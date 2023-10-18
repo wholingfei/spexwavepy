@@ -72,7 +72,7 @@ if __name__ == "__main__":
         pad_y = 10
 
         #track_XST.XST_self(edge_x, edge_y, pad_x, pad_y, hw_xy, display=False, normalize=True)
-        track_XST.XST_self_dev(edge_x, edge_y, pad_x, pad_y, hw_xy, display=False, normalize=True)
+        track_XST.XST_self(edge_x, edge_y, pad_x, pad_y, hw_xy, display=False, normalize=True)
 
     if track_XST.dimension == '2D':
         edge_x = [20, 20]
@@ -83,8 +83,8 @@ if __name__ == "__main__":
         window = 60
         cpu_no = 30 #16
 
-        #track_XST.XST_self_dev(edge_x, edge_y, pad_x, pad_y, hw_xy, window, display=True, normalize=True)
-        track_XST.XST_self_multi_dev(edge_x, edge_y, pad_x, pad_y, hw_xy, window, cpu_no, normalize=True)
+        #track_XST.XST_self(edge_x, edge_y, pad_x, pad_y, hw_xy, window, display=True, normalize=True)
+        track_XST.XST_self_multi(edge_x, edge_y, pad_x, pad_y, hw_xy, window, cpu_no, normalize=True)
 
 
     if _PLOT:

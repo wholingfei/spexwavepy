@@ -48,7 +48,7 @@ if __name__ == "__main__":
         pad_y = [5, 20]
         hw_xy = 10
 
-        track_tmp.XST_self_dev(edge_x, edge_y, pad_x, pad_y, hw_xy, display=False, normalize=True)
+        track_tmp.XST_self(edge_x, edge_y, pad_x, pad_y, hw_xy, display=False, normalize=True)
 
         delayHKB_stack[jc-1] = track_tmp.delayY
         curvYHKB_stack[jc-1] = track_tmp.curvY
@@ -81,7 +81,7 @@ if __name__ == "__main__":
         pad_y = 10
         hw_xy = 10
 
-        track_tmp.XST_self_dev(edge_x, edge_y, pad_x, pad_y, hw_xy, display=False, normalize=True)
+        track_tmp.XST_self(edge_x, edge_y, pad_x, pad_y, hw_xy, display=False, normalize=True)
 
         delayVKB_stack[jc-1] = track_tmp.delayX
         curvYVKB_stack[jc-1] = track_tmp.curvX

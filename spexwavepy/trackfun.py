@@ -1134,7 +1134,7 @@ class Tracking:
             return ixs, iys, resmax
 
 
-    def XST_self_dev(self, edge_x, edge_y, pad_x, pad_y, hw_xy, window=None, normalize=False, display=False, verbose=True):
+    def XST_self(self, edge_x, edge_y, pad_x, pad_y, hw_xy, window=None, normalize=False, display=False, verbose=True):
         """
         Speckle tracking for self-reference XST technique.
         Two image stacks are needed. Both are with test optic.
@@ -1345,7 +1345,7 @@ class Tracking:
                 self.curvY = curv_scan_XST(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
                 self._curvX = None
 
-    def XST_self_multi_dev(self, edge_x, edge_y, pad_x, pad_y, hw_xy, window, cpu_no, normalize=False, verbose=True):
+    def XST_self_multi(self, edge_x, edge_y, pad_x, pad_y, hw_xy, window, cpu_no, normalize=False, verbose=True):
         """
         Speckle tracking for self-reference XST technique.
         Two image stacks are needed. Both are with test optic.
@@ -1567,7 +1567,7 @@ class Tracking:
                 self.curvY = curv_scan_XST(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
                 self._curvX = None
 
-    def XST_withrefer_dev(self, edge_x, edge_y, pad_x, pad_y, hw_xy, window=None, normalize=False, display=False, verbose=True):
+    def XST_withrefer(self, edge_x, edge_y, pad_x, pad_y, hw_xy, window=None, normalize=False, display=False, verbose=True):
         """
         Speckle tracking for conventional XST technique, with reference beam.
         The fisrt image stack is the one with test optic.
@@ -1614,7 +1614,7 @@ class Tracking:
         if self.imstack2.rawdata is None:
             self.imstack2.read_data()
 
-        self.XST_self_dev(edge_x, edge_y, pad_x, pad_y, hw_xy, window, normalize, display, verbose)
+        self.XST_self(edge_x, edge_y, pad_x, pad_y, hw_xy, window, normalize, display, verbose)
 
         self.delayX = copy.deepcopy(self._delayX)
         self._delayX = None
@@ -1625,7 +1625,7 @@ class Tracking:
         self.scandim = 'random'
 
 
-    def XST_withrefer_multi_dev(self, edge_x, edge_y, pad_x, pad_y, hw_xy, window, cpu_no, normalize=False, verbose=True):
+    def XST_withrefer_multi(self, edge_x, edge_y, pad_x, pad_y, hw_xy, window, cpu_no, normalize=False, verbose=True):
         """
         Speckle tracking for self-reference XST technique.
         Two image stacks are needed. Both are with test optic.
@@ -1676,7 +1676,7 @@ class Tracking:
         if self.imstack2.rawdata is None:
             self.imstack2.read_data()
 
-        self.XST_self_multi_dev(edge_x, edge_y, pad_x, pad_y, hw_xy, window, cpu_no, normalize, verbose)
+        self.XST_self_multi(edge_x, edge_y, pad_x, pad_y, hw_xy, window, cpu_no, normalize, verbose)
 
         self.delayX = copy.deepcopy(self._delayX)
         self._delayX = None
