@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Examples &mdash; spexwavepy 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="User guide" href="userguide.html" />
+    <link rel="prev" title="Getting started" href="getstart.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            spexwavepy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="principle.html">The speckle-based wavefront sensing techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getstart.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#plane-mirror-measurement-with-reference-beam">Plane mirror measurement with reference beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#measurement-of-the-wavefront-local-curvature-after-a-plane-mirror">Measurement of the wavefront local curvature after a plane mirror</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mirror-slope-error-curve-1d-reconstructed-from-the-dowmstream-setup">Mirror slope error curve (1D) reconstructed from the dowmstream setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#comparison-between-self-reference-xss-technique-and-self-reference-xst-technique">Comparison between self-reference XSS technique and self-reference XST technique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#kb-mirror-alignment-using-self-reference-xst-technique">KB mirror alignment using self-reference XST technique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#crl-measurement-with-xsvt-technique">CRL measurement with XSVT technique</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="userguide.html">User guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">spexwavepy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Examples</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/example.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h1>
+<p><em>Say something here…</em></p>
+<section id="plane-mirror-measurement-with-reference-beam">
+<span id="expplane"></span><h2>Plane mirror measurement with reference beam<a class="headerlink" href="#plane-mirror-measurement-with-reference-beam" title="Permalink to this heading"></a></h2>
+<p>In this example, we would like to show that how to use the
+<a class="reference internal" href="principle.html#prinxssrefer"><span class="std std-ref">XSS technique with reference beam</span></a> to
+measure the plane mirror.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This example basically extracts from the following paper</p>
+<p>Hu, L., et al.
+Two-dimensional speckle technique for slope error measurements of weakly focusing reflective X-ray optics.
+Journal of Synchrotron Radiation, (2022):29(6).</p>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">imstack_sam</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">sam_folder</span><span class="p">,</span> <span class="n">ROI_sam</span><span class="p">)</span>
+<span class="n">imstack_ref</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">ref_folder</span><span class="p">,</span> <span class="n">ROI_ref</span><span class="p">)</span>
+<span class="n">imstack_ref</span><span class="o">.</span><span class="n">flip</span> <span class="o">=</span> <span class="s1">&#39;x&#39;</span>
+
+<span class="n">track_XSS</span> <span class="o">=</span> <span class="n">Tracking</span><span class="p">(</span><span class="n">imstack_sam</span><span class="p">,</span> <span class="n">imstack_ref</span><span class="p">)</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="s1">&#39;2D&#39;</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">scandim</span> <span class="o">=</span> <span class="s1">&#39;x&#39;</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">dist</span> <span class="o">=</span> <span class="mf">833.</span>     <span class="c1"># [mm]</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">scanstep</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># [um]</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">pixsize</span> <span class="o">=</span> <span class="mf">1.07</span>  <span class="c1"># [um]</span>
+</pre></div>
+</div>
+<p>Note that we set <code class="docutils literal notranslate"><span class="pre">flip</span></code> attribute to the reference image stack.
+This is due to the fact that the reflected images after a mirror
+flipped the incident beam. So, in order to be able to track the
+shift of speckle patterns, we flip the reference images in the
+reference image stack.</p>
+<p>We only did x scan in this example, so the <code class="docutils literal notranslate"><span class="pre">scandim</span></code> of the
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class is <em>‘x’</em>. We do
+2D data analysis, the <code class="docutils literal notranslate"><span class="pre">dimension</span></code> is set to be <em>‘2D’</em>.</p>
+<p>Before we do the speckle pattern tracking, another thing we need to
+do is to align the speckle patterns from the two image stacks. It is
+particularly needed when the test optic is a mirror.
+We use <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.collimate" title="spexwavepy.trackfun.Tracking.collimate"><code class="xref py py-func docutils literal notranslate"><span class="pre">collimate()</span></code></a> function to do
+the alignment.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">track_XSS</span><span class="o">.</span><span class="n">collimate</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After that, the speckle patterns from both image stacks are aligned and
+ready to be tracked.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">edge_x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">edge_y</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">edge_z</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">pad_xy</span> <span class="o">=</span> <span class="mi">30</span>
+</pre></div>
+</div>
+<p>After setting the initial parameters for the speckle patter tracking, we use either single-core version or multi-core version of the method used for the XSS technique with reference beam to obtain the speckle pattern shifts. Since the scan direction is along ‘x’, then <code class="docutils literal notranslate"><span class="pre">edge_x</span></code> is 0. Also, the <code class="docutils literal notranslate"><span class="pre">edge_z</span></code> is not symmetrical.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">track_XSS</span><span class="o">.</span><span class="n">XSS_withrefer</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">edge_z</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">pad_xy</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">track_XSS</span><span class="o">.</span><span class="n">XSS_withrefer_multi</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">edge_z</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">pad_xy</span><span class="p">,</span> <span class="n">cpu_no</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that we did <code class="docutils literal notranslate"><span class="pre">normalization</span></code> for the stiched images in this example.
+The shift in <em>‘x’</em> direction looks like</p>
+<a class="reference internal image-reference" href="_images/planeM_1.png"><img alt="_images/planeM_1.png" src="_images/planeM_1.png" style="width: 80%;" /></a>
+<p>Since we only scanned in the horizontal (x) direction, the <code class="docutils literal notranslate"><span class="pre">delayX</span></code> is only
+stored in the <code class="docutils literal notranslate"><span class="pre">track_XSS</span></code> class. No <code class="docutils literal notranslate"><span class="pre">track_XSS.delayY</span></code> is available.
+However, we do store the tracked value in another direction in the
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class.
+In this example, the shift in <em>‘y’</em>  direction is stored in <code class="docutils literal notranslate"><span class="pre">track_XSS._delayY</span></code>.
+It looks like</p>
+<a class="reference internal image-reference" href="_images/planeM_2.png"><img alt="_images/planeM_2.png" src="_images/planeM_2.png" style="width: 80%;" /></a>
+<p>Since the tested mirror is an ultra-smooth plane mirror, the speckle shift in y
+direction should be very small. If we extract a central horizontal line from the
+2D map of Y shift, we can see a tilted straight line</p>
+<a class="reference internal image-reference" href="_images/planeM_3.png"><img alt="_images/planeM_3.png" src="_images/planeM_3.png" style="width: 80%;" /></a>
+<p>This indicate that the mirror is not perfectly parallel with the reference incident beam.
+The raw images need to be rotated and carefully aligned. According to the paper,
+the rotation angle is calculated to be around -0.275 degrees.</p>
+<p>We can use <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack.rotate" title="spexwavepy.imstackfun.Imagestack.rotate"><code class="xref py py-func docutils literal notranslate"><span class="pre">rotate()</span></code></a> function
+to do the rotation.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">rotateang</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.275</span>       <span class="c1"># [degree]</span>
+<span class="n">imstack_sam</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">rotateang</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After the rotation, the edge of the raw images is non-physical. For example,
+if we print out <code class="docutils literal notranslate"><span class="pre">imstack_sam.data</span></code>, we will see</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">imstack_sam</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">array</span><span class="p">([[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="o">...</span><span class="p">,</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]],</span>
+
+    <span class="p">[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="o">...</span><span class="p">,</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]],</span>
+
+    <span class="p">[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="o">...</span><span class="p">,</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]],</span>
+
+    <span class="o">...</span><span class="p">,</span>
+
+    <span class="p">[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="o">...</span><span class="p">,</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]],</span>
+
+    <span class="p">[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="o">...</span><span class="p">,</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]],</span>
+
+    <span class="p">[[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="o">...</span><span class="p">,</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+     <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]]])</span>
+</pre></div>
+</div>
+<p>As a result, we need to cut the edge of the rotated images.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">cut</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">imstack_sam</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">imstack_sam</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span><span class="n">cut</span><span class="p">:</span><span class="o">-</span><span class="n">cut</span><span class="p">,</span> <span class="n">cut</span><span class="p">:</span><span class="o">-</span><span class="n">cut</span><span class="p">]</span>
+<span class="n">imstack_ref</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">imstack_ref</span><span class="o">.</span><span class="n">data</span><span class="p">[:,</span><span class="n">cut</span><span class="p">:</span><span class="o">-</span><span class="n">cut</span><span class="p">,</span> <span class="n">cut</span><span class="p">:</span><span class="o">-</span><span class="n">cut</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>After that, we redefine the <code class="docutils literal notranslate"><span class="pre">track_XSS</span></code> class and do the same operations
+as before, using either single-core version or multi-core version of
+the XSS tracking method, we have the following tracked shift in <em>`y`</em>
+direction.</p>
+<a class="reference internal image-reference" href="_images/PlaneM_5.png"><img alt="_images/PlaneM_5.png" src="_images/PlaneM_5.png" style="width: 80%;" /></a>
+<p>We can also extract the central line</p>
+<a class="reference internal image-reference" href="_images/PlaneM_6.png"><img alt="_images/PlaneM_6.png" src="_images/PlaneM_6.png" style="width: 80%;" /></a>
+<p>The tracked speckle pattern shift in ‘y’ direction has been properly corrected.
+We also have the tracked shift in ‘x’ direction.</p>
+<a class="reference internal image-reference" href="_images/PlaneM_4.png"><img alt="_images/PlaneM_4.png" src="_images/PlaneM_4.png" style="width: 80%;" /></a>
+<p>Besides, the slope error in <em>‘x’</em> direction has been stored in the <code class="docutils literal notranslate"><span class="pre">slopeX</span></code> of
+<code class="docutils literal notranslate"><span class="pre">track_XSS</span></code> class.</p>
+</section>
+<section id="measurement-of-the-wavefront-local-curvature-after-a-plane-mirror">
+<span id="exp2ndderiv"></span><h2>Measurement of the wavefront local curvature after a plane mirror<a class="headerlink" href="#measurement-of-the-wavefront-local-curvature-after-a-plane-mirror" title="Permalink to this heading"></a></h2>
+<p>In this example, we will use the <a class="reference internal" href="principle.html#prinxssself"><span class="std std-ref">self-reference XSS technique</span></a> to measure
+the local curvature of the wavefront after a plane mirror. Then we will
+show that the fine structures appeared on the intensity image correspond
+to the lcoal curvature map.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This example is extracted from the following publication.</p>
+<p>Hu, L et al., “Investigation of the stripe patterns from X-ray reflection optics,”
+Opt. Express 29, 4270-4286 (2021)</p>
+</div>
+<p>After the general settings of the image stack <code class="docutils literal notranslate"><span class="pre">imstack</span></code> and the
+Tracking class <code class="docutils literal notranslate"><span class="pre">track_XSS</span></code>,</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">ROI</span> <span class="o">=</span> <span class="p">[</span><span class="mi">180</span><span class="p">,</span> <span class="mi">1980</span><span class="p">,</span> <span class="mi">690</span><span class="p">,</span> <span class="mi">1270</span><span class="p">]</span>   <span class="c1"># [y_start, y_end, x_start, x_end]</span>
+<span class="n">imstack</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">folderName</span><span class="p">,</span> <span class="n">ROI</span><span class="p">)</span>
+<span class="n">track_XSS</span> <span class="o">=</span> <span class="n">Tracking</span><span class="p">(</span><span class="n">imstack</span><span class="p">)</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="s1">&#39;2D&#39;</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">scandim</span> <span class="o">=</span> <span class="s1">&#39;x&#39;</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">dist</span> <span class="o">=</span> <span class="mf">1705.0</span>    <span class="c1">#[mm]</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">pixsize</span> <span class="o">=</span> <span class="mf">3.0</span>    <span class="c1">#[um]</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">scanstep</span> <span class="o">=</span> <span class="mf">1.0</span>    <span class="c1">#[um]</span>
+</pre></div>
+</div>
+<p>we call <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_self" title="spexwavepy.trackfun.Tracking.XSS_self"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSS_self()</span></code></a> or
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_self_multi" title="spexwavepy.trackfun.Tracking.XSS_self_multi"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSS_self_multi()</span></code></a> function
+to process the data acquired using
+<a class="reference internal" href="principle.html#prinxssself"><span class="std std-ref">self-reference XSS technique</span></a>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">edge_x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">edge_y</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">edge_z</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">nstep</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">pad_xy</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">normalize</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="c1">#track_XSS.XSS_self(edge_x, edge_y, edge_z, nstep, width, pad_xy, normalize, display=True)</span>
+<span class="n">cpu_no</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">XSS_self_multi</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">edge_z</span><span class="p">,</span> <span class="n">nstep</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">pad_xy</span><span class="p">,</span> <span class="n">cpu_no</span><span class="p">,</span> <span class="n">normalize</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For this technique, the wavefront local curvature is the quantity directly reconstructed.
+We show the 2D map of it. The 2D map generated from the function
+is the local curvature of the wavefront <strong>on the detector plane</strong>.</p>
+<a class="reference internal image-reference" href="_images/planeMXSSself.png"><img alt="_images/planeMXSSself.png" src="_images/planeMXSSself.png" style="width: 80%;" /></a>
+<p>The far-field intensity images are also acquired. We read them and do the average.
+The image stack data are stored in the <code class="docutils literal notranslate"><span class="pre">data</span></code> attribute of the
+<a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack" title="spexwavepy.imstackfun.Imagestack"><code class="xref py py-class docutils literal notranslate"><span class="pre">spexwavepy.imstackfun.Imagestack</span></code></a> class. We do the average on <code class="docutils literal notranslate"><span class="pre">data</span></code>.
+Then we show the intensity image.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">imstack2</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">flatFolder</span><span class="p">,</span> <span class="n">ROI</span><span class="p">)</span>
+<span class="n">imstack2</span><span class="o">.</span><span class="n">read_data</span><span class="p">()</span>
+<span class="n">ffimage</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">imstack2</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/planeMInten.png"><img alt="_images/planeMInten.png" src="_images/planeMInten.png" style="width: 80%;" /></a>
+<p>From the two images shown in the above, we can find that those structures in
+the intensity image can be related to the structures appeared
+in the local curvature 2D map.</p>
+</section>
+<section id="mirror-slope-error-curve-1d-reconstructed-from-the-dowmstream-setup">
+<span id="iterative"></span><h2>Mirror slope error curve (1D) reconstructed from the dowmstream setup<a class="headerlink" href="#mirror-slope-error-curve-1d-reconstructed-from-the-dowmstream-setup" title="Permalink to this heading"></a></h2>
+<p>A curved mirror is measured in this example. The diffuser is placed
+downstream of the mirror.</p>
+<a class="reference internal image-reference" href="_images/curvMXSS_1.png"><img alt="_images/curvMXSS_1.png" src="_images/curvMXSS_1.png" style="width: 60%;" /></a>
+<p>Because the curved mirror has no available reference beam, we use the
+<a class="reference internal" href="principle.html#prinxssself"><span class="std std-ref">self-reference XSS technique</span></a> for the measurement.
+It is easy to obtain the 1D curve of the wavefront curvature.</p>
+<p>Let’s check the raw data image first.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">ShowImage</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">im_sam</span> <span class="o">=</span> <span class="n">read_one</span><span class="p">(</span><span class="n">folderName</span> <span class="o">+</span> <span class="s1">&#39;ipp_292770_1.TIF&#39;</span><span class="p">,</span> <span class="n">ShowImage</span><span class="o">=</span><span class="n">ShowImage</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/curviter_1.png"><img alt="_images/curviter_1.png" src="_images/curviter_1.png" style="width: 80%;" /></a>
+<p>To obtain the 1D local wavefront curvature curve,
+we choose a small stripe of around 150 pixels in width,
+that is around 1mm wide.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">ROI</span> <span class="o">=</span> <span class="p">[</span><span class="mi">338</span><span class="p">,</span> <span class="mi">643</span><span class="p">,</span> <span class="mi">675</span><span class="p">,</span> <span class="mi">825</span><span class="p">]</span>          <span class="c1">#[y_start, y_end, x_start, x_end]</span>
+
+<span class="n">imstack</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">folderName</span><span class="p">,</span> <span class="n">ROI</span><span class="p">)</span>
+
+<span class="n">track_XSS</span> <span class="o">=</span> <span class="n">Tracking</span><span class="p">(</span><span class="n">imstack</span><span class="p">)</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="s1">&#39;1D&#39;</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">scandim</span> <span class="o">=</span> <span class="s1">&#39;y&#39;</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">mempos</span> <span class="o">=</span> <span class="s1">&#39;downstream&#39;</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">dist</span> <span class="o">=</span> <span class="mf">1790.0</span>    <span class="c1">#[mm]</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">pixsize</span> <span class="o">=</span> <span class="mf">6.45</span>    <span class="c1">#[um]</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">scanstep</span> <span class="o">=</span> <span class="mf">0.25</span>    <span class="c1">#[um]</span>
+
+<span class="n">edge_x</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">edge_y</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">edge_z</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+<span class="n">nstep</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">XSS_self</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">edge_z</span><span class="p">,</span> <span class="n">nstep</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After setting up the <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack" title="spexwavepy.imstackfun.Imagestack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Imagestack</span></code></a>
+class <code class="docutils literal notranslate"><span class="pre">imstack</span></code> and <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class
+<code class="docutils literal notranslate"><span class="pre">track_XSS</span></code> and the related parameters, we have the wavefront
+curvature curve at the detector plane <code class="docutils literal notranslate"><span class="pre">track_XSS.curvY</span></code>.</p>
+<a class="reference internal image-reference" href="_images/curvmiter_2.png"><img alt="_images/curvmiter_2.png" src="_images/curvmiter_2.png" style="width: 80%;" /></a>
+<p>In order to compare the at-wavelength measurement with the off-line NOM
+measurement, we need to project the wavefront at the detector plane
+back to the mirror surface. To do that,
+we need the following iterative algorithm.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The main idea of the following iterative algorithm is very similar
+to this published paper:</p>
+<p>S. Berujon, and E. Ziegler,
+“Grating-based at-wavelength metrology of hard x-ray reflective
+optics”, Opt. Lett. 37, 4464-4466 (2012).</p>
+</div>
+<p>Two relations are used to devise the iterative algorithm.
+First, the slope of the mirror can be calculated as</p>
+<div class="math notranslate nohighlight">
+\[slo = \frac{1}{2}\frac{Y_{det}-y}{d-x}\]</div>
+<p>where <span class="math notranslate nohighlight">\(Y_{det}\)</span> is the detector coordinate, <span class="math notranslate nohighlight">\(d\)</span> is the
+distance between the mirror and the detector plane. <span class="math notranslate nohighlight">\(x\)</span> and
+<span class="math notranslate nohighlight">\(y\)</span> are the mirror coordinate.</p>
+<p>Second, the slope of the mirror is also the half of the wavefront
+slope. The wavefront slope can be calculated by the measured local
+curvature. If we integrate the mirror slope, we can have the mirror
+height, which is also <span class="math notranslate nohighlight">\(y\)</span> coordinate of the mirror.</p>
+<div class="math notranslate nohighlight">
+\[y = \int_{0}^{x}slo(x)dx\]</div>
+<p>Among the above equations, the mirror slope is measured quantity and
+is already known, the detector coordinate <span class="math notranslate nohighlight">\(Y_{det}\)</span> is also
+known, so is the distance <span class="math notranslate nohighlight">\(d\)</span>.</p>
+<p>We use the first equation to calculate mirror corrdinate <span class="math notranslate nohighlight">\(x\)</span>,
+the second equation to calculate <span class="math notranslate nohighlight">\(y\)</span>. We do it iteratively.
+In the end, both <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> will converge.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1">######### Iterative algorithm for donwstream case</span>
+<span class="n">iy</span> <span class="o">=</span> <span class="n">track_XSS</span><span class="o">.</span><span class="n">delayY</span>
+<span class="n">loccurv_y</span> <span class="o">=</span> <span class="n">track_XSS</span><span class="o">.</span><span class="n">curvY</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="mf">3.7e-3</span>                     <span class="c1">#[rad], pitch angle</span>
+<span class="n">mirror_L</span> <span class="o">=</span> <span class="mf">0.10</span>                    <span class="c1">#[m], mirror length</span>
+<span class="n">dist_mc2det</span> <span class="o">=</span> <span class="mf">2.925</span>                <span class="c1">#[m]</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">dist_mc2det</span> <span class="o">+</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">mirror_L</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>   <span class="c1">#[m]</span>
+<span class="n">pixsize</span> <span class="o">=</span> <span class="n">track_XSS</span><span class="o">.</span><span class="n">pixsize</span>
+
+<span class="n">loccurvs</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">loccurv_y</span><span class="p">)</span>
+<span class="n">detPos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">loccurvs</span><span class="p">))</span> <span class="o">*</span> <span class="n">pixsize</span> <span class="o">*</span> <span class="mf">1.e-6</span>     <span class="c1">#[m]</span>
+<span class="n">SloErr</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">cumtrapz</span><span class="p">(</span><span class="n">loccurvs</span><span class="p">,</span> <span class="n">detPos</span><span class="p">)</span>           <span class="c1">#[rad]</span>
+<span class="n">SloErr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">]),</span> <span class="n">SloErr</span><span class="p">))</span>                <span class="c1">#[rad]</span>
+<span class="c1">#Inc_corr = np.linspace(-0.5*0.08*theta/41., 0.5*0.08*theta/41, len(SloErr))</span>
+<span class="c1">#SloErr -= Inc_corr</span>
+<span class="n">x_init</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">mirror_L</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">SloErr</span><span class="p">))</span>                <span class="c1">#[m]</span>
+<span class="n">y_init</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">cumtrapz</span><span class="p">(</span><span class="n">SloErr</span><span class="o">*</span><span class="mf">0.</span><span class="o">+</span><span class="n">theta</span><span class="p">,</span> <span class="n">x_init</span><span class="p">)</span>             <span class="c1">#[m]</span>
+<span class="n">y_init</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">]),</span> <span class="n">y_init</span><span class="p">))</span>          <span class="c1">#[m]</span>
+<span class="n">Y_det</span> <span class="o">=</span> <span class="n">y_init</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">SloErr</span><span class="o">+</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">D</span><span class="o">-</span><span class="n">x_init</span><span class="p">)</span>
+<span class="n">Y_det</span> <span class="o">=</span> <span class="n">Y_det</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">detPos</span>
+<span class="n">y_init2</span> <span class="o">=</span> <span class="n">Y_det</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">SloErr</span><span class="o">+</span><span class="n">theta</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">D</span><span class="o">-</span><span class="n">x_init</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">x_init</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">y_init</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+    <span class="n">y_prev</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">x_prev</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">D</span> <span class="o">-</span> <span class="p">(</span><span class="n">Y_det</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">SloErr</span> <span class="o">+</span> <span class="n">theta</span><span class="p">))</span>                   <span class="c1">#[m]</span>
+    <span class="c1">#sys.exit(0)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">cumtrapz</span><span class="p">(</span><span class="n">SloErr</span><span class="o">+</span><span class="n">theta</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>                  <span class="c1">#[m]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">]),</span> <span class="n">y</span><span class="p">))</span>                        <span class="c1">#[m]</span>
+    <span class="n">y_after</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">x_after</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">:</span>
+        <span class="c1">#plt.plot(x*1.e3, s*1.e6)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Iteration time: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y_prev</span><span class="o">-</span><span class="n">y_after</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">x_prev</span><span class="o">-</span><span class="n">x_after</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
+<span class="c1">#########</span>
+</pre></div>
+</div>
+<p>After that, we fit the result with the elliptical mirror shape.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1">######### Fitting</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">46.</span>      <span class="c1">#[m]</span>
+<span class="n">q</span> <span class="o">=</span> <span class="mf">0.4</span>      <span class="c1">#[m]</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="mf">3.e-3</span>     <span class="c1">#[rad]</span>
+<span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span><span class="n">EllipseSlope</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">SloErr</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">([</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="n">theta</span><span class="o">-</span><span class="mf">0.3e-3</span><span class="p">],</span> <span class="p">[</span><span class="n">p</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="n">theta</span><span class="o">+</span><span class="mf">0.3e-3</span><span class="p">]))</span>
+<span class="n">SloFit</span> <span class="o">=</span> <span class="n">EllipseSlope</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">popt</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">popt</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">popt</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">SloRes</span> <span class="o">=</span> <span class="n">SloErr</span> <span class="o">-</span> <span class="n">SloFit</span>
+<span class="c1">#########</span>
+</pre></div>
+</div>
+<p>We plot the measured on-line slope error and the off-line slope error
+together.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1">######### Exel data reading</span>
+<span class="kn">import</span> <span class="nn">pandas</span>
+
+<span class="n">exel_folder</span> <span class="o">=</span> <span class="n">currentfolder</span> <span class="o">+</span> <span class="s2">&quot;/NOM_data.xlsx&quot;</span>
+<span class="n">data_Fram</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">exel_folder</span><span class="p">)</span>
+<span class="n">data_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data_Fram</span><span class="p">)</span>
+<span class="n">x_lane1</span> <span class="o">=</span> <span class="n">data_array</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">901</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">slo_lane1</span> <span class="o">=</span> <span class="n">data_array</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">901</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">sloErr_lane1</span> <span class="o">=</span> <span class="n">data_array</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">901</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">x_lane2</span> <span class="o">=</span> <span class="n">data_array</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">901</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">slo_lane2</span> <span class="o">=</span> <span class="n">data_array</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">901</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">sloErr_lane2</span> <span class="o">=</span> <span class="n">data_array</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">901</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+<span class="n">x_lane3</span> <span class="o">=</span> <span class="n">data_array</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">901</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="n">slo_lane3</span> <span class="o">=</span> <span class="n">data_array</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">901</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">sloErr_lane3</span> <span class="o">=</span> <span class="n">data_array</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">901</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="mf">1.e3</span><span class="o">-</span><span class="mi">41</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="o">-</span><span class="n">SloRes</span><span class="p">)</span><span class="o">*</span><span class="mf">1.e6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;At-wavelength measurement&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_lane3</span><span class="p">,</span> <span class="n">sloErr_lane3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Off-line measurement&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mirror length [mm]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Slope error [&#39;</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;$\mu$&#39;</span> <span class="o">+</span> <span class="s1">&#39;rad]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="c1">#########</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/curviter_3.png"><img alt="_images/curviter_3.png" src="_images/curviter_3.png" style="width: 80%;" /></a>
+<p>We can also check the fitted parameters of the elliptical mirror.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">popt</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">4.57354460e+01</span> <span class="mf">3.70107898e-01</span> <span class="mf">3.07919456e-03</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The fitted p is 45.735 m, q is 0.37 m, <span class="math notranslate nohighlight">\(\theta\)</span>
+is 3.08 mrad.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The initial value <code class="docutils literal notranslate"><span class="pre">theta</span></code>, <code class="docutils literal notranslate"><span class="pre">D</span></code> can be fine adjusted
+to match the off-line NOM data.</p>
+</div>
+</section>
+<section id="comparison-between-self-reference-xss-technique-and-self-reference-xst-technique">
+<span id="expxssvsxst"></span><h2>Comparison between self-reference XSS technique and self-reference XST technique<a class="headerlink" href="#comparison-between-self-reference-xss-technique-and-self-reference-xst-technique" title="Permalink to this heading"></a></h2>
+<p>In this example, we will compare the 1D
+<a class="reference internal" href="principle.html#prinxssself"><span class="std std-ref">self-reference XSS technique</span></a>
+and the 1D <a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">self-reference XST technique</span></a> at first.
+The optic we used is a plane mirror. Similar results has been published from the
+following literature:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>L. Hu, H. Wang, O. Fox, and K. Sawhney,
+“Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique”
+Opt. Express 30(18), 33259-33273 (2022).</p>
+</div>
+<p>The plane mirror speckle data is the same as in
+<a class="reference internal" href="#expplane"><span class="std std-ref">Plane mirror measurement with reference beam</span></a>, and we only use the
+data with mirror in the beam.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">ROI</span> <span class="o">=</span> <span class="p">[</span><span class="mi">600</span><span class="p">,</span> <span class="mi">1600</span><span class="p">,</span> <span class="mi">740</span><span class="p">,</span> <span class="mi">2040</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>A width of around 1mm is chosen for the 1D data analysis.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/XSTvsXSS_1.png"><img alt="_images/XSTvsXSS_1.png" src="_images/XSTvsXSS_1.png" style="width: 60%;" /></a>
+</figure>
+<p>Next let’s use the self-reference XSS technique at first.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">imstack</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">sam_folderX</span><span class="p">,</span> <span class="n">ROI</span><span class="p">)</span>
+
+<span class="n">track_XSS</span> <span class="o">=</span> <span class="n">Tracking</span><span class="p">(</span><span class="n">imstack</span><span class="p">)</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="s1">&#39;1D&#39;</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">scandim</span> <span class="o">=</span> <span class="s1">&#39;x&#39;</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">dist</span> <span class="o">=</span> <span class="mf">833.</span>   <span class="c1"># [mm]</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">scanstep</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># [um]</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">pixsize</span> <span class="o">=</span> <span class="mf">1.07</span>  <span class="c1"># [um]</span>
+
+<span class="n">edge_x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">edge_y</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">edge_z</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">nstep</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">XSS_self</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">edge_z</span><span class="p">,</span> <span class="n">nstep</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After that, the <code class="docutils literal notranslate"><span class="pre">track_XSS</span></code> will return the wavefront local curvature in <code class="docutils literal notranslate"><span class="pre">curv_X</span></code>.
+We know that the wavefront local curvatur can also be obrained using the
+<a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">self-reference XST technique</span></a>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">imstack_1</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">data_folder</span><span class="p">,</span> <span class="n">ROI</span><span class="p">)</span>
+<span class="n">imstack_1</span><span class="o">.</span><span class="n">fnum</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">imstack_1</span><span class="o">.</span><span class="n">fstart</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">imstack_2</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">data_folder</span><span class="p">,</span> <span class="n">ROI</span><span class="p">)</span>
+<span class="n">imstack_2</span><span class="o">.</span><span class="n">fnum</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">imstack_2</span><span class="o">.</span><span class="n">fstart</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">track_XST</span> <span class="o">=</span> <span class="n">Tracking</span><span class="p">(</span><span class="n">imstack_1</span><span class="p">,</span> <span class="n">imstack_2</span><span class="p">)</span>
+<span class="n">track_XST</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="s1">&#39;1D&#39;</span>
+<span class="n">track_XST</span><span class="o">.</span><span class="n">scandim</span> <span class="o">=</span> <span class="s1">&#39;x&#39;</span>
+<span class="n">track_XST</span><span class="o">.</span><span class="n">dist</span> <span class="o">=</span> <span class="mf">833.</span>   <span class="c1"># [mm]</span>
+<span class="n">track_XST</span><span class="o">.</span><span class="n">scanstep</span> <span class="o">=</span> <span class="mf">5.0</span>  <span class="c1"># [um]</span>
+<span class="n">track_XST</span><span class="o">.</span><span class="n">pixsize</span> <span class="o">=</span> <span class="mf">1.07</span>  <span class="c1"># [um]</span>
+</pre></div>
+</div>
+<p>Two images taken at two different diffuser positions are only needed for the
+<a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">self-reference XST technique</span></a>, we can choose any two images
+form the scanned dataset. We choose the first (No. 0) image and the sixth (No. 5) image.
+Thus, the <code class="docutils literal notranslate"><span class="pre">scanstep</span></code> is 5 <span class="math notranslate nohighlight">\(\mu m\)</span>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">edge_x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+<span class="n">edge_y</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">pad_x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+<span class="n">hw_xy</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">pad_y</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">track_XST</span><span class="o">.</span><span class="n">XST_self</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">pad_x</span><span class="p">,</span> <span class="n">pad_y</span><span class="p">,</span> <span class="n">hw_xy</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After setting proper parameters, we can call <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_self" title="spexwavepy.trackfun.Tracking.XST_self"><code class="xref py py-func docutils literal notranslate"><span class="pre">XST_self()</span></code></a>
+function to process the data.</p>
+<p>We plot the wavefront curvature obtained from the two technqiues together, note that the way
+to calculate the wavefront curvature from the two techniques are different, please refer to
+<a class="reference internal" href="userguide.html#curvature"><span class="std std-ref">Local curvature reconstruction</span></a>.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="_images/XSTvsXSS_2.png"><img alt="_images/XSTvsXSS_2.png" src="_images/XSTvsXSS_2.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Wavefront curvature obtained from XSS and XST techniques.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The results from the two techniques match with each other. Further, we can
+plot the tracking coefficient also. The tracking coefficient is stored in
+<code class="docutils literal notranslate"><span class="pre">resX</span></code> and/or <code class="docutils literal notranslate"><span class="pre">resY</span></code> parameters of <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a>
+class.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/XSTvsXSS_3.png"><img alt="_images/XSTvsXSS_3.png" src="_images/XSTvsXSS_3.png" style="width: 80%;" /></a>
+</figure>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/XSTvsXSS_4.png"><img alt="_images/XSTvsXSS_4.png" src="_images/XSTvsXSS_4.png" style="width: 80%;" /></a>
+</figure>
+<p>From the tracking coefficients we can find that the XSS technique in general have
+higher tracking coefficient than the conventional XST technique.</p>
+<p>We can also compare 2D data prcossing of these two techniques.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">track_XSS</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="s1">&#39;2D&#39;</span> <span class="c1">#&#39;1D&#39;</span>
+
+<span class="n">edge_x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">edge_y</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">edge_z</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">nstep</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">pad_xy</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">hw_xy</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">cpu_no</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="c1">#track_XSS.XSS_self(edge_x, edge_y, edge_z, nstep, hw_xy, pad_xy, display=True, normalize=True)</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">XSS_self_multi</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">edge_z</span><span class="p">,</span> <span class="n">nstep</span><span class="p">,</span> <span class="n">hw_xy</span><span class="p">,</span> <span class="n">pad_xy</span><span class="p">,</span> <span class="n">cpu_no</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For 2D case of self-reference XSS technique, the old parameters remain the same, added the
+new parameters that are specific for the 2D data processing case, we can have the following
+2D local wavefront curvature map.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/XSSvsXST2D_1.png"><img alt="_images/XSSvsXST2D_1.png" src="_images/XSSvsXST2D_1.png" style="width: 80%;" /></a>
+</figure>
+<p>Likewise, we can do the 2D data processing for self-reference XST technique. Unlike the XSS case,
+the parameters for 2D processing should be changed in order to have successful tracking result.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">track_XST</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="s1">&#39;2D&#39;</span> <span class="c1">#&#39;1D&#39;</span>
+
+<span class="n">edge_x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+<span class="n">edge_y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">]</span>
+<span class="n">pad_x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+<span class="n">hw_xy</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">pad_y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">]</span>
+<span class="n">window</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="n">cpu_no</span> <span class="o">=</span> <span class="mi">16</span>
+
+<span class="c1">#track_XST.XST_self(edge_x, edge_y, pad_x, pad_y, hw_xy, window, display=True, normalize=True)</span>
+<span class="n">track_XST</span><span class="o">.</span><span class="n">XST_self_multi</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">pad_x</span><span class="p">,</span> <span class="n">pad_y</span><span class="p">,</span> <span class="n">hw_xy</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">cpu_no</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that sometimes the following warning information will occur,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Potential</span> <span class="n">tracking</span> <span class="n">failure</span><span class="p">,</span> <span class="n">no</span> <span class="n">subpixel</span> <span class="n">registration</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>This is because some subregion changed too much that the tracking fails. Ignore those warnings,
+we still have the following 2D wavefront map.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/XSSvsXST2D_2.png"><img alt="_images/XSSvsXST2D_2.png" src="_images/XSSvsXST2D_2.png" style="width: 80%;" /></a>
+</figure>
+<p>The wavefront curvature map from the self-reference XST technique has lower spatial resolution
+and accuracy compared to the self-reference XSS technique.</p>
+</section>
+<section id="kb-mirror-alignment-using-self-reference-xst-technique">
+<span id="expkbalign"></span><h2>KB mirror alignment using self-reference XST technique<a class="headerlink" href="#kb-mirror-alignment-using-self-reference-xst-technique" title="Permalink to this heading"></a></h2>
+<p>In this example we will show how to align KB mirror’s pitch angle (<span class="math notranslate nohighlight">\(\theta\)</span>)
+using the <a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">self-reference XST technique</span></a>. This example is similar
+to Fig.5 in the following paper:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>L. Hu, H. Wang, O. Fox, and K. Sawhney,
+“Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique”
+Opt. Express 30(18), 33259-33273 (2022).</p>
+</div>
+<p>The basic idea is also described in the above paper. At the nominal angle <span class="math notranslate nohighlight">\(\theta\)</span>,
+the local curvature is constant along the mirror length. However, if it deviates to the
+nominal value, the local curvature will change along the mirror length. The change of the
+local curvature can be assumed linealy to the mirror length coordinate.</p>
+<p>Let’s first obtain the wavefront curvature for both HKB and VKB using the self-reference
+XST technique. Note that for this technique, only one image is needed for each image stack,
+thus, the parameter <code class="docutils literal notranslate"><span class="pre">fnum</span></code> is 1. In each folder, the two images are at two different
+diffuser positions. The movement of the diffuser is 4 <span class="math notranslate nohighlight">\(\mu m\)</span>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1">###### HKB self-reference XST</span>
+<span class="n">ROI_HKB</span> <span class="o">=</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">545</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">330</span><span class="p">]</span>
+
+<span class="n">delayHKB_stack</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">13</span><span class="p">,</span> <span class="mi">466</span><span class="p">))</span>
+<span class="n">curvYHKB_stack</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">13</span><span class="p">,</span> <span class="mi">466</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">jc</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">imstack_tmp_1</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">folder_prefix_HKB</span><span class="o">+</span><span class="s1">&#39;theta&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">jc</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">ROI_HKB</span><span class="p">)</span>
+    <span class="n">imstack_tmp_1</span><span class="o">.</span><span class="n">fstart</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">imstack_tmp_1</span><span class="o">.</span><span class="n">fnum</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="n">imstack_tmp_2</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">folder_prefix_HKB</span><span class="o">+</span><span class="s1">&#39;theta&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">jc</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">ROI_HKB</span><span class="p">)</span>
+    <span class="n">imstack_tmp_2</span><span class="o">.</span><span class="n">fstart</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">imstack_tmp_2</span><span class="o">.</span><span class="n">fnum</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="n">track_tmp</span> <span class="o">=</span> <span class="n">Tracking</span><span class="p">(</span><span class="n">imstack_tmp_1</span><span class="p">,</span> <span class="n">imstack_tmp_2</span><span class="p">)</span>
+    <span class="n">track_tmp</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="s1">&#39;1D&#39;</span>
+    <span class="n">track_tmp</span><span class="o">.</span><span class="n">scandim</span> <span class="o">=</span> <span class="s1">&#39;y&#39;</span>
+    <span class="n">track_tmp</span><span class="o">.</span><span class="n">dist</span> <span class="o">=</span> <span class="mf">1650.0</span>   <span class="c1"># [mm]</span>
+    <span class="n">track_tmp</span><span class="o">.</span><span class="n">scanstep</span> <span class="o">=</span> <span class="mf">4.0</span>   <span class="c1"># [um]</span>
+    <span class="n">track_tmp</span><span class="o">.</span><span class="n">pixsize</span> <span class="o">=</span> <span class="mf">6.45</span>   <span class="c1"># [um]</span>
+
+    <span class="n">edge_x</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">edge_y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+    <span class="n">pad_x</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">pad_y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+    <span class="n">hw_xy</span> <span class="o">=</span> <span class="mi">10</span>
+
+    <span class="n">track_tmp</span><span class="o">.</span><span class="n">XST_self</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">pad_x</span><span class="p">,</span> <span class="n">pad_y</span><span class="p">,</span> <span class="n">hw_xy</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">delayHKB_stack</span><span class="p">[</span><span class="n">jc</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">track_tmp</span><span class="o">.</span><span class="n">delayY</span>
+    <span class="n">curvYHKB_stack</span><span class="p">[</span><span class="n">jc</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">track_tmp</span><span class="o">.</span><span class="n">curvY</span>
+
+<span class="c1">##### VKB self-reference XST</span>
+<span class="n">ROI_HKB</span> <span class="o">=</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">540</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">350</span><span class="p">]</span>
+
+<span class="n">delayVKB_stack</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">13</span><span class="p">,</span> <span class="mi">286</span><span class="p">))</span>
+<span class="n">curvYVKB_stack</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">13</span><span class="p">,</span> <span class="mi">286</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">jc</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">imstack_tmp_1</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">folder_prefix_HKB</span><span class="o">+</span><span class="s1">&#39;theta&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">jc</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">ROI_HKB</span><span class="p">)</span>
+    <span class="n">imstack_tmp_1</span><span class="o">.</span><span class="n">fstart</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">imstack_tmp_1</span><span class="o">.</span><span class="n">num</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="n">imstack_tmp_2</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">folder_prefix_HKB</span><span class="o">+</span><span class="s1">&#39;theta&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">jc</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">ROI_HKB</span><span class="p">)</span>
+    <span class="n">imstack_tmp_2</span><span class="o">.</span><span class="n">fstart</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">imstack_tmp_2</span><span class="o">.</span><span class="n">num</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="n">track_tmp</span> <span class="o">=</span> <span class="n">Tracking</span><span class="p">(</span><span class="n">imstack_tmp_1</span><span class="p">,</span> <span class="n">imstack_tmp_2</span><span class="p">)</span>
+    <span class="n">track_tmp</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="s1">&#39;1D&#39;</span>
+    <span class="n">track_tmp</span><span class="o">.</span><span class="n">scandim</span> <span class="o">=</span> <span class="s1">&#39;x&#39;</span>
+    <span class="n">track_tmp</span><span class="o">.</span><span class="n">dist</span> <span class="o">=</span> <span class="mf">1650.0</span>   <span class="c1"># [mm]</span>
+    <span class="n">track_tmp</span><span class="o">.</span><span class="n">scanstep</span> <span class="o">=</span> <span class="mf">4.0</span>   <span class="c1"># [um]</span>
+    <span class="n">track_tmp</span><span class="o">.</span><span class="n">pixsize</span> <span class="o">=</span> <span class="mf">6.45</span>   <span class="c1"># [um]</span>
+
+    <span class="n">edge_x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+    <span class="n">edge_y</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">pad_x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+    <span class="n">pad_y</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">hw_xy</span> <span class="o">=</span> <span class="mi">10</span>
+
+    <span class="n">track_tmp</span><span class="o">.</span><span class="n">XST_self</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">pad_x</span><span class="p">,</span> <span class="n">pad_y</span><span class="p">,</span> <span class="n">hw_xy</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">delayVKB_stack</span><span class="p">[</span><span class="n">jc</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">track_tmp</span><span class="o">.</span><span class="n">delayX</span>
+    <span class="n">curvYVKB_stack</span><span class="p">[</span><span class="n">jc</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">track_tmp</span><span class="o">.</span><span class="n">curvX</span>
+</pre></div>
+</div>
+<p>We can plot the obtained local curvature.</p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="_images/HKB_1.png"><img alt="_images/HKB_1.png" src="_images/HKB_1.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Local wavefront curvature of HKB mirror.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>We can find that the data cloase to one end is abnormal due to the visible
+stains observed on the mirror surface, we cut that part.</p>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="_images/HKB_2.png"><img alt="_images/HKB_2.png" src="_images/HKB_2.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Local wavefront curvature of HKB mirror after cropping the abnormal data.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>We can also plot the wavefron local curvature changed by the VKB mirror.</p>
+<figure class="align-default" id="id4">
+<a class="reference internal image-reference" href="_images/VKB_1.png"><img alt="_images/VKB_1.png" src="_images/VKB_1.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Local wavefront curvature of VKB mirror.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>We do linear fitting for the measured local wavefront curvature data.
+From the following figure we can see clearly the linear relation
+predicted by the theory. The nominal angle <span class="math notranslate nohighlight">\(\theta\)</span> is at the
+position where the fitted slope is close to 0.</p>
+<figure class="align-default" id="id5">
+<a class="reference internal image-reference" href="_images/KBalign.png"><img alt="_images/KBalign.png" src="_images/KBalign.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">The fitted slope for the above measured curves.</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="crl-measurement-with-xsvt-technique">
+<span id="expcrlrefxsvt"></span><h2>CRL measurement with XSVT technique<a class="headerlink" href="#crl-measurement-with-xsvt-technique" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="getstart.html" class="btn btn-neutral float-left" title="Getting started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="userguide.html" class="btn btn-neutral float-right" title="User guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Lingfei Hu, Hongchang Wang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

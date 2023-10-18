@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>spexwavepy.postfun &mdash; spexwavepy 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            spexwavepy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../principle.html">The speckle-based wavefront sensing techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getstart.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../example.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../userguide.html">User guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">spexwavepy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">spexwavepy.postfun</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for spexwavepy.postfun</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<div class="viewcode-block" id="slope_scan"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.postfun.slope_scan">[docs]</a><span class="k">def</span> <span class="nf">slope_scan</span><span class="p">(</span><span class="n">delay</span><span class="p">,</span> <span class="n">scanstep</span><span class="p">,</span> <span class="n">dist</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get wavefront slope (slope error) from tracked shift. </span>
+<span class="sd">    Used when scanned.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    delay: numpy.ndarray</span>
+<span class="sd">        Tracked shift in the scanned direction.</span>
+<span class="sd">    scanstep : float</span>
+<span class="sd">        scan step size. Unit in :math: `\mu m`.</span>
+<span class="sd">    dist : float</span>
+<span class="sd">        distance from diffusor to detector plane.</span>
+<span class="sd">        Unit in mm.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numpy.ndarray</span>
+<span class="sd">        wavefront slope (slope error). </span>
+<span class="sd">        Unit in :math:`\mu rad`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">delay</span> <span class="o">*</span> <span class="n">scanstep</span> <span class="o">/</span> <span class="p">(</span><span class="n">dist</span> <span class="o">*</span> <span class="mf">1.e-3</span><span class="p">)</span>     <span class="c1"># [urad]</span></div>
+
+<div class="viewcode-block" id="slope_pixel"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.postfun.slope_pixel">[docs]</a><span class="k">def</span> <span class="nf">slope_pixel</span><span class="p">(</span><span class="n">delay</span><span class="p">,</span> <span class="n">pixsize</span><span class="p">,</span> <span class="n">dist</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get wavefront slope (slope error) from tracked shift. </span>
+<span class="sd">    Used when not scanned.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    delay: numpy.ndarray</span>
+<span class="sd">        Tracked shift in the scanned direction.</span>
+<span class="sd">    pixsize : float</span>
+<span class="sd">        detector pixel size. Unit in :math: `\mu m`.</span>
+<span class="sd">    dist : float</span>
+<span class="sd">        distance from diffusor to detector plane.</span>
+<span class="sd">        Unit in mm.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numpy.ndarray</span>
+<span class="sd">        wavefront slope (slope error). </span>
+<span class="sd">        Unit in :math:`\mu rad`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">delay</span> <span class="o">*</span> <span class="n">pixsize</span> <span class="o">/</span> <span class="p">(</span><span class="n">dist</span> <span class="o">*</span> <span class="mf">1.e-3</span><span class="p">)</span>     <span class="c1"># [urad]</span></div>
+
+<span class="k">def</span> <span class="nf">_make_window_SCS</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Make a window for a normal integration method:</span>
+<span class="sd">    the SCS (Simchony, Chellappa, and Shao) method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ulist</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span> <span class="o">/</span> <span class="n">width</span>
+    <span class="n">vlist</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span> <span class="o">/</span> <span class="n">height</span>
+    <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">ulist</span><span class="p">,</span> <span class="n">vlist</span><span class="p">)</span>
+    <span class="n">sin_u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">u</span><span class="p">)</span>
+    <span class="n">sin_v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">v</span><span class="p">)</span>
+    <span class="n">sin_u2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">u</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">sin_v2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">v</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">window</span> <span class="o">=</span> <span class="p">(</span><span class="n">sin_u2</span> <span class="o">+</span> <span class="n">sin_v2</span><span class="p">)</span>
+    <span class="n">window</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">window</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">window</span><span class="p">)</span>
+    <span class="n">window</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="k">return</span> <span class="n">sin_u</span><span class="p">,</span> <span class="n">sin_v</span><span class="p">,</span> <span class="n">window</span>
+
+<div class="viewcode-block" id="Integration2D_SCS"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.postfun.Integration2D_SCS">[docs]</a><span class="k">def</span> <span class="nf">Integration2D_SCS</span><span class="p">(</span><span class="n">slope_x</span><span class="p">,</span> <span class="n">slope_y</span><span class="p">,</span> <span class="n">neg_corr</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">pad_mode</span><span class="o">=</span><span class="s2">&quot;linear_ramp&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reconstruct a surface from the gradients in x and y-direction using the</span>
+<span class="sd">    Simchony-Chellappa-Shao method. Note that the DC-component</span>
+<span class="sd">    (average value of an image) of the reconstructed image is unidentified</span>
+<span class="sd">    because the DC-component of the FFT-window is zero.</span>
+<span class="sd">    Assuming the space of the mesh grid is 1 :math:`\mu m`.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">       The SCS method can be found from</span>
+
+<span class="sd">       1. Simchony, Tal, et al.</span>
+<span class="sd">       &quot;Direct analytical methods for solving Poisson equations in computer vision problems&quot;</span>
+<span class="sd">       IEEE transactions on pattern analysis and machine intelligence, 12(5), 435-446.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    slope_x : numpy.ndarray </span>
+<span class="sd">        2D array. Wavefront slope in x-direction, in :math:`\mu rad`.</span>
+<span class="sd">    slope_y : numpy.ndarray </span>
+<span class="sd">        2D array. Wavefront slope in y-direction, in :math:`\mu rad`.</span>
+<span class="sd">    neg_corr : bool, optional</span>
+<span class="sd">        Correct negative offset if True.</span>
+<span class="sd">    pad : int</span>
+<span class="sd">        Padding width.</span>
+<span class="sd">    pad_mode : str</span>
+<span class="sd">        Padding method. Full list can be found at numpy.pad documentation.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numpy.ndarray</span>
+<span class="sd">        2D array. Reconstructed surface. In [pm].</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">pad</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">slope_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">slope_x</span><span class="p">,</span> <span class="n">pad</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">pad_mode</span><span class="p">)</span>
+        <span class="n">slope_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">slope_y</span><span class="p">,</span> <span class="n">pad</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">pad_mode</span><span class="p">)</span>
+    <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">slope_x</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">sin_u</span><span class="p">,</span> <span class="n">sin_v</span><span class="p">,</span> <span class="n">win</span> <span class="o">=</span> <span class="n">_make_window_SCS</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+    <span class="n">fmat_x</span> <span class="o">=</span> <span class="n">sin_u</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft2</span><span class="p">(</span><span class="n">slope_x</span><span class="p">)</span>
+    <span class="n">fmat_y</span> <span class="o">=</span> <span class="n">sin_v</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft2</span><span class="p">(</span><span class="n">slope_y</span><span class="p">)</span>
+    <span class="n">fmat</span> <span class="o">=</span> <span class="n">fmat_x</span> <span class="o">+</span> <span class="n">fmat_y</span>
+    <span class="n">rec_surf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft2</span><span class="p">(</span><span class="n">fmat</span> <span class="o">*</span> <span class="n">win</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">pad</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">rec_surf</span> <span class="o">=</span> <span class="n">rec_surf</span><span class="p">[</span><span class="n">pad</span><span class="p">:</span><span class="o">-</span><span class="n">pad</span><span class="p">,</span> <span class="n">pad</span><span class="p">:</span><span class="o">-</span><span class="n">pad</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">neg_corr</span><span class="p">:</span>
+        <span class="n">nmin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">rec_surf</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">nmin</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="n">rec_surf</span> <span class="o">=</span> <span class="n">rec_surf</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">nmin</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">rec_surf</span><span class="p">)</span></div>
+
+<span class="k">def</span> <span class="nf">_double_image</span><span class="p">(</span><span class="n">mat</span><span class="p">):</span>
+    <span class="n">mat1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">mat</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">fliplr</span><span class="p">(</span><span class="n">mat</span><span class="p">)))</span>
+    <span class="n">mat2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">mat1</span><span class="p">),</span> <span class="n">mat1</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">mat2</span>
+
+<span class="k">def</span> <span class="nf">_make_window_FC</span><span class="p">(</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Make a window for a normal integration method:</span>
+<span class="sd">    the FC (Frankot and Chellappa) method.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xcenter</span> <span class="o">=</span> <span class="n">width</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">ycenter</span> <span class="o">=</span> <span class="n">height</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">ulist</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span> <span class="o">-</span> <span class="n">xcenter</span><span class="p">)</span> <span class="o">/</span> <span class="n">width</span>
+    <span class="n">vlist</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span> <span class="o">-</span> <span class="n">ycenter</span><span class="p">)</span> <span class="o">/</span> <span class="n">width</span>
+    <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">ulist</span><span class="p">,</span> <span class="n">vlist</span><span class="p">)</span>
+    <span class="n">window</span> <span class="o">=</span> <span class="n">u</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">v</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="n">window</span><span class="p">[</span><span class="n">ycenter</span><span class="p">,</span> <span class="n">xcenter</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">window</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">window</span>
+    <span class="n">window</span><span class="p">[</span><span class="n">ycenter</span><span class="p">,</span> <span class="n">xcenter</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="k">return</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">window</span>
+
+<div class="viewcode-block" id="Integration2D_FC"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.postfun.Integration2D_FC">[docs]</a><span class="k">def</span> <span class="nf">Integration2D_FC</span><span class="p">(</span><span class="n">slope_x</span><span class="p">,</span> <span class="n">slope_y</span><span class="p">,</span> <span class="n">neg_corr</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reconstruct a surface from the gradients in x and y-direction using the</span>
+<span class="sd">    Frankot-Chellappa method. Note that the DC-component</span>
+<span class="sd">    (average value of an image) of the reconstructed image is unidentified</span>
+<span class="sd">    because the DC-component of the FFT-window is zero.</span>
+<span class="sd">    Assuming the space of the mesh grid is 1 :math:`\mu m`.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        Frankot-Chellappa method can be found from</span>
+
+<span class="sd">        1. Frankot, Robert T., &amp; Chellappa, Roma.</span>
+<span class="sd">        &quot;A method for enforcing integrability in shape from shading algorithms.&quot;</span>
+<span class="sd">        IEEE Transactions on pattern analysis and machine intelligence, 10(4), 439-451.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    slope_x : numpy.ndarray </span>
+<span class="sd">        2D array. Wavefront slope in x-direction, in :math:`\mu rad`.</span>
+<span class="sd">    slope_y : numpy.ndarray </span>
+<span class="sd">        2D array. Wavefront slope in y-direction, in :math:`\mu rad`.</span>
+<span class="sd">    neg_corr : bool, optional</span>
+<span class="sd">        Correct negative offset if True.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numpy.ndarray </span>
+<span class="sd">        2D array. Reconstructed surface. In [pm].</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">slope_x</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">slope2_x</span> <span class="o">=</span> <span class="n">_double_image</span><span class="p">(</span><span class="n">slope_x</span><span class="p">)</span>
+    <span class="n">slope2_y</span> <span class="o">=</span> <span class="n">_double_image</span><span class="p">(</span><span class="n">slope_y</span><span class="p">)</span>
+    <span class="n">height2</span><span class="p">,</span> <span class="n">width2</span> <span class="o">=</span> <span class="n">slope2_x</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">win</span> <span class="o">=</span> <span class="n">_make_window_FC</span><span class="p">(</span><span class="n">height2</span><span class="p">,</span> <span class="n">width2</span><span class="p">)</span>
+    <span class="n">fmat_x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">u</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft2</span><span class="p">(</span><span class="n">slope2_x</span><span class="p">))</span>
+    <span class="n">fmat_y</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">v</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft2</span><span class="p">(</span><span class="n">slope2_y</span><span class="p">))</span>
+    <span class="n">rec_surf</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft2</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifftshift</span><span class="p">((</span><span class="n">fmat_x</span> <span class="o">+</span> <span class="n">fmat_y</span><span class="p">)</span> <span class="o">*</span> <span class="n">win</span><span class="p">)))[</span><span class="n">height</span><span class="p">:,</span> <span class="mi">0</span><span class="p">:</span><span class="n">width</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">correct_negative</span><span class="p">:</span>
+        <span class="n">nmin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">rec_surf</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">nmin</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="n">rec_surf</span> <span class="o">=</span> <span class="n">rec_surf</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">nmin</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">rec_surf</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="curv_scan"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.postfun.curv_scan">[docs]</a><span class="k">def</span> <span class="nf">curv_scan</span><span class="p">(</span><span class="n">delay</span><span class="p">,</span> <span class="n">scanstep</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">pixsize</span><span class="p">,</span> <span class="n">nstep</span><span class="p">,</span> <span class="n">mempos</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get wavefront local curvature (curvature error) from tracked shift.</span>
+<span class="sd">    Used when scanned. The corresponding wavefront is **on the detector plane**.</span>
+
+<span class="sd">    .. note:: </span>
+<span class="sd">        Eq. (3) in H. Wang, J. Sutter, and K. Sawhney, </span>
+<span class="sd">        &quot;Advanced in situ metrology for x-ray beam shaping with super precision,&quot; </span>
+<span class="sd">        Opt. Express  23, 1605-1614 (2015). </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    delay: numpy.ndarray</span>
+<span class="sd">        Tracked shift in the scanned direction.</span>
+<span class="sd">        :math:`\epsilon` in the paper, it must be **positive**.</span>
+<span class="sd">    scanstep : float</span>
+<span class="sd">        Step size of piezo [:math:`\mu m`], :math:`\mu` in the paper.</span>
+<span class="sd">    dist : float</span>
+<span class="sd">        Distance between membrane and detector [mm], *d* in the paper</span>
+<span class="sd">    pixsize : float</span>
+<span class="sd">        Detector pixel size [:math:`\mu m`], *p* in the paper</span>
+<span class="sd">    nstep : int</span>
+<span class="sd">        ntep, (j-i) in the paper</span>
+<span class="sd">    mempos : str</span>
+<span class="sd">        &#39;downstream&#39; or &#39;upstream&#39;. Use this to define the position of </span>
+<span class="sd">        the diffusor in respect to the focus of the optics. &#39;downstream&#39;</span>
+<span class="sd">        means the diffuser is placed downstream of the focus. See </span>
+<span class="sd">        :ref:`User guide: Local curvature reconstruction &lt;curvature&gt;` for more </span>
+<span class="sd">        details of it. </span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    curvature : numpy.ndarray   </span>
+<span class="sd">        Local curvature [m^-1]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dist</span> <span class="o">*=</span> <span class="mf">1.e-3</span>           <span class="c1"># [m]</span>
+    <span class="n">delay</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+    <span class="n">mag</span> <span class="o">=</span> <span class="n">delay</span> <span class="o">*</span> <span class="n">scanstep</span> <span class="o">/</span> <span class="n">nstep</span> <span class="o">/</span> <span class="n">pixsize</span> 
+    <span class="k">if</span> <span class="n">mempos</span> <span class="o">==</span> <span class="s1">&#39;downstream&#39;</span><span class="p">:</span>
+        <span class="n">curvature</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">mag</span><span class="p">)</span> <span class="o">/</span> <span class="n">dist</span> 
+    <span class="k">if</span> <span class="n">mempos</span> <span class="o">==</span> <span class="s1">&#39;upstream&#39;</span><span class="p">:</span>
+        <span class="n">curvature</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">mag</span><span class="p">)</span> <span class="o">/</span> <span class="n">dist</span> 
+
+    <span class="k">return</span> <span class="n">curvature</span>              <span class="c1">#[1/m]</span></div>
+
+<div class="viewcode-block" id="curv_pixel"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.postfun.curv_pixel">[docs]</a><span class="k">def</span> <span class="nf">curv_pixel</span><span class="p">(</span><span class="n">delay</span><span class="p">,</span> <span class="n">scanstep</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">pixsize</span><span class="p">,</span> <span class="n">mempos</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get wavefront local curvature (curvature error) from tracked shift.</span>
+<span class="sd">    Used for self-reference XST technique. </span>
+<span class="sd">    The corresponding wavefront is **on the detector plane**.</span>
+
+<span class="sd">    .. note:: </span>
+<span class="sd">        Eq. (2) in L. Hu, H. Wang, O. Fox, and K. Sawhney, </span>
+<span class="sd">        &quot;Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique&quot; </span>
+<span class="sd">        Opt. Express 30(18), 33259-33273 (2022). </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    delay: numpy.ndarray</span>
+<span class="sd">        Tracked shift in the scanned direction.</span>
+<span class="sd">        :math:`iy_{AST}` in the paper, it must be **positive**.</span>
+<span class="sd">    scanstep : float</span>
+<span class="sd">        Step size of piezo [:math:`\mu m`], :math:`s` in the paper.</span>
+<span class="sd">    dist : float</span>
+<span class="sd">        Distance between membrane and detector [mm], :math:`D` in the paper.</span>
+<span class="sd">    pixsize : float</span>
+<span class="sd">        Detector pixel size [:math:`\mu m`], :math:`p` in the paper.</span>
+<span class="sd">    mempos : str</span>
+<span class="sd">        &#39;downstream&#39; or &#39;upstream&#39;. Use this to define the position of </span>
+<span class="sd">        the diffusor in respect to the focus of the optics. &#39;downstream&#39;</span>
+<span class="sd">        means the diffuser is placed downstream of the focus. See </span>
+<span class="sd">        :ref:`User guide: Local curvature reconstruction &lt;curvature&gt;` for more </span>
+<span class="sd">        details of it. </span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    curvature : numpy.ndarray   </span>
+<span class="sd">        Local curvature [m^-1]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dist</span> <span class="o">*=</span> <span class="mf">1.e-3</span>           <span class="c1"># [m]</span>
+    <span class="n">delay</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
+    <span class="n">mag</span> <span class="o">=</span> <span class="n">scanstep</span> <span class="o">/</span> <span class="p">(</span><span class="n">delay</span> <span class="o">*</span> <span class="n">pixsize</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">mempos</span> <span class="o">==</span> <span class="s1">&#39;downstream&#39;</span><span class="p">:</span>
+        <span class="n">curvature</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">mag</span><span class="p">)</span> <span class="o">/</span> <span class="n">dist</span> 
+    <span class="k">if</span> <span class="n">mempos</span> <span class="o">==</span> <span class="s1">&#39;upstream&#39;</span><span class="p">:</span>
+        <span class="n">curvature</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">mag</span><span class="p">)</span> <span class="o">/</span> <span class="n">dist</span> 
+
+    <span class="k">return</span> <span class="n">curvature</span>              <span class="c1">#[1/m]</span></div>
+
+<div class="viewcode-block" id="EllipseSlope"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.postfun.EllipseSlope">[docs]</a><span class="k">def</span> <span class="nf">EllipseSlope</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function calculate the slope error at coordinate x. </span>
+<span class="sd">    The resulting slope error always starts with 0.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : numpy.array</span>
+<span class="sd">        Ellipse x coordinate, x starts from 0. [m]</span>
+<span class="sd">    p : float</span>
+<span class="sd">        Ellipse p, [m]</span>
+<span class="sd">    q : float</span>
+<span class="sd">        Ellipse q, [m]</span>
+<span class="sd">    theta : float</span>
+<span class="sd">        Ellipse theta, [rad]</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Slo : numpy.array</span>
+<span class="sd">        Ellipse slope error at x coordinate, starts from 0. [rad]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="n">q</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">p</span> <span class="o">*</span> <span class="n">q</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">p</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">q</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">p</span> <span class="o">*</span> <span class="n">q</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">theta</span><span class="p">))</span>
+    <span class="n">xc</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">q</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">f</span><span class="p">)</span>
+    <span class="n">yc</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">p</span> <span class="o">*</span> <span class="n">q</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">theta</span><span class="p">))</span> <span class="o">/</span> <span class="n">f</span>
+    <span class="n">x_ellip</span> <span class="o">=</span> <span class="n">xc</span> <span class="o">+</span> <span class="n">x</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">y_ellip</span> <span class="o">=</span> <span class="o">-</span><span class="n">b</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x_ellip</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">Slo</span> <span class="o">=</span> <span class="o">-</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x_ellip</span> <span class="o">/</span> <span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">y_ellip</span><span class="p">)</span> 
+    <span class="n">Slo</span> <span class="o">=</span> <span class="n">Slo</span> <span class="o">-</span> <span class="n">Slo</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">Slo</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Lingfei Hu, Hongchang Wang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

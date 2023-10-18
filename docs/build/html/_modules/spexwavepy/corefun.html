@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>spexwavepy.corefun &mdash; spexwavepy 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            spexwavepy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../principle.html">The speckle-based wavefront sensing techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getstart.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../example.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../userguide.html">User guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">spexwavepy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">spexwavepy.corefun</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for spexwavepy.corefun</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+<div class="viewcode-block" id="indicator"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.corefun.indicator">[docs]</a><span class="k">def</span> <span class="nf">indicator</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This auxiliary function is used for counting.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    num : int</span>
+<span class="sd">        Index for each loop</span>
+<span class="sd">    length : int</span>
+<span class="sd">        Total loop length</span>
+<span class="sd">    comments : str, optional, default is None</span>
+<span class="sd">        Used as helper</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">progress</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span> <span class="o">*</span> <span class="n">length</span><span class="p">)</span>
+    <span class="n">strings</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;10%&#39;</span><span class="p">,</span> <span class="s1">&#39;20%&#39;</span><span class="p">,</span> <span class="s1">&#39;30%&#39;</span><span class="p">,</span> <span class="s1">&#39;40%&#39;</span><span class="p">,</span> <span class="s1">&#39;50%&#39;</span><span class="p">,</span> <span class="s1">&#39;60%&#39;</span><span class="p">,</span> <span class="s1">&#39;70%&#39;</span><span class="p">,</span> <span class="s1">&#39;80%&#39;</span><span class="p">,</span> <span class="s1">&#39;90%&#39;</span><span class="p">,</span> <span class="s1">&#39;100%&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">progress</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">comments</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">comments</span><span class="p">)</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">progress</span><span class="o">==</span><span class="n">num</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">strings</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+
+    <span class="k">return</span> </div>
+
+<div class="viewcode-block" id="read_one"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.corefun.read_one">[docs]</a><span class="k">def</span> <span class="nf">read_one</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">ShowImage</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read one image</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : str</span>
+<span class="sd">        File name </span>
+<span class="sd">    ShowImage : bool, optional</span>
+<span class="sd">        To show image or not, default is False</span>
+
+<span class="sd">    Return</span>
+<span class="sd">    ------</span>
+<span class="sd">    numpy.ndarray</span>
+<span class="sd">        One image data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data_tmp</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_ANYCOLOR</span> <span class="o">|</span> <span class="n">cv2</span><span class="o">.</span><span class="n">IMREAD_ANYDEPTH</span><span class="p">)</span> 
+    <span class="k">if</span> <span class="n">ShowImage</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data_tmp</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">data_tmp</span> </div>
+
+<div class="viewcode-block" id="crop_one"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.corefun.crop_one">[docs]</a><span class="k">def</span> <span class="nf">crop_one</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ROI</span><span class="p">,</span> <span class="n">ShowImage</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Crop the input image according to the ROI.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data : numpy.ndarray</span>
+<span class="sd">        The input image data</span>
+<span class="sd">    ROI : [int, int, int, int]</span>
+<span class="sd">        ROI is [y_begin, y_end, x_begin, x_end]</span>
+<span class="sd">    ShowImage : bool, optional</span>
+<span class="sd">        To show image or not, default is False</span>
+
+<span class="sd">    Return</span>
+<span class="sd">    ------</span>
+<span class="sd">    numpy.ndarray</span>
+<span class="sd">        The cropped image data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">ShowImage</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">ROI</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">ROI</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ROI</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span><span class="n">ROI</span><span class="p">[</span><span class="mi">3</span><span class="p">]],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="n">ROI</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">ROI</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ROI</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span><span class="n">ROI</span><span class="p">[</span><span class="mi">3</span><span class="p">]]</span></div>
+
+<div class="viewcode-block" id="NormImage"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.corefun.NormImage">[docs]</a><span class="k">def</span> <span class="nf">NormImage</span><span class="p">(</span><span class="n">image_raw</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Image Normalization. This function is used to mitigate the low frequent structures appeared in the raw images. </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    image_raw : numpy.ndarray</span>
+<span class="sd">        The input image data</span>
+
+<span class="sd">    Return</span>
+<span class="sd">    ------</span>
+<span class="sd">    numpy.ndarray</span>
+<span class="sd">        The normalized image</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">row_sum_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">image_raw</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">col_sum_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">image_raw</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">col_sum_1</span> <span class="o">=</span> <span class="n">col_sum_1</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">col_sum_1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">image_raw</span> <span class="o">=</span> <span class="n">image_raw</span> <span class="o">/</span> <span class="n">row_sum_1</span> <span class="o">/</span> <span class="n">col_sum_1</span> 
+    <span class="n">image_raw</span> <span class="o">=</span> <span class="p">(</span><span class="n">image_raw</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">image_raw</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">image_raw</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">image_raw</span></div>
+
+<div class="viewcode-block" id="Imagematch"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.corefun.Imagematch">[docs]</a><span class="k">def</span> <span class="nf">Imagematch</span><span class="p">(</span><span class="n">im1</span><span class="p">,</span> <span class="n">im2</span><span class="p">,</span> <span class="n">meth</span><span class="o">=</span><span class="s1">&#39;cv2.TM_CCOEFF_NORMED&#39;</span><span class="p">,</span> <span class="n">subpixelmeth</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="n">res</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find the shifts between two images (im1 and im2) with subpixel accuracy.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    im1 : numpy.ndarray</span>
+<span class="sd">       Reference image.</span>
+<span class="sd">    im2 : numpy.ndarray</span>
+<span class="sd">       Image to be tracked. It must be **smaller** than im1.</span>
+<span class="sd">    meth : str</span>
+<span class="sd">       Method for cv2.matchTemplate (default &#39;cv2.TM_CCOEFF_NORMED&#39;). Other methods need to be implemented.</span>
+<span class="sd">    subpixelmeth : str</span>
+<span class="sd">       The algorithm used with subpixel accuracy (default &#39;default&#39;). </span>
+<span class="sd">       When it is None, no subpixel method used. Now only &#39;default&#39;|&#39;gausspeak&#39;|&#39;parapeak&#39; is available. </span>
+<span class="sd">    res : bool</span>
+<span class="sd">       Whether or not return the coefficient matrix (default True). </span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    delayX, delayY, res_mat : numpy.array</span>
+<span class="sd">       Shifts in two dimensions, matching coefficient matrix if res is True.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">meth</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;cv2.TM_CCOEFF_NORMED&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This tracking method needs to be implemented...&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">planeRef</span> <span class="o">=</span> <span class="n">im1</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="n">planetmp</span> <span class="o">=</span> <span class="n">im2</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">res_mat</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">matchTemplate</span><span class="p">(</span><span class="n">planeRef</span><span class="p">,</span> <span class="n">planetmp</span><span class="p">,</span> <span class="nb">eval</span><span class="p">(</span><span class="n">meth</span><span class="p">))</span>
+    <span class="n">index_y</span><span class="p">,</span> <span class="n">index_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">res_mat</span><span class="o">==</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">res_mat</span><span class="p">))</span>
+    <span class="n">index_y</span> <span class="o">=</span> <span class="n">index_y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">index_x</span> <span class="o">=</span> <span class="n">index_x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">subpixelmeth</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">delayX</span> <span class="o">=</span> <span class="n">index_x</span>
+        <span class="n">delayY</span> <span class="o">=</span> <span class="n">index_y</span>
+    <span class="k">if</span> <span class="n">subpixelmeth</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;gausspeak&#39;</span><span class="p">,</span> <span class="s1">&#39;parapeak&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No valid method for subpixel registration! Pixel accuracy values are used.&quot;</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">subpixelmeth</span> <span class="o">==</span> <span class="s1">&#39;default&#39;</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">delta_x</span><span class="p">,</span> <span class="n">delta_y</span> <span class="o">=</span> <span class="n">subpix_default</span><span class="p">(</span><span class="n">res_mat</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IndexError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Potential tracking failure, no subpixel registration: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">delta_x</span><span class="p">,</span> <span class="n">delta_y</span> <span class="o">=</span> <span class="mf">10000.</span><span class="p">,</span> <span class="mf">10000.</span>
+    <span class="k">if</span> <span class="n">subpixelmeth</span> <span class="o">==</span> <span class="s1">&#39;gausspeak&#39;</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">delta_x</span><span class="p">,</span> <span class="n">delta_y</span> <span class="o">=</span> <span class="n">subpix_gausspeak</span><span class="p">(</span><span class="n">res_mat</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IndexError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Potential tracking failure, no subpixel registration: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">delta_x</span><span class="p">,</span> <span class="n">delta_y</span> <span class="o">=</span> <span class="mf">10000.</span><span class="p">,</span> <span class="mf">10000.</span>
+    <span class="k">if</span> <span class="n">subpixelmeth</span> <span class="o">==</span> <span class="s1">&#39;parapeak&#39;</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">delta_x</span><span class="p">,</span> <span class="n">delta_y</span> <span class="o">=</span> <span class="n">subpix_parapeak</span><span class="p">(</span><span class="n">res_mat</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">IndexError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Potential tracking failure, no subpixel registration: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">delta_x</span><span class="p">,</span> <span class="n">delta_y</span> <span class="o">=</span> <span class="mf">10000.</span><span class="p">,</span> <span class="mf">10000.</span>
+    <span class="n">delayX</span> <span class="o">=</span> <span class="n">index_x</span> <span class="o">+</span> <span class="n">delta_x</span>
+    <span class="n">delayY</span> <span class="o">=</span> <span class="n">index_y</span> <span class="o">+</span> <span class="n">delta_y</span>
+
+    <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">delayX</span><span class="p">,</span> <span class="n">delayY</span><span class="p">,</span> <span class="n">res_mat</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">delayX</span><span class="p">,</span> <span class="n">delayY</span></div>
+
+<div class="viewcode-block" id="subpix_default"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.corefun.subpix_default">[docs]</a><span class="k">def</span> <span class="nf">subpix_default</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">meth</span><span class="o">=</span><span class="s1">&#39;cv2.TM_CCOEFF_NORMED&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The default subpix registration method. </span>
+
+<span class="sd">    .. note:: This subpixel registrition method can be found from </span>
+
+<span class="sd">              1. Fisher, G. H., &amp; Welsch, B.T. </span>
+<span class="sd">              &quot;FLCT: a fast, efficient method for performing local correlation tracking.&quot; </span>
+<span class="sd">              Subsurface and Atmospheric Influences on Solar Activity. Vol. 383. 2008.</span>
+
+<span class="sd">              2. Qiao, Zhi, et al. </span>
+<span class="sd">              &quot;Wavelet-transform-based speckle vector tracking method for X-ray phase imaging.&quot; </span>
+<span class="sd">              Optics Express 28.22 (2020): 33053-33067. </span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    res : numpy.ndarray  </span>
+<span class="sd">        The cross correlation results, 2D array</span>
+<span class="sd">    meth : str</span>
+<span class="sd">        Method for cv2.matchTemplate (default &#39;cv2.TM_CCOEFF_NORMED&#39;). </span>
+<span class="sd">        Do not modify it, other methods haven&#39;t been implemented.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Deltax, Deltay : numpy.array</span>
+<span class="sd">        1D array of subpixel registration results.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">min_loc</span><span class="p">,</span> <span class="n">max_loc</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">minMaxLoc</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="c1"># If the method is TM_SQDIFF or TM_SQDIFF_NORMED, take minimum</span>
+    <span class="k">if</span> <span class="n">meth</span> <span class="ow">in</span> <span class="p">[</span><span class="n">cv2</span><span class="o">.</span><span class="n">TM_SQDIFF</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">TM_SQDIFF_NORMED</span><span class="p">]:</span>
+        <span class="n">top_left</span> <span class="o">=</span> <span class="n">min_loc</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">top_left</span> <span class="o">=</span> <span class="n">max_loc</span>
+    <span class="n">max_y</span><span class="p">,</span> <span class="n">max_x</span> <span class="o">=</span> <span class="n">top_left</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">top_left</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1">##Central Difference </span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="p">,</span> <span class="n">max_x</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="p">,</span> <span class="n">max_x</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_x</span><span class="p">]</span> <span class="o">-</span> <span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_x</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.</span>
+    <span class="n">dxx</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="p">,</span> <span class="n">max_x</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="p">,</span> <span class="n">max_x</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="p">,</span> <span class="n">max_x</span><span class="p">]</span>
+    <span class="n">dyy</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_x</span><span class="p">]</span> <span class="o">+</span> <span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_x</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="p">,</span> <span class="n">max_x</span><span class="p">]</span>
+    <span class="n">dxy</span> <span class="o">=</span> <span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_x</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_x</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_x</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_x</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mf">4.</span>
+    <span class="c1">##</span>
+    <span class="n">det</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="n">dxy</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">dxx</span> <span class="o">*</span> <span class="n">dyy</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">dyy</span><span class="o">*</span><span class="n">dx</span> <span class="o">-</span> <span class="n">dxy</span><span class="o">*</span><span class="n">dy</span><span class="p">)</span> <span class="o">*</span> <span class="n">det</span><span class="p">,</span> <span class="p">(</span><span class="n">dxx</span><span class="o">*</span><span class="n">dy</span> <span class="o">-</span> <span class="n">dxy</span><span class="o">*</span><span class="n">dx</span><span class="p">)</span> <span class="o">*</span> <span class="n">det</span>   <span class="c1">#Deltax, Deltay</span></div>
+
+<div class="viewcode-block" id="subpix_gausspeak"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.corefun.subpix_gausspeak">[docs]</a><span class="k">def</span> <span class="nf">subpix_gausspeak</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">meth</span><span class="o">=</span><span class="s1">&#39;cv2.TM_CCOEFF_NORMED&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Gaussian peak fitting for subpixel registration.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    res : numpy.ndarray  </span>
+<span class="sd">        The cross correlation results, 2D array</span>
+<span class="sd">    meth : str</span>
+<span class="sd">        Method for cv2.matchTemplate (default is &#39;cv2.TM_CCOEFF_NORMED&#39;). </span>
+<span class="sd">        Do not modify it, other methods haven&#39;t been implemented.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Deltax, Deltay : numpy.array</span>
+<span class="sd">        1D array of subpixel registration results.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">min_loc</span><span class="p">,</span> <span class="n">max_loc</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">minMaxLoc</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="c1"># If the method is TM_SQDIFF or TM_SQDIFF_NORMED, take minimum</span>
+    <span class="k">if</span> <span class="n">meth</span> <span class="ow">in</span> <span class="p">[</span><span class="n">cv2</span><span class="o">.</span><span class="n">TM_SQDIFF</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">TM_SQDIFF_NORMED</span><span class="p">]:</span>
+        <span class="n">top_left</span> <span class="o">=</span> <span class="n">min_loc</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">top_left</span> <span class="o">=</span> <span class="n">max_loc</span>
+    <span class="n">max_y</span><span class="p">,</span> <span class="n">max_x</span> <span class="o">=</span> <span class="n">top_left</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">top_left</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">dx</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="p">,</span> <span class="n">max_x</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="p">,</span> <span class="n">max_x</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span> \
+            <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="p">,</span> <span class="n">max_x</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="p">,</span> <span class="n">max_x</span><span class="p">])</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="p">,</span> <span class="n">max_x</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_x</span><span class="p">])</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_x</span><span class="p">]))</span> \
+           <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_x</span><span class="p">])</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="p">,</span> <span class="n">max_x</span><span class="p">])</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_x</span><span class="p">]))</span>
+
+    <span class="k">return</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span></div>
+
+<div class="viewcode-block" id="subpix_parapeak"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.corefun.subpix_parapeak">[docs]</a><span class="k">def</span> <span class="nf">subpix_parapeak</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">meth</span><span class="o">=</span><span class="s1">&#39;cv2.TM_CCOEFF_NORMED&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Parabola peak fitting for subpixel registration.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    res : numpy.ndarray  </span>
+<span class="sd">        The cross correlation results, 2D array</span>
+<span class="sd">    meth : str</span>
+<span class="sd">        Method for cv2.matchTemplate (default is &#39;cv2.TM_CCOEFF_NORMED&#39;). </span>
+<span class="sd">        Do not modify it, other methods haven&#39;t been implemented.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Deltax, Deltay : numpy.array</span>
+<span class="sd">        1D array of subpixel registration results.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">min_loc</span><span class="p">,</span> <span class="n">max_loc</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">minMaxLoc</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="c1"># If the method is TM_SQDIFF or TM_SQDIFF_NORMED, take minimum</span>
+    <span class="k">if</span> <span class="n">meth</span> <span class="ow">in</span> <span class="p">[</span><span class="n">cv2</span><span class="o">.</span><span class="n">TM_SQDIFF</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">TM_SQDIFF_NORMED</span><span class="p">]:</span>
+        <span class="n">top_left</span> <span class="o">=</span> <span class="n">min_loc</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">top_left</span> <span class="o">=</span> <span class="n">max_loc</span>
+    <span class="n">max_y</span><span class="p">,</span> <span class="n">max_x</span> <span class="o">=</span> <span class="n">top_left</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">top_left</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">dx</span> <span class="o">=</span> <span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="p">,</span> <span class="n">max_x</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="p">,</span> <span class="n">max_x</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> \
+            <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="p">,</span> <span class="n">max_x</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="p">,</span> <span class="n">max_x</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="p">,</span> <span class="n">max_x</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">dy</span> <span class="o">=</span> <span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_x</span><span class="p">]</span> <span class="o">-</span> <span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_x</span><span class="p">])</span> \
+           <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_x</span><span class="p">]</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="p">,</span> <span class="n">max_x</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">res</span><span class="p">[</span><span class="n">max_y</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_x</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span></div>
+
+<div class="viewcode-block" id="initDisplay"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.corefun.initDisplay">[docs]</a><span class="k">def</span> <span class="nf">initDisplay</span><span class="p">(</span><span class="n">plane1_init</span><span class="p">,</span> <span class="n">plane2_init</span><span class="p">,</span> <span class="n">res_init</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Used for initialize figure layout for dispalaying.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    plane1_init: numpy.ndarray</span>
+<span class="sd">        Template image</span>
+<span class="sd">    plane2_init: numpy.ndarray</span>
+<span class="sd">        Original image</span>
+<span class="sd">    res_init: numpy.ndarray</span>
+<span class="sd">        2D cross-correlation results matrix</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    fig, h1, h2, h3, h4</span>
+<span class="sd">        Auxiliaries for animation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">min_loc</span><span class="p">,</span> <span class="n">max_loc</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">minMaxLoc</span><span class="p">(</span><span class="n">res_init</span><span class="p">)</span>
+    <span class="n">top_left</span> <span class="o">=</span> <span class="n">max_loc</span>
+    <span class="n">index_y</span><span class="p">,</span> <span class="n">index_x</span> <span class="o">=</span> <span class="n">top_left</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">top_left</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">221</span><span class="p">)</span>
+    <span class="n">y_dim_1</span><span class="p">,</span> <span class="n">x_dim_1</span> <span class="o">=</span> <span class="n">plane1_init</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">h1</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">plane1_init</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_dim_1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y_dim_1</span><span class="p">],</span> <span class="n">aspect</span><span class="o">=</span><span class="n">x_dim_1</span><span class="o">/</span><span class="n">y_dim_1</span><span class="p">)</span>
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">222</span><span class="p">)</span>
+    <span class="n">y_dim_2</span><span class="p">,</span> <span class="n">x_dim_2</span> <span class="o">=</span> <span class="n">plane2_init</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">y_dim_res</span><span class="p">,</span> <span class="n">x_dim_res</span> <span class="o">=</span> <span class="n">res_init</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">h2</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">plane2_init</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_dim_2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y_dim_2</span><span class="p">],</span> <span class="n">aspect</span><span class="o">=</span><span class="n">x_dim_2</span><span class="o">/</span><span class="n">y_dim_2</span><span class="p">)</span>
+    <span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">223</span><span class="p">)</span>
+    <span class="n">h3</span> <span class="o">=</span> <span class="n">ax3</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">res_init</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_dim_res</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">y_dim_res</span><span class="p">],</span> <span class="n">aspect</span><span class="o">=</span><span class="n">x_dim_res</span><span class="o">/</span><span class="n">y_dim_res</span><span class="p">)</span>
+    <span class="n">ax4</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">224</span><span class="p">)</span>
+    <span class="n">h4</span> <span class="o">=</span> <span class="n">ax4</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">res_init</span><span class="p">[:,</span> <span class="n">index_x</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ax4</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">h1</span><span class="p">,</span> <span class="n">h2</span><span class="p">,</span> <span class="n">h3</span><span class="p">,</span> <span class="n">h4</span></div>
+
+<div class="viewcode-block" id="contiDisplay"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.corefun.contiDisplay">[docs]</a><span class="k">def</span> <span class="nf">contiDisplay</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">h1</span><span class="p">,</span> <span class="n">h2</span><span class="p">,</span> <span class="n">h3</span><span class="p">,</span> <span class="n">h4</span><span class="p">,</span> <span class="n">plane1t</span><span class="p">,</span> <span class="n">plane2</span><span class="p">,</span> <span class="n">res</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Used for dispalaying.</span>
+
+<span class="sd">    .. note:: Double click on the image will terminate displaying!</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fig, h1, h2, h3, h4</span>
+<span class="sd">        Auxiliaries for animation</span>
+<span class="sd">    plane1t : numpy.ndarray</span>
+<span class="sd">        Template image</span>
+<span class="sd">    plane2 : numpy.ndarray</span>
+<span class="sd">        Original image</span>
+<span class="sd">    res : numpy.ndarray</span>
+<span class="sd">        2D cross-correlation results matrix</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">onclick</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">dblclick</span><span class="p">:</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">min_val</span><span class="p">,</span> <span class="n">max_val</span><span class="p">,</span> <span class="n">min_loc</span><span class="p">,</span> <span class="n">max_loc</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">minMaxLoc</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="n">top_left</span> <span class="o">=</span> <span class="n">max_loc</span>
+    <span class="n">index_y</span><span class="p">,</span> <span class="n">index_x</span> <span class="o">=</span> <span class="n">top_left</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">top_left</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">h1</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">plane1t</span><span class="p">)</span>
+    <span class="n">h2</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">plane2</span><span class="p">)</span>
+    <span class="n">h3</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+    <span class="n">h4</span><span class="o">.</span><span class="n">set_ydata</span><span class="p">(</span><span class="n">res</span><span class="p">[:,</span> <span class="n">index_x</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">pause</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">)</span>
+
+    <span class="n">connection_id</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">mpl_connect</span><span class="p">(</span><span class="s1">&#39;button_press_event&#39;</span><span class="p">,</span> <span class="n">onclick</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Lingfei Hu, Hongchang Wang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

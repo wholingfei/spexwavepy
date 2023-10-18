@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>spexwavepy package &mdash; spexwavepy 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="API reference" href="api.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            spexwavepy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="principle.html">The speckle-based wavefront sensing techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getstart.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userguide.html">User guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="api.html">API reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">spexwavepy package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-spexwavepy.imstackfun">imstackfun module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-spexwavepy.corefun">corefun module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-spexwavepy.trackfun">trackfun module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-spexwavepy.postfun">postfun module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">spexwavepy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="api.html">API reference</a></li>
+      <li class="breadcrumb-item active">spexwavepy package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/spexwavepy.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="spexwavepy-package">
+<h1>spexwavepy package<a class="headerlink" href="#spexwavepy-package" title="Permalink to this heading"></a></h1>
+<section id="module-spexwavepy.imstackfun">
+<span id="imstackfun-module"></span><h2>imstackfun module<a class="headerlink" href="#module-spexwavepy.imstackfun" title="Permalink to this heading"></a></h2>
+<p><strong>This module contains the functions used for dealing with the image stacks.</strong></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="spexwavepy.imstackfun.Imagestack">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spexwavepy.imstackfun.</span></span><span class="sig-name descname"><span class="pre">Imagestack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileFolder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ROI</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/imstackfun.html#Imagestack"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.imstackfun.Imagestack" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class to represent one image stack.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpath</strong> (<em>str</em>) – File folder path.</p></li>
+<li><p><strong>roi</strong> (<em>4-element tuple</em><em>, </em><em>(</em><em>int</em><em>, </em><em>int</em><em>, </em><em>int</em><em>, </em><em>int</em><em>)</em>) – Region of interest.</p></li>
+<li><p><strong>fstep</strong> (<em>int</em>) – File step for file reading. (default 1)</p></li>
+<li><p><strong>fnum</strong> (<em>int</em>) – Total file number, if &lt;=0, consider all the files in the folder.</p></li>
+<li><p><strong>fstart</strong> (<em>int</em>) – Starting file number for dataset loading. (defaul 0)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – Print out information or not. (default True)</p></li>
+<li><p><strong>rawdata</strong> (<em>numpy.ndarray</em>) – 3D image stack data. Read-only.</p></li>
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – 3D image stack data. Data used for future processing. Initially, it copied the raw image stack.</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em>) – Do the normalization or not. (default False)</p></li>
+<li><p><strong>flip</strong> (<em>string</em>) – To flip the images in the stack or not.
+‘x’ is to flip horizontally, ‘y’ is to flip vertically.
+It is necessary when the test optic is a mirror. (default None)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="spexwavepy.imstackfun.Imagestack.flip">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">flip</span></span><a class="headerlink" href="#spexwavepy.imstackfun.Imagestack.flip" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spexwavepy.imstackfun.Imagestack.flipstack">
+<span class="sig-name descname"><span class="pre">flipstack</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/imstackfun.html#Imagestack.flipstack"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.imstackfun.Imagestack.flipstack" title="Permalink to this definition"></a></dt>
+<dd><p>Flip the images in the stack.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spexwavepy.imstackfun.Imagestack.fnum">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fnum</span></span><a class="headerlink" href="#spexwavepy.imstackfun.Imagestack.fnum" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spexwavepy.imstackfun.Imagestack.fstart">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fstart</span></span><a class="headerlink" href="#spexwavepy.imstackfun.Imagestack.fstart" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spexwavepy.imstackfun.Imagestack.fstep">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fstep</span></span><a class="headerlink" href="#spexwavepy.imstackfun.Imagestack.fstep" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spexwavepy.imstackfun.Imagestack.getpixsize">
+<span class="sig-name descname"><span class="pre">getpixsize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subROI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/imstackfun.html#Imagestack.getpixsize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.imstackfun.Imagestack.getpixsize" title="Permalink to this definition"></a></dt>
+<dd><p>To obtain the pixel size from a 1D scan.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subROI</strong> (<em>[</em><em>int</em><em>, </em><em>int</em><em>, </em><em>int</em><em>, </em><em>int</em><em>]</em>) – ROI of the subregion used for template matching.
+It relates to the cropped image. In other words,
+the image stack has been cropped using ROI, the
+subROI is the coordinates of the cropped image
+from the crooped image stack.</p></li>
+<li><p><strong>dim</strong> (<em>str</em>) – ‘x’|’y’|’both’. The data scanned direction.</p></li>
+<li><p><strong>step</strong> (<em>float</em>) – The data scanned step size. Unit <span class="math notranslate nohighlight">\(\mu m\)</span>.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – To show the information or not. (default True)</p></li>
+<li><p><strong>display</strong> (<em>bool</em>) – To display the fitting result or not. (default True)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>pixsize</strong> – The pixel size of the detector. Unit is <span class="math notranslate nohighlight">\(\mu m\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spexwavepy.imstackfun.Imagestack.norm">
+<span class="sig-name descname"><span class="pre">norm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/imstackfun.html#Imagestack.norm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.imstackfun.Imagestack.norm" title="Permalink to this definition"></a></dt>
+<dd><p>Normalize the raw images.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spexwavepy.imstackfun.Imagestack.normalize">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">normalize</span></span><a class="headerlink" href="#spexwavepy.imstackfun.Imagestack.normalize" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spexwavepy.imstackfun.Imagestack.read_data">
+<span class="sig-name descname"><span class="pre">read_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/imstackfun.html#Imagestack.read_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.imstackfun.Imagestack.read_data" title="Permalink to this definition"></a></dt>
+<dd><p>Read the raw image data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spexwavepy.imstackfun.Imagestack.rot90deg">
+<span class="sig-name descname"><span class="pre">rot90deg</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/imstackfun.html#Imagestack.rot90deg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.imstackfun.Imagestack.rot90deg" title="Permalink to this definition"></a></dt>
+<dd><p>Rotate the raw images in the stack 90 degrees.
+It is very useful when dealing the x scan data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spexwavepy.imstackfun.Imagestack.rotate">
+<span class="sig-name descname"><span class="pre">rotate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">angle</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/imstackfun.html#Imagestack.rotate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.imstackfun.Imagestack.rotate" title="Permalink to this definition"></a></dt>
+<dd><p>Rotate the raw images in the stack according to the angle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>angle</strong> (<em>float</em>) – Rotation angle, in [deg].</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spexwavepy.imstackfun.Imagestack.smooth">
+<span class="sig-name descname"><span class="pre">smooth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Gaussian'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/imstackfun.html#Imagestack.smooth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.imstackfun.Imagestack.smooth" title="Permalink to this definition"></a></dt>
+<dd><p>Smoothing the raw images in the image stack.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>meth</strong> (<em>string</em>) – ‘Gaussian|Box’, method used for smoothing. (default ‘Gaussian’)
+‘Gaussian’ is for Gaussian smoothing; ‘Box’ is for smoothing using
+a n*n square.</p></li>
+<li><p><strong>pixel</strong> (<em>int</em>) – If meth is ‘Gaussian’, it is the sigma; if meth is ‘Box’, it is
+the width and height of the square used for smoothing. (default 0)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – To show the information or not. (default False)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spexwavepy.imstackfun.Imagestack.smooth_multi">
+<span class="sig-name descname"><span class="pre">smooth_multi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">meth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Gaussian'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpu_no</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/imstackfun.html#Imagestack.smooth_multi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.imstackfun.Imagestack.smooth_multi" title="Permalink to this definition"></a></dt>
+<dd><p>The multiprocessing version of <a class="reference internal" href="#spexwavepy.imstackfun.Imagestack.smooth" title="spexwavepy.imstackfun.Imagestack.smooth"><code class="xref py py-func docutils literal notranslate"><span class="pre">smooth()</span></code></a> function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>meth</strong> (<em>string</em>) – ‘Gaussian|Box’, method used for smoothing. (default ‘Gaussian’)
+‘Gaussian’ is for Gaussian smoothing; ‘Box’ is for smoothing using
+a n*n square.</p></li>
+<li><p><strong>pixel</strong> (<em>int</em>) – If meth is ‘Gaussian’, it is the sigma; if meth is ‘Box’, it is
+the width and height of the square used for smoothing. (default 0)</p></li>
+<li><p><strong>cpu_no</strong> (<em>int</em>) – CPU number to be used.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – To show the information or not. (default False)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spexwavepy.imstackfun.Imagestack.verbose">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">verbose</span></span><a class="headerlink" href="#spexwavepy.imstackfun.Imagestack.verbose" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-spexwavepy.corefun">
+<span id="corefun-module"></span><h2>corefun module<a class="headerlink" href="#module-spexwavepy.corefun" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="spexwavepy.corefun.Imagematch">
+<span class="sig-prename descclassname"><span class="pre">spexwavepy.corefun.</span></span><span class="sig-name descname"><span class="pre">Imagematch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">im2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cv2.TM_CCOEFF_NORMED'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subpixelmeth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/corefun.html#Imagematch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.corefun.Imagematch" title="Permalink to this definition"></a></dt>
+<dd><p>Find the shifts between two images (im1 and im2) with subpixel accuracy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>im1</strong> (<em>numpy.ndarray</em>) – Reference image.</p></li>
+<li><p><strong>im2</strong> (<em>numpy.ndarray</em>) – Image to be tracked. It must be <strong>smaller</strong> than im1.</p></li>
+<li><p><strong>meth</strong> (<em>str</em>) – Method for cv2.matchTemplate (default ‘cv2.TM_CCOEFF_NORMED’). Other methods need to be implemented.</p></li>
+<li><p><strong>subpixelmeth</strong> (<em>str</em>) – The algorithm used with subpixel accuracy (default ‘default’).
+When it is None, no subpixel method used. Now only ‘default’|’gausspeak’|’parapeak’ is available.</p></li>
+<li><p><strong>res</strong> (<em>bool</em>) – Whether or not return the coefficient matrix (default True).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>delayX, delayY, res_mat</strong> – Shifts in two dimensions, matching coefficient matrix if res is True.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="spexwavepy.corefun.NormImage">
+<span class="sig-prename descclassname"><span class="pre">spexwavepy.corefun.</span></span><span class="sig-name descname"><span class="pre">NormImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_raw</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/corefun.html#NormImage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.corefun.NormImage" title="Permalink to this definition"></a></dt>
+<dd><p>Image Normalization. This function is used to mitigate the low frequent structures appeared in the raw images.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>image_raw</strong> (<em>numpy.ndarray</em>) – The input image data</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The normalized image</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="spexwavepy.corefun.contiDisplay">
+<span class="sig-prename descclassname"><span class="pre">spexwavepy.corefun.</span></span><span class="sig-name descname"><span class="pre">contiDisplay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plane1t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plane2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/corefun.html#contiDisplay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.corefun.contiDisplay" title="Permalink to this definition"></a></dt>
+<dd><p>Used for dispalaying.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Double click on the image will terminate displaying!</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fig</strong> – Auxiliaries for animation</p></li>
+<li><p><strong>h1</strong> – Auxiliaries for animation</p></li>
+<li><p><strong>h2</strong> – Auxiliaries for animation</p></li>
+<li><p><strong>h3</strong> – Auxiliaries for animation</p></li>
+<li><p><strong>h4</strong> – Auxiliaries for animation</p></li>
+<li><p><strong>plane1t</strong> (<em>numpy.ndarray</em>) – Template image</p></li>
+<li><p><strong>plane2</strong> (<em>numpy.ndarray</em>) – Original image</p></li>
+<li><p><strong>res</strong> (<em>numpy.ndarray</em>) – 2D cross-correlation results matrix</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="spexwavepy.corefun.crop_one">
+<span class="sig-prename descclassname"><span class="pre">spexwavepy.corefun.</span></span><span class="sig-name descname"><span class="pre">crop_one</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ROI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ShowImage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/corefun.html#crop_one"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.corefun.crop_one" title="Permalink to this definition"></a></dt>
+<dd><p>Crop the input image according to the ROI.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>) – The input image data</p></li>
+<li><p><strong>ROI</strong> (<em>[</em><em>int</em><em>, </em><em>int</em><em>, </em><em>int</em><em>, </em><em>int</em><em>]</em>) – ROI is [y_begin, y_end, x_begin, x_end]</p></li>
+<li><p><strong>ShowImage</strong> (<em>bool</em><em>, </em><em>optional</em>) – To show image or not, default is False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The cropped image data</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="spexwavepy.corefun.indicator">
+<span class="sig-prename descclassname"><span class="pre">spexwavepy.corefun.</span></span><span class="sig-name descname"><span class="pre">indicator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/corefun.html#indicator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.corefun.indicator" title="Permalink to this definition"></a></dt>
+<dd><p>This auxiliary function is used for counting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num</strong> (<em>int</em>) – Index for each loop</p></li>
+<li><p><strong>length</strong> (<em>int</em>) – Total loop length</p></li>
+<li><p><strong>comments</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default is None</em>) – Used as helper</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="spexwavepy.corefun.initDisplay">
+<span class="sig-prename descclassname"><span class="pre">spexwavepy.corefun.</span></span><span class="sig-name descname"><span class="pre">initDisplay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plane1_init</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plane2_init</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res_init</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/corefun.html#initDisplay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.corefun.initDisplay" title="Permalink to this definition"></a></dt>
+<dd><p>Used for initialize figure layout for dispalaying.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>plane1_init</strong> (<em>numpy.ndarray</em>) – Template image</p></li>
+<li><p><strong>plane2_init</strong> (<em>numpy.ndarray</em>) – Original image</p></li>
+<li><p><strong>res_init</strong> (<em>numpy.ndarray</em>) – 2D cross-correlation results matrix</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Auxiliaries for animation</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>fig, h1, h2, h3, h4</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="spexwavepy.corefun.read_one">
+<span class="sig-prename descclassname"><span class="pre">spexwavepy.corefun.</span></span><span class="sig-name descname"><span class="pre">read_one</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ShowImage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/corefun.html#read_one"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.corefun.read_one" title="Permalink to this definition"></a></dt>
+<dd><p>Read one image</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> (<em>str</em>) – File name</p></li>
+<li><p><strong>ShowImage</strong> (<em>bool</em><em>, </em><em>optional</em>) – To show image or not, default is False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>One image data</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="spexwavepy.corefun.subpix_default">
+<span class="sig-prename descclassname"><span class="pre">spexwavepy.corefun.</span></span><span class="sig-name descname"><span class="pre">subpix_default</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cv2.TM_CCOEFF_NORMED'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/corefun.html#subpix_default"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.corefun.subpix_default" title="Permalink to this definition"></a></dt>
+<dd><p>The default subpix registration method.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This subpixel registrition method can be found from</p>
+<p>1. Fisher, G. H., &amp; Welsch, B.T.
+“FLCT: a fast, efficient method for performing local correlation tracking.”
+Subsurface and Atmospheric Influences on Solar Activity. Vol. 383. 2008.</p>
+<p>2. Qiao, Zhi, et al.
+“Wavelet-transform-based speckle vector tracking method for X-ray phase imaging.”
+Optics Express 28.22 (2020): 33053-33067.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>res</strong> (<em>numpy.ndarray</em>) – The cross correlation results, 2D array</p></li>
+<li><p><strong>meth</strong> (<em>str</em>) – Method for cv2.matchTemplate (default ‘cv2.TM_CCOEFF_NORMED’).
+Do not modify it, other methods haven’t been implemented.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Deltax, Deltay</strong> – 1D array of subpixel registration results.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="spexwavepy.corefun.subpix_gausspeak">
+<span class="sig-prename descclassname"><span class="pre">spexwavepy.corefun.</span></span><span class="sig-name descname"><span class="pre">subpix_gausspeak</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cv2.TM_CCOEFF_NORMED'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/corefun.html#subpix_gausspeak"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.corefun.subpix_gausspeak" title="Permalink to this definition"></a></dt>
+<dd><p>Gaussian peak fitting for subpixel registration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>res</strong> (<em>numpy.ndarray</em>) – The cross correlation results, 2D array</p></li>
+<li><p><strong>meth</strong> (<em>str</em>) – Method for cv2.matchTemplate (default is ‘cv2.TM_CCOEFF_NORMED’).
+Do not modify it, other methods haven’t been implemented.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Deltax, Deltay</strong> – 1D array of subpixel registration results.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="spexwavepy.corefun.subpix_parapeak">
+<span class="sig-prename descclassname"><span class="pre">spexwavepy.corefun.</span></span><span class="sig-name descname"><span class="pre">subpix_parapeak</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cv2.TM_CCOEFF_NORMED'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/corefun.html#subpix_parapeak"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.corefun.subpix_parapeak" title="Permalink to this definition"></a></dt>
+<dd><p>Parabola peak fitting for subpixel registration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>res</strong> (<em>numpy.ndarray</em>) – The cross correlation results, 2D array</p></li>
+<li><p><strong>meth</strong> (<em>str</em>) – Method for cv2.matchTemplate (default is ‘cv2.TM_CCOEFF_NORMED’).
+Do not modify it, other methods haven’t been implemented.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Deltax, Deltay</strong> – 1D array of subpixel registration results.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-spexwavepy.trackfun">
+<span id="trackfun-module"></span><h2>trackfun module<a class="headerlink" href="#module-spexwavepy.trackfun" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spexwavepy.trackfun.</span></span><span class="sig-name descname"><span class="pre">Tracking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imstack1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imstack2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imstack3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imstack4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/trackfun.html#Tracking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.trackfun.Tracking" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A container for different speckle tracking algorithms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>imstack1</strong> (<em>Imagestack class</em>) – The first image stack.
+For XSS technique, it is scanned in x | y direction.</p></li>
+<li><p><strong>imstack2</strong> (<em>Imagestack class</em>) – The second image stack.
+For XSS technique, it is scanned in x | y direction.
+Not always necessary. (default None)</p></li>
+<li><p><strong>imstack3</strong> (<em>Imagestack class</em>) – The third image stack.
+For XSS technique, it is scanned in y direction.
+Not always necessary. (default None)</p></li>
+<li><p><strong>imstack4</strong> (<em>Imagestack class</em>) – The fourth image stack.
+For XSS technique, it is scanned in y direction.
+Not always necessary. (default None)</p></li>
+<li><p><strong>dimension</strong> (<em>str</em>) – ‘1D’ or ‘2D’. To do 1D or 2D data processing. (default ‘2D’)</p></li>
+<li><p><strong>scandim</strong> (<em>str</em>) – ‘x’|’y’|’xy’. Scan direction for the image stack.
+(default ‘x’)</p></li>
+<li><p><strong>mempos</strong> (<em>str</em>) – ‘downstream’ or ‘upstream’. Use this to define the position of
+the diffusor in respect to the focus of the optics. ‘downstream’
+means the diffuser is placed downstream of the focus. See
+<em>User guide: Local curvature reconstruction</em> for more
+details of it. (default ‘downstream’)</p></li>
+<li><p><strong>scanstep</strong> (<em>float</em>) – scan step size, unit in <span class="math notranslate nohighlight">\(\mu m\)</span>. (default None)</p></li>
+<li><p><strong>pixsize</strong> (<em>float</em>) – detector pixel size, unit in <span class="math notranslate nohighlight">\(\mu m\)</span>. (default None)</p></li>
+<li><p><strong>dist</strong> (<em>float</em>) – distance from diffuser to detector plane,
+unit in mm. If the diffuser is placed in the upstream,
+usually it is set to be the distance between the centre
+of the optic to the detector. (default None)</p></li>
+<li><p><strong>subpixelmeth</strong> (<em>str</em>) – ‘default’, ‘gausspeak’ or ‘parapeak’. (default ‘default’).
+Method used for subpixel registration.</p></li>
+<li><p><strong>delayX</strong> (<em>numpy.ndarray</em>) – The tracked 1D/2D shifts in X direction.</p></li>
+<li><p><strong>delayY</strong> (<em>numpy.ndarray</em>) – The tracked 1D/2D shifts in Y direction.</p></li>
+<li><p><strong>resX</strong> (<em>numpy.ndarray</em>) – The tracking 1D/2D coeffcient in X direction.</p></li>
+<li><p><strong>resY</strong> (<em>numpy.ndarray</em>) – The tracking 1D/2D coeffcient in Y direction.</p></li>
+<li><p><strong>sloX</strong> (<em>numpy.ndarray</em>) – The reconstructed slope error in X direction.</p></li>
+<li><p><strong>sloY</strong> (<em>numpy.ndarray</em>) – The reconstructed slope error in Y direction.</p></li>
+<li><p><strong>curvX</strong> (<em>numpy.ndarray</em>) – The reconstructed local curvature in X direction.</p></li>
+<li><p><strong>curvY</strong> (<em>numpy.ndarray</em>) – The reconstructed local curvature in Y direction.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.XSS_self">
+<span class="sig-name descname"><span class="pre">XSS_self</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hw_xy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_xy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/trackfun.html#Tracking.XSS_self"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.trackfun.Tracking.XSS_self" title="Permalink to this definition"></a></dt>
+<dd><p>Speckle tracking for self-reference XSS technique.
+Only one image stack, the one with test optic, is needed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>edge_x</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in x dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int]. If scan in x direction, it is useless.</p></li>
+<li><p><strong>edge_y</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in y dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int]. If scan in y direction, it is useless.</p></li>
+<li><p><strong>edge_z</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in scan number dimension.
+If it is a single integer, it will be expanded automatically</p></li>
+<li><p><strong>nstep</strong> (<em>int</em>) – The space between two chosen columns or rows.
+to the list [int, int].</p></li>
+<li><p><strong>hw_xy</strong> (<em>int</em>) – the width/height of the image subregion. if <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’,
+it is the height of the subregion; if <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’,
+it is the width of the subregion.
+Needed when do 2d data processing. (default none)</p></li>
+<li><p><strong>pad_xy</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the extra part the reference image needed to do the tracking.
+Needed when do 2D data processing. (default None)</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em>) – To normalize the stitched image or not. (default False)</p></li>
+<li><p><strong>display</strong> (<em>bool</em>) – To display or not. (default False)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – To show the information or not. (default True)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.XSS_self_multi">
+<span class="sig-name descname"><span class="pre">XSS_self_multi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hw_xy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_xy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpu_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/trackfun.html#Tracking.XSS_self_multi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.trackfun.Tracking.XSS_self_multi" title="Permalink to this definition"></a></dt>
+<dd><p>Speckle tracking for self-reference XSS technique.
+Only one image stack, the one with test optic, is needed.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>BE CAREFUL</strong> to check the available and safe cpu numbers before run this function!!</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>edge_x</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in x dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int]. If scan in x direction, it is useless.</p></li>
+<li><p><strong>edge_y</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in y dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int]. If scan in y direction, it is useless.</p></li>
+<li><p><strong>edge_z</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in scan number dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int].</p></li>
+<li><p><strong>hw_xy</strong> (<em>int</em>) – the width/height of the image subregion. if <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’,
+it is the height of the subregion; if <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’,
+it is the width of the subregion.
+needed when do 2d data processing. (default none)</p></li>
+<li><p><strong>pad_xy</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the extra part the reference image needed to do the tracking.</p></li>
+<li><p><strong>cpu_no</strong> (<em>int</em>) – The number of CPUs that is available.</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em>) – To normalize the stitched image or not. (default False)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – To show the information or not. (default True)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.XSS_withrefer">
+<span class="sig-name descname"><span class="pre">XSS_withrefer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hw_xy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_xy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/trackfun.html#Tracking.XSS_withrefer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.trackfun.Tracking.XSS_withrefer" title="Permalink to this definition"></a></dt>
+<dd><p>Speckle tracking for XSS technique with reference beam.
+The fisrt image stack is the one with test optic.
+The second image stack is the reference image stack.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>edge_x</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in x dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int]. If scan in x direction, it is useless.</p></li>
+<li><p><strong>edge_y</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in y dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int]. If scan in y direction, it is useless.</p></li>
+<li><p><strong>edge_z</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in scan number dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int].</p></li>
+<li><p><strong>hw_xy</strong> (<em>int</em>) – The width/height of the image subregion. If <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’,
+it is the height of the subregion; if <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’,
+it is the width of the subregion.
+Needed when do 2D data processing. (default None)</p></li>
+<li><p><strong>pad_xy</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the extra part the reference image needed to do the tracking.
+Needed when do 2D data processing. (default None)</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em>) – To normalize the stitched image or not. (default False)</p></li>
+<li><p><strong>display</strong> (<em>bool</em>) – To display or not. (default False)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – To show the information or not. (default True)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.XSS_withrefer_multi">
+<span class="sig-name descname"><span class="pre">XSS_withrefer_multi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hw_xy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_xy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpu_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/trackfun.html#Tracking.XSS_withrefer_multi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.trackfun.Tracking.XSS_withrefer_multi" title="Permalink to this definition"></a></dt>
+<dd><p>Speckle tracking for XSS technique with reference beam.
+The fisrt image stack is the one with test optic.
+The second image stack is the reference image stack.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>BE CAREFUL</strong> to check the available and safe cpu numbers before run this function!!</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>edge_x</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in x dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int]. If scan in x direction, it is useless.</p></li>
+<li><p><strong>edge_y</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in y dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int]. If scan in y direction, it is useless.</p></li>
+<li><p><strong>edge_z</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in scan number dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int].</p></li>
+<li><p><strong>hw_xy</strong> (<em>int</em>) – The width/height of the image subregion. If <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’,
+it is the height of the subregion; if <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’,
+it is the width of the subregion.
+Needed when do 2D data processing. (default None)</p></li>
+<li><p><strong>pad_xy</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the extra part the reference image needed to do the tracking.</p></li>
+<li><p><strong>cpu_no</strong> (<em>int</em>) – The number of CPUs that is available.</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em>) – To normalize the stitched image or not. (default False)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – To show the information or not. (default True)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.XST_self">
+<span class="sig-name descname"><span class="pre">XST_self</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hw_xy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/trackfun.html#Tracking.XST_self"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.trackfun.Tracking.XST_self" title="Permalink to this definition"></a></dt>
+<dd><p>Speckle tracking for self-reference XST technique.
+Two image stacks are needed. Both are with test optic.
+One image stack consists one image when the diffuser is at one position,
+another image stack consists another image when the diffuser
+is at another position.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This technique has been described in the following paper:</p>
+<p>L. Hu, H. Wang, O. Fox, and K. Sawhney,
+“Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique”
+Opt. Express 30(18), 33259-33273 (2022).</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>edge_x</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in x dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int].</p></li>
+<li><p><strong>edge_y</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in y dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int].</p></li>
+<li><p><strong>pad_x</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the extra part the reference image needed to do
+the tracking in x direction. If <code class="docutils literal notranslate"><span class="pre">dimension</span></code>  is ‘1D’ and
+<code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’, it is useless.</p></li>
+<li><p><strong>pad_y</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the extra part the reference image needed to do
+the tracking in y direction. If <code class="docutils literal notranslate"><span class="pre">dimension</span></code>  is ‘1D’ and
+<code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’, it is useless.</p></li>
+<li><p><strong>hw_xy</strong> (<em>int</em>) – The height (when <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’) or the width (when <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’)
+of the subregion to be chosen from the template for cross-correlation.</p></li>
+<li><p><strong>window</strong> (<em>int</em>) – The width (when <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’) or the height (when <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’)
+of the subregion to be chosen from the template for cross-correlation.
+Only used when <code class="docutils literal notranslate"><span class="pre">dimension</span></code> is ‘2D’. (default None)</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em>) – To normalize the stitched image or not. (default False)</p></li>
+<li><p><strong>display</strong> (<em>bool</em>) – To display or not. (default False)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – To show the information or not. (default True)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.XST_self_multi">
+<span class="sig-name descname"><span class="pre">XST_self_multi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hw_xy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpu_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/trackfun.html#Tracking.XST_self_multi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.trackfun.Tracking.XST_self_multi" title="Permalink to this definition"></a></dt>
+<dd><p>Speckle tracking for self-reference XST technique.
+Two image stacks are needed. Both are with test optic.
+One image stack consists one image when the diffuser is at one position,
+another image stack consists another image when the diffuser
+is at another position.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>BE CAREFUL</strong> to check the available and safe cpu numbers before run this function!!</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>edge_x</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in x dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int].</p></li>
+<li><p><strong>edge_y</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in y dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int].</p></li>
+<li><p><strong>pad_x</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the extra part the reference image needed to do
+the tracking in x direction. If <code class="docutils literal notranslate"><span class="pre">dimension</span></code>  is ‘1D’ and
+<code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’, it is useless.</p></li>
+<li><p><strong>pad_y</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the extra part the reference image needed to do
+the tracking in y direction. If <code class="docutils literal notranslate"><span class="pre">dimension</span></code>  is ‘1D’ and
+<code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’, it is useless.</p></li>
+<li><p><strong>hw_xy</strong> (<em>int</em>) – The height (when <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’) or the width (when <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’)
+of the subregion to be chosen from the template for cross-correlation.</p></li>
+<li><p><strong>window</strong> (<em>int</em>) – The width (when <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’) or the height (when <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’)
+of the subregion to be chosen from the template for cross-correlation.
+Only used when <code class="docutils literal notranslate"><span class="pre">dimension</span></code> is ‘2D’. (default None)</p></li>
+<li><p><strong>cpu_no</strong> (<em>int</em>) – The number of CPUs that is available.</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em>) – To normalize the stitched image or not. (default False)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – To show the information or not. (default True)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.XST_withrefer">
+<span class="sig-name descname"><span class="pre">XST_withrefer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hw_xy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/trackfun.html#Tracking.XST_withrefer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.trackfun.Tracking.XST_withrefer" title="Permalink to this definition"></a></dt>
+<dd><p>Speckle tracking for conventional XST technique, with reference beam.
+The fisrt image stack is the one with test optic.
+The second image stack is the reference image stack.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>edge_x</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in x dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int].</p></li>
+<li><p><strong>edge_y</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in y dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int].</p></li>
+<li><p><strong>pad_x</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the extra part the reference image needed to do
+the tracking in x direction. If <code class="docutils literal notranslate"><span class="pre">dimension</span></code>  is ‘1D’ and
+<code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’, it is useless.</p></li>
+<li><p><strong>pad_y</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the extra part the reference image needed to do
+the tracking in y direction. If <code class="docutils literal notranslate"><span class="pre">dimension</span></code>  is ‘1D’ and
+<code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’, it is useless.</p></li>
+<li><p><strong>hw_xy</strong> (<em>int</em>) – The height (when <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’) or the width (when <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’)
+of the subregion to be chosen from the template for cross-correlation.</p></li>
+<li><p><strong>window</strong> (<em>int</em>) – The width (when <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’) or the height (when <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’)
+of the subregion to be chosen from the template for cross-correlation.
+Only used when <code class="docutils literal notranslate"><span class="pre">dimension</span></code> is ‘2D’. (default None)</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em>) – To normalize the stitched image or not. (default False)</p></li>
+<li><p><strong>display</strong> (<em>bool</em>) – To display or not. (default False)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – To show the information or not. (default True)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.XST_withrefer_multi">
+<span class="sig-name descname"><span class="pre">XST_withrefer_multi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hw_xy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpu_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/trackfun.html#Tracking.XST_withrefer_multi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.trackfun.Tracking.XST_withrefer_multi" title="Permalink to this definition"></a></dt>
+<dd><p>Speckle tracking for conventional XST technique, with reference beam.
+The fisrt image stack is the one with test optic.
+The second image stack is the reference image stack.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>BE CAREFUL</strong> to check the available and safe cpu numbers before run this function!!</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>edge_x</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in x dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int].</p></li>
+<li><p><strong>edge_y</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in y dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int].</p></li>
+<li><p><strong>pad_x</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the extra part the reference image needed to do
+the tracking in x direction. If <code class="docutils literal notranslate"><span class="pre">dimension</span></code>  is ‘1D’ and
+<code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’, it is useless.</p></li>
+<li><p><strong>pad_y</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the extra part the reference image needed to do
+the tracking in y direction. If <code class="docutils literal notranslate"><span class="pre">dimension</span></code>  is ‘1D’ and
+<code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’, it is useless.</p></li>
+<li><p><strong>hw_xy</strong> (<em>int</em>) – The height (when <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’) or the width (when <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’)
+of the subregion to be chosen from the template for cross-correlation.</p></li>
+<li><p><strong>window</strong> (<em>int</em>) – The width (when <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’) or the height (when <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’)
+of the subregion to be chosen from the template for cross-correlation.
+Only used when <code class="docutils literal notranslate"><span class="pre">dimension</span></code> is ‘2D’. (default None)</p></li>
+<li><p><strong>cpu_no</strong> (<em>int</em>) – The number of CPUs that is available.</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em>) – To normalize the stitched image or not. (default False)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – To show the information or not. (default True)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.collimate">
+<span class="sig-name descname"><span class="pre">collimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/trackfun.html#Tracking.collimate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.trackfun.Tracking.collimate" title="Permalink to this definition"></a></dt>
+<dd><p>This function uses the first image from both imstack1 and imstack2
+to align the speckle patterns. It is called before any further tracking.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>edge_x</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in x dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int].</p></li>
+<li><p><strong>edge_y</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in y dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int].</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.dimension">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dimension</span></span><a class="headerlink" href="#spexwavepy.trackfun.Tracking.dimension" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.dist">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dist</span></span><a class="headerlink" href="#spexwavepy.trackfun.Tracking.dist" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.mempos">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mempos</span></span><a class="headerlink" href="#spexwavepy.trackfun.Tracking.mempos" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.pixsize">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pixsize</span></span><a class="headerlink" href="#spexwavepy.trackfun.Tracking.pixsize" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.scandim">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">scandim</span></span><a class="headerlink" href="#spexwavepy.trackfun.Tracking.scandim" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.scanstep">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">scanstep</span></span><a class="headerlink" href="#spexwavepy.trackfun.Tracking.scanstep" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.stability">
+<span class="sig-name descname"><span class="pre">stability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/trackfun.html#Tracking.stability"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.trackfun.Tracking.stability" title="Permalink to this definition"></a></dt>
+<dd><p>Check the stability using speckle pattern.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>edge_x</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Cutting area of the reference image in x direction.
+If it is a single integer, it will be expanded automatically
+to the list [int, int].</p></li>
+<li><p><strong>edge_y</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Cutting area of the reference image in y direction.
+If it is a single integer, it will be expanded automatically
+to the list [int, int].</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – To show the information or not. (default True)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ixs, iys, res</strong> – Shifts in two dimensions and the coefficient.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.stability_multi">
+<span class="sig-name descname"><span class="pre">stability_multi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpu_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/trackfun.html#Tracking.stability_multi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.trackfun.Tracking.stability_multi" title="Permalink to this definition"></a></dt>
+<dd><p>Multiprocessing version of stability function.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>BE CAREFUL</strong> to check the available and safe cpu numbers before run this function!!</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>edge_x</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Cutting area of the reference image in x direction.
+If it is a single integer, it will be expanded automatically
+to the list [int, int].</p></li>
+<li><p><strong>edge_y</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Cutting area of the reference image in y direction.
+If it is a single integer, it will be expanded automatically
+to the list [int, int].</p></li>
+<li><p><strong>cpu_no</strong> (<em>int</em>) – Number of CPU to be used.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – To show the information or not. (default True)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ixs, iys, res</strong> – Shifts in two dimensions and the coefficient.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.subpixelmeth">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">subpixelmeth</span></span><a class="headerlink" href="#spexwavepy.trackfun.Tracking.subpixelmeth" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-spexwavepy.postfun">
+<span id="postfun-module"></span><h2>postfun module<a class="headerlink" href="#module-spexwavepy.postfun" title="Permalink to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="spexwavepy.postfun.EllipseSlope">
+<span class="sig-prename descclassname"><span class="pre">spexwavepy.postfun.</span></span><span class="sig-name descname"><span class="pre">EllipseSlope</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/postfun.html#EllipseSlope"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.postfun.EllipseSlope" title="Permalink to this definition"></a></dt>
+<dd><p>This function calculate the slope error at coordinate x.
+The resulting slope error always starts with 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>numpy.array</em>) – Ellipse x coordinate, x starts from 0. [m]</p></li>
+<li><p><strong>p</strong> (<em>float</em>) – Ellipse p, [m]</p></li>
+<li><p><strong>q</strong> (<em>float</em>) – Ellipse q, [m]</p></li>
+<li><p><strong>theta</strong> (<em>float</em>) – Ellipse theta, [rad]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Slo</strong> – Ellipse slope error at x coordinate, starts from 0. [rad]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.array</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="spexwavepy.postfun.Integration2D_FC">
+<span class="sig-prename descclassname"><span class="pre">spexwavepy.postfun.</span></span><span class="sig-name descname"><span class="pre">Integration2D_FC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">slope_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slope_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neg_corr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/postfun.html#Integration2D_FC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.postfun.Integration2D_FC" title="Permalink to this definition"></a></dt>
+<dd><p>Reconstruct a surface from the gradients in x and y-direction using the
+Frankot-Chellappa method. Note that the DC-component
+(average value of an image) of the reconstructed image is unidentified
+because the DC-component of the FFT-window is zero.
+Assuming the space of the mesh grid is 1 <span class="math notranslate nohighlight">\(\mu m\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Frankot-Chellappa method can be found from</p>
+<p>1. Frankot, Robert T., &amp; Chellappa, Roma.
+“A method for enforcing integrability in shape from shading algorithms.”
+IEEE Transactions on pattern analysis and machine intelligence, 10(4), 439-451.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>slope_x</strong> (<em>numpy.ndarray</em>) – 2D array. Wavefront slope in x-direction, in <span class="math notranslate nohighlight">\(\mu rad\)</span>.</p></li>
+<li><p><strong>slope_y</strong> (<em>numpy.ndarray</em>) – 2D array. Wavefront slope in y-direction, in <span class="math notranslate nohighlight">\(\mu rad\)</span>.</p></li>
+<li><p><strong>neg_corr</strong> (<em>bool</em><em>, </em><em>optional</em>) – Correct negative offset if True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2D array. Reconstructed surface. In [pm].</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="spexwavepy.postfun.Integration2D_SCS">
+<span class="sig-prename descclassname"><span class="pre">spexwavepy.postfun.</span></span><span class="sig-name descname"><span class="pre">Integration2D_SCS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">slope_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slope_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neg_corr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear_ramp'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/postfun.html#Integration2D_SCS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.postfun.Integration2D_SCS" title="Permalink to this definition"></a></dt>
+<dd><p>Reconstruct a surface from the gradients in x and y-direction using the
+Simchony-Chellappa-Shao method. Note that the DC-component
+(average value of an image) of the reconstructed image is unidentified
+because the DC-component of the FFT-window is zero.
+Assuming the space of the mesh grid is 1 <span class="math notranslate nohighlight">\(\mu m\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The SCS method can be found from</p>
+<p>1. Simchony, Tal, et al.
+“Direct analytical methods for solving Poisson equations in computer vision problems”
+IEEE transactions on pattern analysis and machine intelligence, 12(5), 435-446.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>slope_x</strong> (<em>numpy.ndarray</em>) – 2D array. Wavefront slope in x-direction, in <span class="math notranslate nohighlight">\(\mu rad\)</span>.</p></li>
+<li><p><strong>slope_y</strong> (<em>numpy.ndarray</em>) – 2D array. Wavefront slope in y-direction, in <span class="math notranslate nohighlight">\(\mu rad\)</span>.</p></li>
+<li><p><strong>neg_corr</strong> (<em>bool</em><em>, </em><em>optional</em>) – Correct negative offset if True.</p></li>
+<li><p><strong>pad</strong> (<em>int</em>) – Padding width.</p></li>
+<li><p><strong>pad_mode</strong> (<em>str</em>) – Padding method. Full list can be found at numpy.pad documentation.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>2D array. Reconstructed surface. In [pm].</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="spexwavepy.postfun.curv_pixel">
+<span class="sig-prename descclassname"><span class="pre">spexwavepy.postfun.</span></span><span class="sig-name descname"><span class="pre">curv_pixel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scanstep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixsize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mempos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/postfun.html#curv_pixel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.postfun.curv_pixel" title="Permalink to this definition"></a></dt>
+<dd><p>Get wavefront local curvature (curvature error) from tracked shift.
+Used for self-reference XST technique.
+The corresponding wavefront is <strong>on the detector plane</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Eq. (2) in L. Hu, H. Wang, O. Fox, and K. Sawhney,
+“Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique”
+Opt. Express 30(18), 33259-33273 (2022).</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delay</strong> (<em>numpy.ndarray</em>) – Tracked shift in the scanned direction.
+<span class="math notranslate nohighlight">\(iy_{AST}\)</span> in the paper, it must be <strong>positive</strong>.</p></li>
+<li><p><strong>scanstep</strong> (<em>float</em>) – Step size of piezo [<span class="math notranslate nohighlight">\(\mu m\)</span>], <span class="math notranslate nohighlight">\(s\)</span> in the paper.</p></li>
+<li><p><strong>dist</strong> (<em>float</em>) – Distance between membrane and detector [mm], <span class="math notranslate nohighlight">\(D\)</span> in the paper.</p></li>
+<li><p><strong>pixsize</strong> (<em>float</em>) – Detector pixel size [<span class="math notranslate nohighlight">\(\mu m\)</span>], <span class="math notranslate nohighlight">\(p\)</span> in the paper.</p></li>
+<li><p><strong>mempos</strong> (<em>str</em>) – ‘downstream’ or ‘upstream’. Use this to define the position of
+the diffusor in respect to the focus of the optics. ‘downstream’
+means the diffuser is placed downstream of the focus. See
+<a class="reference internal" href="userguide.html#curvature"><span class="std std-ref">User guide: Local curvature reconstruction</span></a> for more
+details of it.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>curvature</strong> – Local curvature [m^-1]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="spexwavepy.postfun.curv_scan">
+<span class="sig-prename descclassname"><span class="pre">spexwavepy.postfun.</span></span><span class="sig-name descname"><span class="pre">curv_scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scanstep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixsize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mempos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/postfun.html#curv_scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.postfun.curv_scan" title="Permalink to this definition"></a></dt>
+<dd><p>Get wavefront local curvature (curvature error) from tracked shift.
+Used when scanned. The corresponding wavefront is <strong>on the detector plane</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Eq. (3) in H. Wang, J. Sutter, and K. Sawhney,
+“Advanced in situ metrology for x-ray beam shaping with super precision,”
+Opt. Express  23, 1605-1614 (2015).</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delay</strong> (<em>numpy.ndarray</em>) – Tracked shift in the scanned direction.
+<span class="math notranslate nohighlight">\(\epsilon\)</span> in the paper, it must be <strong>positive</strong>.</p></li>
+<li><p><strong>scanstep</strong> (<em>float</em>) – Step size of piezo [<span class="math notranslate nohighlight">\(\mu m\)</span>], <span class="math notranslate nohighlight">\(\mu\)</span> in the paper.</p></li>
+<li><p><strong>dist</strong> (<em>float</em>) – Distance between membrane and detector [mm], <em>d</em> in the paper</p></li>
+<li><p><strong>pixsize</strong> (<em>float</em>) – Detector pixel size [<span class="math notranslate nohighlight">\(\mu m\)</span>], <em>p</em> in the paper</p></li>
+<li><p><strong>nstep</strong> (<em>int</em>) – ntep, (j-i) in the paper</p></li>
+<li><p><strong>mempos</strong> (<em>str</em>) – ‘downstream’ or ‘upstream’. Use this to define the position of
+the diffusor in respect to the focus of the optics. ‘downstream’
+means the diffuser is placed downstream of the focus. See
+<a class="reference internal" href="userguide.html#curvature"><span class="std std-ref">User guide: Local curvature reconstruction</span></a> for more
+details of it.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>curvature</strong> – Local curvature [m^-1]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="spexwavepy.postfun.slope_pixel">
+<span class="sig-prename descclassname"><span class="pre">spexwavepy.postfun.</span></span><span class="sig-name descname"><span class="pre">slope_pixel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixsize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/postfun.html#slope_pixel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.postfun.slope_pixel" title="Permalink to this definition"></a></dt>
+<dd><p>Get wavefront slope (slope error) from tracked shift.
+Used when not scanned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delay</strong> (<em>numpy.ndarray</em>) – Tracked shift in the scanned direction.</p></li>
+<li><p><strong>pixsize</strong> (<em>float</em>) – detector pixel size. Unit in :math: <cite>mu m</cite>.</p></li>
+<li><p><strong>dist</strong> (<em>float</em>) – distance from diffusor to detector plane.
+Unit in mm.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>wavefront slope (slope error).
+Unit in <span class="math notranslate nohighlight">\(\mu rad\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="spexwavepy.postfun.slope_scan">
+<span class="sig-prename descclassname"><span class="pre">spexwavepy.postfun.</span></span><span class="sig-name descname"><span class="pre">slope_scan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scanstep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/postfun.html#slope_scan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.postfun.slope_scan" title="Permalink to this definition"></a></dt>
+<dd><p>Get wavefront slope (slope error) from tracked shift.
+Used when scanned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delay</strong> (<em>numpy.ndarray</em>) – Tracked shift in the scanned direction.</p></li>
+<li><p><strong>scanstep</strong> (<em>float</em>) – scan step size. Unit in :math: <cite>mu m</cite>.</p></li>
+<li><p><strong>dist</strong> (<em>float</em>) – distance from diffusor to detector plane.
+Unit in mm.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>wavefront slope (slope error).
+Unit in <span class="math notranslate nohighlight">\(\mu rad\)</span>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="api.html" class="btn btn-neutral float-left" title="API reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Lingfei Hu, Hongchang Wang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+#Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+#PyBuilder
+target/
+
+#Pyre type checker
+.pyre/
+
+#dls-optics-sam-alalysis related
+tags
+*.swp
+
+#tempt files
+tmp/
+
+#Documentation
+#docs/build/
+
+#For experiment
+ForExperiment/*
+

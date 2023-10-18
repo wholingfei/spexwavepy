@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting started &mdash; spexwavepy 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Examples" href="example.html" />
+    <link rel="prev" title="The speckle-based wavefront sensing techniques" href="principle.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            spexwavepy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="principle.html">The speckle-based wavefront sensing techniques</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installing-spexwavepy">Installing spexwavepy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial">Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#read-the-image-stack">1. Read the image stack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#determine-the-detector-pixel-size">2. Determine the detector pixel size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stability-check">3. Stability check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#single-crl-measurement">4. Single CRL measurement</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userguide.html">User guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">spexwavepy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Getting started</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/getstart.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="getting-started">
+<h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h1>
+<p><em>Description goes here …</em></p>
+<section id="installing-spexwavepy">
+<span id="install"></span><h2>Installing spexwavepy<a class="headerlink" href="#installing-spexwavepy" title="Permalink to this heading"></a></h2>
+<p><em>Say something…</em></p>
+</section>
+<section id="tutorial">
+<span id="id1"></span><h2>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this heading"></a></h2>
+<p>The <strong>spexwavepy</strong> is a data processing package for speckle-based X-ray wavefront sensing techniques.
+In this tutorial, we try to help new users to get familiar with the basic concept and the usage of this package.
+Let’s do it step by step.</p>
+<section id="read-the-image-stack">
+<span id="tuimstack"></span><h3>1. Read the image stack<a class="headerlink" href="#read-the-image-stack" title="Permalink to this heading"></a></h3>
+<p>An image stack is the first class you will create before any other operations.
+To create it, we need to import <code class="docutils literal notranslate"><span class="pre">imstackfun</span></code> module.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">spexwavepy.imstackfun</span> <span class="kn">import</span> <span class="n">Imagestack</span>
+</pre></div>
+</div>
+<p>After that, we can create an instance of Imagestack.
+Two mandatory parameters are needed to initialize an Imagestack.
+One is the data file folder, and the other one is the region of interest (ROI) in the raw images which will be cropped.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">fileFolder</span> <span class="o">=</span> <span class="s2">&quot;/dls/b16/data/2023/cm33912-1/pixelsizestep10um/402724-pcoedge-files/&quot;</span>
+<span class="n">ROI</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4500</span><span class="p">]</span>           <span class="c1">#[y_start, y_end, x_start, x_end]</span>
+<span class="n">Imstack_1</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">fileFolder</span><span class="p">,</span> <span class="n">ROI</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The above codes create a Imagestack instance <code class="docutils literal notranslate"><span class="pre">Imstack_1</span></code>.
+The raw images are stored in the <code class="docutils literal notranslate"><span class="pre">fileFolder</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">ROI</span></code> in this case is larger than the real figure size,
+thus, contains the whole image range.
+Other parameters, such as start image number, total image number, etc.,
+can be used to define how to load the images in the <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack" title="spexwavepy.imstackfun.Imagestack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Imagestack</span></code></a>.</p>
+<p>Until now, we have only defined one <code class="docutils literal notranslate"><span class="pre">Imagestack</span></code> instance, no real data has been loaded.
+To load the raw data into the memory, method <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack.read_data" title="spexwavepy.imstackfun.Imagestack.read_data"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read_data()</span></code></a>
+needs to be called.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">Imstack_1</span><span class="o">.</span><span class="n">read_data</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>After the above operation, the raw data will be stored in the attribute
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">rawdata</span></code>.
+The rawdata is read-only. Another attribute
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">data</span></code>
+is used to store the data to be processed in the future.</p>
+<p>It is also possible that we only need to one image from the folder in the beginning.
+In this case, we can use the <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.read_one" title="spexwavepy.corefun.read_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_one()</span></code></a> function from
+the <a class="reference internal" href="spexwavepy.html#module-spexwavepy.corefun" title="spexwavepy.corefun"><code class="xref py py-mod docutils literal notranslate"><span class="pre">corefun</span></code></a> module. If you want to crop the raw image,
+you need to import <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.crop_one" title="spexwavepy.corefun.crop_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">crop_one()</span></code></a> function too.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">spexwavepy.corefun</span> <span class="kn">import</span> <span class="n">read_one</span><span class="p">,</span> <span class="n">crop_one</span>
+</pre></div>
+</div>
+<p>To call <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.read_one" title="spexwavepy.corefun.read_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_one()</span></code></a> function,
+you need to input the file path that you want to read.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">filepath</span> <span class="o">=</span> <span class="s2">&quot;/dls/b16/data/2023/cm33912-1/pixelsizestep10um/402724-pcoedge-files/00005.tif&quot;</span>
+<span class="n">im_raw</span> <span class="o">=</span> <span class="n">read_one</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">ShowImage</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">ShowImage</span></code> is set to be True, then it will show the image.</p>
+<a class="reference internal image-reference" href="_images/readone.png"><img alt="_images/readone.png" src="_images/readone.png" style="width: 80%;" /></a>
+<p>Usually we need to crop the raw image for future processing, so we provide ROI for
+<a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.crop_one" title="spexwavepy.corefun.crop_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">crop_one()</span></code></a> function.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">filepath</span> <span class="o">=</span> <span class="s2">&quot;/dls/b16/data/2023/cm33912-1/pixelsizestep10um/402724-pcoedge-files/00005.tif&quot;</span>
+<span class="n">ROI</span> <span class="o">=</span> <span class="p">[</span><span class="mi">750</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>    <span class="c1">#[y_start, y_end, x_start, x_end]</span>
+<span class="n">im_crop</span> <span class="o">=</span> <span class="n">crop_one</span><span class="p">(</span><span class="n">im_raw</span><span class="p">,</span> <span class="n">ROI</span><span class="p">,</span> <span class="n">ShowImage</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Again, if <code class="docutils literal notranslate"><span class="pre">ShowImage</span></code> is set to be True, then it will show the cropped image.</p>
+<a class="reference internal image-reference" href="_images/cropone.png"><img alt="_images/cropone.png" src="_images/cropone.png" style="width: 80%;" /></a>
+</section>
+<section id="determine-the-detector-pixel-size">
+<span id="tudetpix"></span><h3>2. Determine the detector pixel size<a class="headerlink" href="#determine-the-detector-pixel-size" title="Permalink to this heading"></a></h3>
+<p>In many cases, e.g., B16 Test beamline at Diamond Light Source,
+the pixel size of the detector used for data acquisition is changeable.
+The first step is to determine the pixel size.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Imstack_1</span></code> has already loaded the data used for detector pixel size determination,
+we use the <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack.getpixsize" title="spexwavepy.imstackfun.Imagestack.getpixsize"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getpixsize()</span></code></a> method to calculate the pixel size.
+The parameters that needed are <code class="docutils literal notranslate"><span class="pre">subROI</span></code>, <code class="docutils literal notranslate"><span class="pre">dim</span></code> and <code class="docutils literal notranslate"><span class="pre">step</span></code>.
+<code class="docutils literal notranslate"><span class="pre">subROI</span></code> is the ROI used for image matching.
+<code class="docutils literal notranslate"><span class="pre">dim</span></code> is either ‘x’ or ‘y’ to indicate in which direction the speckle generator was scanned.
+<code class="docutils literal notranslate"><span class="pre">step</span></code> is the scan step in unit of <span class="math notranslate nohighlight">\(\mu m\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that the image stack has been cropped according to ROI.
+Thus, <code class="docutils literal notranslate"><span class="pre">subROI</span></code> is the region on the cropped images from the cropped image stack,
+<strong>NOT</strong> the coordinates on the raw images.</p>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">subROI</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>      <span class="c1">#[y_start, y_end, x_start, x_end]</span>
+<span class="n">dim</span> <span class="o">=</span> <span class="s1">&#39;x&#39;</span>
+<span class="n">step</span> <span class="o">=</span> <span class="mf">10.0</span>                           <span class="c1">#[um]</span>
+<span class="n">pixsize</span> <span class="o">=</span> <span class="n">Imstack_1</span><span class="o">.</span><span class="n">getpixsize</span><span class="p">(</span><span class="n">subROI</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Please refer to the <a class="reference internal" href="userguide.html#usedetpix"><span class="std std-ref">detector pixel size determination</span></a> in the user guide to
+find out how we use speckle patterns to determine the pixel size.</p>
+</section>
+<section id="stability-check">
+<span id="tustable"></span><h3>3. Stability check<a class="headerlink" href="#stability-check" title="Permalink to this heading"></a></h3>
+<p>Using speckle patterns to monitor the stability of the beamline is
+a very simple use of the speckle-based technique.
+The images are acquired when all the hardware is fixed.
+The stability is monitored by comparing the images in the whole folder with the <strong>first</strong> one.</p>
+<p>To enable the stability check,
+a class called <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> needs to be initialized.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">spexwavepy.trackfun</span> <span class="kn">import</span> <span class="n">Tracking</span>
+</pre></div>
+</div>
+<p>Depending on the type of speckle-based technique that is used,
+one image stack or two image stacks are needed to initialize <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a>.
+For stability checking, only one image stack is needed.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">spexwavepy.imstackfun</span> <span class="kn">import</span> <span class="n">Imagestack</span>
+
+<span class="n">fileFolder</span> <span class="o">=</span> <span class="s2">&quot;/dls/science/groups/b16/SpeckleData/example_1/&quot;</span>
+<span class="n">ROI</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4500</span><span class="p">]</span>           <span class="c1">#[y_start, y_end, x_start, x_end]</span>
+<span class="n">Imstack_1</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">fileFolder</span><span class="p">,</span> <span class="n">ROI</span><span class="p">)</span>
+<span class="n">Imstack_1</span><span class="o">.</span><span class="n">fnum</span> <span class="o">=</span> <span class="mi">99</span>   <span class="c1">#File number to be used for stability check</span>
+<span class="n">Imstack_1</span><span class="o">.</span><span class="n">fstart</span> <span class="o">=</span> <span class="mi">0</span>   <span class="c1">#File start number to be used for stability check</span>
+<span class="n">Imstack_1</span><span class="o">.</span><span class="n">dim</span> <span class="o">=</span> <span class="s1">&#39;both&#39;</span>
+
+<span class="n">track</span> <span class="o">=</span> <span class="n">Tracking</span><span class="p">(</span><span class="n">Imstack_1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Usually, there will be plenty of raw images in one folder.
+There is no need to load all the data into memory for stability checking.
+The <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.stability" title="spexwavepy.trackfun.Tracking.stability"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stability()</span></code></a> method is used for this purpose.
+<code class="docutils literal notranslate"><span class="pre">edge_x</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> are the two parameters needed.
+<code class="docutils literal notranslate"><span class="pre">edge_x</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> can be either a single integer or a list of two integers,
+like [int1, int2]. If input as a single integer int0,
+<code class="docutils literal notranslate"><span class="pre">edge_x</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> will be expanded as a list of two integers,
+the elements in the list are the same, i.e., [int0, int0].</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span>
+<span class="n">delayX</span><span class="p">,</span> <span class="n">delayY</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">stability</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Please refer to <a class="reference internal" href="userguide.html#trastable"><span class="std std-ref">stability check using speckle patterns</span></a> in the user guide
+to see how to do the stability checking using speckle patterns.</p>
+<a class="reference internal image-reference" href="_images/stableres.png"><img alt="_images/stableres.png" src="_images/stableres.png" style="width: 80%;" /></a>
+<p>We can also use multi-cores to accelerate the calculation.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">cpu_no</span> <span class="o">=</span> <span class="mi">16</span>
+<span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span>
+<span class="n">delayX</span><span class="p">,</span> <span class="n">delayY</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">stability_multi</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">cpu_no</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.stability_multi" title="spexwavepy.trackfun.Tracking.stability_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stability_multi()</span></code></a> method uses the
+built-in <code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code> package.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Please check the available CPUs before calling <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.stability_multi" title="spexwavepy.trackfun.Tracking.stability_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stability_multi()</span></code></a> method.</p>
+</div>
+</section>
+<section id="single-crl-measurement">
+<span id="tucrl"></span><h3>4. Single CRL measurement<a class="headerlink" href="#single-crl-measurement" title="Permalink to this heading"></a></h3>
+<p><em>In this section we will show how to obtain a single CRL wavefront using X-ray Speckle Scanning (XSS) … Then say more things…</em></p>
+<p>First, let us load and see the raw images.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">spexwavepy.imstackfun</span> <span class="kn">import</span> <span class="n">Imagestack</span>
+<span class="kn">from</span> <span class="nn">spexwavepy.trackfun</span> <span class="kn">import</span> <span class="n">Tracking</span>
+<span class="kn">from</span> <span class="nn">spexwavepy.corefun</span> <span class="kn">import</span> <span class="n">read_one</span><span class="p">,</span> <span class="n">crop_one</span>
+
+<span class="n">ref_folder_x</span> <span class="o">=</span> <span class="s2">&quot;/dls/science/groups/b16/SpeckleData/CRLXSS/ReferX1D/402923-pcoedge-files/&quot;</span>
+<span class="n">sam_folder_x</span> <span class="o">=</span> <span class="s2">&quot;/dls/science/groups/b16/SpeckleData/CRLXSS/SampleX1D/402924-pcoedge-files/&quot;</span>
+<span class="n">ref_folder_y</span> <span class="o">=</span> <span class="s2">&quot;/dls/science/groups/b16/SpeckleData/CRLXSS/ReferY1D/402925-pcoedge-files/&quot;</span>
+<span class="n">sam_folder_y</span> <span class="o">=</span> <span class="s2">&quot;/dls/science/groups/b16/SpeckleData/CRLXSS/SampleY1D/402926-pcoedge-files/&quot;</span>
+
+<span class="n">im_sam_tmp</span> <span class="o">=</span> <span class="n">read_one</span><span class="p">(</span><span class="n">sam_folder_y</span><span class="o">+</span><span class="s1">&#39;00005.tif&#39;</span><span class="p">,</span> <span class="n">ShowImage</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/crlraw.png"><img alt="_images/crlraw.png" src="_images/crlraw.png" style="width: 80%;" /></a>
+<p>The raw image of the single CRL shows that we only need to crop the central part of it
+for future processing.
+The reference image should use the same ROI as the CRL image.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">ROI_sam</span> <span class="o">=</span> <span class="p">[</span><span class="mi">540</span><span class="p">,</span> <span class="mi">1570</span><span class="p">,</span> <span class="mi">750</span><span class="p">,</span> <span class="mi">1800</span><span class="p">]</span>
+<span class="n">ROI_ref</span> <span class="o">=</span> <span class="n">ROI_sam</span>
+<span class="n">im_crop_tmp</span> <span class="o">=</span> <span class="n">crop_one</span><span class="p">(</span><span class="n">im_sam_tmp</span><span class="p">,</span> <span class="n">ROI_sam</span><span class="p">,</span> <span class="n">ShowImage</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">im_ref_tmp</span> <span class="o">=</span> <span class="n">read_one</span><span class="p">(</span><span class="n">ref_folder_y</span><span class="o">+</span><span class="s1">&#39;00005.tif&#39;</span><span class="p">,</span> <span class="n">ShowImage</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">im_crop_tmp2</span> <span class="o">=</span> <span class="n">crop_one</span><span class="p">(</span><span class="n">im_ref_tmp</span><span class="p">,</span> <span class="n">ROI_sam</span><span class="p">,</span> <span class="n">ShowImage</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/crlcrop.png"><img alt="_images/crlcrop.png" src="_images/crlcrop.png" style="width: 90%;" /></a>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">Imstack_sam_x</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">sam_folder_x</span><span class="p">,</span> <span class="n">ROI_sam</span><span class="p">)</span>
+<span class="n">Imstack_ref_x</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">ref_folder_x</span><span class="p">,</span> <span class="n">ROI_ref</span><span class="p">)</span>
+<span class="n">Imstack_sam_y</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">sam_folder_y</span><span class="p">,</span> <span class="n">ROI_sam</span><span class="p">)</span>
+<span class="n">Imstack_ref_y</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">ref_folder_y</span><span class="p">,</span> <span class="n">ROI_ref</span><span class="p">)</span>
+
+<span class="n">Imstack_sam_x</span><span class="o">.</span><span class="n">normalize</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">Imstack_ref_x</span><span class="o">.</span><span class="n">normalize</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">Imstack_sam_y</span><span class="o">.</span><span class="n">normalize</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">Imstack_ref_y</span><span class="o">.</span><span class="n">normalize</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>Since we are going to use XSS technique with reference beam,
+we need at least two image stacks to initialize the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class.
+The first image stack to be loaded is the template image stack, i.e., the image stack with test optic.
+The second image stack is the reference image stack.
+In this example, we would like to obtain the 2D slope map in two directions from two
+1D scans. Thus we need four image stacks. Two for references and two for samples, respectively.
+The first two image stacks are the template image stack and reference image stack
+in the x (horizontal) scan direction. The last two image stacks are those in the
+y (vertical) direction. Also, we choose to <a class="reference internal" href="userguide.html#usenorm"><span class="std std-ref">normalize</span></a> these image stacks in the beginning.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">track_XSS</span> <span class="o">=</span> <span class="n">Tracking</span><span class="p">(</span><span class="n">Imstack_sam_x</span><span class="p">,</span> <span class="n">Imstack_ref_x</span><span class="p">,</span> <span class="n">Imstack_sam_y</span><span class="p">,</span> <span class="n">Imstack_ref_y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Before we do the real tracking, there are some parameters to be set for <code class="docutils literal notranslate"><span class="pre">track_XSS</span></code>.
+<code class="docutils literal notranslate"><span class="pre">dimension</span></code> is set to be <cite>‘1D’</cite> or <cite>‘2D’</cite>.
+We use it to tell the code to do <cite>1D</cite> or <cite>2D</cite> data processing. <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is used to tell
+the code the <cite>scan direction</cite> of the loaded image stack. For XSS technique, it supports
+<cite>‘x’, ‘y’, ‘xy’ and ‘diag’</cite>. In this case, we use <cite>‘xy’</cite>. That means we will obtain the
+speckle shifts from both x (horizontal) 1D scan and y (vertical) 1D scan all together.
+Thus, 4 image stacks are loaded. Besides, we need to provide
+<code class="docutils literal notranslate"><span class="pre">dist</span></code>, <code class="docutils literal notranslate"><span class="pre">pixsize</span></code> and <code class="docutils literal notranslate"><span class="pre">scanstep</span></code>. They are <cite>distance between diffuser and detector plane</cite> in
+mm, <cite>detector pixel size</cite> in <span class="math notranslate nohighlight">\(\mu m\)</span> and <cite>scan step size</cite> in <span class="math notranslate nohighlight">\(\mu m\)</span>, repectively.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">track_XSS</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="s1">&#39;2D&#39;</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">scandim</span> <span class="o">=</span> <span class="s1">&#39;xy&#39;</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">dist</span> <span class="o">=</span> <span class="mf">623.</span>    <span class="c1">#[mm]</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">pixsize</span> <span class="o">=</span> <span class="mf">1.03</span>    <span class="c1">#[um]</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">scanstep</span> <span class="o">=</span> <span class="mf">1.0</span>    <span class="c1">#[um]</span>
+</pre></div>
+</div>
+<p>There are several compulsory input for
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer" title="spexwavepy.trackfun.Tracking.XSS_withrefer"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSS_withrefer()</span></code></a> function before we call it.
+<code class="docutils literal notranslate"><span class="pre">edge_x</span></code>, <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_z</span></code> define the edges of the raw images in the image stack to be
+cut in order to be trackable. <code class="docutils literal notranslate"><span class="pre">width</span></code> is the window width used for 1D tracking,
+<code class="docutils literal notranslate"><span class="pre">pad_xy</span></code> determines how large the extra area needed for the reference image.
+See <a class="reference internal" href="userguide.html#traxss"><span class="std std-ref">User guide</span></a> for detailed description.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">edge_x</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">edge_y</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">edge_z</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">pad_xy</span> <span class="o">=</span> <span class="mi">20</span>
+</pre></div>
+</div>
+<p>Then we call <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer" title="spexwavepy.trackfun.Tracking.XSS_withrefer"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSS_withrefer()</span></code></a> function.
+In the beginning, we can set the <code class="docutils literal notranslate"><span class="pre">display</span></code> to be <code class="docutils literal notranslate"><span class="pre">True</span></code> to have a check
+of the settings of all the parameters.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">track_XSS</span><span class="o">.</span><span class="n">XSS_withrefer</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">edge_z</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">pad_xy</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Double click the mouse will terminate the display.</p>
+</div>
+<p>If every parameter is set appropriately, the following window will appear.
+The top-left is the template image, the top-right is the reference image,
+the bottom-left is the tracking coefficient matrix, the bottom-right is the central cut
+of the matrix.</p>
+<a class="reference internal image-reference" href="_images/XSSdisplay.png"><img alt="_images/XSSdisplay.png" src="_images/XSSdisplay.png" style="width: 80%;" /></a>
+<p>Switch off <code class="docutils literal notranslate"><span class="pre">display</span></code> if we want to do the real calculation.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">track_XSS</span><span class="o">.</span><span class="n">XSS_withrefer</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">edge_z</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">pad_xy</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you have multicores, you can also use the multi-core version of this function,
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer_multi" title="spexwavepy.trackfun.Tracking.XSS_withrefer_multi"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSS_withrefer_multi()</span></code></a>. The only additional
+parameter is <code class="docutils literal notranslate"><span class="pre">cpu_no</span></code>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">track_XSS</span><span class="o">.</span><span class="n">XSS_withrefer_multi</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">edge_z</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">pad_xy</span><span class="p">,</span> <span class="n">cpu_no</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After calling the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer" title="spexwavepy.trackfun.Tracking.XSS_withrefer"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSS_withrefer()</span></code></a> or
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer_multi" title="spexwavepy.trackfun.Tracking.XSS_withrefer_multi"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSS_withrefer_multi()</span></code></a> function,
+the 2D shift map in both x and y direction are stored in the <code class="docutils literal notranslate"><span class="pre">delayX</span></code> and
+<code class="docutils literal notranslate"><span class="pre">delayY</span></code> attribute. Likewise, the 2D slope map are stored in the
+<code class="docutils literal notranslate"><span class="pre">sloX</span></code> and <code class="docutils literal notranslate"><span class="pre">sloY</span></code> attribute.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">delayX</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x [pixel]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y [pixel]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Shift in x direction&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">delayY</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x [pixel]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y [pixel]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Shift in y direction&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">sloX</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x [pixel]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y [pixel]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\mu$rad&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Slope in x direction&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">sloY</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x [pixel]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y [pixel]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\mu$rad&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Slope in y direction&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/XSS_delayandslope.png"><img alt="_images/XSS_delayandslope.png" src="_images/XSS_delayandslope.png" style="width: 90%;" /></a>
+<p>We know that the tested single CRL has a surface of paraboloid of revolution.
+Thus, its 2D slope map will be a tilted plane. Let’s calculate the slope of this plane.
+We extract the central horizontal line from the slope map in horizontal direction.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">sloX</span><span class="p">[</span><span class="mi">500</span><span class="p">,</span> <span class="p">:],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Raw data&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The curve of slope in the central part can be fitted with a straight line,
+if we cut the edge of this curve.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">sloX_cen</span> <span class="o">=</span> <span class="n">track_XSS</span><span class="o">.</span><span class="n">sloX</span><span class="p">[</span><span class="mi">500</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">sloX_cen_fit</span> <span class="o">=</span> <span class="n">sloX_cen</span><span class="p">[</span><span class="mi">200</span><span class="p">:</span><span class="mi">800</span><span class="p">]</span>
+<span class="n">sloX_coord</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">fit_para_X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">sloX_coord</span><span class="p">,</span> <span class="n">sloX_cen_fit</span><span class="p">,</span> <span class="n">deg</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We plot the fitted line and the raw curve together.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">track_XSS</span><span class="o">.</span><span class="n">sloX</span><span class="p">[</span><span class="mi">500</span><span class="p">,</span> <span class="mi">200</span><span class="p">:</span><span class="mi">800</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Partial data&#39;</span><span class="p">)</span>
+<span class="n">x_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">sloX</span><span class="p">[</span><span class="mi">500</span><span class="p">,</span> <span class="p">:])</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">fit_para_X</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x_plot</span><span class="o">+</span><span class="n">fit_para_X</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Fitted line&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Pixel&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Slope [&#39;</span><span class="o">+</span><span class="s1">&#39;$\mu rad$&#39;</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;X slope&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/XSS_fitx.png"><img alt="_images/XSS_fitx.png" src="_images/XSS_fitx.png" style="width: 80%;" /></a>
+<p>Likewise, we do the same thing on y direction.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">sloY_cen</span> <span class="o">=</span> <span class="n">track_XSS</span><span class="o">.</span><span class="n">sloY</span><span class="p">[:,</span> <span class="mi">450</span><span class="p">]</span>
+<span class="n">sloY_cen_fit</span> <span class="o">=</span> <span class="n">sloY_cen</span><span class="p">[</span><span class="mi">200</span><span class="p">:</span><span class="mi">780</span><span class="p">]</span>
+<span class="n">sloY_coord</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">780</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">fit_para_Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">sloY_coord</span><span class="p">,</span> <span class="n">sloY_cen_fit</span><span class="p">,</span> <span class="n">deg</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">sloY</span><span class="p">[:,</span> <span class="mi">450</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Raw data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">780</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">track_XSS</span><span class="o">.</span><span class="n">sloY</span><span class="p">[</span><span class="mi">200</span><span class="p">:</span><span class="mi">780</span><span class="p">,</span> <span class="mi">450</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Partial data&#39;</span><span class="p">)</span>
+<span class="n">y_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">sloY</span><span class="p">[:,</span> <span class="mi">450</span><span class="p">])</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_plot</span><span class="p">,</span> <span class="n">fit_para_Y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">y_plot</span><span class="o">+</span><span class="n">fit_para_Y</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Fitted line&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Pixel&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Slope [&#39;</span><span class="o">+</span><span class="s1">&#39;$\mu rad$&#39;</span><span class="o">+</span><span class="s1">&#39;]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Y slope&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/XSS_fity.png"><img alt="_images/XSS_fity.png" src="_images/XSS_fity.png" style="width: 80%;" /></a>
+<p>Let’s check the fitting parameter in both directions.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fiiting parameters in x direction:&quot;</span><span class="p">,</span> <span class="n">fit_para_X</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fiiting parameters in y direction:&quot;</span><span class="p">,</span> <span class="n">fit_para_Y</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Fitting</span> <span class="n">parameters</span> <span class="ow">in</span> <span class="n">x</span> <span class="n">direction</span><span class="p">:</span> <span class="p">[</span> <span class="mf">0.01470974</span> <span class="o">-</span><span class="mf">6.86428282</span><span class="p">]</span>
+<span class="n">Fitting</span> <span class="n">parameters</span> <span class="ow">in</span> <span class="n">y</span> <span class="n">direction</span><span class="p">:</span> <span class="p">[</span> <span class="mf">0.01475435</span> <span class="o">-</span><span class="mf">7.04149456</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>We can see the slope of the two fitted straight lines are very close.
+The slope for the ideal single 2D CRL in both directions is a tilted plane.
+We use the fitting parameters to generated this plane.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">y_dim_tmp</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">track_XSS</span><span class="o">.</span><span class="n">sloX</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">planeXcoord</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sloX_cen</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">planeX</span> <span class="o">=</span> <span class="n">planeXcoord</span> <span class="o">*</span> <span class="n">fit_para_X</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">fit_para_X</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">planeX</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">list</span><span class="p">(</span><span class="n">planeX</span><span class="p">)]</span> <span class="o">*</span> <span class="n">y_dim_tmp</span><span class="p">)</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">x_dim_tmp</span> <span class="o">=</span> <span class="n">track_XSS</span><span class="o">.</span><span class="n">sloY</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">planeYcoord</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sloY_cen</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">planeY</span> <span class="o">=</span> <span class="n">planeYcoord</span> <span class="o">*</span> <span class="n">fit_para_Y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">fit_para_Y</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">planeY</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">rot90</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">list</span><span class="p">(</span><span class="n">planeY</span><span class="p">)]</span> <span class="o">*</span> <span class="n">x_dim_tmp</span><span class="p">),</span> <span class="n">k</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To estimate the slope error, we subtract the fitted plane.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">sloErr_x</span> <span class="o">=</span> <span class="n">track_XSS</span><span class="o">.</span><span class="n">sloX</span> <span class="o">-</span> <span class="n">planeX</span>
+<span class="n">sloErr_y</span> <span class="o">=</span> <span class="n">track_XSS</span><span class="o">.</span><span class="n">sloY</span> <span class="o">-</span> <span class="n">planeY</span>
+</pre></div>
+</div>
+<p>After that, we plot the 2D map of the slope error.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">y_dim_tmp</span><span class="p">,</span> <span class="n">x_dim_tmp</span> <span class="o">=</span> <span class="n">track_XSS</span><span class="o">.</span><span class="n">sloX</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">sloErr_x</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_dim_tmp</span><span class="o">*</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">pixsize</span><span class="p">,</span> <span class="n">y_dim_tmp</span><span class="o">*</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">pixsize</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\mu rad$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\mu m$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\mu m$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Slope error in X direction&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">y_dim_tmp</span><span class="p">,</span> <span class="n">x_dim_tmp</span> <span class="o">=</span> <span class="n">track_XSS</span><span class="o">.</span><span class="n">sloY</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">sloErr_y</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_dim_tmp</span><span class="o">*</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">pixsize</span><span class="p">,</span> <span class="n">y_dim_tmp</span><span class="o">*</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">pixsize</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\mu rad$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\mu m$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\mu m$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Slope error in Y direction&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/XSSsloerr.png"><img alt="_images/XSSsloerr.png" src="_images/XSSsloerr.png" style="width: 90%;" /></a>
+<p>Next, we can do 2D integration to obtain the surface of the wavefront.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">surface</span> <span class="o">=</span> <span class="n">Integration2D_SCS</span><span class="p">(</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">sloX</span><span class="p">,</span> <span class="n">track_XSS</span><span class="o">.</span><span class="n">sloY</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For the 2D integration, please see the <a class="reference internal" href="userguide.html#use2dint"><span class="std std-ref">User guide</span></a> for details.
+The x and y coordinate in the 2D integrations are in the unit of <span class="math notranslate nohighlight">\(\mu m\)</span>.
+The output height is in the unit of pm.
+Let’s see the integrated surface.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">surface</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/XSSintsurf.png"><img alt="_images/XSSintsurf.png" src="_images/XSSintsurf.png" style="width: 60%;" /></a>
+<p>The surface should be cutted in order to be fitted.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">surface2fit</span> <span class="o">=</span> <span class="n">surface</span><span class="p">[</span><span class="mi">200</span><span class="p">:</span><span class="mi">750</span><span class="p">,</span> <span class="mi">150</span><span class="p">:</span><span class="mi">750</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">surface2fit</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/XSSintsurfcut.png"><img alt="_images/XSSintsurfcut.png" src="_images/XSSintsurfcut.png" style="width: 60%;" /></a>
+<p>The ideal wavefront after a single CRL is defined as:</p>
+<div class="math notranslate nohighlight">
+\[z = \frac{(x-x_0)^2+(y-y_0)^2}{2f} + z_0\]</div>
+<p>We fit the measured wavefront to the above ideal function.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ideal_surf</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">z0</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">x0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span><span class="o">-</span><span class="n">y0</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">R</span> <span class="o">+</span> <span class="n">z0</span>
+
+<span class="n">x_surf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">750</span><span class="p">)</span>
+<span class="n">y_surf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">750</span><span class="p">)</span>
+<span class="n">X_surf</span><span class="p">,</span> <span class="n">Y_surf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x_surf</span><span class="p">,</span> <span class="n">y_surf</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">X_surf</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">Y_surf</span><span class="p">)</span>
+<span class="n">XY_data</span> <span class="o">=</span> <span class="p">[</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">]</span>
+<span class="n">Z_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">surface2fit</span><span class="p">)</span>
+<span class="n">p_init</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">150</span><span class="o">+</span><span class="mi">750</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">200</span><span class="o">+</span><span class="mi">750</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">Z_data</span><span class="p">)]</span>
+<span class="n">popt</span><span class="p">,</span> <span class="n">pcov</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span><span class="n">ideal_surf</span><span class="p">,</span> <span class="n">XY_data</span><span class="p">,</span> <span class="n">Z_data</span><span class="p">,</span> <span class="n">p_init</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Since the real pixel size is 1.03 <span class="math notranslate nohighlight">\(\mu m\)</span> rather than the assumed 1 <span class="math notranslate nohighlight">\(\mu m\)</span>,
+the real <code class="docutils literal notranslate"><span class="pre">f</span></code> should be 70.16 m.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;f is </span><span class="si">{:.4f}</span><span class="s2"> m.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">popt</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">pixsize</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="ow">is</span> <span class="mf">70.1582</span> <span class="n">m</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>The beam energy is 15.5 keV, the CRL is made of Be, the <span class="math notranslate nohighlight">\(\delta\)</span> for
+Be at 15.5 keV is around <span class="math notranslate nohighlight">\(1.42\times 10^{-6}\)</span>.
+According to the relation</p>
+<div class="math notranslate nohighlight">
+\[f = \frac{R}{2 \delta}\]</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">R</span></code> will be 199.25 <span class="math notranslate nohighlight">\(\mu m\)</span>. It is close to 200 <span class="math notranslate nohighlight">\(\mu m\)</span>
+which is the value the manufacturer provided.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">delta</span><span class="o">=</span><span class="mf">1.42</span> <span class="o">*</span> <span class="mf">1.e-6</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R is </span><span class="si">{:.2f}</span><span class="s2"> um.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">popt</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">pixsize</span><span class="o">*</span><span class="n">delta</span><span class="o">*</span><span class="mf">1.e6</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">R</span> <span class="ow">is</span> <span class="mf">199.25</span> <span class="n">um</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>From the parameters <code class="docutils literal notranslate"><span class="pre">popt</span></code> we can obtain the fitted surface.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">y_dim_tmp</span><span class="p">,</span> <span class="n">x_dim_tmp</span> <span class="o">=</span> <span class="n">surface</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">x_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_dim_tmp</span><span class="p">)</span>
+<span class="n">y_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">y_dim_tmp</span><span class="p">)</span>
+<span class="n">X_plot</span><span class="p">,</span> <span class="n">Y_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">y_plot</span><span class="p">)</span>
+<span class="n">surf_fit</span> <span class="o">=</span> <span class="p">(((</span><span class="n">X_plot</span><span class="o">-</span><span class="n">popt</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="n">Y_plot</span><span class="o">-</span><span class="n">popt</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">popt</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">popt</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The residual is <code class="docutils literal notranslate"><span class="pre">surface</span></code>-<code class="docutils literal notranslate"><span class="pre">surf_fit</span></code>. Remeber that the real pixel size is
+1.03 <span class="math notranslate nohighlight">\(\mu m\)</span> instead of 1 <span class="math notranslate nohighlight">\(\mu m\)</span>, this factor should be multiplied.
+Also, we cut the outside part of the CRL using a mask.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">residual</span> <span class="o">=</span> <span class="n">surface</span> <span class="o">-</span> <span class="n">surf_fit</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">residual</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">20</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">residual</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">residual</span> <span class="o">=</span> <span class="n">residual</span> <span class="o">*</span> <span class="n">mask</span> <span class="o">*</span> <span class="n">track_XSS</span><span class="o">.</span><span class="n">pixsize</span>         <span class="c1">#[pm]</span>
+</pre></div>
+</div>
+<p>Divide the residual with <span class="math notranslate nohighlight">\(\delta\)</span>, we have the residual
+height error of single CRL. Also we can convert the wavefront
+surface to the CRL thinckness distribution.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">delta</span> <span class="o">=</span> <span class="mf">1.42</span> <span class="o">*</span> <span class="mf">1.e-6</span>
+<span class="n">T_residual</span> <span class="o">=</span> <span class="n">residual</span> <span class="o">/</span> <span class="p">(</span><span class="n">delta</span> <span class="o">*</span> <span class="mf">1.e6</span><span class="p">)</span>                  <span class="c1">#[um]</span>
+<span class="n">T_crl</span> <span class="o">=</span> <span class="n">surface</span> <span class="o">*</span> <span class="n">track_XSS</span><span class="o">.</span><span class="n">pixsize</span> <span class="o">/</span> <span class="p">(</span><span class="n">delta</span> <span class="o">*</span> <span class="mf">1.e6</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.e-3</span>  <span class="c1">#[mm]</span>
+</pre></div>
+</div>
+<p>We display the 2D residual height error map.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">y_dim_tmp</span><span class="p">,</span> <span class="n">x_dim_tmp</span> <span class="o">=</span> <span class="n">T_residual</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">T_residual</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_dim_tmp</span><span class="o">*</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">pixsize</span><span class="p">,</span> <span class="n">y_dim_tmp</span><span class="o">*</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">pixsize</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\mu m$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\mu m$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\mu m$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Residual thickness error&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/XSSheighterr.png"><img alt="_images/XSSheighterr.png" src="_images/XSSheighterr.png" style="width: 80%;" /></a>
+<p>Likewise, we can also draw the 3D CRL height surface shape.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mpl_toolkits</span> <span class="kn">import</span> <span class="n">mplot3d</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">y_dim_tmp</span><span class="p">,</span> <span class="n">x_dim_tmp</span> <span class="o">=</span> <span class="n">T_crl</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">X_plot</span><span class="o">*</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">pixsize</span><span class="p">,</span> <span class="n">Y_plot</span><span class="o">*</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">pixsize</span><span class="p">,</span> <span class="p">(</span><span class="n">T_crl</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">T_crl</span><span class="p">)),</span> <span class="n">rstride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cstride</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Be single CRL&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\mu$m&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\mu$m&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;mm&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="_images/XSScrlheight.png"><img alt="_images/XSScrlheight.png" src="_images/XSScrlheight.png" style="width: 80%;" /></a>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="principle.html" class="btn btn-neutral float-left" title="The speckle-based wavefront sensing techniques" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="example.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Lingfei Hu, Hongchang Wang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

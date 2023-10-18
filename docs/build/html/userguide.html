@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User guide &mdash; spexwavepy 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API reference" href="api.html" />
+    <link rel="prev" title="Examples" href="example.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            spexwavepy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="principle.html">The speckle-based wavefront sensing techniques</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getstart.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#title-1">Title 1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#preprocessing-of-the-images">Preprocessing of the images</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#image-stack">Image stack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#normalization">Normalization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#smoothing">Smoothing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#detector-pixel-size-determination">Detector pixel size determination</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#cross-correlation">Cross-correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sub-pixel-registration">Sub-pixel registration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#default-method">Default method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gaussian-peak-finding-method">Gaussian peak finding method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parabola-peak-finding-method">Parabola peak finding method</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#image-match">Image match</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#d-integration-for-post-processing">2D integration for post processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-speckle-based-techniques-included-in-tracking-class">The speckle-based techniques included in <code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code> class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#stability-checking-using-speckle-patterns">Stability checking using speckle patterns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reference-and-sample-image-stacks-collimating-before-tracking">Reference and sample image stacks collimating before tracking</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xss-technique-with-reference-beam">XSS technique with reference beam</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#self-reference-xss-technique">Self-reference XSS technique</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xst-technique-with-reference-beam">XST technique with reference beam</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#self-reference-xst-technique">Self-reference XST technique</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xsvt-technique-with-reference-beam">XSVT technique with reference beam</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#self-reference-xsvt-technique">Self-reference XSVT technique</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#post-processing-of-the-tracked-speckle-pattern-shifts">Post processing of the tracked speckle pattern shifts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#slope-reconstruction">Slope reconstruction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#local-curvature-reconstruction">Local curvature reconstruction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#d-integration-from-the-slope">2D integration from the slope</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">spexwavepy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">User guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/userguide.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="user-guide">
+<h1>User guide<a class="headerlink" href="#user-guide" title="Permalink to this heading"></a></h1>
+<p><em>Description goes here …</em></p>
+<section id="title-1">
+<span id="usetitle1"></span><h2>Title 1<a class="headerlink" href="#title-1" title="Permalink to this heading"></a></h2>
+<p><em>Say something…</em></p>
+</section>
+<section id="preprocessing-of-the-images">
+<span id="usepreprocess"></span><h2>Preprocessing of the images<a class="headerlink" href="#preprocessing-of-the-images" title="Permalink to this heading"></a></h2>
+<p><em>Say something…</em></p>
+<section id="image-stack">
+<span id="useimstack"></span><h3>Image stack<a class="headerlink" href="#image-stack" title="Permalink to this heading"></a></h3>
+<p><em>Say something…</em></p>
+</section>
+<section id="normalization">
+<span id="usenorm"></span><h3>Normalization<a class="headerlink" href="#normalization" title="Permalink to this heading"></a></h3>
+<p>We do normalization to mitigate the impact of the non-uniformity of the images.
+There are two places in this package to do the normalization.
+One is to normalize the raw images, the other one is to normalize the stitched images.
+<strong>Usually, we only choose one place to do the normalization.</strong></p>
+<a class="reference internal image-reference" href="_images/rawimage.JPG"><img alt="_images/rawimage.JPG" src="_images/rawimage.JPG" style="width: 40%;" /></a>
+<p>Wherever to do the normalization, the basic function to call is
+<a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.NormImage" title="spexwavepy.corefun.NormImage"><code class="xref py py-func docutils literal notranslate"><span class="pre">NormImage()</span></code></a>.
+The process is as follows.</p>
+<p><span class="math notranslate nohighlight">\(b_j\)</span> and <span class="math notranslate nohighlight">\(c_i\)</span> are the partial sums of each column and row of the raw image, respectively.</p>
+<a class="reference internal image-reference" href="_images/rowsum.JPG"><img alt="_images/rowsum.JPG" src="_images/rowsum.JPG" style="width: 40%;" /></a>
+<a class="reference internal image-reference" href="_images/colsum.JPG"><img alt="_images/colsum.JPG" src="_images/colsum.JPG" style="width: 40%;" /></a>
+<p><span class="math notranslate nohighlight">\(\bar{a}_{i,j}\)</span> is generated as the following.
+First, for every index <span class="math notranslate nohighlight">\(j\)</span>, the column of the raw image, <span class="math notranslate nohighlight">\(a_{i,j}\)</span>, divides <span class="math notranslate nohighlight">\(b_j\)</span>.
+Second, after the above first step, for every index <span class="math notranslate nohighlight">\(i\)</span>, the row of the generated image divides <span class="math notranslate nohighlight">\(c_i\)</span>.</p>
+<p>Then we do the common normalization.
+<span class="math notranslate nohighlight">\(\bar{a}\)</span> is the mean value of <span class="math notranslate nohighlight">\(\bar{a}_{i,j}\)</span>, <span class="math notranslate nohighlight">\(\sigma\)</span> is the std of <span class="math notranslate nohighlight">\(\bar{a}_{i,j}\)</span>,
+then we have each element of the final generated image as <span class="math notranslate nohighlight">\((\bar{a}_{i,j}-\bar{a})/\sigma\)</span>.</p>
+<p>As the images shown in the following, the main purpose of doing normalization is to
+get rid of the “wrinkles” come from the incident beam. If the normalization is not
+effect to the raw images, we recommend to do the normalization to the stiched images later.
+Besides, if the incident beam is clean enough, there is no need to do the normalization.</p>
+<a class="reference internal image-reference" href="_images/normCRL.png"><img alt="_images/normCRL.png" src="_images/normCRL.png" style="width: 100%;" /></a>
+</section>
+<section id="smoothing">
+<span id="usesmooth"></span><h3>Smoothing<a class="headerlink" href="#smoothing" title="Permalink to this heading"></a></h3>
+<p>If the raw image quaility is very low, sometimes you need to smooth it.
+<a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack.smooth" title="spexwavepy.imstackfun.Imagestack.smooth"><code class="xref py py-func docutils literal notranslate"><span class="pre">smooth()</span></code></a> and
+<a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack.smooth_multi" title="spexwavepy.imstackfun.Imagestack.smooth_multi"><code class="xref py py-func docutils literal notranslate"><span class="pre">smooth_multi()</span></code></a> functions are
+used to smooth the raw images in the image stack. The latter is the
+multiprocessing version of the former. Two smoothing are available at
+present, they are <code class="docutils literal notranslate"><span class="pre">Gaussian</span></code> and <code class="docutils literal notranslate"><span class="pre">Box</span></code>, respectively. If the
+<code class="docutils literal notranslate"><span class="pre">meth</span></code> is <code class="docutils literal notranslate"><span class="pre">Gaussian</span></code>, a Gaussian function will be used for the
+smoothing, the parameter of <code class="docutils literal notranslate"><span class="pre">pixel</span></code> determines the sigma of the
+Gaussian function. If the <code class="docutils literal notranslate"><span class="pre">meth</span></code> is <code class="docutils literal notranslate"><span class="pre">Box</span></code>, a <span class="math notranslate nohighlight">\(n \times n\)</span>
+matrix is used to convolve the raw image, each element in the matrix
+equals to <span class="math notranslate nohighlight">\(1/n^2\)</span>. Likewise, the parameter of <code class="docutils literal notranslate"><span class="pre">pixel</span></code> is used
+to determine <span class="math notranslate nohighlight">\(n\)</span>. The following images show how the smoothing
+will look like.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/smoothing.png"><img alt="_images/smoothing.png" src="_images/smoothing.png" style="width: 100%;" /></a>
+</figure>
+</section>
+<section id="detector-pixel-size-determination">
+<span id="usedetpix"></span><h3>Detector pixel size determination<a class="headerlink" href="#detector-pixel-size-determination" title="Permalink to this heading"></a></h3>
+<p>To determine the detector pixel size,
+we scan the diffuser in one direction with a relatively large step at first,
+10 um for example. The speckle pattern will move according to the scan.
+If the scan direction is along the x-axis,
+the speckle pattern will move along the x-axis too.</p>
+<a class="reference internal image-reference" href="_images/pixdet1.jpg"><img alt="_images/pixdet1.jpg" src="_images/pixdet1.jpg" style="width: 80%;" /></a>
+<p>We choose a subregion from each image to track the speckle pattern movement using cross-correlation.
+The tracked moving is in the unit of pixels.
+All the images extracted from the subregion are compared with the first raw image.
+Thus, the tracked speckle pattern shifts will be along a straight line.
+We fit the tracked shifts into a straight line,
+and the pixel size is calculated by 1 over the slope of the fitted line.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">subregion</span></code> set in this function is related to the cropped image stack.
+That is to say, if we have set <code class="docutils literal notranslate"><span class="pre">ROI</span></code> for the image stack, then the <code class="docutils literal notranslate"><span class="pre">subROI</span></code>
+parameter is the coordinate to the newly cropped images by <code class="docutils literal notranslate"><span class="pre">ROI</span></code>, <strong>NOT</strong> to
+the raw images.</p>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">display</span></code> is True, the fitting results will be shown.</p>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="_images/pixdet2.jpg"><img alt="_images/pixdet2.jpg" src="_images/pixdet2.jpg" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">The fitting results and the residuals.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="cross-correlation">
+<span id="usecrosscorr"></span><h2>Cross-correlation<a class="headerlink" href="#cross-correlation" title="Permalink to this heading"></a></h2>
+<p>In image processing, cross-correlation is a measure of the similarity of two images.
+For template matching, the template image moves along the surface of the reference image.
+At each position, a cross-correlation calculation is conducted.
+The output of these cross-correlation calculations is a coefficient matrix.
+This matrix is often used to estimate how the two images resemble.
+According to the mode of cross-correlation used, usually,
+the largest or smallest value in the coefficient matrix corresponds to the position
+the template image and the reference image resemble the most.</p>
+<figure class="align-default" id="id5">
+<a class="reference internal image-reference" href="_images/Cross_Correlation_Animation.gif"><img alt="_images/Cross_Correlation_Animation.gif" src="_images/Cross_Correlation_Animation.gif" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">Animation of the cross-correlation sliding a template over an image. (Image is from wikipedia.)</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The <strong>normalized cross-correlation</strong> is used to obtain the coefficient matrix in this package.
+This matrix can provide the pixel-wise location of the highest correlation.
+It is also used to obtain the sub-pixel registration, which we will cover in the next section <a class="reference internal" href="#usesubpix"><span class="std std-ref">Sub-pixel registration</span></a>.</p>
+<p>If <span class="math notranslate nohighlight">\(t(x,y)\)</span> is the template image,
+<span class="math notranslate nohighlight">\(f(x,y)\)</span> is the sub-image of the raw image which is to be cross-correlated,
+then the <strong>normalized cross-correlation</strong> is:</p>
+<div class="math notranslate nohighlight">
+\[R(x,y) = \frac{1}{n} \sum\limits_{x',y'}\frac{1}{\sigma_{t}\sigma_{f}} (t(x',y') - \bar t)(f(x+x', y+y') - \bar f(x, y))\]</div>
+<p>where <span class="math notranslate nohighlight">\(n\)</span> is the number of pixels in <span class="math notranslate nohighlight">\(t(x', y')\)</span> and <span class="math notranslate nohighlight">\(f(x+x', y+y')\)</span>,
+<span class="math notranslate nohighlight">\(\bar t\)</span> and <span class="math notranslate nohighlight">\(\bar f(x, y)\)</span> are the average of <span class="math notranslate nohighlight">\(t(x', y')\)</span> and <span class="math notranslate nohighlight">\(f(x+x', y+y')\)</span>, respectively.</p>
+<p>The OpenCv-Python (cv2) package is heavily used in this package.
+Especially, we use the existing <code class="docutils literal notranslate"><span class="pre">cv2.matchTemplate</span></code> function to calculate the cross-correlation matrix.
+The standard normalized cross-correlation shown above corresponds to
+the <code class="docutils literal notranslate"><span class="pre">TM_CCOEFF_NORMED</span></code> method for the existing template matching function.
+Other methods haven’t been implemented in this package.</p>
+<p>For more information of the <strong>template matching</strong> in OpenCv-Python (cv2) package,
+please refer to <a class="reference external" href="https://docs.opencv.org/3.4/de/da9/tutorial_template_matching.html">this link</a>.</p>
+</section>
+<section id="sub-pixel-registration">
+<span id="usesubpix"></span><h2>Sub-pixel registration<a class="headerlink" href="#sub-pixel-registration" title="Permalink to this heading"></a></h2>
+<p>We provide three sub-pixel registration methods at present.
+They are the differential approach (the default method), Gaussian peak locating, and parabola curve peak locating.
+Other methods can be easily implemented if required.</p>
+<section id="default-method">
+<span id="subdefault"></span><h3>Default method<a class="headerlink" href="#default-method" title="Permalink to this heading"></a></h3>
+<p>The default sub-pixel registration method can be found <a class="reference internal" href="#defaultref1" id="id1"><span>[defaultref1]</span></a> in and <a class="reference internal" href="#defaultref2" id="id2"><span>[defaultref2]</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<div role="list" class="citation-list">
+<div class="citation" id="defaultref1" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">defaultref1</a><span class="fn-bracket">]</span></span>
+<p>Fisher, G. H., &amp; Welsch, B.T.
+“FLCT: a fast, efficient method for performing local correlation tracking.”
+Subsurface and Atmospheric Influences on Solar Activity. Vol. 383. 2008.</p>
+</div>
+<div class="citation" id="defaultref2" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">defaultref2</a><span class="fn-bracket">]</span></span>
+<p>Qiao, Zhi, et al.
+“Wavelet-transform-based speckle vector tracking method for X-ray phase imaging.”
+Optics Express 28.22 (2020): 33053-33067.</p>
+</div>
+</div>
+</div>
+<p>This method can be described in the following.
+The method can be described in the following.
+We assume the coefficient matrix obtained from the cross-correlation to be <span class="math notranslate nohighlight">\(R(x,y)\)</span>.
+It has the pixel-wise maximum value at <span class="math notranslate nohighlight">\((x_0, y_0)\)</span>.
+<span class="math notranslate nohighlight">\((x_0, y_0)\)</span> is the index of the pixel.
+We assume the cross-correlation has its maximum value at the position of <span class="math notranslate nohighlight">\((x_0+\delta x, y_0+\delta y)\)</span>.
+Then we have:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\delta x = \left( \frac{\partial^{2} R}{\partial y^{2}} \frac{\partial R}{\partial x}
+- \frac{\partial^{2} R}{\partial x \partial y} \frac{\partial R}{\partial y} \right)
+ \left( \left( \frac{\partial^{2} R}{\partial x \partial y} \right)^{2}
+- \frac{\partial^{2} R}{\partial x^{2}} \frac{\partial^{2} R}{\partial y^{2}} \right)^{-1}\\\delta y = \left( \frac{\partial^{2} R}{\partial x^{2}} \frac{\partial R}{\partial y}
+- \frac{\partial^{2} R}{\partial x \partial y} \frac{\partial R}{\partial x} \right)
+ \left( \left( \frac{\partial^{2} R}{\partial x \partial y} \right)^{2}
+- \frac{\partial^{2} R}{\partial x^{2}} \frac{\partial^{2} R}{\partial y^{2}} \right)^{-1}\end{aligned}\end{align} \]</div>
+<p>To discrete the above partial differential operators, the central difference scheme is used.</p>
+</section>
+<section id="gaussian-peak-finding-method">
+<span id="subgauss"></span><h3>Gaussian peak finding method<a class="headerlink" href="#gaussian-peak-finding-method" title="Permalink to this heading"></a></h3>
+<p>Both this method and <a class="reference internal" href="#subpara"><span class="std std-ref">Parabola peak finding method</span></a> can be find in <a class="reference internal" href="#gaussref1" id="id3"><span>[gaussref1]</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<div role="list" class="citation-list">
+<div class="citation" id="gaussref1" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">gaussref1</a><span class="fn-bracket">]</span></span>
+<p>Debella-Gilo, M, and Kääb, A.
+“Sub-pixel precision image matching for measuring surface displacements on mass movements using normalized cross-correlation.”
+Remote Sensing of Environment 115.1 (2011): 130-142.</p>
+</div>
+</div>
+</div>
+<p>Assuming the coefficient matrix <span class="math notranslate nohighlight">\(R(x, y)\)</span> can be fitted by a 2D Gaussian function,
+the peak location of the fitted function is:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}x_m = x_0 + \frac{\ln(R(x_{0}-1, y_{0}))-\ln(R(x_{0}+1, y_{0}))}{2\ln(R(x_{0}+1, y_{0}))-4\ln(R(x_{0}, y_{0}))+2\ln(R(x_{0}-1, y_{0}))}\\y_m = x_0 + \frac{\ln(R(x_{0}, y_{0}-1))-\ln(R(x_{0}, y_{0}+1))}{2\ln(R(x_{0}, y_{0}+1))-4\ln(R(x_{0}, y_{0}))+2\ln(R(x_{0}, y_{0}-1))}\end{aligned}\end{align} \]</div>
+<p>where <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(y_0\)</span> are the pixel indices in the two dimensions with the maximum value of <span class="math notranslate nohighlight">\(R(x, y)\)</span>.</p>
+</section>
+<section id="parabola-peak-finding-method">
+<span id="subpara"></span><h3>Parabola peak finding method<a class="headerlink" href="#parabola-peak-finding-method" title="Permalink to this heading"></a></h3>
+<p>Resemble to Gaussian peak finding method,
+parabola peak finding method assumes the coefficient matrix <span class="math notranslate nohighlight">\(R(x, y)\)</span> can be fitted by a 2D parabolic function.
+The peak location of the fitted function is:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}x_m = x_0 + \frac{R(x_{0}-1, y_{0})-R(x_{0}+1, y_{0})}{2R(x_{0}+1, y_{0})-4R(x_{0}, y_{0})+2R(x_{0}-1, y_{0})}\\y_m = x_0 + \frac{R(x_{0}, y_{0}-1)-R(x_{0}, y_{0}+1)}{2R(x_{0}, y_{0}+1)-4R(x_{0}, y_{0})+2R(x_{0}, y_{0}-1)}\end{aligned}\end{align} \]</div>
+<p>where <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(y_0\)</span> are the pixel indices in the two dimensions with the maximum value of <span class="math notranslate nohighlight">\(R(x, y)\)</span>.</p>
+</section>
+</section>
+<section id="image-match">
+<span id="useimmatch"></span><h2>Image match<a class="headerlink" href="#image-match" title="Permalink to this heading"></a></h2>
+<p>The <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.Imagematch" title="spexwavepy.corefun.Imagematch"><code class="xref py py-func docutils literal notranslate"><span class="pre">Imagematch()</span></code></a> function from the
+<a class="reference internal" href="spexwavepy.html#module-spexwavepy.corefun" title="spexwavepy.corefun"><code class="xref py py-mod docutils literal notranslate"><span class="pre">corefun</span></code></a> module is the basic function this package
+calls to do the cross-correlation. It wraps <code class="docutils literal notranslate"><span class="pre">cv2.matchTemplate</span></code> function
+and several sub-pixel registration methods. The two mandatory inputs are two images,
+<code class="docutils literal notranslate"><span class="pre">im1</span></code> and <code class="docutils literal notranslate"><span class="pre">im2</span></code>. <code class="docutils literal notranslate"><span class="pre">im2</span></code> by definition must be smaller than <code class="docutils literal notranslate"><span class="pre">im1</span></code>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">delayX</span><span class="p">,</span> <span class="n">delayY</span><span class="p">,</span> <span class="n">res_mat</span> <span class="o">=</span> <span class="n">Imagematch</span><span class="p">(</span><span class="n">im1</span><span class="p">,</span> <span class="n">im2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This function returns tracked shifts (<code class="docutils literal notranslate"><span class="pre">delayX</span></code> and <code class="docutils literal notranslate"><span class="pre">delayY</span></code>) betweeen <code class="docutils literal notranslate"><span class="pre">im1</span></code> and <code class="docutils literal notranslate"><span class="pre">im2</span></code>
+and also the related cross-correlatin coefficient matrix <code class="docutils literal notranslate"><span class="pre">res_mat</span></code> (if <code class="docutils literal notranslate"><span class="pre">res</span></code> is True).</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/imagematch.jpg"><img alt="_images/imagematch.jpg" src="_images/imagematch.jpg" style="width: 80%;" /></a>
+</figure>
+</section>
+<section id="d-integration-for-post-processing">
+<span id="use2dint"></span><h2>2D integration for post processing<a class="headerlink" href="#d-integration-for-post-processing" title="Permalink to this heading"></a></h2>
+<p><em>Say something here for 2D integration…</em></p>
+</section>
+<section id="the-speckle-based-techniques-included-in-tracking-class">
+<span id="usetrack"></span><h2>The speckle-based techniques included in <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class<a class="headerlink" href="#the-speckle-based-techniques-included-in-tracking-class" title="Permalink to this heading"></a></h2>
+<p>The most important parameters within the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class
+are the image stacks. At least 1 image stack is needed to construct
+the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class. There are at most 4 image stacks needed
+according to the different data processing modes. The following list shows how to input
+these image stacks for different data processing modes. Each row represents a scan
+dimension <code class="docutils literal notranslate"><span class="pre">scandim</span></code>, each column represnts a data processing mode.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>XSS self</p></th>
+<th class="head"><p>XST self</p></th>
+<th class="head"><p>XSS/XST with reference</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>x</p></td>
+<td><p>imstack1</p></td>
+<td><p>imstack1, 2</p></td>
+<td><p>imstack1(sample), 2(ref)</p></td>
+</tr>
+<tr class="row-odd"><td><p>y</p></td>
+<td><p>imstack1</p></td>
+<td><p>imstack1, 2</p></td>
+<td><p>imstack1(sam), 2(ref)</p></td>
+</tr>
+<tr class="row-even"><td><p>xy</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>imstack1(x sam), 2(x ref), 3(y sam), 4(y ref)</p></td>
+</tr>
+</tbody>
+</table>
+<p><em>Say something.</em></p>
+<section id="stability-checking-using-speckle-patterns">
+<span id="trastable"></span><h3>Stability checking using speckle patterns<a class="headerlink" href="#stability-checking-using-speckle-patterns" title="Permalink to this heading"></a></h3>
+<p>To do stability checking, the reference image is the first image in the image folder.
+The rest images are all compared with the reference image.
+This tracking mode calls the <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.Imagematch" title="spexwavepy.corefun.Imagematch"><code class="xref py py-func docutils literal notranslate"><span class="pre">Imagematch()</span></code></a> function directly.</p>
+<p>Thus, before tracking, the template image will be cut according to the <code class="docutils literal notranslate"><span class="pre">edge_x</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_y</span></code>.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/stable.jpg"><img alt="_images/stable.jpg" src="_images/stable.jpg" style="width: 80%;" /></a>
+</figure>
+<p>If <code class="docutils literal notranslate"><span class="pre">delayX</span></code> and <code class="docutils literal notranslate"><span class="pre">delayY</span></code> are the tracked results, the real shifts should be
+<code class="docutils literal notranslate"><span class="pre">delayX</span></code> - <code class="docutils literal notranslate"><span class="pre">edge_x[0]</span></code> and <code class="docutils literal notranslate"><span class="pre">delayY</span></code> - <code class="docutils literal notranslate"><span class="pre">edge_y[0]</span></code>.</p>
+</section>
+<section id="reference-and-sample-image-stacks-collimating-before-tracking">
+<span id="tracolli"></span><h3>Reference and sample image stacks collimating before tracking<a class="headerlink" href="#reference-and-sample-image-stacks-collimating-before-tracking" title="Permalink to this heading"></a></h3>
+<p>There are some occasions that you need to collimate the speckle pattrns from
+two image stacks before you do any trackings. It is needed particularly
+when the tested  optic is a planar reflecting mirror and we have another
+incident beam image stack for reference.
+The <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.collimate" title="spexwavepy.trackfun.Tracking.collimate"><code class="xref py py-func docutils literal notranslate"><span class="pre">collimate()</span></code></a> function is designed for this purpose.</p>
+<p>Usually, we use the first image from the two image stacks to do the collimation.
+Similar to the stability check, we cut one image to make it as a template.
+Unlike the stability check, for collimating, usually a very large area is cropped.
+After that, we call the <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.Imagematch" title="spexwavepy.corefun.Imagematch"><code class="xref py py-func docutils literal notranslate"><span class="pre">Imagematch()</span></code></a> fucntion to
+cross-correlate this two images. Finally, we move the images in the image stack
+according to the obtained speckle pattern shifts.</p>
+</section>
+<section id="xss-technique-with-reference-beam">
+<span id="traxss"></span><h3>XSS technique with reference beam<a class="headerlink" href="#xss-technique-with-reference-beam" title="Permalink to this heading"></a></h3>
+<p>The <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer" title="spexwavepy.trackfun.Tracking.XSS_withrefer"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XSS_withrefer()</span></code></a> function
+and <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer_multi" title="spexwavepy.trackfun.Tracking.XSS_withrefer_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XSS_withrefer_multi()</span></code></a> function
+are used to process the scanned data.
+In this method, a reference image stack is needed.
+Please refer to <a class="reference internal" href="principle.html#prinxssrefer"><span class="std std-ref">XSS technique with reference beam</span></a>
+for the detailed description of this technique.</p>
+<p>The important parameters of these two functions are <code class="docutils literal notranslate"><span class="pre">edge_x</span></code>, <code class="docutils literal notranslate"><span class="pre">edge_y</span></code>,
+<code class="docutils literal notranslate"><span class="pre">edge_z</span></code>, <code class="docutils literal notranslate"><span class="pre">hw_xy</span></code>, <code class="docutils literal notranslate"><span class="pre">pad_xy</span></code>. The last two parameters, <code class="docutils literal notranslate"><span class="pre">hw_xy</span></code>
+and <code class="docutils literal notranslate"><span class="pre">pad_xy</span></code> are only important in 2D case.</p>
+<p><code class="docutils literal notranslate"><span class="pre">edge_x</span></code>, <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_z</span></code> defines how the raw template images
+are cut. If the scan is along ‘x’ direction, <code class="docutils literal notranslate"><span class="pre">scandim</span></code> = ‘x’, <code class="docutils literal notranslate"><span class="pre">edge_x</span></code>
+is useless. Likewise, if scan is along ‘y’ direction, <code class="docutils literal notranslate"><span class="pre">scandim</span></code> = ‘y’,
+<code class="docutils literal notranslate"><span class="pre">edge_y</span></code> is useless.</p>
+<p>The diffuser was scanned along the y or x direction.
+At each scan position, an image was taken.</p>
+<p>For <strong>1D case</strong>, only a small strip of data from each raw image is extracted.
+As a result, the whole image stack is cropped. This is done by setting <code class="docutils literal notranslate"><span class="pre">ROI</span></code>
+for the image stacks.</p>
+<figure class="align-default" id="id6">
+<a class="reference internal image-reference" href="_images/XSSrefer_1.png"><img alt="_images/XSSrefer_1.png" src="_images/XSSrefer_1.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">The cropped data strip for 1D data processing in y scan direction.</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id7">
+<a class="reference internal image-reference" href="_images/XSSrefer_1x.png"><img alt="_images/XSSrefer_1x.png" src="_images/XSSrefer_1x.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">The cropped data strip for 1D data processing in x scan direction.</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The XSS technique then process the data row/column by row/column.
+Each raw image in the image stack are taken at different diffuser position.
+If we extract the <em>ith</em> row/column of every raw images and then stitch them together,
+a new image is generated. Two images will be generated from both reference image stack
+and the image stack with test optic.</p>
+<figure class="align-default" id="id8">
+<a class="reference internal image-reference" href="_images/XSSrefer_2.png"><img alt="_images/XSSrefer_2.png" src="_images/XSSrefer_2.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">The stiched images for y scan data.</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id9">
+<a class="reference internal image-reference" href="_images/XSSrefer_2x.png"><img alt="_images/XSSrefer_2x.png" src="_images/XSSrefer_2x.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">The stiched images for x scan data.</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The newly generated two images are cross-correlated to track the speckle pattern shifts.
+As mentioned in the above, <code class="docutils literal notranslate"><span class="pre">edge_x</span></code> is used for the y scan data. It is not used for
+the y scan data. On the contrary, <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> is used for the x scan data,
+not used for the y scan data.
+<code class="docutils literal notranslate"><span class="pre">edge_z</span></code> are used for both data set. <em>z</em> is the direction representing
+the scan number.</p>
+<figure class="align-default" id="id10">
+<a class="reference internal image-reference" href="_images/XSSrefer_3.png"><img alt="_images/XSSrefer_3.png" src="_images/XSSrefer_3.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Stiched image for 1D data processing.</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Loop over each row in the raw image, a 1D speckle shift results will be obtained.</p>
+<p>For <strong>2D case</strong>, two more parameters play important roles. As in the 1D case,
+<code class="docutils literal notranslate"><span class="pre">edge_x</span></code>, <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_z</span></code> define how to cut the raw image stack.
+<code class="docutils literal notranslate"><span class="pre">hw_xy</span></code> defines the width (height) of the subregion for the 2D data processing if
+the <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’ (‘x’). Each subregion is a strip of data resemble that in 1D
+case. The subregion will move to cover the whole range of the raw images.
+We use <code class="docutils literal notranslate"><span class="pre">hw_xy</span></code> to define the width (height) of the window, i.e.,
+the stitched images to be coross-correlated during each loop.
+The reference stitched image should be larger than the template,
+we use <code class="docutils literal notranslate"><span class="pre">pad_xy</span></code> to define how larger the reference stitched image is.
+Apparently, <code class="docutils literal notranslate"><span class="pre">pad_xy[0]</span></code> and <code class="docutils literal notranslate"><span class="pre">pad_xy[1]</span></code> should be smaller or equal to
+<code class="docutils literal notranslate"><span class="pre">edge_x(edge_y)[0]</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_x(edge_y)[1]</span></code>, respectively.
+The larger the <code class="docutils literal notranslate"><span class="pre">pad_xy</span></code> is, the more trackable the image is, the slower the
+tracking process can be.</p>
+<figure class="align-default" id="id11">
+<a class="reference internal image-reference" href="_images/XSSrefer_4.png"><img alt="_images/XSSrefer_4.png" src="_images/XSSrefer_4.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">2D image processing for y scan data.</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id12">
+<a class="reference internal image-reference" href="_images/XSSrefer_4x.png"><img alt="_images/XSSrefer_4x.png" src="_images/XSSrefer_4x.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">2D image processing for x scan data.</span><a class="headerlink" href="#id12" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The remaing operations are the same as the 1D case.
+Note that in order to do the integration, if <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is <cite>‘xy’</cite>,
+the 2D results in two directions will be cut to the same size automatically.</p>
+<p>As already described in the <a class="reference internal" href="principle.html#prinxssrefer"><span class="std std-ref">XSS technique with reference beam</span></a>
+section, after obtaining the speckle patter shifts, we can reconstruct the
+slope of the wavefront from this techinque. Thus, ths <code class="docutils literal notranslate"><span class="pre">sloX</span></code> and/or <code class="docutils literal notranslate"><span class="pre">sloY</span></code>
+are stored in the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class according
+to the scan direction. The related postprocess fucntions are
+<a class="reference internal" href="spexwavepy.html#spexwavepy.postfun.slope_pixel" title="spexwavepy.postfun.slope_pixel"><code class="xref py py-func docutils literal notranslate"><span class="pre">slope_pixel()</span></code></a> and
+<a class="reference internal" href="spexwavepy.html#spexwavepy.postfun.slope_scan" title="spexwavepy.postfun.slope_scan"><code class="xref py py-func docutils literal notranslate"><span class="pre">slope_scan()</span></code></a>. Please refere to
+<a class="reference internal" href="#slope"><span class="std std-ref">Slope reconstruction</span></a> in the
+<a class="reference internal" href="#postfun"><span class="std std-ref">Post processing of the tracked speckle pattern shifts</span></a>
+section for more information.</p>
+</section>
+<section id="self-reference-xss-technique">
+<span id="traxssself"></span><h3>Self-reference XSS technique<a class="headerlink" href="#self-reference-xss-technique" title="Permalink to this heading"></a></h3>
+<p>The <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_self" title="spexwavepy.trackfun.Tracking.XSS_self"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XSS_self()</span></code></a> function
+and <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_self_multi" title="spexwavepy.trackfun.Tracking.XSS_self_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XSS_self_multi()</span></code></a> function
+are used for the <a class="reference internal" href="principle.html#prinxssself"><span class="std std-ref">self-reference XSS technique</span></a>.
+In terms of speckle pattern tracking, they are only a special case of
+<a class="reference internal" href="#traxss"><span class="std std-ref">XSS technique with reference beam</span></a>. We only need to
+be careful that for this technique, usually only one image stack is
+provided.</p>
+<p>Since it is a self-reference scheme, the template image stack and the
+reference image stack are the same one. Slightly differ from
+<a class="reference internal" href="#traxss"><span class="std std-ref">XSS technique with reference beam</span></a>, the generated
+stiched images are from different (<em>i</em> th and <em>j</em> th) rows/columns
+extracted from the same raw images in the stack.</p>
+<a class="reference internal image-reference" href="_images/XSS_self.png"><img alt="_images/XSS_self.png" src="_images/XSS_self.png" style="width: 80%;" /></a>
+<p>Apart from the newly introduced <code class="docutils literal notranslate"><span class="pre">nstep</span></code> parameter, all the other
+parameters are the same as in the corresponding
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer" title="spexwavepy.trackfun.Tracking.XSS_withrefer"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSS_withrefer()</span></code></a> and
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer_multi" title="spexwavepy.trackfun.Tracking.XSS_withrefer_multi"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSS_withrefer_multi()</span></code></a> functions,
+as already been described in the above
+<a class="reference internal" href="#traxss"><span class="std std-ref">XSS technique with reference beam</span></a>.</p>
+<p>However, in the technique, the physical quantities directly reconstructed
+from the tracked speckle pattern shifts are dfferent from the
+<a class="reference internal" href="principle.html#prinxssrefer"><span class="std std-ref">XSS technique with reference beam</span></a>. The directly rconstructed
+quantity in <a class="reference internal" href="principle.html#prinxssself"><span class="std std-ref">self-reference XSS technique</span></a> is the
+local curvature of the wavefront.</p>
+<p>As a result, only <code class="docutils literal notranslate"><span class="pre">curvX</span></code> or <code class="docutils literal notranslate"><span class="pre">curvY</span></code> are stored in the
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class. The related
+postprocess fucntion is <a class="reference internal" href="spexwavepy.html#spexwavepy.postfun.curv_scan" title="spexwavepy.postfun.curv_scan"><code class="xref py py-func docutils literal notranslate"><span class="pre">curv_scan()</span></code></a>.
+Please refer to <a class="reference internal" href="#curvature"><span class="std std-ref">Local radius of curvature reconstruction</span></a>
+section for details.</p>
+</section>
+<section id="xst-technique-with-reference-beam">
+<span id="traxstrefer"></span><h3>XST technique with reference beam<a class="headerlink" href="#xst-technique-with-reference-beam" title="Permalink to this heading"></a></h3>
+<p>Function <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_withrefer" title="spexwavepy.trackfun.Tracking.XST_withrefer"><code class="xref py py-func docutils literal notranslate"><span class="pre">XST_withrefer()</span></code></a> and
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_withrefer_multi" title="spexwavepy.trackfun.Tracking.XST_withrefer_multi"><code class="xref py py-func docutils literal notranslate"><span class="pre">XST_withrefer_multi()</span></code></a> is used
+for the XST technique with reference beam.</p>
+<p>Unlike the scan-based techniques, XST techinque only requires two images.</p>
+<p>For <strong>1D case</strong>, two modes are provided.
+They are along <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> direction, respectively.
+Like the scan-based techniques, a stripe of data along
+the <code class="docutils literal notranslate"><span class="pre">y</span></code> or <code class="docutils literal notranslate"><span class="pre">x</span></code> direction is extracted. And again,
+this is done by setting <code class="docutils literal notranslate"><span class="pre">ROI</span></code> for the image stacks.</p>
+<figure class="align-default" id="id13">
+<a class="reference internal image-reference" href="_images/XSTrefer_1.png"><img alt="_images/XSTrefer_1.png" src="_images/XSTrefer_1.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">The cropped data strip for 1D data processing in y direction.</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id14">
+<a class="reference internal image-reference" href="_images/XSTrefer_1x.png"><img alt="_images/XSTrefer_1x.png" src="_images/XSTrefer_1x.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">The cropped data strip for 1D data processing in x direction.</span><a class="headerlink" href="#id14" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Compared to the XSS method, there are some more parameters needed
+for this technique. Those parameters are <code class="docutils literal notranslate"><span class="pre">edge_x</span></code>, <code class="docutils literal notranslate"><span class="pre">edge_y</span></code>,
+<code class="docutils literal notranslate"><span class="pre">hw_xy</span></code>, <code class="docutils literal notranslate"><span class="pre">pad_x</span></code> and <code class="docutils literal notranslate"><span class="pre">pad_y</span></code>.</p>
+<figure class="align-default" id="id15">
+<a class="reference internal image-reference" href="_images/XSTrefer_2.png"><img alt="_images/XSTrefer_2.png" src="_images/XSTrefer_2.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Parameters for 1D data processing in y direction</span><a class="headerlink" href="#id15" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id16">
+<a class="reference internal image-reference" href="_images/XSTrefer_2x.png"><img alt="_images/XSTrefer_2x.png" src="_images/XSTrefer_2x.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Parameters for 1D data processing in x direction</span><a class="headerlink" href="#id16" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p><code class="docutils literal notranslate"><span class="pre">edge_x</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> define the area to be cut from the template
+in order to be able to do the cross-correlation. Unlike the XSS technique,
+we need <code class="docutils literal notranslate"><span class="pre">hw_xy</span></code> to generate the subregion from the template for
+cross-correlation. If the <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’, then <code class="docutils literal notranslate"><span class="pre">hw_xy</span></code> is the
+width you want to choose to generate the subregion, also in this case,
+<code class="docutils literal notranslate"><span class="pre">pad_y</span></code> is useless ; if the <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’, <code class="docutils literal notranslate"><span class="pre">hw_xy</span></code> is the
+height you want to choose for your subregion, <code class="docutils literal notranslate"><span class="pre">pad_x</span></code> is
+useless in this case.</p>
+<p>For <strong>2D case</strong>, there are several more parameters needed apart from
+those in the 1D case. Also, some parameters are slightly different
+compared to the 1D case.</p>
+<figure class="align-default" id="id17">
+<a class="reference internal image-reference" href="_images/XSTrefer_3.png"><img alt="_images/XSTrefer_3.png" src="_images/XSTrefer_3.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Parameters for 2D data processing in y direction</span><a class="headerlink" href="#id17" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id18">
+<a class="reference internal image-reference" href="_images/XSTrefer_3x.png"><img alt="_images/XSTrefer_3x.png" src="_images/XSTrefer_3x.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Parameters for 2D data processing in x direction</span><a class="headerlink" href="#id18" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>As shown in the above images, <code class="docutils literal notranslate"><span class="pre">edge_x</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> define the
+cutting areas for the raw template image. Then <code class="docutils literal notranslate"><span class="pre">window</span></code> and <code class="docutils literal notranslate"><span class="pre">hw_xy</span></code>
+define the real size of the subregion used for tracking.
+If the <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’, <code class="docutils literal notranslate"><span class="pre">window</span></code> is the width of the subregion,
+<code class="docutils literal notranslate"><span class="pre">hw_xy</span></code> is the height of it; if <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’, <code class="docutils literal notranslate"><span class="pre">window</span></code> is the
+height of the subregion and <code class="docutils literal notranslate"><span class="pre">hw_xy</span></code> is the width of it.
+<code class="docutils literal notranslate"><span class="pre">pad_x</span></code> and <code class="docutils literal notranslate"><span class="pre">pad_y</span></code> determines the extra area for tracking.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘xy’, then <code class="docutils literal notranslate"><span class="pre">edge_x</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> should be the same, as well as the elements within them.
+So is the <code class="docutils literal notranslate"><span class="pre">pad_x</span></code> and <code class="docutils literal notranslate"><span class="pre">pad_y</span></code>.</p>
+</div>
+<p>Since this technique has a reference, after we obtain the speckle pattern shifts,
+we can calculate the <code class="docutils literal notranslate"><span class="pre">sloX</span></code> and/or <code class="docutils literal notranslate"><span class="pre">sloY</span></code>. These are stored in the
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class. The slopes are calculated using
+<a class="reference internal" href="spexwavepy.html#spexwavepy.postfun.slope_pixel" title="spexwavepy.postfun.slope_pixel"><code class="xref py py-func docutils literal notranslate"><span class="pre">slope_pixel()</span></code></a> function. See <a class="reference internal" href="#slope"><span class="std std-ref">Slope reconstruction</span></a>
+for more details.</p>
+</section>
+<section id="self-reference-xst-technique">
+<span id="traxstself"></span><h3>Self-reference XST technique<a class="headerlink" href="#self-reference-xst-technique" title="Permalink to this heading"></a></h3>
+<p><a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_self" title="spexwavepy.trackfun.Tracking.XST_self"><code class="xref py py-func docutils literal notranslate"><span class="pre">XST_self()</span></code></a> and
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_self_multi" title="spexwavepy.trackfun.Tracking.XST_self_multi"><code class="xref py py-func docutils literal notranslate"><span class="pre">XST_self_multi()</span></code></a> are the
+two functions used for the data processing of the
+<a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">self-reference XST technique</span></a>. Unlike the
+<a class="reference internal" href="#traxssself"><span class="std std-ref">self-reference XSS technqiue</span></a>, we still need
+two image stacks here. Each image stack has only one image. Since
+no reference beam is available, the reference and template images
+are both that with tested optic in the beam, only at two different
+diffuser positions.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/XSTselfcode.png"><img alt="_images/XSTselfcode.png" src="_images/XSTselfcode.png" style="width: 80%;" /></a>
+</figure>
+<p>After defining the necessary two image stacks, all the other parameters
+for <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_self" title="spexwavepy.trackfun.Tracking.XST_self"><code class="xref py py-func docutils literal notranslate"><span class="pre">XST_self()</span></code></a> and
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_self_multi" title="spexwavepy.trackfun.Tracking.XST_self_multi"><code class="xref py py-func docutils literal notranslate"><span class="pre">XST_self_multi()</span></code></a> are the same as
+the <a class="reference internal" href="#traxstrefer"><span class="std std-ref">XST technique with reference beam</span></a> and have
+been described there.</p>
+<p>However, unlike the <a class="reference internal" href="principle.html#prinxstrefer"><span class="std std-ref">XST technique with reference beam</span></a>,
+the physical quantities directly reconstructed
+from the tracked speckle pattern shifts are local curvature of the wavefront.
+They are stored in the parameters <code class="docutils literal notranslate"><span class="pre">curvX</span></code> and/or <code class="docutils literal notranslate"><span class="pre">curvY</span></code> in the
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class. The related
+postprocess fucntion is <a class="reference internal" href="spexwavepy.html#spexwavepy.postfun.curv_pixel" title="spexwavepy.postfun.curv_pixel"><code class="xref py py-func docutils literal notranslate"><span class="pre">curv_pixel()</span></code></a>.
+Please refer to <a class="reference internal" href="#curvature"><span class="std std-ref">Local radius of curvature reconstruction</span></a>
+section for details.</p>
+</section>
+<section id="xsvt-technique-with-reference-beam">
+<span id="traxsvtrefer"></span><h3>XSVT technique with reference beam<a class="headerlink" href="#xsvt-technique-with-reference-beam" title="Permalink to this heading"></a></h3>
+</section>
+<section id="self-reference-xsvt-technique">
+<span id="traxsvtself"></span><h3>Self-reference XSVT technique<a class="headerlink" href="#self-reference-xsvt-technique" title="Permalink to this heading"></a></h3>
+</section>
+</section>
+<section id="post-processing-of-the-tracked-speckle-pattern-shifts">
+<span id="postfun"></span><h2>Post processing of the tracked speckle pattern shifts<a class="headerlink" href="#post-processing-of-the-tracked-speckle-pattern-shifts" title="Permalink to this heading"></a></h2>
+<section id="slope-reconstruction">
+<span id="slope"></span><h3>Slope reconstruction<a class="headerlink" href="#slope-reconstruction" title="Permalink to this heading"></a></h3>
+<p>Two functions are provided in the package, the are
+<a class="reference internal" href="spexwavepy.html#spexwavepy.postfun.slope_scan" title="spexwavepy.postfun.slope_scan"><code class="xref py py-func docutils literal notranslate"><span class="pre">slope_scan()</span></code></a> and
+<a class="reference internal" href="spexwavepy.html#spexwavepy.postfun.slope_pixel" title="spexwavepy.postfun.slope_pixel"><code class="xref py py-func docutils literal notranslate"><span class="pre">slope_pixel()</span></code></a>, respectively.
+These two functions are called depending on the unit of the
+tracked shifts.</p>
+<p>Usually, for the XSS (both <a class="reference internal" href="principle.html#prinxssrefer"><span class="std std-ref">with reference beam</span></a> or
+<a class="reference internal" href="principle.html#prinxssself"><span class="std std-ref">self-reference</span></a>), the tracked
+shifts are in the unit of scan step in the scan direction, thus, the
+<a class="reference internal" href="spexwavepy.html#spexwavepy.postfun.slope_scan" title="spexwavepy.postfun.slope_scan"><code class="xref py py-func docutils literal notranslate"><span class="pre">slope_scan()</span></code></a> function is called. If the tracked
+shifts are in the unit of pixel size, such as other tracking methods, then the
+<a class="reference internal" href="spexwavepy.html#spexwavepy.postfun.slope_pixel" title="spexwavepy.postfun.slope_pixel"><code class="xref py py-func docutils literal notranslate"><span class="pre">slope_pixel()</span></code></a> function is called.</p>
+<p>If we use <span class="math notranslate nohighlight">\(\mu\)</span> to represent the tracked shifts regardless of its unit,
+<span class="math notranslate nohighlight">\(p\)</span> the detector pixel size, <span class="math notranslate nohighlight">\(s\)</span> the scan step size, <span class="math notranslate nohighlight">\(d\)</span>
+the distacne betweeen the diffuser and the detector, for
+<a class="reference internal" href="spexwavepy.html#spexwavepy.postfun.slope_scan" title="spexwavepy.postfun.slope_scan"><code class="xref py py-func docutils literal notranslate"><span class="pre">slope_scan()</span></code></a> function, we have:</p>
+<div class="math notranslate nohighlight">
+\[slope = \frac{\mu \times s}{d}\]</div>
+<p>for <a class="reference internal" href="spexwavepy.html#spexwavepy.postfun.slope_pixel" title="spexwavepy.postfun.slope_pixel"><code class="xref py py-func docutils literal notranslate"><span class="pre">slope_pixel()</span></code></a> function, we have:</p>
+<div class="math notranslate nohighlight">
+\[slope = \frac{\mu \times p}{d}\]</div>
+</section>
+<section id="local-curvature-reconstruction">
+<span id="curvature"></span><h3>Local curvature reconstruction<a class="headerlink" href="#local-curvature-reconstruction" title="Permalink to this heading"></a></h3>
+<p>Usually, the local radius of curvature is reconstructed from the
+<a class="reference internal" href="principle.html#prinxssself"><span class="std std-ref">self-reference XSS technique</span></a> and
+<a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">self-reference XST technique</span></a> techniques.
+There are two geometric relations used to calculate the local
+radius of curvature depending on where the diffuser is placed. This information
+is stored in the <code class="docutils literal notranslate"><span class="pre">mempos</span></code> attribute of the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a>
+class. The <a class="reference internal" href="spexwavepy.html#spexwavepy.postfun.curv_scan" title="spexwavepy.postfun.curv_scan"><code class="xref py py-func docutils literal notranslate"><span class="pre">curv_scan()</span></code></a> function is used for
+the XSS technique, the <a class="reference internal" href="spexwavepy.html#spexwavepy.postfun.curv_pixel" title="spexwavepy.postfun.curv_pixel"><code class="xref py py-func docutils literal notranslate"><span class="pre">curv_pixel()</span></code></a> function
+is used for the XST technique.
+They both return the local
+curvature of the wavefront <strong>at the detector plane</strong>. It is easy to convert this
+to the wavefront curvature at the diffuser plane.</p>
+<p>We show the downstream case at first.</p>
+<a class="reference internal image-reference" href="_images/downstream.jpg"><img alt="_images/downstream.jpg" src="_images/downstream.jpg" style="width: 80%;" /></a>
+<p>In downstream case, the diffuser is placed in the downstream of the focus of the
+tested optic if it has one. If we use <span class="math notranslate nohighlight">\(p\)</span> to represent the detector pixel
+size, <span class="math notranslate nohighlight">\(\mu\)</span> the tracked shift, <span class="math notranslate nohighlight">\(s\)</span> the scan step size, <span class="math notranslate nohighlight">\(j-i\)</span> the
+spacing of the columns/rows to be extracted and stiched, <span class="math notranslate nohighlight">\(d\)</span> the distacne
+betweeen the diffuser and the detector, <span class="math notranslate nohighlight">\(m\)</span> the magnification
+factor, then we have the following equation.</p>
+<p>For <a class="reference internal" href="principle.html#prinxssself"><span class="std std-ref">self-reference XSS technique</span></a>:</p>
+<div class="math notranslate nohighlight">
+\[m = \frac{\mu \times s}{(j-i) \times p} = \frac{R-d}{R}\]</div>
+<p>For <a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">self-reference XST technique</span></a>:</p>
+<div class="math notranslate nohighlight">
+\[m = \frac{s}{\mu \times p} = \frac{R-d}{R}\]</div>
+<p>The local curvature of the wavefront at the detector plane is <span class="math notranslate nohighlight">\(1/R\)</span>, thus we
+have:</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{R} = \frac{1-m}{d}\]</div>
+<p>Now let’s look at the upstream case.</p>
+<a class="reference internal image-reference" href="_images/upstream.jpg"><img alt="_images/upstream.jpg" src="_images/upstream.jpg" style="width: 80%;" /></a>
+<p>We use the same symbols to represent the related physical quantity. For the upstream case,
+the distance betweeen the diffuser and the detector <span class="math notranslate nohighlight">\(d\)</span> is assumed to be <strong>the centre
+of the tested optic and the detector</strong>, since we assume the incident beam has negligible
+divergence and the beam is modulated only after the optic.</p>
+<p>The equation to describe the geometric relation is slightly different from the downstream
+case.</p>
+<p>For <a class="reference internal" href="principle.html#prinxssself"><span class="std std-ref">self-reference XSS technique</span></a>:</p>
+<div class="math notranslate nohighlight">
+\[m = \frac{\mu \times s}{(j-i) \times p} = \frac{d-R}{R}\]</div>
+<p>For <a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">self-reference XST technique</span></a>:</p>
+<div class="math notranslate nohighlight">
+\[m = \frac{s}{\mu \times p} = \frac{d-R}{R}\]</div>
+<p>The local curvature of the wavefront at the detector plane is:</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{R} = \frac{1+m}{d}\]</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Apart from the above two cases, there are other geometric situations. However,
+these other situations can be equivalent to the the above two cases, only need
+to note that the obtained curvature may no longer at the detector plane, it may
+at the diffuser plane instead. For plane mirror, set <code class="docutils literal notranslate"><span class="pre">mempos</span></code> to downstream
+is usually better since its focus is always very far.</p>
+</div>
+</section>
+<section id="d-integration-from-the-slope">
+<span id="integral"></span><h3>2D integration from the slope<a class="headerlink" href="#d-integration-from-the-slope" title="Permalink to this heading"></a></h3>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="example.html" class="btn btn-neutral float-left" title="Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api.html" class="btn btn-neutral float-right" title="API reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Lingfei Hu, Hongchang Wang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
