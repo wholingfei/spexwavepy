@@ -698,6 +698,13 @@ Two image stacks are needed. Both are with test optic.
 One image stack consists one image when the diffuser is at one position,
 another image stack consists another image when the diffuser
 is at another position.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This technique has been described in the following paper:</p>
+<p>L. Hu, H. Wang, O. Fox, and K. Sawhney,
+“Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique”
+Opt. Express 30(18), 33259-33273 (2022).</p>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p><strong>BE CAREFUL</strong> to check the available and safe cpu numbers before run this function!!</p>
@@ -767,9 +774,11 @@ Only used when <code class="docutils literal notranslate"><span class="pre">dime
 <dl class="py method">
 <dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.XST_withrefer_multi">
 <span class="sig-name descname"><span class="pre">XST_withrefer_multi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hw_xy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpu_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/trackfun.html#Tracking.XST_withrefer_multi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.trackfun.Tracking.XST_withrefer_multi" title="Permalink to this definition"></a></dt>
-<dd><p>Speckle tracking for conventional XST technique, with reference beam.
-The fisrt image stack is the one with test optic.
-The second image stack is the reference image stack.</p>
+<dd><p>Speckle tracking for self-reference XST technique.
+Two image stacks are needed. Both are with test optic.
+One image stack consists one image when the diffuser is at one position,
+another image stack consists another image when the diffuser
+is at another position.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p><strong>BE CAREFUL</strong> to check the available and safe cpu numbers before run this function!!</p>
@@ -796,6 +805,38 @@ of the subregion to be chosen from the template for cross-correlation.
 Only used when <code class="docutils literal notranslate"><span class="pre">dimension</span></code> is ‘2D’. (default None)</p></li>
 <li><p><strong>cpu_no</strong> (<em>int</em>) – The number of CPUs that is available.</p></li>
 <li><p><strong>normalize</strong> (<em>bool</em>) – To normalize the stitched image or not. (default False)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – To show the information or not. (default True)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.XSVT_withrefer">
+<span class="sig-name descname"><span class="pre">XSVT_withrefer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hw_xy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_xy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/trackfun.html#Tracking.XSVT_withrefer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.trackfun.Tracking.XSVT_withrefer" title="Permalink to this definition"></a></dt>
+<dd><p>Speckle tracking for XSVT technique with reference beam.
+The fisrt image stack is the one with test optic.
+The second image stack is the reference image stack.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>edge_x</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in x dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int]. If scan in x direction, it is useless.</p></li>
+<li><p><strong>edge_y</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in y dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int]. If scan in y direction, it is useless.</p></li>
+<li><p><strong>edge_z</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in scan number dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int].</p></li>
+<li><p><strong>hw_xy</strong> (<em>int</em>) – The width/height of the image subregion. If <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’,
+it is the height of the subregion; if <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’,
+it is the width of the subregion.
+Needed when do 2D data processing. (default None)</p></li>
+<li><p><strong>pad_xy</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the extra part the reference image needed to do the tracking.
+Needed when do 2D data processing. (default None)</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em>) – To normalize the stitched image or not. (default False)</p></li>
+<li><p><strong>display</strong> (<em>bool</em>) – To display or not. (default False)</p></li>
 <li><p><strong>verbose</strong> (<em>bool</em>) – To show the information or not. (default True)</p></li>
 </ul>
 </dd>
@@ -1061,6 +1102,40 @@ Opt. Express  23, 1605-1614 (2015).</p>
 <li><p><strong>dist</strong> (<em>float</em>) – Distance between membrane and detector [mm], <em>d</em> in the paper</p></li>
 <li><p><strong>pixsize</strong> (<em>float</em>) – Detector pixel size [<span class="math notranslate nohighlight">\(\mu m\)</span>], <em>p</em> in the paper</p></li>
 <li><p><strong>nstep</strong> (<em>int</em>) – ntep, (j-i) in the paper</p></li>
+<li><p><strong>mempos</strong> (<em>str</em>) – ‘downstream’ or ‘upstream’. Use this to define the position of
+the diffusor in respect to the focus of the optics. ‘downstream’
+means the diffuser is placed downstream of the focus. See
+<a class="reference internal" href="userguide.html#curvature"><span class="std std-ref">User guide: Local curvature reconstruction</span></a> for more
+details of it.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>curvature</strong> – Local curvature [m^-1]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="spexwavepy.postfun.curv_scan_XST">
+<span class="sig-prename descclassname"><span class="pre">spexwavepy.postfun.</span></span><span class="sig-name descname"><span class="pre">curv_scan_XST</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delay</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scanstep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pixsize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mempos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/postfun.html#curv_scan_XST"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.postfun.curv_scan_XST" title="Permalink to this definition"></a></dt>
+<dd><p>Get wavefront local curvature (curvature error) from tracked shift.
+Used when scanned. The corresponding wavefront is <strong>on the detector plane</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Add reference.
+Opt. Express</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>delay</strong> (<em>numpy.ndarray</em>) – Tracked shift in the scanned direction.
+<span class="math notranslate nohighlight">\(\epsilon\)</span> in the paper, it must be <strong>positive</strong>.</p></li>
+<li><p><strong>scanstep</strong> (<em>float</em>) – Step size of piezo [<span class="math notranslate nohighlight">\(\mu m\)</span>], <span class="math notranslate nohighlight">\(\mu\)</span> in the paper.</p></li>
+<li><p><strong>dist</strong> (<em>float</em>) – Distance between membrane and detector [mm], <em>d</em> in the paper</p></li>
+<li><p><strong>pixsize</strong> (<em>float</em>) – Detector pixel size [<span class="math notranslate nohighlight">\(\mu m\)</span>], <em>p</em> in the paper</p></li>
 <li><p><strong>mempos</strong> (<em>str</em>) – ‘downstream’ or ‘upstream’. Use this to define the position of
 the diffusor in respect to the focus of the optics. ‘downstream’
 means the diffuser is placed downstream of the focus. See

@@ -275,15 +275,17 @@ according to the different data processing modes. The following list shows how t
 these image stacks for different data processing modes. Each row represents a scan
 dimension ``scandim``, each column represnts a data processing mode.
 
-+----------+---------------------+-------------+-------------------------------------------------------+
-|          | XSS self            | XST self    |       XSS/XST with reference                          |
-+==========+=====================+=============+=======================================================+
-|    x     | imstack1            | imstack1, 2 |       imstack1(sample), 2(ref)                        |
-+----------+---------------------+-------------+-------------------------------------------------------+
-|    y     | imstack1            | imstack1, 2 |       imstack1(sam), 2(ref)                           |
-+----------+---------------------+-------------+-------------------------------------------------------+
-|    xy    |   \-                | \-          |       imstack1(x sam), 2(x ref), 3(y sam), 4(y ref)   |
-+----------+---------------------+-------------+-------------------------------------------------------+
++--------+-----------------+-------------------------------+-------------------------------------------------------+
+|        | XSS self        | XST self                      |       XSS/XST with reference                          |
++========+=================+===============================+=======================================================+
+| x      | imstack1(x sam) | imstack1(1 image), 2(1 image) |       imstack1(x sam), 2(x ref)                       |
++--------+-----------------+-------------------------------+-------------------------------------------------------+
+| y      | imstack1(y sam) | imstack1(1 image), 2(1 image) |       imstack1(y sam), 2(y ref)                       |
++--------+-----------------+-------------------------------+-------------------------------------------------------+
+| xy     | \-              | \-                            |       imstack1(x sam), 2(x ref), 3(y sam), 4(y ref)   |
++--------+-----------------+-------------------------------+-------------------------------------------------------+
+| random | \-              | \-                            |       \-                                              |
++--------+-----------------+-------------------------------+-------------------------------------------------------+
 
 *Say something.*
 
@@ -357,7 +359,7 @@ for the image stacks.
 
    The cropped data strip for 1D data processing in x scan direction.
 
-The XSS technique then process the data row/column by row/column.
+The XSS technique then process the data row(column) by row(column).
 Each raw image in the image stack are taken at different diffuser position.
 If we extract the *ith* row/column of every raw images and then stitch them together,
 a new image is generated. Two images will be generated from both reference image stack 

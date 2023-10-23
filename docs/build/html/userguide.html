@@ -343,19 +343,24 @@ dimension <code class="docutils literal notranslate"><span class="pre">scandim</
 </thead>
 <tbody>
 <tr class="row-even"><td><p>x</p></td>
-<td><p>imstack1</p></td>
-<td><p>imstack1, 2</p></td>
-<td><p>imstack1(sample), 2(ref)</p></td>
+<td><p>imstack1(x sam)</p></td>
+<td><p>imstack1(1 image), 2(1 image)</p></td>
+<td><p>imstack1(x sam), 2(x ref)</p></td>
 </tr>
 <tr class="row-odd"><td><p>y</p></td>
-<td><p>imstack1</p></td>
-<td><p>imstack1, 2</p></td>
-<td><p>imstack1(sam), 2(ref)</p></td>
+<td><p>imstack1(y sam)</p></td>
+<td><p>imstack1(1 image), 2(1 image)</p></td>
+<td><p>imstack1(y sam), 2(y ref)</p></td>
 </tr>
 <tr class="row-even"><td><p>xy</p></td>
 <td><p>-</p></td>
 <td><p>-</p></td>
 <td><p>imstack1(x sam), 2(x ref), 3(y sam), 4(y ref)</p></td>
+</tr>
+<tr class="row-odd"><td><p>random</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
 </tr>
 </tbody>
 </table>
@@ -418,7 +423,7 @@ for the image stacks.</p>
 <p><span class="caption-text">The cropped data strip for 1D data processing in x scan direction.</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<p>The XSS technique then process the data row/column by row/column.
+<p>The XSS technique then process the data row(column) by row(column).
 Each raw image in the image stack are taken at different diffuser position.
 If we extract the <em>ith</em> row/column of every raw images and then stitch them together,
 a new image is generated. Two images will be generated from both reference image stack
