@@ -13,7 +13,7 @@ sys.path.append(os.path.join('..'))
 from spexwavepy.imstackfun import Imagestack
 from spexwavepy.corefun import indicator, read_one, crop_one, Imagematch, NormImage
 from spexwavepy.corefun import initDisplay, contiDisplay
-from spexwavepy.postfun import slope_scan, slope_pixel, curv_scan, curv_pixel, curv_scan_XST
+from spexwavepy.postfun import slope_scan, slope_pixel, curv_scan, curv_pixel 
 
 __DEBUG = True
 
@@ -1237,8 +1237,8 @@ class Tracking:
                 pad_xy = pad_y
                 self._XST_2images_1D(edge_x, edge_y, pad_xy, hw_xy, normalize, display, verbose)
 
-            if self.delayX is not None: self.curvX = curv_scan_XST(self.delayX, self.scanstep, self.dist, self.pixsize, self.mempos)
-            if self.delayY is not None: self.curvY = curv_scan_XST(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
+            if self.delayX is not None: self.curvX = curv_pixel(self.delayX, self.scanstep, self.dist, self.pixsize, self.mempos)
+            if self.delayY is not None: self.curvY = curv_pixel(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
 
         if self.dimension == '2D':
             if scandim == 'x' or scandim == 'xy': 
@@ -1284,14 +1284,14 @@ class Tracking:
                 self.delayY = delayY_2D
                 self._delayX = delayX_2D
                 self.resY = res_2D
-                self.curvY = curv_scan_XST(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
+                self.curvY = curv_pixel(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
                 self._curvX = None
 
             if scandim == 'x' or scandim == 'xy': #or scandim == 'diag':
                 self.delayX = np.rot90(delayY_2D, k=-1)
                 self._delayY = np.rot90(delayX_2D, k=-1)
                 self.resX = np.rot90(res_2D, k=-1)
-                self.curvX = curv_scan_XST(self.delayX, self.scanstep, self.dist, self.pixsize, self.mempos)
+                self.curvX = curv_pixel(self.delayX, self.scanstep, self.dist, self.pixsize, self.mempos)
                 self._curvY = None
 
             if scandim == 'xy':
@@ -1342,7 +1342,7 @@ class Tracking:
                 self.imstack1.data = imstack1_data
                 self.imstack2.data = imstack2_data
 
-                self.curvY = curv_scan_XST(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
+                self.curvY = curv_pixel(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
                 self._curvX = None
 
     def XST_self_multi(self, edge_x, edge_y, pad_x, pad_y, hw_xy, window, cpu_no, normalize=False, verbose=True):
@@ -1496,14 +1496,14 @@ class Tracking:
                 self.delayY = delayY_2D
                 self._delayX = delayX_2D
                 self.resY = res_2D
-                self.curvY = curv_scan_XST(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
+                self.curvY = curv_pixel(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
                 self._curvX = None
 
             if scandim == 'x' or scandim == 'xy': #or scandim == 'diag':
                 self.delayX = np.rot90(delayY_2D, k=-1)
                 self._delayY = np.rot90(delayX_2D, k=-1)
                 self.resX = np.rot90(res_2D, k=-1)
-                self.curvX = curv_scan_XST(self.delayX, self.scanstep, self.dist, self.pixsize, self.mempos)
+                self.curvX = curv_pixel(self.delayX, self.scanstep, self.dist, self.pixsize, self.mempos)
                 self._curvY = None
 
             if scandim == 'xy':
@@ -1564,7 +1564,7 @@ class Tracking:
                 self.imstack1.data = imstack1_data
                 self.imstack2.data = imstack2_data
 
-                self.curvY = curv_scan_XST(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
+                self.curvY = curv_pixel(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
                 self._curvX = None
 
     def XST_withrefer(self, edge_x, edge_y, pad_x, pad_y, hw_xy, window=None, normalize=False, display=False, verbose=True):
