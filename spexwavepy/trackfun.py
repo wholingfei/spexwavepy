@@ -543,6 +543,9 @@ class Tracking:
         if scandim == 'xy' and self.imstack3 == None:
             print("Please provide another image stack.")
             sys.exit(0)
+        if scandim == 'xy' and self.imstack4 == None:
+            print("Please provide another image stack.")
+            sys.exit(0)
         if self.imstack1.rawdata is None:
             self.imstack1.read_data()
         if self.imstack2.rawdata is None:
@@ -892,7 +895,7 @@ class Tracking:
                 if isinstance(edge_y, int):
                     edge_y = (edge_y, edge_y)
                 self.delayX = self.delayX[:, edge_x[0]+width//2:-edge_x[1]-width//2+1]
-                self._delayY = self._delayY[:, edge_x[0]+width//2:-edge_x[1]-width+1]
+                self._delayY = self._delayY[:, edge_x[0]+width//2:-edge_x[1]-width//2+1]
                 self.delayY = self.delayY[edge_y[0]+width//2:-edge_y[1]-width//2+1, :]
                 self._delayX = self._delayX[edge_y[0]+width//2:-edge_y[1]-width//2+1, :]
                 self.sloX = slope_scan(self.delayX, self.scanstep, self.dist)
@@ -1687,7 +1690,7 @@ class Tracking:
         self.scandim = 'random'
 
 
-    def XSVT_withrefer(self, edge_x, edge_y, edge_z, hw_xy=None, pad_xy=None, normalize=False, display=False, verbose=True):
+    def XSVT_withrefer(self, edge_xy, edge_z, hw_xy=None, pad_xy=None, normalize=False, display=False, verbose=True):
         """
         Speckle tracking for XSVT technique with reference beam.
         The fisrt image stack is the one with test optic.
@@ -1695,22 +1698,17 @@ class Tracking:
 
         Parameters
         ----------
-        edge_x : int, or [int, int]
-            Area needs to be cut in x dimension.
+        edge_xy : int, or [int, int]
+            Area needs to be cut in x and y dimension.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int]. If scan in x direction, it is useless.
-        edge_y : int, or [int, int]
-            Area needs to be cut in y dimension.
-            If it is a single integer, it will be expanded automatically 
-            to the list [int, int]. If scan in y direction, it is useless.
+            to the list [int, int]. In other words, the selected area is 
+            a square in this technique.
         edge_z : int, or [int, int]
             Area needs to be cut in scan number dimension.
             If it is a single integer, it will be expanded automatically 
             to the list [int, int].
         hw_xy : int
-            The width/height of the image subregion. If ``scandim`` is 'x',
-            it is the height of the subregion; if ``scandim`` is 'y',
-            it is the width of the subregion.
+            The width and height of the image subregion. 
             Needed when do 2D data processing. (default None) 
         pad_xy : int, or [int, int]
             It defines the extra part the reference image needed to do the tracking.
@@ -1724,7 +1722,7 @@ class Tracking:
         """
         self.scandim = 'random'
         scandim = 'random'
-        width = hw_xy
+        self.scanstep = 1.    # Dummy
         if self.imstack2 == None:
             print("Please provide another image stack.")
             sys.exit(0)
@@ -1737,18 +1735,26 @@ class Tracking:
             self.imstack1.read_data()
         if self.imstack2.rawdata is None:
             self.imstack2.read_data()
+        if isinstance(edge_xy, int):
+            edge_xy = (edge_xy, edge_xy)
         if isinstance(edge_z, int):
             edge_z = (edge_z, edge_z)
+        self.imstack3 = copy.deepcopy(self.imstack1)
+        self.imstack4 = copy.deepcopy(self.imstack2)
 
-        # First, deal with y direction, but the delay is actually x !
-        self.scandim = 'y'
-        if isinstance(edge_x, int):
-            edge_xy = (edge_x, edge_x)
-        else:
-            edge_xy = edge_x
-
-
-        # Second, deal with x direction, but the delay is actually y !
+        #Use the underscored delay in the XSS method, thus delayY is _delayX, delayX is _delayY.
+        self.scandim = 'xy'
+        self.XSS_withrefer(edge_xy, edge_xy, edge_z, hw_xy, pad_xy, normalize, display, verbose)
+        delayX = copy.deepcopy(self._delayY)
+        delayY = copy.deepcopy(self._delayX)
+        self.delayX = delayX
+        self.delayY = delayY
+        self._delayX = None 
+        self._delayY = None
+        self._sloX = None 
+        self._sloY = None
+        self.sloX = slope_pixel(self.delayX, self.pixsize, self.dist)
+        self.sloY = slope_pixel(self.delayY, self.pixsize, self.dist)
 
 
         self.scandim = 'random' 
