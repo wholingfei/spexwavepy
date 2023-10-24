@@ -488,7 +488,7 @@ Not always necessary. (default None)</p></li>
 For XSS technique, it is scanned in y direction.
 Not always necessary. (default None)</p></li>
 <li><p><strong>dimension</strong> (<em>str</em>) – ‘1D’ or ‘2D’. To do 1D or 2D data processing. (default ‘2D’)</p></li>
-<li><p><strong>scandim</strong> (<em>str</em>) – ‘x’|’y’|’xy’. Scan direction for the image stack.
+<li><p><strong>scandim</strong> (<em>str</em>) – ‘x’|’y’|’xy’|’random’. Scan direction for the image stack.
 (default ‘x’)</p></li>
 <li><p><strong>mempos</strong> (<em>str</em>) – ‘downstream’ or ‘upstream’. Use this to define the position of
 the diffusor in respect to the focus of the optics. ‘downstream’
@@ -813,25 +813,21 @@ Only used when <code class="docutils literal notranslate"><span class="pre">dime
 
 <dl class="py method">
 <dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.XSVT_withrefer">
-<span class="sig-name descname"><span class="pre">XSVT_withrefer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hw_xy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_xy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/trackfun.html#Tracking.XSVT_withrefer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.trackfun.Tracking.XSVT_withrefer" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">XSVT_withrefer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_xy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hw_xy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_xy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/trackfun.html#Tracking.XSVT_withrefer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.trackfun.Tracking.XSVT_withrefer" title="Permalink to this definition"></a></dt>
 <dd><p>Speckle tracking for XSVT technique with reference beam.
 The fisrt image stack is the one with test optic.
 The second image stack is the reference image stack.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>edge_x</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in x dimension.
+<li><p><strong>edge_xy</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in x and y dimension.
 If it is a single integer, it will be expanded automatically
-to the list [int, int]. If scan in x direction, it is useless.</p></li>
-<li><p><strong>edge_y</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in y dimension.
-If it is a single integer, it will be expanded automatically
-to the list [int, int]. If scan in y direction, it is useless.</p></li>
+to the list [int, int]. In other words, the selected area is
+a square in this technique.</p></li>
 <li><p><strong>edge_z</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in scan number dimension.
 If it is a single integer, it will be expanded automatically
 to the list [int, int].</p></li>
-<li><p><strong>hw_xy</strong> (<em>int</em>) – The width/height of the image subregion. If <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’,
-it is the height of the subregion; if <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’,
-it is the width of the subregion.
+<li><p><strong>hw_xy</strong> (<em>int</em>) – The width and height of the image subregion.
 Needed when do 2D data processing. (default None)</p></li>
 <li><p><strong>pad_xy</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the extra part the reference image needed to do the tracking.
 Needed when do 2D data processing. (default None)</p></li>
