@@ -115,6 +115,7 @@ class Tracking:
         self._curvX = None
         self.curvY = None
         self._curvY = None
+        self._flag = None
 
     @property
     def dimension(self):
@@ -468,9 +469,9 @@ class Tracking:
         for i in range(y_dim):
             if verbose: 
                 if scandim == 'x':
-                    indicator(i, y_dim, comments='XSS technique in X direction')
+                    indicator(i, y_dim, comments = self._flag + ' technique in X direction')
                 if scandim == 'y':
-                    indicator(i, y_dim, comments='XSS technique in Y direction')
+                    indicator(i, y_dim, comments = self._flag + ' technique in Y direction')
             plane1 = self.imstack1.data[:, i, :].astype(np.float32)
             plane2 = self.imstack2.data[:, i, :].astype(np.float32)
             if normalize:
@@ -533,6 +534,7 @@ class Tracking:
             To show the information or not. (default True)
         """
         scandim = self.scandim
+        if self._flag is None: self._flag = 'XSS(with reference)'
         width = hw_xy
         if scandim not in ['x', 'y', 'xy']:
             print("Unrecognized scan mode. It should be 'x', 'y' or 'xy'.")
@@ -553,8 +555,8 @@ class Tracking:
             self.imstack2.read_data()
         # For 'xy' case, ROI should be a square, for 2D integaration 
         if scandim == 'xy': 
-            if self.imstack1.shape[1] != self.imstack1.shape[2] \
-                    or self.imstack2.shape[1] != self.imstack2.shape[2]: 
+            if self.imstack1.data.shape[1] != self.imstack1.data.shape[2] \
+                    or self.imstack2.data.shape[1] != self.imstack2.data.shape[2]: 
                         print("For scandim is 'xy', the ROI should be a square, please re-select.")
                         sys.exit(0)
         #if scandim == 'diag':
@@ -608,8 +610,8 @@ class Tracking:
                     print("For scandim == 'xy', the edges should be symmetrical, edge_x should be the same as edge_y, and also the elements of each.")
                     sys.exit(0)
             if scandim == 'xy':
-                if pad_x != pad_y or pad_x[0] != pad_x[1] or pad_y[0] != pad_y[1]: 
-                    print("For scandim == 'xy', the pad should be symmetrical, pad_x should be the same as pad_y, and also the elements of each.")
+                if pad_xy[0] != pad_xy[1]: 
+                    print("For scandim == 'xy', the pad should be symmetrical.")
                     sys.exit(0)
             if pad_xy[0] > edge_xy[0] or pad_xy[1] > edge_xy[1]:
                 print("pad_xy should not be greater than edge_xy.")
@@ -627,7 +629,7 @@ class Tracking:
             if self.scandim == 'xy': self.scandim = 'x'
             for index, jx in enumerate(jxs):
                 if verbose:
-                    indicator(jx, len(jxs), comments='XSS technique in X direction')
+                    indicator(jx, len(jxs), comments = self._flag + ' technique in X direction')
                 self.imstack1.data = imstack1_data[:, :, jx:width+jx]
                 self.imstack2.data = imstack2_data[:, :, jx+edge_xy[0]-pad_xy[0]:width+jx+edge_xy[0]+pad_xy[1]]
                 edge_xy_new = 0
@@ -658,8 +660,8 @@ class Tracking:
                     self.imstack4.read_data()
             # For 'xy' case, ROI should be a square, for 2D integaration 
             if scandim == 'xy': 
-                if self.imstack3.shape[1] != self.imstack3.shape[2] \
-                        or self.imstack4.shape[1] != self.imstack4.shape[2]: 
+                if self.imstack3.data.shape[1] != self.imstack3.data.shape[2] \
+                        or self.imstack4.data.shape[1] != self.imstack4.data.shape[2]: 
                             print("For scandim is 'xy', the ROI should be a square, please re-select.")
                             sys.exit(0)
                 if isinstance(edge_x, int):
@@ -683,7 +685,7 @@ class Tracking:
                 self.scandim = 'y'
                 for index, jx in enumerate(jxs2):
                     if verbose:
-                        indicator(jx, len(jxs), comments='XSS technique in Y direction')
+                        indicator(jx, len(jxs), comments = self._flag + ' technique in Y direction')
                     self.imstack1.data = imstack3_data[:, :, jx:width+jx]
                     self.imstack2.data = imstack4_data[:, :, jx+edge_xy[0]-pad_xy[0]:width+jx+edge_xy[0]+pad_xy[1]]
                     edge_xy_new = 0
@@ -751,6 +753,7 @@ class Tracking:
         verbose : bool
             To show the information or not. (default True)
         """
+        if self._flag is None: self._flag = 'XSS(with reference)'
         width = hw_xy
         if width % 2 != 0: width += 1       # width should be even
         scandim = self.scandim
@@ -769,8 +772,8 @@ class Tracking:
             self.imstack2.read_data()
         # For 'xy' case, ROI should be a square, for 2D integaration 
         if scandim == 'xy': 
-            if self.imstack1.shape[1] != self.imstack1.shape[2] \
-                    or self.imstack2.shape[1] != self.imstack2.shape[2]: 
+            if self.imstack1.data.shape[1] != self.imstack1.data.shape[2] \
+                    or self.imstack2.data.shape[1] != self.imstack2.data.shape[2]: 
                         print("For scandim is 'xy', the ROI should be a square, please re-select.")
                         sys.exit(0)
         #if scandim == 'diag':
@@ -813,7 +816,7 @@ class Tracking:
                     print("For scandim == 'xy', the edges should be symmetrical, edge_x should be the same as edge_y, and also the elements of each.")
                     sys.exit(0)
             if scandim == 'xy':
-                if pad_x != pad_y or pad_x[0] != pad_x[1] or pad_y[0] != pad_y[1]: 
+                if pad_xy[0] != pad_xy[1]:
                     print("For scandim == 'xy', the pad should be symmetrical, pad_x should be the same as pad_y, and also the elements of each.")
                     sys.exit(0)
             if pad_xy[0] > edge_xy[0] or pad_xy[1] > edge_xy[1]:
@@ -835,9 +838,9 @@ class Tracking:
             def process_tmp1(jx):
                 if verbose:
                     if self.scandim == 'x':
-                        indicator(jx, len(jxs1), comments='XSS technique in X direction')
+                        indicator(jx, len(jxs1), comments = self._flag + ' technique in X direction')
                     if self.scandim == 'y':
-                        indicator(jx, len(jxs1), comments='XSS technique in Y direction')
+                        indicator(jx, len(jxs1), comments = self._flag + ' technique in Y direction')
                 self.imstack1.data = imstack1_data[:, :, jx:width+jx]
                 self.imstack2.data = imstack2_data[:, :, jx+edge_xy[0]-pad_xy[0]:width+jx+edge_xy[0]+pad_xy[1]]
                 edge_xy_new = 0
@@ -876,8 +879,8 @@ class Tracking:
                 if self.imstack4.rawdata is None:
                     self.imstack4.read_data()
                 # For 'xy' case, ROI should be a square, for 2D integaration 
-                if self.imstack3.shape[1] != self.imstack3.shape[2] \
-                        or self.imstack4.shape[1] != self.imstack4.shape[2]: 
+                if self.imstack3.data.shape[1] != self.imstack3.data.shape[2] \
+                        or self.imstack4.data.shape[1] != self.imstack4.data.shape[2]: 
                             print("For scandim is 'xy', the ROI should be a square, please re-select.")
                             sys.exit(0)
                 if isinstance(edge_x, int):
@@ -903,7 +906,7 @@ class Tracking:
                 global process_tmp2
                 def process_tmp2(jx):
                     if verbose:
-                        indicator(jx, len(jxs2), comments='XSS technique in Y direction')
+                        indicator(jx, len(jxs2), comments = self._flag + ' technique in Y direction')
                     self.imstack1.data = imstack3_data[:, :, jx:width+jx]
                     self.imstack2.data = imstack4_data[:, :, jx+edge_xy[0]-pad_xy[0]:width+jx+edge_xy[0]+pad_xy[1]]
                     edge_xy_new = 0
@@ -981,6 +984,7 @@ class Tracking:
         verbose : bool
             To show the information or not. (default True)
         """
+        self._flag = "Self-reference XSS"
         width = hw_xy
         scandim = self.scandim
         if scandim not in ['x', 'y', 'xy']:
@@ -1047,6 +1051,7 @@ class Tracking:
         verbose : bool
             To show the information or not. (default True)
         """
+        self._flag = "Self-reference XSS"
         width = hw_xy
         scandim = self.scandim
         if scandim not in ['x', 'y', 'xy']:
@@ -1147,9 +1152,9 @@ class Tracking:
         for i in range(y_dim):
             if verbose: 
                 if scandim == 'x':
-                    indicator(i, y_dim, comments='XST technique in X direction')
+                    indicator(i, y_dim, comments = self._flag + ' technique in X direction')
                 if scandim == 'y':
-                    indicator(i, y_dim, comments='XST technique in Y direction')
+                    indicator(i, y_dim, comments = self._flag + ' technique in Y direction')
             plane1 = self.imstack1.data[0, i+edge_y[0]:hw_xy+i+edge_y[0], edge_x[0]:x_dim_tmp-edge_x[1]].astype(np.float32)
             plane2 = self.imstack2.data[0, i+edge_y[0]-pad_xy[0]:hw_xy+i+edge_y[0]+pad_xy[1], :].astype(np.float32)
             if normalize:
@@ -1224,6 +1229,7 @@ class Tracking:
         verbose : bool
             To show the information or not. (default True)
         """
+        if self._flag is None: self._flag = "Self-reference XST"
         scandim = self.scandim
         if scandim not in ['x', 'y', 'xy']:
             print("Unrecognized scan mode. It should be 'x', 'y' or 'xy'.")
@@ -1243,8 +1249,8 @@ class Tracking:
             self.imstack2.read_data()
         # For 'xy' case, ROI should be a square, for 2D integaration 
         if scandim == 'xy': 
-            if self.imstack1.shape[1] != self.imstack1.shape[2] \
-                    or self.imstack2.shape[1] != self.imstack2.shape[2]: 
+            if self.imstack1.data.shape[1] != self.imstack1.data.shape[2] \
+                    or self.imstack2.data.shape[1] != self.imstack2.data.shape[2]: 
                         print("For scandim is 'xy', the ROI should be a square, please re-select.")
                         sys.exit(0)
         if scandim == 'x' or scandim == 'xy': #or scandim == 'diag':
@@ -1315,9 +1321,9 @@ class Tracking:
             for index, jx in enumerate(jxs):
                 if verbose:
                     if self.scandim == 'x':
-                        indicator(jx, len(jxs), comments='XST technique in X direction')
+                        indicator(jx, len(jxs), comments = self._flag + 'technique in X direction')
                     if self.scandim == 'y':
-                        indicator(jx, len(jxs), comments='XST technique in Y direction')
+                        indicator(jx, len(jxs), comments = self._flag + 'technique in Y direction')
                 y_ind_left = edge_y_new[0] - pad_y_new[0]
                 y_ind_right = y_dim_tmp - edge_y_new[1] + pad_y_new[1]
                 x_ind_left = jx + edge_x_new[0] - pad_x_new[0]
@@ -1349,8 +1355,8 @@ class Tracking:
                 if self.imstack4.rawdata is None:
                     self.imstack4.read_data()
                 # For 'xy' case, ROI should be a square, for 2D integaration 
-                if self.imstack3.shape[1] != self.imstack3.shape[2] \
-                        or self.imstack4.shape[1] != self.imstack4.shape[2]: 
+                if self.imstack3.data.shape[1] != self.imstack3.data.shape[2] \
+                        or self.imstack4.data.shape[1] != self.imstack4.data.shape[2]: 
                             print("For scandim is 'xy', the ROI should be a square, please re-select.")
                             sys.exit(0)
 
@@ -1375,9 +1381,9 @@ class Tracking:
                 for index, jx in enumerate(jxs):
                     if verbose:
                         if self.scandim == 'x':
-                            indicator(jx, len(jxs), comments='XST technique in X direction')
+                            indicator(jx, len(jxs), comments = self._flag + 'technique in X direction')
                         if self.scandim == 'y':
-                            indicator(jx, len(jxs), comments='XST technique in Y direction')
+                            indicator(jx, len(jxs), comments = self._flag + 'technique in Y direction')
                     y_ind_left = edge_y_new[0] - pad_y_new[0]
                     y_ind_right = y_dim_tmp - edge_y_new[1] + pad_y_new[1]
                     x_ind_left = jx + edge_x_new[0] - pad_x_new[0]
@@ -1448,6 +1454,7 @@ class Tracking:
         verbose : bool
             To show the information or not. (default True)
         """
+        if self._flag is None: self._flag = "Self-reference XST"
         scandim = self.scandim
         if scandim not in ['x', 'y', 'xy']:
             print("Unrecognized scan mode. It should be 'x', 'y' or 'xy'.")
@@ -1467,8 +1474,8 @@ class Tracking:
             self.imstack2.read_data()
         # For 'xy' case, ROI should be a square, for 2D integaration 
         if scandim == 'xy': 
-            if self.imstack1.shape[1] != self.imstack1.shape[2] \
-                    or self.imstack2.shape[1] != self.imstack2.shape[2]: 
+            if self.imstack1.data.shape[1] != self.imstack1.data.shape[2] \
+                    or self.imstack2.data.shape[1] != self.imstack2.data.shape[2]: 
                         print("For scandim is 'xy', the ROI should be a square, please re-select.")
                         sys.exit(0)
         if scandim == 'x' or scandim == 'xy': #or scandim == 'diag':
@@ -1530,9 +1537,9 @@ class Tracking:
             def process_tmp1(jx):
                 if verbose:
                     if self.scandim == 'x':
-                        indicator(jx, len(jxs1), comments='XST technique in X direction')
+                        indicator(jx, len(jxs1), comments = self._flag + 'technique in X direction')
                     if self.scandim == 'y':
-                        indicator(jx, len(jxs1), comments='XST technique in Y direction')
+                        indicator(jx, len(jxs1), comments = self._flag + 'technique in Y direction')
                 y_ind_left = edge_y_new[0] - pad_y_new[0]
                 y_ind_right = y_dim_tmp - edge_y_new[1] + pad_y_new[1]
                 x_ind_left = jx + edge_x_new[0] - pad_x_new[0]
@@ -1572,8 +1579,8 @@ class Tracking:
                 if self.imstack4.rawdata is None:
                     self.imstack4.read_data()
                 # For 'xy' case, ROI should be a square, for 2D integaration 
-                if self.imstack3.shape[1] != self.imstack3.shape[2] \
-                        or self.imstack4.shape[1] != self.imstack4.shape[2]: 
+                if self.imstack3.data.shape[1] != self.imstack3.data.shape[2] \
+                        or self.imstack4.data.shape[1] != self.imstack4.data.shape[2]: 
                             print("For scandim is 'xy', the ROI should be a square, please re-select.")
                             sys.exit(0)
 
@@ -1600,9 +1607,9 @@ class Tracking:
                 def process_tmp2(jx):
                     if verbose:
                         if self.scandim == 'x':
-                            indicator(jx, len(jxs2), comments='XST technique in X direction')
+                            indicator(jx, len(jxs2), comments = self._flag + 'technique in X direction')
                         if self.scandim == 'y':
-                            indicator(jx, len(jxs2), comments='XST technique in Y direction')
+                            indicator(jx, len(jxs2), comments = self._flag + ' technique in Y direction')
                     y_ind_left = edge_y_new[0] - pad_y_new[0]
                     y_ind_right = y_dim_tmp - edge_y_new[1] + pad_y_new[1]
                     x_ind_left = jx + edge_x_new[0] - pad_x_new[0]
@@ -1670,6 +1677,7 @@ class Tracking:
         verbose : bool
             To show the information or not. (default True)
         """
+        self._flag = "XST(with reference)"
         self.scandim = 'y'
         if self.imstack2 == None:
             print("Please provide another image stack.")
@@ -1732,6 +1740,7 @@ class Tracking:
         verbose : bool
             To show the information or not. (default True)
         """
+        self._flag = "XST(with reference)"
         self.scandim = 'y'
         if self.imstack2 == None:
             print("Please provide another image stack.")
@@ -1782,8 +1791,8 @@ class Tracking:
         verbose : bool
             To show the information or not. (default True)
         """
+        self._flag = "XSVT(with reference)"
         self.scandim = 'random'
-        scandim = 'random'
         self.scanstep = 1.    # Dummy
         if self.imstack2 == None:
             print("Please provide another image stack.")
@@ -1818,6 +1827,80 @@ class Tracking:
         self.sloX = slope_pixel(self.delayX, self.pixsize, self.dist)
         self.sloY = slope_pixel(self.delayY, self.pixsize, self.dist)
 
+
+        self.scandim = 'random' 
+
+    def XSVT_withrefer_multi(self, edge_xy, edge_z, hw_xy, pad_xy, cpu_no, normalize=False, verbose=True):
+        """
+        Speckle tracking for XSVT technique with reference beam.
+        The fisrt image stack is the one with test optic.
+        The second image stack is the reference image stack.
+
+        .. warning:: **BE CAREFUL** to check the available and safe cpu numbers before run this function!!
+
+        Parameters
+        ----------
+        edge_x : int, or [int, int]
+            Area needs to be cut in x dimension.
+            If it is a single integer, it will be expanded automatically 
+            to the list [int, int]. If scan in x direction, it is useless.
+        edge_y : int, or [int, int]
+            Area needs to be cut in y dimension.
+            If it is a single integer, it will be expanded automatically 
+            to the list [int, int]. If scan in y direction, it is useless.
+        edge_z : int, or [int, int]
+            Area needs to be cut in scan number dimension.
+            If it is a single integer, it will be expanded automatically 
+            to the list [int, int].
+        hw_xy : int
+            The width/height of the image subregion. If ``scandim`` is 'x',
+            it is the height of the subregion; if ``scandim`` is 'y',
+            it is the width of the subregion.
+            Needed when do 2D data processing. (default None) 
+        pad_xy : int, or [int, int]
+            It defines the extra part the reference image needed to do the tracking.
+        cpu_no : int
+            The number of CPUs that is available.
+        normalize : bool
+            To normalize the stitched image or not. (default False)
+        verbose : bool
+            To show the information or not. (default True)
+        """
+        self._flag = "XSVT(with reference)"
+        self.scandim = 'random'
+        self.scanstep = 1.    # Dummy
+        if self.imstack2 == None:
+            print("Please provide another image stack.")
+            sys.exit(0)
+        if self.dimension == '1D':
+            print("The 1D data processing is not supported for XSVT method. \
+                    Instead, you can cut a small strip of data and do 2D \
+                    data processing and extract the information you want.")
+            sys.exit(0)
+        if self.imstack1.rawdata is None:
+            self.imstack1.read_data()
+        if self.imstack2.rawdata is None:
+            self.imstack2.read_data()
+        if isinstance(edge_xy, int):
+            edge_xy = (edge_xy, edge_xy)
+        if isinstance(edge_z, int):
+            edge_z = (edge_z, edge_z)
+        self.imstack3 = copy.deepcopy(self.imstack1)
+        self.imstack4 = copy.deepcopy(self.imstack2)
+
+        #Use the underscored delay in the XSS method, thus delayY is _delayX, delayX is _delayY.
+        self.scandim = 'xy'
+        self.XSS_withrefer_multi(edge_xy, edge_xy, edge_z, hw_xy, pad_xy, cpu_no, normalize, verbose)
+        delayX = copy.deepcopy(self._delayY)
+        delayY = copy.deepcopy(self._delayX)
+        self.delayX = delayX
+        self.delayY = delayY
+        self._delayX = None 
+        self._delayY = None
+        self._sloX = None 
+        self._sloY = None
+        self.sloX = slope_pixel(self.delayX, self.pixsize, self.dist)
+        self.sloY = slope_pixel(self.delayY, self.pixsize, self.dist)
 
         self.scandim = 'random' 
 

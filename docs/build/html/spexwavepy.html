@@ -840,6 +840,41 @@ Needed when do 2D data processing. (default None)</p></li>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.XSVT_withrefer_multi">
+<span class="sig-name descname"><span class="pre">XSVT_withrefer_multi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_xy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hw_xy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_xy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpu_no</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/trackfun.html#Tracking.XSVT_withrefer_multi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.trackfun.Tracking.XSVT_withrefer_multi" title="Permalink to this definition"></a></dt>
+<dd><p>Speckle tracking for XSVT technique with reference beam.
+The fisrt image stack is the one with test optic.
+The second image stack is the reference image stack.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>BE CAREFUL</strong> to check the available and safe cpu numbers before run this function!!</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>edge_x</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in x dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int]. If scan in x direction, it is useless.</p></li>
+<li><p><strong>edge_y</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in y dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int]. If scan in y direction, it is useless.</p></li>
+<li><p><strong>edge_z</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in scan number dimension.
+If it is a single integer, it will be expanded automatically
+to the list [int, int].</p></li>
+<li><p><strong>hw_xy</strong> (<em>int</em>) – The width/height of the image subregion. If <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’,
+it is the height of the subregion; if <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’,
+it is the width of the subregion.
+Needed when do 2D data processing. (default None)</p></li>
+<li><p><strong>pad_xy</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the extra part the reference image needed to do the tracking.</p></li>
+<li><p><strong>cpu_no</strong> (<em>int</em>) – The number of CPUs that is available.</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em>) – To normalize the stitched image or not. (default False)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – To show the information or not. (default True)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.collimate">
 <span class="sig-name descname"><span class="pre">collimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/trackfun.html#Tracking.collimate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.trackfun.Tracking.collimate" title="Permalink to this definition"></a></dt>
 <dd><p>This function uses the first image from both imstack1 and imstack2
