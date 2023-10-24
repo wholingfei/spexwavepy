@@ -760,7 +760,3 @@ position where the fitted slope is close to 0.
    The fitted slope for the above measured curves.
 
 
-.. _expCRLrefXSVT:
-
-CRL measurement with XSVT technique
-===================================

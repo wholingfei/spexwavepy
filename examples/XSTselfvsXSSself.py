@@ -14,7 +14,7 @@ from spexwavepy.trackfun import Tracking
 from spexwavepy.corefun import read_one, crop_one
 from spexwavepy.postfun import curv_scan_XST 
 
-_PLOT = True
+_PLOT = False#True
 if __name__ == "__main__":
     #data_folder = "/dls/science/groups/b16/SpeckleData/example_2/"
     data_folder = "/home/lingfei/spexwavepy/tmp/example_2/"
@@ -41,7 +41,7 @@ if __name__ == "__main__":
         hw_xy = 20
         cpu_no = 30#16
         #track_XSS.XSS_self(edge_x, edge_y, edge_z, nstep, hw_xy, pad_xy, display=True, normalize=True)
-        track_XSS.XSS_self_multi(edge_x, edge_y, edge_z, nstep, hw_xy, pad_xy, cpu_no, normalize=True)
+        #track_XSS.XSS_self_multi(edge_x, edge_y, edge_z, nstep, hw_xy, pad_xy, cpu_no, normalize=True)
 
     imstack_1 = Imagestack(data_folder, ROI) 
     imstack_1.fnum = 1
@@ -72,7 +72,6 @@ if __name__ == "__main__":
         pad_y = 10
 
         #track_XST.XST_self(edge_x, edge_y, pad_x, pad_y, hw_xy, display=False, normalize=True)
-        track_XST.XST_self(edge_x, edge_y, pad_x, pad_y, hw_xy, display=False, normalize=True)
 
     if track_XST.dimension == '2D':
         edge_x = [20, 20]
@@ -84,7 +83,7 @@ if __name__ == "__main__":
         cpu_no = 30 #16
 
         #track_XST.XST_self(edge_x, edge_y, pad_x, pad_y, hw_xy, window, display=True, normalize=True)
-        track_XST.XST_self_multi(edge_x, edge_y, pad_x, pad_y, hw_xy, window, cpu_no, normalize=True)
+        #track_XST.XST_self_multi(edge_x, edge_y, pad_x, pad_y, hw_xy, window, cpu_no, normalize=True)
 
 
     if _PLOT:

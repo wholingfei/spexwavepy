@@ -72,8 +72,6 @@ Examples
 
   - :ref:`KB mirror alignment using self-reference XST technique <expKBalign>`
 
-  - :ref:`CRL measurement with XSVT technique <expCRLrefXSVT>`
-
 User guide
 ==========
 *Description here...*

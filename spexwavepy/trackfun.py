@@ -41,7 +41,7 @@ class Tracking:
     dimension : str
         '1D' or '2D'. To do 1D or 2D data processing. (default '2D')
     scandim : str
-        'x'|'y'|'xy'. Scan direction for the image stack. 
+        'x'|'y'|'xy'|'random'. Scan direction for the image stack. 
         (default 'x')
     mempos : str
         'downstream' or 'upstream'. Use this to define the position of 
@@ -546,10 +546,17 @@ class Tracking:
         if scandim == 'xy' and self.imstack4 == None:
             print("Please provide another image stack.")
             sys.exit(0)
+
         if self.imstack1.rawdata is None:
             self.imstack1.read_data()
         if self.imstack2.rawdata is None:
             self.imstack2.read_data()
+        # For 'xy' case, ROI should be a square, for 2D integaration 
+        if scandim == 'xy': 
+            if self.imstack1.shape[1] != self.imstack1.shape[2] \
+                    or self.imstack2.shape[1] != self.imstack2.shape[2]: 
+                        print("For scandim is 'xy', the ROI should be a square, please re-select.")
+                        sys.exit(0)
         #if scandim == 'diag':
         #    self.imstack3 = copy.deepcopy(self.imstack1)
         #    self.imstack4 = copy.deepcopy(self.imstack2)
@@ -596,6 +603,14 @@ class Tracking:
                     edge_xy = edge_y
             if isinstance(pad_xy, int):
                 pad_xy = (pad_xy, pad_xy)
+            if scandim == 'xy':
+                if edge_x != edge_y or edge_x[0] != edge_x[1] or edge_y[0] != edge_y[1]:
+                    print("For scandim == 'xy', the edges should be symmetrical, edge_x should be the same as edge_y, and also the elements of each.")
+                    sys.exit(0)
+            if scandim == 'xy':
+                if pad_x != pad_y or pad_x[0] != pad_x[1] or pad_y[0] != pad_y[1]: 
+                    print("For scandim == 'xy', the pad should be symmetrical, pad_x should be the same as pad_y, and also the elements of each.")
+                    sys.exit(0)
             if pad_xy[0] > edge_xy[0] or pad_xy[1] > edge_xy[1]:
                 print("pad_xy should not be greater than edge_xy.")
                 sys.exit(0)
@@ -641,6 +656,12 @@ class Tracking:
                     self.imstack3.read_data()
                 if self.imstack4.rawdata is None:
                     self.imstack4.read_data()
+            # For 'xy' case, ROI should be a square, for 2D integaration 
+            if scandim == 'xy': 
+                if self.imstack3.shape[1] != self.imstack3.shape[2] \
+                        or self.imstack4.shape[1] != self.imstack4.shape[2]: 
+                            print("For scandim is 'xy', the ROI should be a square, please re-select.")
+                            sys.exit(0)
                 if isinstance(edge_x, int):
                     edge_xy = (edge_x, edge_x)
                 else:
@@ -746,6 +767,12 @@ class Tracking:
             self.imstack1.read_data()
         if self.imstack2.rawdata is None:
             self.imstack2.read_data()
+        # For 'xy' case, ROI should be a square, for 2D integaration 
+        if scandim == 'xy': 
+            if self.imstack1.shape[1] != self.imstack1.shape[2] \
+                    or self.imstack2.shape[1] != self.imstack2.shape[2]: 
+                        print("For scandim is 'xy', the ROI should be a square, please re-select.")
+                        sys.exit(0)
         #if scandim == 'diag':
         #    self.imstack3 = copy.deepcopy(self.imstack1)
         #    self.imstack4 = copy.deepcopy(self.imstack2)
@@ -781,6 +808,14 @@ class Tracking:
                     edge_xy = edge_y
             if isinstance(pad_xy, int):
                 pad_xy = (pad_xy, pad_xy)
+            if scandim == 'xy':
+                if edge_x != edge_y or edge_x[0] != edge_x[1] or edge_y[0] != edge_y[1]:
+                    print("For scandim == 'xy', the edges should be symmetrical, edge_x should be the same as edge_y, and also the elements of each.")
+                    sys.exit(0)
+            if scandim == 'xy':
+                if pad_x != pad_y or pad_x[0] != pad_x[1] or pad_y[0] != pad_y[1]: 
+                    print("For scandim == 'xy', the pad should be symmetrical, pad_x should be the same as pad_y, and also the elements of each.")
+                    sys.exit(0)
             if pad_xy[0] > edge_xy[0] or pad_xy[1] > edge_xy[1]:
                 print("pad_xy should not be greater than edge_xy.")
                 sys.exit(0)
@@ -840,6 +875,11 @@ class Tracking:
                     self.imstack3.read_data()
                 if self.imstack4.rawdata is None:
                     self.imstack4.read_data()
+                # For 'xy' case, ROI should be a square, for 2D integaration 
+                if self.imstack3.shape[1] != self.imstack3.shape[2] \
+                        or self.imstack4.shape[1] != self.imstack4.shape[2]: 
+                            print("For scandim is 'xy', the ROI should be a square, please re-select.")
+                            sys.exit(0)
                 if isinstance(edge_x, int):
                     edge_xy = (edge_x, edge_x)
                 else:
@@ -1201,6 +1241,12 @@ class Tracking:
             self.imstack1.read_data()
         if self.imstack2.rawdata is None:
             self.imstack2.read_data()
+        # For 'xy' case, ROI should be a square, for 2D integaration 
+        if scandim == 'xy': 
+            if self.imstack1.shape[1] != self.imstack1.shape[2] \
+                    or self.imstack2.shape[1] != self.imstack2.shape[2]: 
+                        print("For scandim is 'xy', the ROI should be a square, please re-select.")
+                        sys.exit(0)
         if scandim == 'x' or scandim == 'xy': #or scandim == 'diag':
             verbose_tmp1 = self.imstack1.verbose
             verbose_tmp2 = self.imstack2.verbose
@@ -1220,11 +1266,11 @@ class Tracking:
         if isinstance(pad_y, int):
             pad_y = (pad_y, pad_y)
         if scandim == 'xy':
-            if edge_x[0] != edge_y[0] and edge_x[1] != edge_y[1] and edge_x[0] != edge_x[1] and edge_y[0] != edge_y[1]:
+            if edge_x != edge_y or edge_x[0] != edge_x[1] or edge_y[0] != edge_y[1]:
                 print("For scandim == 'xy', the edges should be symmetrical, edge_x should be the same as edge_y, and also the elements of each.")
                 sys.exit(0)
         if scandim == 'xy':
-            if pad_x[0] != pad_y[0] and pad_x[1] != pad_y[1] and pad_x[0] != pad_x[1] and pad_y[0] != pad_y[1]:
+            if pad_x != pad_y or pad_x[0] != pad_x[1] or pad_y[0] != pad_y[1]: 
                 print("For scandim == 'xy', the pad should be symmetrical, pad_x should be the same as pad_y, and also the elements of each.")
                 sys.exit(0)
 
@@ -1302,6 +1348,11 @@ class Tracking:
                     self.imstack3.read_data()
                 if self.imstack4.rawdata is None:
                     self.imstack4.read_data()
+                # For 'xy' case, ROI should be a square, for 2D integaration 
+                if self.imstack3.shape[1] != self.imstack3.shape[2] \
+                        or self.imstack4.shape[1] != self.imstack4.shape[2]: 
+                            print("For scandim is 'xy', the ROI should be a square, please re-select.")
+                            sys.exit(0)
 
                 edge_x_new = edge_x
                 edge_y_new = edge_y
@@ -1414,6 +1465,12 @@ class Tracking:
             self.imstack1.read_data()
         if self.imstack2.rawdata is None:
             self.imstack2.read_data()
+        # For 'xy' case, ROI should be a square, for 2D integaration 
+        if scandim == 'xy': 
+            if self.imstack1.shape[1] != self.imstack1.shape[2] \
+                    or self.imstack2.shape[1] != self.imstack2.shape[2]: 
+                        print("For scandim is 'xy', the ROI should be a square, please re-select.")
+                        sys.exit(0)
         if scandim == 'x' or scandim == 'xy': #or scandim == 'diag':
             verbose_tmp1 = self.imstack1.verbose
             verbose_tmp2 = self.imstack2.verbose
@@ -1433,11 +1490,11 @@ class Tracking:
         if isinstance(pad_y, int):
             pad_y = (pad_y, pad_y)
         if scandim == 'xy':
-            if edge_x[0] != edge_y[0] and edge_x[1] != edge_y[1] and edge_x[0] != edge_x[1] and edge_y[0] != edge_y[1]:
+            if edge_x != edge_y or edge_x[0] != edge_x[1] or edge_y[0] != edge_y[1]:
                 print("For scandim == 'xy', the edges should be symmetrical, edge_x should be the same as edge_y, and also the elements of each.")
                 sys.exit(0)
         if scandim == 'xy':
-            if pad_x[0] != pad_y[0] and pad_x[1] != pad_y[1] and pad_x[0] != pad_x[1] and pad_y[0] != pad_y[1]:
+            if pad_x != pad_y or pad_x[0] != pad_x[1] or pad_y[0] != pad_y[1]: 
                 print("For scandim == 'xy', the pad should be symmetrical, pad_x should be the same as pad_y, and also the elements of each.")
                 sys.exit(0)
 
@@ -1514,6 +1571,11 @@ class Tracking:
                     self.imstack3.read_data()
                 if self.imstack4.rawdata is None:
                     self.imstack4.read_data()
+                # For 'xy' case, ROI should be a square, for 2D integaration 
+                if self.imstack3.shape[1] != self.imstack3.shape[2] \
+                        or self.imstack4.shape[1] != self.imstack4.shape[2]: 
+                            print("For scandim is 'xy', the ROI should be a square, please re-select.")
+                            sys.exit(0)
 
                 edge_x_new = edge_x
                 edge_y_new = edge_y
