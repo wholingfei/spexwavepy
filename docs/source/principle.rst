@@ -29,12 +29,7 @@ Self-reference conventional X-ray Speckle Tracking (XST) technique
 
 .. _prinXSVTRefer:
 
-X-ray Speckle Vector Tracking (XSVT) technique with reference beam
-==================================================================
+X-ray Speckle Vector Tracking (XSVT) technique
+==============================================
 *Say something here...*
 
-.. _prinXSVTSelf:
-
-Self-reference X-ray Speckle Vector Tracking (XSVT) technique 
-=============================================================
-*Say something here...*

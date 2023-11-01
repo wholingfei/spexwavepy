@@ -36,7 +36,6 @@ The speckle-based wavefront sensing techniques
 
   - :ref:`X-ray Speckle Vector Tracking (XSVT) technique <prinXSVTRefer>`
 
-  - :ref:`Self-reference X-ray Speckle Vector Tracking (XSVT) technique <prinXSVTSelf>`
 
 Getting started
 ===============
@@ -74,33 +73,36 @@ Examples
 
 User guide
 ==========
-*Description here...*
+In this page, we will give a detailed explanation of this python package. 
+All the functions in each module will be covered.  
 
 - :doc:`User guide <userguide>`
   
-  - :ref:`Title 1 <useTitle1>`
+  - :ref:`Fundamental algorithm <usealgorithm>`
+  
+    - :ref:`Cross-correlation <usecrosscorr>`
 
-  - :ref:`Preprocessing of the images <usepreprocess>`
+    - :ref:`Sub-pixel registration <usesubpix>`
 
-    - :ref:`Image stack <useimstack>`
+      - :ref:`Default method <subdefault>`
 
-    - :ref:`Smoothing <usesmooth>`
+      - :ref:`Gaussian peak fitting method <subgauss>`
 
-    - :ref:`Normalization <usenorm>`
-
-    - :ref:`Detector pixel size determination <usedetpix>`
-
-  - :ref:`Cross-correlation <usecrosscorr>`
-
-  - :ref:`Sub-pixel registration <usesubpix>`
-
-    - :ref:`Default method <subdefault>`
-
-    - :ref:`Gaussian peak fitting method <subgauss>`
-
-    - :ref:`Parabola peak fitting method <subpara>`
+      - :ref:`Parabola peak fitting method <subpara>`
 
   - :ref:`Image match <useimmatch>`
+
+  - :ref:`Image stack and its functions <useimstackclass>`
+
+    - :ref:`Image stack <useimstack>`
+      
+    - :ref:`Preprocessing of the images <usepreprocess>`
+
+      - :ref:`Smoothing <usesmooth>`
+
+      - :ref:`Normalization <usenorm>`
+        
+      - :ref:`Detector pixel size determination <usedetpix>`
 
   - :ref:`The speckle-based techniques included in Tracking class <usetrack>`
 
@@ -116,9 +118,7 @@ User guide
 
     - :ref:`Self-reference XST technique <traXSTself>`
 
-    - :ref:`XSVT technique with reference beam <traXSVTrefer>`
-
-    - :ref:`Self-reference XSVT technique <traXSVTself>`
+    - :ref:`XSVT technique <traXSVTrefer>`
 
   - :ref:`Post processing of the tracked speckle pattern shifts <postfun>`
     

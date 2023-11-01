@@ -1,125 +1,20 @@
 ==========
 User guide
 ==========
-*Description goes here ...*
+In this page, we will give a detailed explanation of this python package. 
+All the crucial functions in each module will be covered.  
 
-.. _useTitle1:
+.. _usealgorithm:
 
-Title 1
-=======
-*Say something...*
-
-.. _usepreprocess:
-
-Preprocessing of the images
-===========================
-*Say something...*
-
-.. _useimstack:
-
-Image stack
------------
-*Say something...*
-
-.. _usenorm:
-
-Normalization
--------------
-We do normalization to mitigate the impact of the non-uniformity of the images. 
-There are two places in this package to do the normalization. 
-One is to normalize the raw images, the other one is to normalize the stitched images. 
-**Usually, we only choose one place to do the normalization.**
-
-.. image:: _static/rawimage.JPG
-   :width: 40%
-
-Wherever to do the normalization, the basic function to call is 
-:py:func:`~spexwavepy.corefun.NormImage`.
-The process is as follows.
-
-:math:`b_j` and :math:`c_i` are the partial sums of each column and row of the raw image, respectively. 
-
-.. image:: _static/rowsum.JPG
-   :width: 40%
-
-.. image:: _static/colsum.JPG
-   :width: 40%
-
-:math:`\bar{a}_{i,j}` is generated as the following. 
-First, for every index :math:`j`, the column of the raw image, :math:`a_{i,j}`, divides :math:`b_j`.
-Second, after the above first step, for every index :math:`i`, the row of the generated image divides :math:`c_i`.
-
-Then we do the common normalization. 
-:math:`\bar{a}` is the mean value of :math:`\bar{a}_{i,j}`, :math:`\sigma` is the std of :math:`\bar{a}_{i,j}`,
-then we have each element of the final generated image as :math:`(\bar{a}_{i,j}-\bar{a})/\sigma`.
-
-As the images shown in the following, the main purpose of doing normalization is to 
-get rid of the "wrinkles" come from the incident beam. If the normalization is not
-effect to the raw images, we recommend to do the normalization to the stiched images later.
-Besides, if the incident beam is clean enough, there is no need to do the normalization.
-
-.. image:: _static/normCRL.png
-   :width: 100%
-
-.. _usesmooth:
-
-Smoothing
----------
-If the raw image quaility is very low, sometimes you need to smooth it.
-:py:func:`~spexwavepy.imstackfun.Imagestack.smooth` and
-:py:func:`~spexwavepy.imstackfun.Imagestack.smooth_multi` functions are 
-used to smooth the raw images in the image stack. The latter is the 
-multiprocessing version of the former. Two smoothing are available at 
-present, they are ``Gaussian`` and ``Box``, respectively. If the 
-``meth`` is ``Gaussian``, a Gaussian function will be used for the 
-smoothing, the parameter of ``pixel`` determines the sigma of the 
-Gaussian function. If the ``meth`` is ``Box``, a :math:`n \times n` 
-matrix is used to convolve the raw image, each element in the matrix 
-equals to :math:`1/n^2`. Likewise, the parameter of ``pixel`` is used 
-to determine :math:`n`. The following images show how the smoothing 
-will look like.
-
-.. figure:: _static/smoothing.png
-   :width: 100%
-
-.. _usedetpix:
-
-Detector pixel size determination
----------------------------------
-To determine the detector pixel size, 
-we scan the diffuser in one direction with a relatively large step at first, 
-10 um for example. The speckle pattern will move according to the scan. 
-If the scan direction is along the x-axis, 
-the speckle pattern will move along the x-axis too. 
-
-.. image:: _static/pixdet1.jpg
-   :width: 80%
-
-We choose a subregion from each image to track the speckle pattern movement using cross-correlation. 
-The tracked moving is in the unit of pixels. 
-All the images extracted from the subregion are compared with the first raw image. 
-Thus, the tracked speckle pattern shifts will be along a straight line. 
-We fit the tracked shifts into a straight line, 
-and the pixel size is calculated by 1 over the slope of the fitted line.  
-
-.. note::
-   The ``subregion`` set in this function is related to the cropped image stack.
-   That is to say, if we have set ``ROI`` for the image stack, then the ``subROI`` 
-   parameter is the coordinate to the newly cropped images by ``ROI``, **NOT** to 
-   the raw images.
-
-If ``display`` is True, the fitting results will be shown.
-
-.. figure:: _static/pixdet2.jpg
-   :width: 100%
-   :align: center
-
-   The fitting results and the residuals.
+Fundamental algorithm
+=====================
+This section introduce the basic algorithm we used for the various speckle tracking techniques.
+Most functions described in this section comes from the :py:mod:`~spexwavepy.corefun` module.
 
 .. _usecrosscorr:
 
 Cross-correlation
-=================
+-----------------
 In image processing, cross-correlation is a measure of the similarity of two images. 
 For template matching, the template image moves along the surface of the reference image. 
 At each position, a cross-correlation calculation is conducted. 
@@ -161,15 +56,17 @@ please refer to `this link <https://docs.opencv.org/3.4/de/da9/tutorial_template
 .. _usesubpix:
 
 Sub-pixel registration
-======================
+----------------------
 We provide three sub-pixel registration methods at present. 
 They are the differential approach (the default method), Gaussian peak locating, and parabola curve peak locating. 
 Other methods can be easily implemented if required.  
 
+The subpixel registration functions are defined in :py:mod:`~spexwavepy.corefun` module.
+
 .. _subdefault:
 
 Default method 
---------------
+^^^^^^^^^^^^^^
 The default sub-pixel registration method can be found [defaultref1]_ in and [defaultref2]_.
 
 .. note::
@@ -204,7 +101,7 @@ To discrete the above partial differential operators, the central difference sch
 .. _subgauss:
 
 Gaussian peak finding method
-----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Both this method and :ref:`Parabola peak finding method <subpara>` can be find in [gaussref1]_. 
 
 .. note::
@@ -226,7 +123,7 @@ where :math:`x_0` and :math:`y_0` are the pixel indices in the two dimensions wi
 .. _subpara:
 
 Parabola peak finding method
-----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Resemble to Gaussian peak finding method, 
 parabola peak finding method assumes the coefficient matrix :math:`R(x, y)` can be fitted by a 2D parabolic function.
 The peak location of the fitted function is:
@@ -241,7 +138,7 @@ where :math:`x_0` and :math:`y_0` are the pixel indices in the two dimensions wi
 .. _useimmatch:
 
 Image match
-===========
+-----------
 The :py:func:`~spexwavepy.corefun.Imagematch` function from the 
 :py:mod:`~spexwavepy.corefun` module is the basic function this package
 calls to do the cross-correlation. It wraps ``cv2.matchTemplate`` function 
@@ -258,6 +155,120 @@ and also the related cross-correlatin coefficient matrix ``res_mat`` (if ``res``
 .. figure:: _static/imagematch.jpg
    :width: 80%
 
+.. _useimstackclass:
+
+Image stack and its functions
+=============================
+*Say something...*
+
+.. _useimstack:
+
+Image stack
+-----------
+*Say something...*
+
+.. _usepreprocess:
+
+Preprocessing of the images
+---------------------------
+*Say something...*
+
+.. _usenorm:
+
+Normalization
+^^^^^^^^^^^^^
+We do normalization to mitigate the impact of the non-uniformity of the images. 
+There are two places in this package to do the normalization. 
+One is to normalize the raw images, the other one is to normalize the stitched images. 
+**Usually, we only choose one place to do the normalization.**
+
+.. image:: _static/rawimage.JPG
+   :width: 40%
+
+Wherever to do the normalization, the basic function to call is 
+:py:func:`~spexwavepy.corefun.NormImage`.
+The process is as follows.
+
+:math:`b_j` and :math:`c_i` are the partial sums of each column and row of the raw image, respectively. 
+
+.. image:: _static/rowsum.JPG
+   :width: 40%
+
+.. image:: _static/colsum.JPG
+   :width: 40%
+
+:math:`\bar{a}_{i,j}` is generated as the following. 
+First, for every index :math:`j`, the column of the raw image, :math:`a_{i,j}`, divides :math:`b_j`.
+Second, after the above first step, for every index :math:`i`, the row of the generated image divides :math:`c_i`.
+
+Then we do the common normalization. 
+:math:`\bar{a}` is the mean value of :math:`\bar{a}_{i,j}`, :math:`\sigma` is the std of :math:`\bar{a}_{i,j}`,
+then we have each element of the final generated image as :math:`(\bar{a}_{i,j}-\bar{a})/\sigma`.
+
+As the images shown in the following, the main purpose of doing normalization is to 
+get rid of the "wrinkles" come from the incident beam. If the normalization is not
+effect to the raw images, we recommend to do the normalization to the stiched images later.
+Besides, if the incident beam is clean enough, there is no need to do the normalization.
+
+.. image:: _static/normCRL.png
+   :width: 100%
+
+.. _usesmooth:
+
+Smoothing
+^^^^^^^^^
+If the raw image quaility is very low, sometimes you need to smooth it.
+:py:func:`~spexwavepy.imstackfun.Imagestack.smooth` and
+:py:func:`~spexwavepy.imstackfun.Imagestack.smooth_multi` functions are 
+used to smooth the raw images in the image stack. The latter is the 
+multiprocessing version of the former. Two smoothing are available at 
+present, they are ``Gaussian`` and ``Box``, respectively. If the 
+``meth`` is ``Gaussian``, a Gaussian function will be used for the 
+smoothing, the parameter of ``pixel`` determines the sigma of the 
+Gaussian function. If the ``meth`` is ``Box``, a :math:`n \times n` 
+matrix is used to convolve the raw image, each element in the matrix 
+equals to :math:`1/n^2`. Likewise, the parameter of ``pixel`` is used 
+to determine :math:`n`. The following images show how the smoothing 
+will look like.
+
+.. figure:: _static/smoothing.png
+   :width: 100%
+
+.. _usedetpix:
+
+Detector pixel size determination
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+To determine the detector pixel size, 
+we scan the diffuser in one direction with a relatively large step at first, 
+10 um for example. The speckle pattern will move according to the scan. 
+If the scan direction is along the x-axis, 
+the speckle pattern will move along the x-axis too. 
+
+.. image:: _static/pixdet1.jpg
+   :width: 80%
+
+We choose a subregion from each image to track the speckle pattern movement using cross-correlation. 
+The tracked moving is in the unit of pixels. 
+All the images extracted from the subregion are compared with the first raw image. 
+Thus, the tracked speckle pattern shifts will be along a straight line. 
+We fit the tracked shifts into a straight line, 
+and the pixel size is calculated by 1 over the slope of the fitted line.  
+
+.. note::
+   The ``subregion`` set in this function is related to the cropped image stack.
+   That is to say, if we have set ``ROI`` for the image stack, then the ``subROI`` 
+   parameter is the coordinate to the newly cropped images by ``ROI``, **NOT** to 
+   the raw images.
+
+If ``display`` is True, the fitting results will be shown.
+
+.. figure:: _static/pixdet2.jpg
+   :width: 100%
+   :align: center
+
+   The fitting results and the residuals.
+
+
 .. _use2Dint:
 
 2D integration for post processing
@@ -268,26 +279,39 @@ and also the related cross-correlatin coefficient matrix ``res_mat`` (if ``res``
 
 The speckle-based techniques included in :py:class:`~spexwavepy.trackfun.Tracking` class 
 ========================================================================================
-The most important parameters within the :py:class:`~spexwavepy.trackfun.Tracking` class 
+The most important parameters for the :py:class:`~spexwavepy.trackfun.Tracking` class 
 are the image stacks. At least 1 image stack is needed to construct 
-the :py:class:`~spexwavepy.trackfun.Tracking` class. There are at most 4 image stacks needed 
+the :py:class:`~spexwavepy.trackfun.Tracking` class. There are up to 4 image stacks needed 
 according to the different data processing modes. The following list shows how to input
 these image stacks for different data processing modes. Each row represents a scan
 dimension ``scandim``, each column represnts a data processing mode.
 
-+--------+-----------------+-------------------------------+-------------------------------------------------------+
-|        | XSS self        | XST self                      |       XSS/XST with reference                          |
-+========+=================+===============================+=======================================================+
-| x      | imstack1(x sam) | imstack1(1 image), 2(1 image) |       imstack1(x sam), 2(x ref)                       |
-+--------+-----------------+-------------------------------+-------------------------------------------------------+
-| y      | imstack1(y sam) | imstack1(1 image), 2(1 image) |       imstack1(y sam), 2(y ref)                       |
-+--------+-----------------+-------------------------------+-------------------------------------------------------+
-| xy     | \-              | \-                            |       imstack1(x sam), 2(x ref), 3(y sam), 4(y ref)   |
-+--------+-----------------+-------------------------------+-------------------------------------------------------+
-| random | \-              | \-                            |       \-                                              |
-+--------+-----------------+-------------------------------+-------------------------------------------------------+
++---------+-----------------+--------------------------------------------------------+-----------------------------------------------+----------------------------+-----------------------+
+|         | XSS self        | XST self [2]_                                          | XSS with reference                            | XST with reference         | XSVT with reference   |
++=========+=================+========================================================+===============================================+============================+=======================+
+| x       | imstack1(x sam) | imstack1(x sam1), 2(x sam2)                            | imstack1(x sam), 2(x ref)                     | \-                         | \-                    |
++---------+-----------------+--------------------------------------------------------+-----------------------------------------------+----------------------------+-----------------------+
+| y       | imstack1(y sam) | imstack1(y sam1), 2(y sam2)                            | imstack1(y sam), 2(y ref)                     | \-                         | \-                    |
++---------+-----------------+--------------------------------------------------------+-----------------------------------------------+----------------------------+-----------------------+
+| xy [1]_ | \-              | imstack1(x sam1), 2(x sam2), 3(y sam1), 4(y sam2) [3]_ | imstack1(x sam), 2(x ref), 3(y sam), 4(y ref) | \-                         | \-                    |
++---------+-----------------+--------------------------------------------------------+-----------------------------------------------+----------------------------+-----------------------+
+| random  | \-              | \-                                                     | \-                                            | imstack1(sam), 2(ref) [4]_ | imstack1(sam), 2(ref) |
++---------+-----------------+--------------------------------------------------------+-----------------------------------------------+----------------------------+-----------------------+
 
-*Say something.*
+.. [1] The ``scandim`` set to 'xy' is exclusively used for '2D' data processing, it is valid only when ``Tracking.dimension`` is '2D'.
+
+.. [2] For XST techniques (self or with reference), there will be only one image in each image stacks.
+
+.. [3] For self-reference XST technique, it is possible that imsatck1 and imstack3 are identical. 
+
+.. [4] The ``scandim`` is not valid and not used in XST technique with reference beam.
+
+``imstack1``, ``imstack2``, ``imstack3``, ``imstack4`` represent the 
+:py:class:`~spexwavepy.imstackfun.Imagestack` class needed for each tracking mode.
+
+The implementation of each of these tracking modes used in this package will be introduced in this section. 
+For the explanation of the physics and theory of these tracking modes please refer to 
+:doc:`this section: The speckle-based wavefront sensing techniques <principle>`.
 
 .. _trastable:
 
@@ -585,13 +609,8 @@ section for details.
 
 .. _traXSVTrefer:
 
-XSVT technique with reference beam
-----------------------------------
-
-.. _traXSVTself:
-
-Self-reference XSVT technique 
-------------------------------
+XSVT technique
+--------------
 
 .. _postfun:
 
