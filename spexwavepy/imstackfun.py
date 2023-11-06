@@ -14,7 +14,7 @@ import multiprocessing
 import copy
 
 sys.path.append(os.path.join('..'))
-from spexwavepy.corefun import indicator, read_one, crop_one, NormImage, Imagematch
+from spexwavepy.corefun import _indicator, read_one, crop_one, NormImage, Imagematch
 
 __DEBUG = True#False#True
 
@@ -149,7 +149,7 @@ class Imagestack:
                 data_tmp = read_one(fileNames[i])
                 data[i] = crop_one(data_tmp, self.roi)
                 if self.verbose:
-                    indicator(i, len(fileNames))
+                    _indicator(i, len(fileNames))
             if self.verbose:
                 print("Image stack acquired.")
 
@@ -175,7 +175,7 @@ class Imagestack:
                 print("Start normalization...")
             for i in range(imNo):
                 if self.verbose:
-                    indicator(i, imNo)
+                    _indicator(i, imNo)
                 data_tmp = data[i]
                 data[i] = NormImage(data_tmp)
             self.data = data
@@ -197,12 +197,12 @@ class Imagestack:
                 for k in range(imNo):
                     self.data[k] = np.fliplr(self.data[k])
                     if self.verbose:
-                        indicator(k, len(self.data))
+                        _indicator(k, len(self.data))
             if self.flip == 'y':
                 for k in range(imNo):
                     self.data[k] = np.flipud(self.data[k])
                     if self.verbose:
-                        indicator(k, len(self.data))
+                        _indicator(k, len(self.data))
             if self.verbose:
                 print("Images flipped.")
         else:
@@ -222,7 +222,7 @@ class Imagestack:
         for i in range(imNo):
             data_new[i] = np.rot90(self.data[i])
             if self.verbose:
-                indicator(i, imNo)
+                _indicator(i, imNo)
 
         self.data = data_new
         if self.verbose:
@@ -247,7 +247,7 @@ class Imagestack:
         for i in range(imNo):
             data_new[i] = cv2.warpAffine(self.data[i], Rot_M, (x_dim, y_dim))
             if self.verbose:
-                indicator(i, imNo)
+                _indicator(i, imNo)
 
         self.data = copy.deepcopy(data_new)
 
@@ -283,14 +283,14 @@ class Imagestack:
                 im_tmp = scipy.ndimage.gaussian_filter(self.data[jc], pixel, mode='wrap') 
                 data_new[jc] = im_tmp
                 if verbose:
-                    indicator(jc, imNo)
+                    _indicator(jc, imNo)
         if meth == 'Box':
             kernel = np.ones((pixel, pixel), dtype=np.float64) / (pixel**2)
             for jc in range(imNo):
                 im_tmp = cv2.filter2D(self.data[jc], -1, kernel)
                 data_new[jc] = im_tmp
                 if verbose:
-                    indicator(jc, imNo)
+                    _indicator(jc, imNo)
 
         self.data = copy.deepcopy(data_new)
         if self.verbose: print("Image stack smoothed.")
@@ -327,7 +327,7 @@ class Imagestack:
             global process_tmp_gaussian
             def process_tmp_gaussian(j):
                 if verbose:
-                    indicator(j, imNo)
+                    _indicator(j, imNo)
                 im_tmp = self.data[j]
                 im_tmp_smooth = scipy.ndimage.gaussian_filter(im_tmp, pixel, mode='wrap')
 
@@ -341,7 +341,7 @@ class Imagestack:
             global process_tmp_box
             def process_tmp_box(j):
                 if verbose:
-                    indicator(j, imNo)
+                    _indicator(j, imNo)
                 im_tmp = self.data[j]
                 im_tmp_smooth = cv2.filter2D(im_tmp, -1, kernel)
 

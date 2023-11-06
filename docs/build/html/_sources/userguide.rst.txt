@@ -155,6 +155,14 @@ and also the related cross-correlatin coefficient matrix ``res_mat`` (if ``res``
 .. figure:: _static/imagematch.jpg
    :width: 80%
 
+.. _useauxfunc:
+
+Auxiliary functions
+-------------------
+We provide functions :py:func:`~spxewavepy.corefun.read_one` and 
+:py:func:`~spxewavepy.corefun.crop_one` in the :py:mod:`~spexwavepy.corefun` module
+to help 
+
 .. _useimstackclass:
 
 Image stack and its functions

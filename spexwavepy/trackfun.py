@@ -11,7 +11,7 @@ import warnings
 
 sys.path.append(os.path.join('..'))
 from spexwavepy.imstackfun import Imagestack
-from spexwavepy.corefun import indicator, read_one, crop_one, Imagematch, NormImage
+from spexwavepy.corefun import _indicator, read_one, crop_one, Imagematch, NormImage
 from spexwavepy.corefun import initDisplay, contiDisplay
 from spexwavepy.postfun import slope_scan, slope_pixel, curv_scan, curv_pixel 
 
@@ -222,7 +222,7 @@ class Tracking:
             res = np.zeros(imNo-1)
             im1 = self.imstack1.data[0]
             for j in range(imNo-1):
-                if verbose: indicator(j, imNo, 'Stability')
+                if verbose: _indicator(j, imNo, 'Stability')
                 im2 = self.imstack1.data[j+1]
                 im2 = im2[edge_y[0]:-edge_y[1], edge_x[0]:-edge_x[1]]
                 ix_tmp, iy_tmp, res_tmp = Imagematch(im1, im2, self.subpixelmeth)
@@ -253,7 +253,7 @@ class Tracking:
             iys = np.zeros(imNo-1)
             res = np.zeros(imNo-1)
             for j in range(imNo-1):
-                if verbose: indicator(j, imNo-1, comments='Stability')
+                if verbose: _indicator(j, imNo-1, comments='Stability')
                 im2_tmp = read_one(fileNames[j+1])
                 im2_tmp = crop_one(im2_tmp, self.imstack1.roi)
                 y_dim_tmp, x_dim_tmp = im2_tmp.shape
@@ -318,7 +318,7 @@ class Tracking:
         def process_tmp(j):
             if verbose:
                 #The indications may not appear in correct order, however, it may still be useful to keep outputing some information.
-                indicator(j, len(jxs), comments='Stability') 
+                _indicator(j, len(jxs), comments='Stability') 
             im1_tmp = read_one(fileNames[0])
             im1 = crop_one(im1_tmp, self.imstack1.roi)
             im2_tmp = read_one(fileNames[j+1])
@@ -469,9 +469,9 @@ class Tracking:
         for i in range(y_dim):
             if verbose: 
                 if scandim == 'x':
-                    indicator(i, y_dim, comments = self._flag + ' technique in X direction')
+                    _indicator(i, y_dim, comments = self._flag + ' technique in X direction')
                 if scandim == 'y':
-                    indicator(i, y_dim, comments = self._flag + ' technique in Y direction')
+                    _indicator(i, y_dim, comments = self._flag + ' technique in Y direction')
             plane1 = self.imstack1.data[:, i, :].astype(np.float32)
             plane2 = self.imstack2.data[:, i, :].astype(np.float32)
             if normalize:
@@ -629,7 +629,7 @@ class Tracking:
             if self.scandim == 'xy': self.scandim = 'x'
             for index, jx in enumerate(jxs):
                 if verbose:
-                    indicator(jx, len(jxs), comments = self._flag + ' technique in X direction')
+                    _indicator(jx, len(jxs), comments = self._flag + ' technique in X direction')
                 self.imstack1.data = imstack1_data[:, :, jx:width+jx]
                 self.imstack2.data = imstack2_data[:, :, jx+edge_xy[0]-pad_xy[0]:width+jx+edge_xy[0]+pad_xy[1]]
                 edge_xy_new = 0
@@ -685,7 +685,7 @@ class Tracking:
                 self.scandim = 'y'
                 for index, jx in enumerate(jxs2):
                     if verbose:
-                        indicator(jx, len(jxs), comments = self._flag + ' technique in Y direction')
+                        _indicator(jx, len(jxs), comments = self._flag + ' technique in Y direction')
                     self.imstack1.data = imstack3_data[:, :, jx:width+jx]
                     self.imstack2.data = imstack4_data[:, :, jx+edge_xy[0]-pad_xy[0]:width+jx+edge_xy[0]+pad_xy[1]]
                     edge_xy_new = 0
@@ -838,9 +838,9 @@ class Tracking:
             def process_tmp1(jx):
                 if verbose:
                     if self.scandim == 'x':
-                        indicator(jx, len(jxs1), comments = self._flag + ' technique in X direction')
+                        _indicator(jx, len(jxs1), comments = self._flag + ' technique in X direction')
                     if self.scandim == 'y':
-                        indicator(jx, len(jxs1), comments = self._flag + ' technique in Y direction')
+                        _indicator(jx, len(jxs1), comments = self._flag + ' technique in Y direction')
                 self.imstack1.data = imstack1_data[:, :, jx:width+jx]
                 self.imstack2.data = imstack2_data[:, :, jx+edge_xy[0]-pad_xy[0]:width+jx+edge_xy[0]+pad_xy[1]]
                 edge_xy_new = 0
@@ -906,7 +906,7 @@ class Tracking:
                 global process_tmp2
                 def process_tmp2(jx):
                     if verbose:
-                        indicator(jx, len(jxs2), comments = self._flag + ' technique in Y direction')
+                        _indicator(jx, len(jxs2), comments = self._flag + ' technique in Y direction')
                     self.imstack1.data = imstack3_data[:, :, jx:width+jx]
                     self.imstack2.data = imstack4_data[:, :, jx+edge_xy[0]-pad_xy[0]:width+jx+edge_xy[0]+pad_xy[1]]
                     edge_xy_new = 0
@@ -1152,9 +1152,9 @@ class Tracking:
         for i in range(y_dim):
             if verbose: 
                 if scandim == 'x':
-                    indicator(i, y_dim, comments = self._flag + ' technique in X direction')
+                    _indicator(i, y_dim, comments = self._flag + ' technique in X direction')
                 if scandim == 'y':
-                    indicator(i, y_dim, comments = self._flag + ' technique in Y direction')
+                    _indicator(i, y_dim, comments = self._flag + ' technique in Y direction')
             plane1 = self.imstack1.data[0, i+edge_y[0]:hw_xy+i+edge_y[0], edge_x[0]:x_dim_tmp-edge_x[1]].astype(np.float32)
             plane2 = self.imstack2.data[0, i+edge_y[0]-pad_xy[0]:hw_xy+i+edge_y[0]+pad_xy[1], :].astype(np.float32)
             if normalize:
@@ -1321,9 +1321,9 @@ class Tracking:
             for index, jx in enumerate(jxs):
                 if verbose:
                     if self.scandim == 'x':
-                        indicator(jx, len(jxs), comments = self._flag + 'technique in X direction')
+                        _indicator(jx, len(jxs), comments = self._flag + 'technique in X direction')
                     if self.scandim == 'y':
-                        indicator(jx, len(jxs), comments = self._flag + 'technique in Y direction')
+                        _indicator(jx, len(jxs), comments = self._flag + 'technique in Y direction')
                 y_ind_left = edge_y_new[0] - pad_y_new[0]
                 y_ind_right = y_dim_tmp - edge_y_new[1] + pad_y_new[1]
                 x_ind_left = jx + edge_x_new[0] - pad_x_new[0]
@@ -1381,9 +1381,9 @@ class Tracking:
                 for index, jx in enumerate(jxs):
                     if verbose:
                         if self.scandim == 'x':
-                            indicator(jx, len(jxs), comments = self._flag + 'technique in X direction')
+                            _indicator(jx, len(jxs), comments = self._flag + 'technique in X direction')
                         if self.scandim == 'y':
-                            indicator(jx, len(jxs), comments = self._flag + 'technique in Y direction')
+                            _indicator(jx, len(jxs), comments = self._flag + 'technique in Y direction')
                     y_ind_left = edge_y_new[0] - pad_y_new[0]
                     y_ind_right = y_dim_tmp - edge_y_new[1] + pad_y_new[1]
                     x_ind_left = jx + edge_x_new[0] - pad_x_new[0]
@@ -1537,9 +1537,9 @@ class Tracking:
             def process_tmp1(jx):
                 if verbose:
                     if self.scandim == 'x':
-                        indicator(jx, len(jxs1), comments = self._flag + 'technique in X direction')
+                        _indicator(jx, len(jxs1), comments = self._flag + 'technique in X direction')
                     if self.scandim == 'y':
-                        indicator(jx, len(jxs1), comments = self._flag + 'technique in Y direction')
+                        _indicator(jx, len(jxs1), comments = self._flag + 'technique in Y direction')
                 y_ind_left = edge_y_new[0] - pad_y_new[0]
                 y_ind_right = y_dim_tmp - edge_y_new[1] + pad_y_new[1]
                 x_ind_left = jx + edge_x_new[0] - pad_x_new[0]
@@ -1607,9 +1607,9 @@ class Tracking:
                 def process_tmp2(jx):
                     if verbose:
                         if self.scandim == 'x':
-                            indicator(jx, len(jxs2), comments = self._flag + 'technique in X direction')
+                            _indicator(jx, len(jxs2), comments = self._flag + 'technique in X direction')
                         if self.scandim == 'y':
-                            indicator(jx, len(jxs2), comments = self._flag + ' technique in Y direction')
+                            _indicator(jx, len(jxs2), comments = self._flag + ' technique in Y direction')
                     y_ind_left = edge_y_new[0] - pad_y_new[0]
                     y_ind_right = y_dim_tmp - edge_y_new[1] + pad_y_new[1]
                     x_ind_left = jx + edge_x_new[0] - pad_x_new[0]

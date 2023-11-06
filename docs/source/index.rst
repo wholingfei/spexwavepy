@@ -89,8 +89,8 @@ All the functions in each module will be covered.
       - :ref:`Gaussian peak fitting method <subgauss>`
 
       - :ref:`Parabola peak fitting method <subpara>`
-
-  - :ref:`Image match <useimmatch>`
+        
+    - :ref:`Image match <useimmatch>`
 
   - :ref:`Image stack and its functions <useimstackclass>`
 

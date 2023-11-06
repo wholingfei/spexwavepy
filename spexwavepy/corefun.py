@@ -5,7 +5,7 @@ import sys
 import warnings
 import cv2
 
-def indicator(num, length, comments=None):
+def _indicator(num, length, comments=None):
     """
     This auxiliary function is used for counting.
 
