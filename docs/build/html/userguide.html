@@ -70,7 +70,6 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#d-integration-for-post-processing">2D integration for post processing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#the-speckle-based-techniques-included-in-tracking-class">The speckle-based techniques included in <code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code> class</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#stability-checking-using-speckle-patterns">Stability checking using speckle patterns</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#reference-and-sample-image-stacks-collimating-before-tracking">Reference and sample image stacks collimating before tracking</a></li>
@@ -82,6 +81,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#post-processing-of-the-tracked-speckle-pattern-shifts">Post processing of the tracked speckle pattern shifts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#d-integration-for-post-processing">2D integration for post processing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#slope-reconstruction">Slope reconstruction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#local-curvature-reconstruction">Local curvature reconstruction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#d-integration-from-the-slope">2D integration from the slope</a></li>
@@ -249,9 +249,29 @@ and also the related cross-correlatin coefficient matrix <code class="docutils l
 </section>
 <section id="auxiliary-functions">
 <span id="useauxfunc"></span><h3>Auxiliary functions<a class="headerlink" href="#auxiliary-functions" title="Permalink to this heading"></a></h3>
-<p>We provide functions <code class="xref py py-func docutils literal notranslate"><span class="pre">read_one()</span></code> and
-<code class="xref py py-func docutils literal notranslate"><span class="pre">crop_one()</span></code> in the <a class="reference internal" href="spexwavepy.html#module-spexwavepy.corefun" title="spexwavepy.corefun"><code class="xref py py-mod docutils literal notranslate"><span class="pre">corefun</span></code></a> module
-to help</p>
+<p>We provide functions <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.read_one" title="spexwavepy.corefun.read_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_one()</span></code></a> and
+<a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.crop_one" title="spexwavepy.corefun.crop_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">crop_one()</span></code></a> in the <a class="reference internal" href="spexwavepy.html#module-spexwavepy.corefun" title="spexwavepy.corefun"><code class="xref py py-mod docutils literal notranslate"><span class="pre">corefun</span></code></a> module
+to help the user read one image into the memory and see it and crop it.</p>
+<p>To call <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.read_one" title="spexwavepy.corefun.read_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_one()</span></code></a> function,
+you need to input the file path of the image that you want to read.
+If <code class="docutils literal notranslate"><span class="pre">ShowImage</span></code> is set to be True, then it will show the loaded single image automatically
+after you call this function.</p>
+<p>The <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.crop_one" title="spexwavepy.corefun.crop_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">crop_one()</span></code></a> function has a parameter <code class="docutils literal notranslate"><span class="pre">ROI</span></code> to set
+the region of interest to be cropped from the loaded raw image. To correctely call
+this function, the user need to use <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.read_one" title="spexwavepy.corefun.read_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_one()</span></code></a> function to
+load the raw image into memory. The following is the an example of a piece of codes
+the user need to crop the raw image and to show it. The raw image is loaded into
+memory and assigned to <code class="docutils literal notranslate"><span class="pre">im_raw</span></code>. Then <code class="docutils literal notranslate"><span class="pre">im_raw</span></code> is paased to <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.read_one" title="spexwavepy.corefun.read_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_one()</span></code></a>
+function. The <code class="docutils literal notranslate"><span class="pre">ShowImage</span></code> parameter is the same as <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.read_one" title="spexwavepy.corefun.read_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_one()</span></code></a>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">im_raw</span> <span class="o">=</span> <span class="n">read_one</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="n">IMAGE</span> <span class="o">/</span> <span class="n">FILE</span> <span class="o">/</span> <span class="n">PATH</span><span class="p">,</span> <span class="n">ShowImage</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">ROI</span> <span class="o">=</span> <span class="p">[</span><span class="mi">750</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>    <span class="c1">#[y_start, y_end, x_start, x_end]</span>
+<span class="n">im_crop</span> <span class="o">=</span> <span class="n">crop_one</span><span class="p">(</span><span class="n">im_raw</span><span class="p">,</span> <span class="n">ROI</span><span class="p">,</span> <span class="n">ShowImage</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ROI=[y_start,</span> <span class="pre">y_end,</span> <span class="pre">x_start,</span> <span class="pre">x_end]</span></code>. The first two parameters of <code class="docutils literal notranslate"><span class="pre">ROI</span></code> is
+the start and the end position of y coordinate, the last parameters of <code class="docutils literal notranslate"><span class="pre">ROI</span></code> is
+the start and the end position of x coordinate. The start and the end coordinates are shown below.</p>
+<a class="reference internal image-reference" href="_images/readone.png"><img alt="_images/readone.png" src="_images/readone.png" style="width: 80%;" /></a>
 </section>
 </section>
 <section id="image-stack-and-its-functions">
@@ -338,10 +358,6 @@ the raw images.</p>
 </figure>
 </section>
 </section>
-</section>
-<section id="d-integration-for-post-processing">
-<span id="use2dint"></span><h2>2D integration for post processing<a class="headerlink" href="#d-integration-for-post-processing" title="Permalink to this heading"></a></h2>
-<p><em>Say something here for 2D integration…</em></p>
 </section>
 <section id="the-speckle-based-techniques-included-in-tracking-class">
 <span id="usetrack"></span><h2>The speckle-based techniques included in <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class<a class="headerlink" href="#the-speckle-based-techniques-included-in-tracking-class" title="Permalink to this heading"></a></h2>
@@ -685,6 +701,10 @@ section for details.</p>
 </section>
 <section id="post-processing-of-the-tracked-speckle-pattern-shifts">
 <span id="postfun"></span><h2>Post processing of the tracked speckle pattern shifts<a class="headerlink" href="#post-processing-of-the-tracked-speckle-pattern-shifts" title="Permalink to this heading"></a></h2>
+<section id="d-integration-for-post-processing">
+<span id="use2dint"></span><h3>2D integration for post processing<a class="headerlink" href="#d-integration-for-post-processing" title="Permalink to this heading"></a></h3>
+<p><em>Say something here for 2D integration…</em></p>
+</section>
 <section id="slope-reconstruction">
 <span id="slope"></span><h3>Slope reconstruction<a class="headerlink" href="#slope-reconstruction" title="Permalink to this heading"></a></h3>
 <p>Two functions are provided in the package, the are

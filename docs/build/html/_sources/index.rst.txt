@@ -91,6 +91,8 @@ All the functions in each module will be covered.
       - :ref:`Parabola peak fitting method <subpara>`
         
     - :ref:`Image match <useimmatch>`
+      
+    - :ref:`Auxiliary functions <useauxfunc>`
 
   - :ref:`Image stack and its functions <useimstackclass>`
 

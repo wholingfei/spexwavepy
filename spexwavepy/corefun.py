@@ -279,7 +279,7 @@ def subpix_parapeak(res, meth='cv2.TM_CCOEFF_NORMED'):
 
     return dx, dy
 
-def initDisplay(plane1_init, plane2_init, res_init):
+def _initDisplay(plane1_init, plane2_init, res_init):
     """
     Used for initialize figure layout for dispalaying.
 
@@ -316,7 +316,7 @@ def initDisplay(plane1_init, plane2_init, res_init):
 
     return fig, h1, h2, h3, h4
 
-def contiDisplay(fig, h1, h2, h3, h4, plane1t, plane2, res):
+def _contiDisplay(fig, h1, h2, h3, h4, plane1t, plane2, res):
     """
     Used for dispalaying.
 
@@ -333,7 +333,7 @@ def contiDisplay(fig, h1, h2, h3, h4, plane1t, plane2, res):
     res : numpy.ndarray
         2D cross-correlation results matrix
     """
-    def onclick(event):
+    def _onclick(event):
         if event.dblclick:
             sys.exit(0)
 
@@ -347,4 +347,4 @@ def contiDisplay(fig, h1, h2, h3, h4, plane1t, plane2, res):
     plt.draw()
     plt.pause(1e-3)
 
-    connection_id = fig.canvas.mpl_connect('button_press_event', onclick)
+    connection_id = fig.canvas.mpl_connect('button_press_event', _onclick)

@@ -289,30 +289,6 @@ When it is None, no subpixel method used. Now only ‘default’|’gausspeak’
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="spexwavepy.corefun.contiDisplay">
-<span class="sig-prename descclassname"><span class="pre">spexwavepy.corefun.</span></span><span class="sig-name descname"><span class="pre">contiDisplay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plane1t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plane2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/corefun.html#contiDisplay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.corefun.contiDisplay" title="Permalink to this definition"></a></dt>
-<dd><p>Used for dispalaying.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Double click on the image will terminate displaying!</p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>fig</strong> – Auxiliaries for animation</p></li>
-<li><p><strong>h1</strong> – Auxiliaries for animation</p></li>
-<li><p><strong>h2</strong> – Auxiliaries for animation</p></li>
-<li><p><strong>h3</strong> – Auxiliaries for animation</p></li>
-<li><p><strong>h4</strong> – Auxiliaries for animation</p></li>
-<li><p><strong>plane1t</strong> (<em>numpy.ndarray</em>) – Template image</p></li>
-<li><p><strong>plane2</strong> (<em>numpy.ndarray</em>) – Original image</p></li>
-<li><p><strong>res</strong> (<em>numpy.ndarray</em>) – 2D cross-correlation results matrix</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="spexwavepy.corefun.crop_one">
 <span class="sig-prename descclassname"><span class="pre">spexwavepy.corefun.</span></span><span class="sig-name descname"><span class="pre">crop_one</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ROI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ShowImage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/corefun.html#crop_one"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.corefun.crop_one" title="Permalink to this definition"></a></dt>
 <dd><p>Crop the input image according to the ROI.</p>
@@ -329,27 +305,6 @@ When it is None, no subpixel method used. Now only ‘default’|’gausspeak’
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>numpy.ndarray</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="spexwavepy.corefun.initDisplay">
-<span class="sig-prename descclassname"><span class="pre">spexwavepy.corefun.</span></span><span class="sig-name descname"><span class="pre">initDisplay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plane1_init</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plane2_init</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res_init</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/corefun.html#initDisplay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.corefun.initDisplay" title="Permalink to this definition"></a></dt>
-<dd><p>Used for initialize figure layout for dispalaying.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>plane1_init</strong> (<em>numpy.ndarray</em>) – Template image</p></li>
-<li><p><strong>plane2_init</strong> (<em>numpy.ndarray</em>) – Original image</p></li>
-<li><p><strong>res_init</strong> (<em>numpy.ndarray</em>) – 2D cross-correlation results matrix</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Auxiliaries for animation</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>fig, h1, h2, h3, h4</p>
 </dd>
 </dl>
 </dd></dl>

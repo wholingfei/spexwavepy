@@ -12,7 +12,7 @@ import warnings
 sys.path.append(os.path.join('..'))
 from spexwavepy.imstackfun import Imagestack
 from spexwavepy.corefun import _indicator, read_one, crop_one, Imagematch, NormImage
-from spexwavepy.corefun import initDisplay, contiDisplay
+from spexwavepy.corefun import _initDisplay, _contiDisplay
 from spexwavepy.postfun import slope_scan, slope_pixel, curv_scan, curv_pixel 
 
 __DEBUG = True
@@ -464,7 +464,7 @@ class Tracking:
         ix_init, iy_init, res_init = Imagematch(plane2_init, plane1_init, subpixelmeth=subpixelmeth)
 
         if display:
-            fig, h1, h2, h3, h4 = initDisplay(plane1_init, plane2_init, res_init)
+            fig, h1, h2, h3, h4 = _initDisplay(plane1_init, plane2_init, res_init)
 
         for i in range(y_dim):
             if verbose: 
@@ -482,7 +482,7 @@ class Tracking:
             iys[i] = iy_tmp - edge_z[0]
             resmax[i] = np.max(res_tmp)
             if display:
-                contiDisplay(fig, h1, h2, h3, h4, plane1, plane2, res_tmp)
+                _contiDisplay(fig, h1, h2, h3, h4, plane1, plane2, res_tmp)
 
         if display and self.dimension == '2D': plt.close('all')
 
@@ -1147,7 +1147,7 @@ class Tracking:
         ix_init, iy_init, res_init = Imagematch(plane2_init, plane1_init, subpixelmeth=subpixelmeth)
 
         if display:
-            fig, h1, h2, h3, h4 = initDisplay(plane1_init, plane2_init, res_init)
+            fig, h1, h2, h3, h4 = _initDisplay(plane1_init, plane2_init, res_init)
 
         for i in range(y_dim):
             if verbose: 
@@ -1165,7 +1165,7 @@ class Tracking:
             iys[i] = iy_tmp - pad_xy[0]
             resmax[i] = np.max(res_tmp)
             if display:
-                contiDisplay(fig, h1, h2, h3, h4, plane1, plane2, res_tmp)
+                _contiDisplay(fig, h1, h2, h3, h4, plane1, plane2, res_tmp)
 
         if display and self.dimension == '2D': plt.close('all')
 

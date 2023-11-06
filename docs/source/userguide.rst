@@ -159,9 +159,35 @@ and also the related cross-correlatin coefficient matrix ``res_mat`` (if ``res``
 
 Auxiliary functions
 -------------------
-We provide functions :py:func:`~spxewavepy.corefun.read_one` and 
-:py:func:`~spxewavepy.corefun.crop_one` in the :py:mod:`~spexwavepy.corefun` module
-to help 
+We provide functions :py:func:`~spexwavepy.corefun.read_one` and 
+:py:func:`~spexwavepy.corefun.crop_one` in the :py:mod:`~spexwavepy.corefun` module
+to help the user read one image into the memory and see it and crop it. 
+
+To call :py:func:`~spexwavepy.corefun.read_one` function, 
+you need to input the file path of the image that you want to read.
+If ``ShowImage`` is set to be True, then it will show the loaded single image automatically 
+after you call this function.
+
+The :py:func:`~spexwavepy.corefun.crop_one` function has a parameter ``ROI`` to set 
+the region of interest to be cropped from the loaded raw image. To correctely call 
+this function, the user need to use :py:func:`~spexwavepy.corefun.read_one` function to 
+load the raw image into memory. The following is the an example of a piece of codes 
+the user need to crop the raw image and to show it. The raw image is loaded into 
+memory and assigned to ``im_raw``. Then ``im_raw`` is paased to :py:func:`~spexwavepy.corefun.read_one` 
+function. The ``ShowImage`` parameter is the same as :py:func:`~spexwavepy.corefun.read_one`.
+
+.. code-block:: Python
+
+   im_raw = read_one(filepath=IMAGE / FILE / PATH, ShowImage=True)
+   ROI = [750, 1500, 500, 2000]    #[y_start, y_end, x_start, x_end]
+   im_crop = crop_one(im_raw, ROI, ShowImage=True)
+
+``ROI=[y_start, y_end, x_start, x_end]``. The first two parameters of ``ROI`` is 
+the start and the end position of y coordinate, the last parameters of ``ROI`` is 
+the start and the end position of x coordinate. The start and the end coordinates are shown below.
+
+.. image:: _static/readone.png
+   :width: 80%
 
 .. _useimstackclass:
 
@@ -277,11 +303,7 @@ If ``display`` is True, the fitting results will be shown.
    The fitting results and the residuals.
 
 
-.. _use2Dint:
 
-2D integration for post processing
-==================================
-*Say something here for 2D integration...*
 
 .. _usetrack:
 
@@ -624,6 +646,12 @@ XSVT technique
 
 Post processing of the tracked speckle pattern shifts
 =====================================================
+
+.. _use2Dint:
+
+2D integration for post processing
+----------------------------------
+*Say something here for 2D integration...*
 
 .. _slope:
 
