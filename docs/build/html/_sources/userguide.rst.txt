@@ -443,11 +443,32 @@ the scan number.
 
 Loop over each row in the raw image, a 1D speckle shift results will be obtained. 
 
-For **2D case**, two more parameters play important roles. As in the 1D case, 
-``edge_x``, ``edge_y`` and ``edge_z`` define how to cut the raw image stack.
-``hw_xy`` defines the width (height) of the subregion for the 2D data processing if 
-the ``scandim`` is 'y' ('x'). Each subregion is a strip of data resemble that in 1D 
-case. The subregion will move to cover the whole range of the raw images.
+For **2D case**, the data processing procedure loop over one direction. 
+The data processing resembles the 1D case in each loop. For y scan direction, 
+the outmost layer of the loop is along the x direction, 
+as shown in the following picture. The obtained speckle pattern shift is in 
+the y direction.
+
+.. figure:: _static/XSVT_refer2.png
+   :width: 80%
+   
+   The loop is over x direction when the scan is along y direction.
+
+Similar, if the scan direction is x, the outmost loop of the 2D data processing 
+will be along the y direction. The obtained speckle pattern shift is in the
+x direction.
+
+.. figure:: _static/XSVT_refer3.png
+   :width: 80%
+   
+   The loop is over y direction when the scan is along x direction.
+
+According to the above description, two more parameters play important roles. 
+As in the 1D case, ``edge_x``, ``edge_y`` and ``edge_z`` define how to 
+cut the raw image stack. ``hw_xy`` defines the width (height) of 
+the subregion for the 2D data processing if the ``scandim`` is 'y' ('x'). 
+Each subregion is a strip of data resemble that in 1D case. 
+The subregion will move to cover the whole range of the raw images.
 We use ``hw_xy`` to define the width (height) of the window, i.e., 
 the stitched images to be coross-correlated during each loop. 
 The reference stitched image should be larger than the template,
@@ -641,6 +662,68 @@ section for details.
 
 XSVT technique
 --------------
+:py:func:`~spexwavepy.trackfun.Tracking.XSVT_withrefer` and 
+:py:func:`~spexwavepy.trackfun.Tracking.XSVT_withrefer_multi` are the 
+two functions used for the data processing of the 
+:ref:`XSVT technique <prinXSVTRefer>`. Since this type of technique needs
+images of the reference beam and the beam with tested optics, so we need 
+two image stacks. Each image in the image stacks are taken at one random 
+scan position of the diffuser during the movement. As a result, the 
+``scandim`` is set to be 'random', the ``scanstep`` is useless. 
+
+Like the XSS-type techniques, the raw image stack is a 3D data set. 
+Unlike the XSS-type techniques, the scan step in this technique has 
+no clear physical meaning. It has no use in the data processing. Also, 
+the '1D' mode is not supported in this technique. The data processing 
+mode in this technique is assumed to be two-dimentional. 
+
+The important parameters of these two functions are ``edge_xy``, ``edge_z``, 
+``hw_xy``, ``pad_xy``.
+
+``hw_xy`` defines the window size of the subregion to be processed 
+on the raw image. As shown in the picture below. Note the selected area 
+is a square. 
+
+.. figure:: _static/XSVT_refer1.png
+   :width: 80%
+
+Like the XSS-type techniques, the XSVT technique will process the data 
+row by row and column by column to obtain the displacements in two 
+dimensions. Unlike the XSS-type techniques, since there is no clear 
+physcial meaning in the scan direction, we obtain the speckle pattern 
+shifts in x direction from the row-by-row data processing and y direction 
+from the column-by-column data processing. As a result, the obtained 
+shifts are in the unit of the pixels size rather than the scan step 
+as in the XSS-type techniques. 
+
+Due to the above reasons, for the practical implementation of the 
+XSVT technique, we do the speckle tracking data processing two times
+to obtain the shifts in x and y direction, respectively. The data 
+processing procedure resembles the 2D case XSS technique 
+with reference beam. 
+
+To obtain the speckle pattern shift in the x direction, the outmost 
+loop is along the same direction. 
+
+.. figure:: _static/XSVT_refer2.png
+   :width: 80%
+   
+   The loop is over x direction to obtain the speckle pattern shift in this direction.
+
+Likewise, the outmost loop is along y direction if the speckle pattern 
+shift in y direction is to be tracked.
+
+.. figure:: _static/XSVT_refer3.png
+   :width: 80%
+   
+   The loop is over y direction to obtain the speckle pattern shift in this direction.
+
+Note to distinguish the above data processing procedure with the 
+XSS-type techniques. Although the implementation of the codes are 
+almost the same, the way to obtain the speckle pattern shifts for 
+these two techniques are different. The shifts obtained from XSVT 
+technique are in the unit of pixel size. Unlike it, the shifts 
+obtained from the XSS-type techniques are in the unit of scan step.
 
 .. _postfun:
 

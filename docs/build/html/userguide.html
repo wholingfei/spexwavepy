@@ -517,11 +517,32 @@ the scan number.</p>
 </figcaption>
 </figure>
 <p>Loop over each row in the raw image, a 1D speckle shift results will be obtained.</p>
-<p>For <strong>2D case</strong>, two more parameters play important roles. As in the 1D case,
-<code class="docutils literal notranslate"><span class="pre">edge_x</span></code>, <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_z</span></code> define how to cut the raw image stack.
-<code class="docutils literal notranslate"><span class="pre">hw_xy</span></code> defines the width (height) of the subregion for the 2D data processing if
-the <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’ (‘x’). Each subregion is a strip of data resemble that in 1D
-case. The subregion will move to cover the whole range of the raw images.
+<p>For <strong>2D case</strong>, the data processing procedure loop over one direction.
+The data processing resembles the 1D case in each loop. For y scan direction,
+the outmost layer of the loop is along the x direction,
+as shown in the following picture. The obtained speckle pattern shift is in
+the y direction.</p>
+<figure class="align-default" id="id19">
+<a class="reference internal image-reference" href="_images/XSVT_refer2.png"><img alt="_images/XSVT_refer2.png" src="_images/XSVT_refer2.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">The loop is over x direction when the scan is along y direction.</span><a class="headerlink" href="#id19" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Similar, if the scan direction is x, the outmost loop of the 2D data processing
+will be along the y direction. The obtained speckle pattern shift is in the
+x direction.</p>
+<figure class="align-default" id="id20">
+<a class="reference internal image-reference" href="_images/XSVT_refer3.png"><img alt="_images/XSVT_refer3.png" src="_images/XSVT_refer3.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">The loop is over y direction when the scan is along x direction.</span><a class="headerlink" href="#id20" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>According to the above description, two more parameters play important roles.
+As in the 1D case, <code class="docutils literal notranslate"><span class="pre">edge_x</span></code>, <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_z</span></code> define how to
+cut the raw image stack. <code class="docutils literal notranslate"><span class="pre">hw_xy</span></code> defines the width (height) of
+the subregion for the 2D data processing if the <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’ (‘x’).
+Each subregion is a strip of data resemble that in 1D case.
+The subregion will move to cover the whole range of the raw images.
 We use <code class="docutils literal notranslate"><span class="pre">hw_xy</span></code> to define the width (height) of the window, i.e.,
 the stitched images to be coross-correlated during each loop.
 The reference stitched image should be larger than the template,
@@ -530,16 +551,16 @@ Apparently, <code class="docutils literal notranslate"><span class="pre">pad_xy[
 <code class="docutils literal notranslate"><span class="pre">edge_x(edge_y)[0]</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_x(edge_y)[1]</span></code>, respectively.
 The larger the <code class="docutils literal notranslate"><span class="pre">pad_xy</span></code> is, the more trackable the image is, the slower the
 tracking process can be.</p>
-<figure class="align-default" id="id19">
+<figure class="align-default" id="id21">
 <a class="reference internal image-reference" href="_images/XSSrefer_4.png"><img alt="_images/XSSrefer_4.png" src="_images/XSSrefer_4.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">2D image processing for y scan data.</span><a class="headerlink" href="#id19" title="Permalink to this image"></a></p>
+<p><span class="caption-text">2D image processing for y scan data.</span><a class="headerlink" href="#id21" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-default" id="id20">
+<figure class="align-default" id="id22">
 <a class="reference internal image-reference" href="_images/XSSrefer_4x.png"><img alt="_images/XSSrefer_4x.png" src="_images/XSSrefer_4x.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">2D image processing for x scan data.</span><a class="headerlink" href="#id20" title="Permalink to this image"></a></p>
+<p><span class="caption-text">2D image processing for x scan data.</span><a class="headerlink" href="#id22" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>The remaing operations are the same as the 1D case.
@@ -599,31 +620,31 @@ They are along <code class="docutils literal notranslate"><span class="pre">x</s
 Like the scan-based techniques, a stripe of data along
 the <code class="docutils literal notranslate"><span class="pre">y</span></code> or <code class="docutils literal notranslate"><span class="pre">x</span></code> direction is extracted. And again,
 this is done by setting <code class="docutils literal notranslate"><span class="pre">ROI</span></code> for the image stacks.</p>
-<figure class="align-default" id="id21">
+<figure class="align-default" id="id23">
 <a class="reference internal image-reference" href="_images/XSTrefer_1.png"><img alt="_images/XSTrefer_1.png" src="_images/XSTrefer_1.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">The cropped data strip for 1D data processing in y direction.</span><a class="headerlink" href="#id21" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The cropped data strip for 1D data processing in y direction.</span><a class="headerlink" href="#id23" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-default" id="id22">
+<figure class="align-default" id="id24">
 <a class="reference internal image-reference" href="_images/XSTrefer_1x.png"><img alt="_images/XSTrefer_1x.png" src="_images/XSTrefer_1x.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">The cropped data strip for 1D data processing in x direction.</span><a class="headerlink" href="#id22" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The cropped data strip for 1D data processing in x direction.</span><a class="headerlink" href="#id24" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>Compared to the XSS method, there are some more parameters needed
 for this technique. Those parameters are <code class="docutils literal notranslate"><span class="pre">edge_x</span></code>, <code class="docutils literal notranslate"><span class="pre">edge_y</span></code>,
 <code class="docutils literal notranslate"><span class="pre">hw_xy</span></code>, <code class="docutils literal notranslate"><span class="pre">pad_x</span></code> and <code class="docutils literal notranslate"><span class="pre">pad_y</span></code>.</p>
-<figure class="align-default" id="id23">
+<figure class="align-default" id="id25">
 <a class="reference internal image-reference" href="_images/XSTrefer_2.png"><img alt="_images/XSTrefer_2.png" src="_images/XSTrefer_2.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Parameters for 1D data processing in y direction</span><a class="headerlink" href="#id23" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Parameters for 1D data processing in y direction</span><a class="headerlink" href="#id25" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-default" id="id24">
+<figure class="align-default" id="id26">
 <a class="reference internal image-reference" href="_images/XSTrefer_2x.png"><img alt="_images/XSTrefer_2x.png" src="_images/XSTrefer_2x.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Parameters for 1D data processing in x direction</span><a class="headerlink" href="#id24" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Parameters for 1D data processing in x direction</span><a class="headerlink" href="#id26" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p><code class="docutils literal notranslate"><span class="pre">edge_x</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> define the area to be cut from the template
@@ -637,16 +658,16 @@ useless in this case.</p>
 <p>For <strong>2D case</strong>, there are several more parameters needed apart from
 those in the 1D case. Also, some parameters are slightly different
 compared to the 1D case.</p>
-<figure class="align-default" id="id25">
+<figure class="align-default" id="id27">
 <a class="reference internal image-reference" href="_images/XSTrefer_3.png"><img alt="_images/XSTrefer_3.png" src="_images/XSTrefer_3.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Parameters for 2D data processing in y direction</span><a class="headerlink" href="#id25" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Parameters for 2D data processing in y direction</span><a class="headerlink" href="#id27" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-default" id="id26">
+<figure class="align-default" id="id28">
 <a class="reference internal image-reference" href="_images/XSTrefer_3x.png"><img alt="_images/XSTrefer_3x.png" src="_images/XSTrefer_3x.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Parameters for 2D data processing in x direction</span><a class="headerlink" href="#id26" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Parameters for 2D data processing in x direction</span><a class="headerlink" href="#id28" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>As shown in the above images, <code class="docutils literal notranslate"><span class="pre">edge_x</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> define the
@@ -697,6 +718,62 @@ section for details.</p>
 </section>
 <section id="xsvt-technique">
 <span id="traxsvtrefer"></span><h3>XSVT technique<a class="headerlink" href="#xsvt-technique" title="Permalink to this heading"></a></h3>
+<p><a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSVT_withrefer" title="spexwavepy.trackfun.Tracking.XSVT_withrefer"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSVT_withrefer()</span></code></a> and
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSVT_withrefer_multi" title="spexwavepy.trackfun.Tracking.XSVT_withrefer_multi"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSVT_withrefer_multi()</span></code></a> are the
+two functions used for the data processing of the
+<a class="reference internal" href="principle.html#prinxsvtrefer"><span class="std std-ref">XSVT technique</span></a>. Since this type of technique needs
+images of the reference beam and the beam with tested optics, so we need
+two image stacks. Each image in the image stacks are taken at one random
+scan position of the diffuser during the movement. As a result, the
+<code class="docutils literal notranslate"><span class="pre">scandim</span></code> is set to be ‘random’, the <code class="docutils literal notranslate"><span class="pre">scanstep</span></code> is useless.</p>
+<p>Like the XSS-type techniques, the raw image stack is a 3D data set.
+Unlike the XSS-type techniques, the scan step in this technique has
+no clear physical meaning. It has no use in the data processing. Also,
+the ‘1D’ mode is not supported in this technique. The data processing
+mode in this technique is assumed to be two-dimentional.</p>
+<p>The important parameters of these two functions are <code class="docutils literal notranslate"><span class="pre">edge_xy</span></code>, <code class="docutils literal notranslate"><span class="pre">edge_z</span></code>,
+<code class="docutils literal notranslate"><span class="pre">hw_xy</span></code>, <code class="docutils literal notranslate"><span class="pre">pad_xy</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">hw_xy</span></code> defines the window size of the subregion to be processed
+on the raw image. As shown in the picture below. Note the selected area
+is a square.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/XSVT_refer1.png"><img alt="_images/XSVT_refer1.png" src="_images/XSVT_refer1.png" style="width: 80%;" /></a>
+</figure>
+<p>Like the XSS-type techniques, the XSVT technique will process the data
+row by row and column by column to obtain the displacements in two
+dimensions. Unlike the XSS-type techniques, since there is no clear
+physcial meaning in the scan direction, we obtain the speckle pattern
+shifts in x direction from the row-by-row data processing and y direction
+from the column-by-column data processing. As a result, the obtained
+shifts are in the unit of the pixels size rather than the scan step
+as in the XSS-type techniques.</p>
+<p>Due to the above reasons, for the practical implementation of the
+XSVT technique, we do the speckle tracking data processing two times
+to obtain the shifts in x and y direction, respectively. The data
+processing procedure resembles the 2D case XSS technique
+with reference beam.</p>
+<p>To obtain the speckle pattern shift in the x direction, the outmost
+loop is along the same direction.</p>
+<figure class="align-default" id="id29">
+<a class="reference internal image-reference" href="_images/XSVT_refer2.png"><img alt="_images/XSVT_refer2.png" src="_images/XSVT_refer2.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">The loop is over x direction to obtain the speckle pattern shift in this direction.</span><a class="headerlink" href="#id29" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Likewise, the outmost loop is along y direction if the speckle pattern
+shift in y direction is to be tracked.</p>
+<figure class="align-default" id="id30">
+<a class="reference internal image-reference" href="_images/XSVT_refer3.png"><img alt="_images/XSVT_refer3.png" src="_images/XSVT_refer3.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">The loop is over y direction to obtain the speckle pattern shift in this direction.</span><a class="headerlink" href="#id30" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Note to distinguish the above data processing procedure with the
+XSS-type techniques. Although the implementation of the codes are
+almost the same, the way to obtain the speckle pattern shifts for
+these two techniques are different. The shifts obtained from XSVT
+technique are in the unit of pixel size. Unlike it, the shifts
+obtained from the XSS-type techniques are in the unit of scan step.</p>
 </section>
 </section>
 <section id="post-processing-of-the-tracked-speckle-pattern-shifts">
