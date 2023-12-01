@@ -2,18 +2,8 @@
 The speckle-based wavefront sensing techniques
 ============================================================
 *Description goes here...*
-
-.. _prinXSSRefer:
-
-X-ray Speckle Scanning (XSS) technique with reference beam
-==========================================================
-*Say something here...*
-
-.. _prinXSSSelf:
-
-Self-reference X-ray Speckle Scanning (XSS) technique 
-=====================================================
-*Say something here...*
+*Mention that we don't do 2D XSS, that means all the method about 
+XSS is 1D-XSS for Sebastien. For acquisition time concerns.*
 
 .. _prinXSTRefer:
 
@@ -96,6 +86,118 @@ The self-reference conventional XST technique may look ostensibly like the above
 conventional XST technique with reference beam. 
 However, the physical quantities obtained directly from the speckle pattern shifts are 
 very much different **[Add refs]**. 
+
+We use :math:`s_x` and :math:`s_y` to represent the displacement in two directions for the pizeo 
+at two different positions, :math:`ix` and :math:`iy` to represnt the shifts of the 
+speckle pattern in the cooresponding direction. 
+:math:`p`, :math:`D`, :math:`\alpha_x` and :math:`\alpha_y` represent 
+the pixel size of the detector, the distance between the diffuser and the detector plane,
+the wavefront slopes in x and y directions, repectively.
+
+We have the following equations:
+
+.. math::
+   \frac{1}{R_x} \approx \frac{\partial^{2}W}{\partial x^2} = \frac{1}{D} - \frac{s_x}{i_x \times p \times D}
+   
+   \frac{1}{R_y} \approx \frac{\partial^{2}W}{\partial y^2} = \frac{1}{D} - \frac{s_y}{i_y \times p \times D}
+
+Note in the above equations, :math:`R_x` and :math:`R_y` are the curvatures, i.e., 
+the second derivative of the wavefront.
+
+See the examples for the applications of the :ref:`1D <expKBalign>` and :ref:`2D <expxssvsxst>` self-reference 
+XST technique. 
+
+.. _prinXSSRefer:
+
+X-ray Speckle Scanning (XSS) technique with reference beam
+==========================================================
+The X-ray speckle scanning method was developed to further 
+improve the spatial resolution of the speckle-based 
+wavefront sensing techniques.
+The XSS techniques enable the analysis of the wavefront 
+pixel-by-pixel along the scan direction, 
+making it suitable for at-wavelength measurements with 
+high sensitivity and precision. 
+
+Like the conventional XST-like techniques, 
+the XSS-like techniques have two modes, depending on 
+whether the reference beam is available. 
+
+The following figure shows the data acquisition process
+of the XSS technique with reference beam **[Add refs]**. 
+Note that compared to the above XST-like techniques, 
+the difusser is scanned. 
+
+.. figure:: _static/referXSS_principle.png
+   :width: 80%
+   
+   The experiment layout for the X-ray speckle scanning 
+   technique with reference beam. 
+
+The data is processed pixel-wisely in the scan direction.
+During the data processing procedure, 
+sub-regions of the raw images in each stack was extracted 
+and stitched together to form a new image.
+Two new images were thereby generated from the two image stacks.
+They are then cross-correlated. 
+As a result, the tracked pattern shifts are in 
+the unit of the scan step. 
+
+Like the conventional XST method with reference beam, 
+the phsycial quantity directly derived from the tracked 
+speckle pattern shift is the wavefront slope, 
+i.e., the first derivative of the wavefront. 
+
+The following equations satisfy:
+
+.. math:: 
+   \alpha_x = \frac{\partial W}{\partial x} = \frac{ix \times s_x}{D}
+   
+   \alpha_y = \frac{\partial W}{\partial y} = \frac{iy \times s_y}{D}
+
+where :math:`\alpha_x`, :math:`\alpha_y` are the slopes of the wavefront, 
+:math:`ix` and :math:`iy` are the tracked shifts of the speckle pattern 
+in x and y directions, :math:`s_x` and :math:`s_y` are the scan steps in 
+two directions, :math:`D` is the distance between the detector plane and 
+the diffuser.
+
+This technique has been shown in the :ref:`example <expplane>`.
+
+.. _prinXSSSelf:
+
+Self-reference X-ray Speckle Scanning (XSS) technique 
+=====================================================
+As the name indicates, when there is no reference beam, 
+this technique is used.
+
+The image data are acquired during the scan of the diffuser in 
+either x or y direction. For this technique, 
+only one image stack is acquired. 
+It is obtained with the tested optical element in the beam.
+
+The following figure shows the data acquisition procedure for 
+the self-reference XSS technique.
+
+.. figure:: _static/selfXSS_principle.png
+   :width: 80%
+   
+   The experiment layout for the self-reference 
+   X-ray speckle scanning technique. 
+
+Like the self-reference conventional XST method, 
+the phsycial quantity directly derived from the tracked 
+speckle pattern shift for this technique 
+is the wavefront slope, i.e., the second derivative 
+of the wavefront.
+
+We have the following equations:
+
+.. math::
+   \frac{1}{R_x} \approx \frac{\partial^{2}W}{\partial x^2} = \frac{1}{D} - \frac{i_x \times s_x}{(j-i) \times p \times D}
+   
+   \frac{1}{R_y} \approx \frac{\partial^{2}W}{\partial y^2} = \frac{1}{D} - \frac{i_y \times s_y}{(j-i) \times p \times D}
+
+where 
 
 .. _prinXSVTRefer:
 

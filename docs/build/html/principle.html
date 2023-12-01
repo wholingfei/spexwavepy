@@ -45,10 +45,10 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">The speckle-based wavefront sensing techniques</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#x-ray-speckle-scanning-xss-technique-with-reference-beam">X-ray Speckle Scanning (XSS) technique with reference beam</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#self-reference-x-ray-speckle-scanning-xss-technique">Self-reference X-ray Speckle Scanning (XSS) technique</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#conventional-x-ray-speckle-tracking-xst-technique-with-reference-beam">Conventional X-ray Speckle Tracking (XST) technique with reference beam</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#self-reference-conventional-x-ray-speckle-tracking-xst-technique">Self-reference conventional X-ray Speckle Tracking (XST) technique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#x-ray-speckle-scanning-xss-technique-with-reference-beam">X-ray Speckle Scanning (XSS) technique with reference beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#self-reference-x-ray-speckle-scanning-xss-technique">Self-reference X-ray Speckle Scanning (XSS) technique</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#x-ray-speckle-vector-tracking-xsvt-technique">X-ray Speckle Vector Tracking (XSVT) technique</a></li>
 </ul>
 </li>
@@ -84,15 +84,9 @@
              
   <section id="the-speckle-based-wavefront-sensing-techniques">
 <h1>The speckle-based wavefront sensing techniques<a class="headerlink" href="#the-speckle-based-wavefront-sensing-techniques" title="Permalink to this heading"></a></h1>
-<p><em>Description goes here…</em></p>
-<section id="x-ray-speckle-scanning-xss-technique-with-reference-beam">
-<span id="prinxssrefer"></span><h2>X-ray Speckle Scanning (XSS) technique with reference beam<a class="headerlink" href="#x-ray-speckle-scanning-xss-technique-with-reference-beam" title="Permalink to this heading"></a></h2>
-<p><em>Say something here…</em></p>
-</section>
-<section id="self-reference-x-ray-speckle-scanning-xss-technique">
-<span id="prinxssself"></span><h2>Self-reference X-ray Speckle Scanning (XSS) technique<a class="headerlink" href="#self-reference-x-ray-speckle-scanning-xss-technique" title="Permalink to this heading"></a></h2>
-<p><em>Say something here…</em></p>
-</section>
+<p><em>Description goes here…</em>
+<em>Mention that we don’t do 2D XSS, that means all the method about
+XSS is 1D-XSS for Sebastien. For acquisition time concerns.</em></p>
 <section id="conventional-x-ray-speckle-tracking-xst-technique-with-reference-beam">
 <span id="prinxstrefer"></span><h2>Conventional X-ray Speckle Tracking (XST) technique with reference beam<a class="headerlink" href="#conventional-x-ray-speckle-tracking-xst-technique-with-reference-beam" title="Permalink to this heading"></a></h2>
 <p>The conventional XST technique with reference beam was developed at the
@@ -158,6 +152,91 @@ technique.</span><a class="headerlink" href="#id2" title="Permalink to this imag
 conventional XST technique with reference beam.
 However, the physical quantities obtained directly from the speckle pattern shifts are
 very much different <strong>[Add refs]</strong>.</p>
+<p>We use <span class="math notranslate nohighlight">\(s_x\)</span> and <span class="math notranslate nohighlight">\(s_y\)</span> to represent the displacement in two directions for the pizeo
+at two different positions, <span class="math notranslate nohighlight">\(ix\)</span> and <span class="math notranslate nohighlight">\(iy\)</span> to represnt the shifts of the
+speckle pattern in the cooresponding direction.
+<span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(D\)</span>, <span class="math notranslate nohighlight">\(\alpha_x\)</span> and <span class="math notranslate nohighlight">\(\alpha_y\)</span> represent
+the pixel size of the detector, the distance between the diffuser and the detector plane,
+the wavefront slopes in x and y directions, repectively.</p>
+<p>We have the following equations:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\frac{1}{R_x} \approx \frac{\partial^{2}W}{\partial x^2} = \frac{1}{D} - \frac{s_x}{i_x \times p \times D}\\\frac{1}{R_y} \approx \frac{\partial^{2}W}{\partial y^2} = \frac{1}{D} - \frac{s_y}{i_y \times p \times D}\end{aligned}\end{align} \]</div>
+<p>Note in the above equations, <span class="math notranslate nohighlight">\(R_x\)</span> and <span class="math notranslate nohighlight">\(R_y\)</span> are the curvatures, i.e.,
+the second derivative of the wavefront.</p>
+<p>See the examples for the applications of the <a class="reference internal" href="example.html#expkbalign"><span class="std std-ref">1D</span></a> and <a class="reference internal" href="example.html#expxssvsxst"><span class="std std-ref">2D</span></a> self-reference
+XST technique.</p>
+</section>
+<section id="x-ray-speckle-scanning-xss-technique-with-reference-beam">
+<span id="prinxssrefer"></span><h2>X-ray Speckle Scanning (XSS) technique with reference beam<a class="headerlink" href="#x-ray-speckle-scanning-xss-technique-with-reference-beam" title="Permalink to this heading"></a></h2>
+<p>The X-ray speckle scanning method was developed to further
+improve the spatial resolution of the speckle-based
+wavefront sensing techniques.
+The XSS techniques enable the analysis of the wavefront
+pixel-by-pixel along the scan direction,
+making it suitable for at-wavelength measurements with
+high sensitivity and precision.</p>
+<p>Like the conventional XST-like techniques,
+the XSS-like techniques have two modes, depending on
+whether the reference beam is available.</p>
+<p>The following figure shows the data acquisition process
+of the XSS technique with reference beam <strong>[Add refs]</strong>.
+Note that compared to the above XST-like techniques,
+the difusser is scanned.</p>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="_images/referXSS_principle.png"><img alt="_images/referXSS_principle.png" src="_images/referXSS_principle.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">The experiment layout for the X-ray speckle scanning
+technique with reference beam.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The data is processed pixel-wisely in the scan direction.
+During the data processing procedure,
+sub-regions of the raw images in each stack was extracted
+and stitched together to form a new image.
+Two new images were thereby generated from the two image stacks.
+They are then cross-correlated.
+As a result, the tracked pattern shifts are in
+the unit of the scan step.</p>
+<p>Like the conventional XST method with reference beam,
+the phsycial quantity directly derived from the tracked
+speckle pattern shift is the wavefront slope,
+i.e., the first derivative of the wavefront.</p>
+<p>The following equations satisfy:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\alpha_x = \frac{\partial W}{\partial x} = \frac{ix \times s_x}{D}\\\alpha_y = \frac{\partial W}{\partial y} = \frac{iy \times s_y}{D}\end{aligned}\end{align} \]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha_x\)</span>, <span class="math notranslate nohighlight">\(\alpha_y\)</span> are the slopes of the wavefront,
+<span class="math notranslate nohighlight">\(ix\)</span> and <span class="math notranslate nohighlight">\(iy\)</span> are the tracked shifts of the speckle pattern
+in x and y directions, <span class="math notranslate nohighlight">\(s_x\)</span> and <span class="math notranslate nohighlight">\(s_y\)</span> are the scan steps in
+two directions, <span class="math notranslate nohighlight">\(D\)</span> is the distance between the detector plane and
+the diffuser.</p>
+<p>This technique has been shown in the <a class="reference internal" href="example.html#expplane"><span class="std std-ref">example</span></a>.</p>
+</section>
+<section id="self-reference-x-ray-speckle-scanning-xss-technique">
+<span id="prinxssself"></span><h2>Self-reference X-ray Speckle Scanning (XSS) technique<a class="headerlink" href="#self-reference-x-ray-speckle-scanning-xss-technique" title="Permalink to this heading"></a></h2>
+<p>As the name indicates, when there is no reference beam,
+this technique is used.</p>
+<p>The image data are acquired during the scan of the diffuser in
+either x or y direction. For this technique,
+only one image stack is acquired.
+It is obtained with the tested optical element in the beam.</p>
+<p>The following figure shows the data acquisition procedure for
+the self-reference XSS technique.</p>
+<figure class="align-default" id="id4">
+<a class="reference internal image-reference" href="_images/selfXSS_principle.png"><img alt="_images/selfXSS_principle.png" src="_images/selfXSS_principle.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">The experiment layout for the self-reference
+X-ray speckle scanning technique.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Like the self-reference conventional XST method,
+the phsycial quantity directly derived from the tracked
+speckle pattern shift for this technique
+is the wavefront slope, i.e., the second derivative
+of the wavefront.</p>
+<p>We have the following equations:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\frac{1}{R_x} \approx \frac{\partial^{2}W}{\partial x^2} = \frac{1}{D} - \frac{i_x \times s_x}{(j-i) \times p \times D}\\\frac{1}{R_y} \approx \frac{\partial^{2}W}{\partial y^2} = \frac{1}{D} - \frac{i_y \times s_y}{(j-i) \times p \times D}\end{aligned}\end{align} \]</div>
+<p>where</p>
 </section>
 <section id="x-ray-speckle-vector-tracking-xsvt-technique">
 <span id="prinxsvtrefer"></span><h2>X-ray Speckle Vector Tracking (XSVT) technique<a class="headerlink" href="#x-ray-speckle-vector-tracking-xsvt-technique" title="Permalink to this heading"></a></h2>
