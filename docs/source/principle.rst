@@ -5,6 +5,42 @@ The speckle-based wavefront sensing techniques
 *Mention that we don't do 2D XSS, that means all the method about 
 XSS is 1D-XSS for Sebastien. For acquisition time concerns.*
 
+In general, the speckle-based X-ray wavefront characterization 
+methods can be divided into **two modes**. They depend on whether the 
+reference beam is available or not. 
+
+If the tested optical element is a weakly-focusing object, 
+such as single CRL or even a planar reflecting mirror, 
+the incident beam without the tested optical element can be 
+treated as a reference beam. 
+The speckle patterns acquired with or without the tested optical 
+element are comparable with each other.
+This mode corresponds to the 'differetial mode' 
+discussed in **[Add ref]**.
+In this documentation, we call this mode with the suffix 
+**'with reference beam'**.
+
+For the strong-focusing optics, such as curved mirror, 
+the speckle patterns can be very different with and without 
+the tested optics in the beam. 
+In this case, no reference beam is available.
+The speckle patterns to be compared come from the same data set 
+in which the tested optics are always in the beam.
+This mode corresponds to the 'absolute mode' 
+discussed in **[Add ref]**.
+Here, in this documentation, we call this mode with the prefix 
+**'self-reference'**.
+
+Regardless of the characterization modes, the various techniques 
+all trace the shift of the speckle pattern. 
+However, these shifts are caused by different physcial process. 
+In other words, different modes represent different 
+physcial quantities directly characterized.
+
+In brief, 
+
+*Don't forget to add footnote on the situation along z direction.* 
+
 .. _prinXSTRefer:
 
 Conventional X-ray Speckle Tracking (XST) technique with reference beam 
@@ -171,7 +207,7 @@ As the name indicates, when there is no reference beam,
 this technique is used.
 
 The image data are acquired during the scan of the diffuser in 
-either x or y direction. For this technique, 
+either x or y direction**[Add refs]**. For this technique, 
 only one image stack is acquired. 
 It is obtained with the tested optical element in the beam.
 
@@ -197,7 +233,13 @@ We have the following equations:
    
    \frac{1}{R_y} \approx \frac{\partial^{2}W}{\partial y^2} = \frac{1}{D} - \frac{i_y \times s_y}{(j-i) \times p \times D}
 
-where 
+where :math:`R_x` and :math:`R_y` are the curvatures of the wavefront. 
+They are the second derivatives of the wavefront in the 
+horizontal and vertical directions.
+:math:`ix` and :math:`iy` are the tracked shifts of the speckle pattern, 
+:math:`s_x` and :math:`s_y` are the scan steps,
+:math:`D` is the distance between the detector plane and 
+the diffuser.
 
 .. _prinXSVTRefer:
 

@@ -87,6 +87,36 @@
 <p><em>Description goes here…</em>
 <em>Mention that we don’t do 2D XSS, that means all the method about
 XSS is 1D-XSS for Sebastien. For acquisition time concerns.</em></p>
+<p>In general, the speckle-based X-ray wavefront characterization
+methods can be divided into <strong>two modes</strong>. They depend on whether the
+reference beam is available or not.</p>
+<p>If the tested optical element is a weakly-focusing object,
+such as single CRL or even a planar reflecting mirror,
+the incident beam without the tested optical element can be
+treated as a reference beam.
+The speckle patterns acquired with or without the tested optical
+element are comparable with each other.
+This mode corresponds to the ‘differetial mode’
+discussed in <strong>[Add ref]</strong>.
+In this documentation, we call this mode with the suffix
+<strong>‘with reference beam’</strong>.</p>
+<p>For the strong-focusing optics, such as curved mirror,
+the speckle patterns can be very different with and without
+the tested optics in the beam.
+In this case, no reference beam is available.
+The speckle patterns to be compared come from the same data set
+in which the tested optics are always in the beam.
+This mode corresponds to the ‘absolute mode’
+discussed in <strong>[Add ref]</strong>.
+Here, in this documentation, we call this mode with the prefix
+<strong>‘self-reference’</strong>.</p>
+<p>Regardless of the characterization modes, the various techniques
+all trace the shift of the speckle pattern.
+However, these shifts are caused by different physcial process.
+In other words, different modes represent different
+physcial quantities directly characterized.</p>
+<p>In brief,</p>
+<p><em>Don’t forget to add footnote on the situation along z direction.</em></p>
 <section id="conventional-x-ray-speckle-tracking-xst-technique-with-reference-beam">
 <span id="prinxstrefer"></span><h2>Conventional X-ray Speckle Tracking (XST) technique with reference beam<a class="headerlink" href="#conventional-x-ray-speckle-tracking-xst-technique-with-reference-beam" title="Permalink to this heading"></a></h2>
 <p>The conventional XST technique with reference beam was developed at the
@@ -216,7 +246,7 @@ the diffuser.</p>
 <p>As the name indicates, when there is no reference beam,
 this technique is used.</p>
 <p>The image data are acquired during the scan of the diffuser in
-either x or y direction. For this technique,
+either x or y direction**[Add refs]**. For this technique,
 only one image stack is acquired.
 It is obtained with the tested optical element in the beam.</p>
 <p>The following figure shows the data acquisition procedure for
@@ -236,7 +266,13 @@ of the wavefront.</p>
 <p>We have the following equations:</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}\frac{1}{R_x} \approx \frac{\partial^{2}W}{\partial x^2} = \frac{1}{D} - \frac{i_x \times s_x}{(j-i) \times p \times D}\\\frac{1}{R_y} \approx \frac{\partial^{2}W}{\partial y^2} = \frac{1}{D} - \frac{i_y \times s_y}{(j-i) \times p \times D}\end{aligned}\end{align} \]</div>
-<p>where</p>
+<p>where <span class="math notranslate nohighlight">\(R_x\)</span> and <span class="math notranslate nohighlight">\(R_y\)</span> are the curvatures of the wavefront.
+They are the second derivatives of the wavefront in the
+horizontal and vertical directions.
+<span class="math notranslate nohighlight">\(ix\)</span> and <span class="math notranslate nohighlight">\(iy\)</span> are the tracked shifts of the speckle pattern,
+<span class="math notranslate nohighlight">\(s_x\)</span> and <span class="math notranslate nohighlight">\(s_y\)</span> are the scan steps,
+<span class="math notranslate nohighlight">\(D\)</span> is the distance between the detector plane and
+the diffuser.</p>
 </section>
 <section id="x-ray-speckle-vector-tracking-xsvt-technique">
 <span id="prinxsvtrefer"></span><h2>X-ray Speckle Vector Tracking (XSVT) technique<a class="headerlink" href="#x-ray-speckle-vector-tracking-xsvt-technique" title="Permalink to this heading"></a></h2>
