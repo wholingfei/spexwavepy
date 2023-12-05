@@ -37,7 +37,28 @@ However, these shifts are caused by different physcial process.
 In other words, different modes represent different 
 physcial quantities directly characterized.
 
-In brief, 
+In brief, when the reference beam is available, 
+the speckle pattern shift is caused by the 
+first derivative, i.e., the slope of the measured wavefront. 
+Otherwise, when in self-reference mode, 
+the speckle pattern shift is caused by the 
+second derivative, i.e., the curvature of the measured wavefront. 
+
+The following table gives a summary of the speckle-based techniques 
+included in this package.
+
++---------------------+-----------------------------------------------+-------------------------------------+
+| Technique           | Number of images                              | Physical quantity directly measured |
++=====================+===============================================+=====================================+
+| Conventional XST    | 1 image for both reference and                | Wavefront slope                     |
+|                     | sample dataset.                               |                                     |
++---------------------+-----------------------------------------------+-------------------------------------+
+| Self-reference XST  | 2 images for reference dataset.               | Wavefront curvature                 |
++---------------------+-----------------------------------------------+-------------------------------------+
+| XSS with reference  | 2 datasets, for reference and sample each.    |                                     |
+| beam                | The number of images in one dataset equals to | Wavefront slope                     |
+|                     | the number of scans.                          |                                     |
++---------------------+-----------------------------------------------+-------------------------------------+
 
 *Don't forget to add footnote on the situation along z direction.* 
 
@@ -240,6 +261,9 @@ horizontal and vertical directions.
 :math:`s_x` and :math:`s_y` are the scan steps,
 :math:`D` is the distance between the detector plane and 
 the diffuser.
+
+Please see :ref:`this example <exp2ndderiv>` for the use of self-reference XSS technique to 
+measure wavefront local curvature after a plane mirror.
 
 .. _prinXSVTRefer:
 

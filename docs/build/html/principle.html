@@ -115,7 +115,40 @@ all trace the shift of the speckle pattern.
 However, these shifts are caused by different physcial process.
 In other words, different modes represent different
 physcial quantities directly characterized.</p>
-<p>In brief,</p>
+<p>In brief, when the reference beam is available,
+the speckle pattern shift is caused by the
+first derivative, i.e., the slope of the measured wavefront.
+Otherwise, when in self-reference mode,
+the speckle pattern shift is caused by the
+second derivative, i.e., the curvature of the measured wavefront.</p>
+<p>The following table gives a summary of the speckle-based techniques
+included in this package.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Technique</p></th>
+<th class="head"><p>Number of images</p></th>
+<th class="head"><p>Physical quantity directly measured</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Conventional XST</p></td>
+<td><p>1 image for both reference and
+sample dataset.</p></td>
+<td><p>Wavefront slope</p></td>
+</tr>
+<tr class="row-odd"><td><p>Self-reference XST</p></td>
+<td><p>2 images for reference dataset.</p></td>
+<td><p>Wavefront curvature</p></td>
+</tr>
+<tr class="row-even"><td><p>XSS with reference
+beam</p></td>
+<td><p>2 datasets, for reference and sample each.
+The number of images in one dataset equals to
+the number of scans.</p></td>
+<td><p>Wavefront slope</p></td>
+</tr>
+</tbody>
+</table>
 <p><em>Don’t forget to add footnote on the situation along z direction.</em></p>
 <section id="conventional-x-ray-speckle-tracking-xst-technique-with-reference-beam">
 <span id="prinxstrefer"></span><h2>Conventional X-ray Speckle Tracking (XST) technique with reference beam<a class="headerlink" href="#conventional-x-ray-speckle-tracking-xst-technique-with-reference-beam" title="Permalink to this heading"></a></h2>
@@ -273,6 +306,8 @@ horizontal and vertical directions.
 <span class="math notranslate nohighlight">\(s_x\)</span> and <span class="math notranslate nohighlight">\(s_y\)</span> are the scan steps,
 <span class="math notranslate nohighlight">\(D\)</span> is the distance between the detector plane and
 the diffuser.</p>
+<p>Please see <a class="reference internal" href="example.html#exp2ndderiv"><span class="std std-ref">this example</span></a> for the use of self-reference XSS technique to
+measure wavefront local curvature after a plane mirror.</p>
 </section>
 <section id="x-ray-speckle-vector-tracking-xsvt-technique">
 <span id="prinxsvtrefer"></span><h2>X-ray Speckle Vector Tracking (XSVT) technique<a class="headerlink" href="#x-ray-speckle-vector-tracking-xsvt-technique" title="Permalink to this heading"></a></h2>
