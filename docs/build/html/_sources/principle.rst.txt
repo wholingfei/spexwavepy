@@ -45,7 +45,8 @@ the speckle pattern shift is caused by the
 second derivative, i.e., the curvature of the measured wavefront. 
 
 The following table gives a summary of the speckle-based techniques 
-included in this package.
+included in this package. For the detailed description of the principle
+of each technique, please see the following sections.
 
 +---------------------+-----------------------------------------------+-------------------------------------+
 | Technique           | Number of images                              | Physical quantity directly measured |
@@ -58,6 +59,14 @@ included in this package.
 | XSS with reference  | 2 datasets, for reference and sample each.    |                                     |
 | beam                | The number of images in one dataset equals to | Wavefront slope                     |
 |                     | the number of scans.                          |                                     |
++---------------------+-----------------------------------------------+-------------------------------------+
+| Self-reference XSS  | 1 dataset, for sample images.                 |                                     |
+|                     | The number of images equals to                | Wavefront curvature                 |
+|                     | the number of scans.                          |                                     |
++---------------------+-----------------------------------------------+-------------------------------------+
+| XSVT                | 2 datasets, for reference and sample each.    |                                     |
+|                     | The number of images equals to                | Wavefront slope                     |
+|                     | the number of random scans.                   |                                     |
 +---------------------+-----------------------------------------------+-------------------------------------+
 
 *Don't forget to add footnote on the situation along z direction.* 
@@ -105,8 +114,10 @@ can be acquired.
 The physical quantity directly obtained from this method is the wavefront slope.
 We use :math:`ix` and :math:`iy` to represnt the shift in the cooresponding direction. 
 The pixel size of the detector, the distance between the diffuser and the detector plane, 
-and the wavefront slopes in x and y directions can be represented by :math:`p`, :math:`D`, 
-:math:`\alpha_x` and :math:`\alpha_y`, respectively.
+and the wavefront slopes in x and y directions can be represented by :math:`p`, 
+:math:`D`, 
+:math:`\alpha_x` 
+and :math:`\alpha_y`, respectively.
 
 The following equations satisfy:
 

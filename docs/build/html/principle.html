@@ -122,7 +122,8 @@ Otherwise, when in self-reference mode,
 the speckle pattern shift is caused by the
 second derivative, i.e., the curvature of the measured wavefront.</p>
 <p>The following table gives a summary of the speckle-based techniques
-included in this package.</p>
+included in this package. For the detailed description of the principle
+of each technique, please see the following sections.</p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Technique</p></th>
@@ -145,6 +146,18 @@ beam</p></td>
 <td><p>2 datasets, for reference and sample each.
 The number of images in one dataset equals to
 the number of scans.</p></td>
+<td><p>Wavefront slope</p></td>
+</tr>
+<tr class="row-odd"><td><p>Self-reference XSS</p></td>
+<td><p>1 dataset, for sample images.
+The number of images equals to
+the number of scans.</p></td>
+<td><p>Wavefront curvature</p></td>
+</tr>
+<tr class="row-even"><td><p>XSVT</p></td>
+<td><p>2 datasets, for reference and sample each.
+The number of images equals to
+the number of random scans.</p></td>
 <td><p>Wavefront slope</p></td>
 </tr>
 </tbody>
@@ -187,8 +200,10 @@ can be acquired.</p>
 <p>The physical quantity directly obtained from this method is the wavefront slope.
 We use <span class="math notranslate nohighlight">\(ix\)</span> and <span class="math notranslate nohighlight">\(iy\)</span> to represnt the shift in the cooresponding direction.
 The pixel size of the detector, the distance between the diffuser and the detector plane,
-and the wavefront slopes in x and y directions can be represented by <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(D\)</span>,
-<span class="math notranslate nohighlight">\(\alpha_x\)</span> and <span class="math notranslate nohighlight">\(\alpha_y\)</span>, respectively.</p>
+and the wavefront slopes in x and y directions can be represented by <span class="math notranslate nohighlight">\(p\)</span>,
+<span class="math notranslate nohighlight">\(D\)</span>,
+<span class="math notranslate nohighlight">\(\alpha_x\)</span>
+and <span class="math notranslate nohighlight">\(\alpha_y\)</span>, respectively.</p>
 <p>The following equations satisfy:</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}\alpha_x = \frac{\partial W}{\partial x} = \frac{ix \times p}{D}\\\alpha_y = \frac{\partial W}{\partial y} = \frac{iy \times p}{D}\end{aligned}\end{align} \]</div>
