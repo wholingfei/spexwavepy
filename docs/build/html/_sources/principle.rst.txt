@@ -1,9 +1,50 @@
 ============================================================
 The speckle-based wavefront sensing techniques
 ============================================================
-*Description goes here...*
-*Mention that we don't do 2D XSS, that means all the method about 
-XSS is 1D-XSS for Sebastien. For acquisition time concerns.*
+When shining a laser through a diffuser, 
+a two-dimensional random intensity (speckle) patterns will be generated. 
+Speckle-based techniques have long been used in metrology 
+and other applications that using visible light.
+Those visible light techniques have been extended to X-ray regime 
+a decade ago by early researchers [BerujonPRL]_ and [MorganAPL]_. 
+Since then, the X-ray speckle-based techniques was burgeoning over time.
+These techniques stand out due to their relatively simple 
+experimental requirements and ease of use. 
+
+A typical experimental setup for hard X-ray is shown in the 
+following picture. The diffuser used is a sandpaper. 
+It is mounted on a 2D scannable high precision stage. 
+The detector used a scintillator to convert the incident 
+X-ray to the visible light and coupled with a microscopy
+imaging system.
+
+.. figure:: _static/ExpsetupB16.png
+   :width: 100%
+
+   A typical setup for the speckle wavefront sensing experiment.
+   This picture was taken at the Test beamline B16 at Diamond Light Source Ltd.
+
+The early technique developed is the conventional X-ray Speckle 
+Tracking (XST) method [BerujonPRL]_. 
+Only two images are required for this method. 
+In order to further improve the spatial resolution of the 
+data processing, the scan based techniques were proposed 
+[BerujonPRA]_, [BerujonOE]_. 
+They are referred as X-ray Speckle Scanning (XSS) techniques.
+To trade off between the spatial resolution of the data processing 
+and the data acquisition time, X-ray Speckle Vector Tracking (XSVT) 
+was developed [BerujonZieglerPRA]_. 
+
+For a complete review of the theoretical and experimental part of 
+the speckle-based wavefront sensing techniques, please refere to
+[JSRTheory]_ and [JSRExperiment]_.
+
+.. note:: 
+   In this package, we didn't implement the 2D version 
+   of XSS techniques as introduced in [JSRTheory]_ and [JSRExperiment]_,
+   taking the practical data acquisition time into consideration. 
+   Thus, all the XSS-techniques used in this package correspond to the 
+   1D scan of the XSS techniques.
 
 In general, the speckle-based X-ray wavefront characterization 
 methods can be divided into **two modes**. They depend on whether the 
@@ -16,7 +57,7 @@ treated as a reference beam.
 The speckle patterns acquired with or without the tested optical 
 element are comparable with each other.
 This mode corresponds to the 'differetial mode' 
-discussed in **[Add ref]**.
+discussed in [JSRTheory]_.
 In this documentation, we call this mode with the suffix 
 **'with reference beam'**.
 
@@ -26,8 +67,6 @@ the tested optics in the beam.
 In this case, no reference beam is available.
 The speckle patterns to be compared come from the same data set 
 in which the tested optics are always in the beam.
-This mode corresponds to the 'absolute mode' 
-discussed in **[Add ref]**.
 Here, in this documentation, we call this mode with the prefix 
 **'self-reference'**.
 
@@ -48,28 +87,70 @@ The following table gives a summary of the speckle-based techniques
 included in this package. For the detailed description of the principle
 of each technique, please see the following sections.
 
-+---------------------+-----------------------------------------------+-------------------------------------+
-| Technique           | Number of images                              | Physical quantity directly measured |
-+=====================+===============================================+=====================================+
-| Conventional XST    | 1 image for both reference and                | Wavefront slope                     |
-|                     | sample dataset.                               |                                     |
-+---------------------+-----------------------------------------------+-------------------------------------+
-| Self-reference XST  | 2 images for reference dataset.               | Wavefront curvature                 |
-+---------------------+-----------------------------------------------+-------------------------------------+
-| XSS with reference  | 2 datasets, for reference and sample each.    |                                     |
-| beam                | The number of images in one dataset equals to | Wavefront slope                     |
-|                     | the number of scans.                          |                                     |
-+---------------------+-----------------------------------------------+-------------------------------------+
-| Self-reference XSS  | 1 dataset, for sample images.                 |                                     |
-|                     | The number of images equals to                | Wavefront curvature                 |
-|                     | the number of scans.                          |                                     |
-+---------------------+-----------------------------------------------+-------------------------------------+
-| XSVT                | 2 datasets, for reference and sample each.    |                                     |
-|                     | The number of images equals to                | Wavefront slope                     |
-|                     | the number of random scans.                   |                                     |
-+---------------------+-----------------------------------------------+-------------------------------------+
++--------------------------+-----------------------------------------------+-------------------------------------+
+| Technique                | Number of images                              | Physical quantity directly measured |
++==========================+===============================================+=====================================+
+| Conventional XST [1]_    | 1 image for both reference and                | Wavefront slope                     |
+|                          | sample dataset.                               |                                     |
++--------------------------+-----------------------------------------------+-------------------------------------+
+| Self-reference XST       | 2 images for reference dataset.               | Wavefront curvature                 |
++--------------------------+-----------------------------------------------+-------------------------------------+
+| XSS with reference       | 2 datasets, for reference and sample each.    |                                     |
+| beam                     | The number of images in one dataset equals to | Wavefront slope                     |
+|                          | the number of scans.                          |                                     |
++--------------------------+-----------------------------------------------+-------------------------------------+
+| Self-reference XSS       | 1 dataset, for sample images.                 |                                     |
+|                          | The number of images equals to                | Wavefront curvature                 |
+|                          | the number of scans.                          |                                     |
++--------------------------+-----------------------------------------------+-------------------------------------+
+| XSVT                     | 2 datasets, for reference and sample each.    |                                     |
+|                          | The number of images equals to                | Wavefront slope                     |
+|                          | the number of random scans.                   |                                     |
++--------------------------+-----------------------------------------------+-------------------------------------+
 
-*Don't forget to add footnote on the situation along z direction.* 
+.. [1] The conventional XST technique in this package refers to the case with and without tested optic in the beam.
+       It is the 'differential mode' in [JSRTheory]_. However, the data processing procedure for the 'absolute mode'
+       is almost the same.   
+
+
+.. [BerujonPRL] Berujon S, Ziegler E, Cerbino R, Peverini L. 
+                Two-dimensional x-ray beam phase sensing. 
+                Phys Rev Lett. 2012 Apr 13;108(15):158102. 
+                https://doi.org/10.1103/PhysRevLett.108.158102
+
+.. [MorganAPL] Kaye S. Morgan, David M. Paganin, Karen K. W. Siu 
+               X-ray phase imaging with a paper analyzer. 
+               Appl. Phys. Lett. 19 March 2012; 100 (12): 124102. 
+               https://doi.org/10.1063/1.3694918
+
+.. [BerujonPRA] Berujon, S., Wang, H., & Sawhney, K.J. 
+                (2012). X-ray multimodal imaging using a random-phase object. 
+                Physical Review A, 86, 063813. 
+                https://doi.org/10.1103/PhysRevA.86.063813
+
+.. [BerujonOE] Berujon, S., Wang, H., Alcock, S.G., & Sawhney, K.J. 
+               (2014). At-wavelength metrology of hard X-ray mirror using near field speckle. 
+               Optics express, 22 6, 6438-46.
+               https://doi.org/10.1364/OE.22.006438
+
+.. [BerujonZieglerPRA] Berujon, S., & Ziegler, E. (2017). 
+                       Near-field speckle-scanning-based X-ray tomography. 
+                       Physical Review A, 95.
+                       https://doi.org/10.1103/PhysRevA.95.063822
+
+.. [JSRTheory] Berujon, S., Cojocaru, R., Piault, P., Celestre, R., Roth, T., Barrett, R. & Ziegler, E. (2020). 
+               X-ray optics and beam characterization using random modulation: theory
+               J. Synchrotron Rad. 27, 284-292.
+               https://doi.org/10.1107/S1600577520000491
+
+.. [JSRExperiment] Berujon, S., Cojocaru, R., Piault, P., Celestre, R., Roth, T., Barrett, R. & Ziegler, E. (2020). 
+                   X-ray optics and beam characterization using random modulation: experiments 
+                   J. Synchrotron Rad. 27, 293-304.
+                   https://doi.org/10.1107/S1600577520000508
+
+This page only introduces the basic principle of each technique. 
+For the actual implementation of these methods in the code, 
+please refer to the :doc:`user guide <userguide>`.
 
 .. _prinXSTRefer:
 
@@ -77,7 +158,7 @@ Conventional X-ray Speckle Tracking (XST) technique with reference beam
 =======================================================================
 The conventional XST technique with reference beam was developed at the 
 early stage of the *in-situ* at-wavelength characterization of the X-ray 
-wavefront using speckle pattern **[Add refs]**. 
+wavefront using speckle pattern [BerujonPRL]_. 
 It is inspired by the popular digital imaging correlation analysis which 
 is commonly used in visible light metrology and mechanical 
 engineering applications. As the name suggests, 
@@ -153,7 +234,7 @@ setup for this technique.
 The self-reference conventional XST technique may look ostensibly like the above mentioned 
 conventional XST technique with reference beam. 
 However, the physical quantities obtained directly from the speckle pattern shifts are 
-very much different **[Add refs]**. 
+very much different [HuXSTOE]_. 
 
 We use :math:`s_x` and :math:`s_y` to represent the displacement in two directions for the pizeo 
 at two different positions, :math:`ix` and :math:`iy` to represnt the shifts of the 
@@ -175,6 +256,11 @@ the second derivative of the wavefront.
 See the examples for the applications of the :ref:`1D <expKBalign>` and :ref:`2D <expxssvsxst>` self-reference 
 XST technique. 
 
+.. [HuXSTOE] Hu, L., Wang, H., Fox, O., & Sawhney, K. (2022). 
+             Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique. 
+             Opt. Exp., 30(18), 33259-33273.
+             https://doi.org/10.1364/OE.460163
+
 .. _prinXSSRefer:
 
 X-ray Speckle Scanning (XSS) technique with reference beam
@@ -192,7 +278,7 @@ the XSS-like techniques have two modes, depending on
 whether the reference beam is available. 
 
 The following figure shows the data acquisition process
-of the XSS technique with reference beam **[Add refs]**. 
+of the XSS technique with reference beam [HuXSSJSR]_. 
 Note that compared to the above XST-like techniques, 
 the difusser is scanned. 
 
@@ -231,6 +317,12 @@ the diffuser.
 
 This technique has been shown in the :ref:`example <expplane>`.
 
+.. [HuXSSJSR] Hu, L., Wang, H., Fox, O., & Sawhney, K. (2022). 
+              Two-dimensional speckle technique for slope error measurements of 
+              weakly focusing reflective X-ray optics. 
+              J. Synchrotron Rad. 29(6).
+              https://doi.org/10.1107/S160057752200916X
+
 .. _prinXSSSelf:
 
 Self-reference X-ray Speckle Scanning (XSS) technique 
@@ -239,7 +331,7 @@ As the name indicates, when there is no reference beam,
 this technique is used.
 
 The image data are acquired during the scan of the diffuser in 
-either x or y direction**[Add refs]**. For this technique, 
+either x or y direction [WangXSSOE]_. For this technique, 
 only one image stack is acquired. 
 It is obtained with the tested optical element in the beam.
 
@@ -270,15 +362,65 @@ They are the second derivatives of the wavefront in the
 horizontal and vertical directions.
 :math:`ix` and :math:`iy` are the tracked shifts of the speckle pattern, 
 :math:`s_x` and :math:`s_y` are the scan steps,
+:math:`p` is the pixel size of the detector,
 :math:`D` is the distance between the detector plane and 
 the diffuser.
 
 Please see :ref:`this example <exp2ndderiv>` for the use of self-reference XSS technique to 
 measure wavefront local curvature after a plane mirror.
 
+.. [WangXSSOE] Wang H, Sutter J, Sawhney K. 
+               Advanced in situ metrology for x-ray beam shaping with super precision. 
+               Opt Express 2015, 23(2): 1605-1614.
+               https://doi.org/10.1364/OE.23.001605
+
 .. _prinXSVTRefer:
 
 X-ray Speckle Vector Tracking (XSVT) technique
 ==============================================
-*Say something here...*
+The XSS technique enables pixel-wise data analysis along the scan direction.
+whereas the XST technique requires at least several speckle grains to be 
+included in the subregion which is to be tracked. 
+On the other hand, the XSS techinque requires a number of scans 
+in order to obtain reliable tracking results, 
+while the XST technique only needs two images. 
 
+The X-ray speckle vector tracking was proposed [BerujonZieglerPRA]_ to 
+trade off between the number of images to be obtained 
+and the spatial resolution achieved for the data processing.
+
+For XSVT method, the reference and sample images are taken at the same 
+piezo positions. The piezo are moving randomly during the 
+data acquisition. 
+
+.. figure:: _static/XSVT_principle.png
+   :width: 80%
+   
+   The experiment layout for the X-ray speckle vector tracking technique. 
+
+Like the XSS technique with reference beam, two datasets will be obtained 
+in the end. The data processing procedure for XSVT also resembles the XSS
+technique. A new image will be formed by extracting the data row(column) by 
+row(column) and stiched together along the "random scan direction".
+However, due to the random scan of the piezo, the tracked speckle pattern 
+shift in the scan direction has no clear phsycial meaning and is dropped out.
+The shift in the orthogonal direction is in the unit of detector pixel size 
+other than the scan step size as in the XSS technique.
+
+It should be noted that XSVT method cannot be used in the self-reference case 
+since the scan direction is random rather than along x or y 
+direction. So the tracked speckle pattern shift from XSVT method represents 
+the slope, i.e., the first derivative of the measured wavefront.
+
+As a result, we have the following equations:
+
+.. math:: 
+   \alpha_x = \frac{\partial W}{\partial x} = \frac{ix \times p}{D}
+   
+   \alpha_y = \frac{\partial W}{\partial y} = \frac{iy \times p}{D}
+
+where :math:`\alpha_x`, :math:`\alpha_y` are the slopes of the wavefront, 
+:math:`ix` and :math:`iy` are the tracked shifts of the speckle pattern 
+in x and y directions, :math:`p` is the pixel size of the detector,
+:math:`D` is the distance between the detector plane and 
+the diffuser.

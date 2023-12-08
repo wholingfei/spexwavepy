@@ -7,12 +7,12 @@
 spexwavepy
 ==========
 :Version: 1.0.0
-:Authors: Lingfei Hu (DLS), Hongchang Wang (DLS)
+:Authors: Lingfei Hu (USTC), Hongchang Wang (DLS)
 :Dependencies: * **Numpy**
                * **Scipy**
                * **cv2**: This is OpenCV support for python.
                * **natsort**: This package is used for natural sorting.
-:E-mail: lingfei.hu@diamond.ac.uk, hongchang.wang@diamond.ac.uk
+:E-mail: hulf88@ustc.edu.cn, hongchang.wang@diamond.ac.uk
 
 
 What is spexwavepy
@@ -21,18 +21,19 @@ What is spexwavepy
 
 The speckle-based wavefront sensing techniques
 ==============================================
-*Description here...*
+This part gives the brief introduction of the basic 
+principles of various speckle-based wavefront sensing 
+techniques. 
 
 - :doc:`The speckle-based wavefront sensing techniques <principle>`
-  
-
-  - :ref:`X-ray Speckle Scanning (XSS) technique with reference beam <prinXSSRefer>`
-
-  - :ref:`Self-reference X-ray Speckle Scanning (XSS) technique <prinXSSSelf>`
 
   - :ref:`Conventional X-ray Speckle Tracking (XST) technique with reference beam <prinXSTRefer>`
 
   - :ref:`Self-reference conventional X-ray Speckle Tracking (XST) technique <prinXSTSelf>`
+
+  - :ref:`X-ray Speckle Scanning (XSS) technique with reference beam <prinXSSRefer>`
+
+  - :ref:`Self-reference X-ray Speckle Scanning (XSS) technique <prinXSSSelf>`
 
   - :ref:`X-ray Speckle Vector Tracking (XSVT) technique <prinXSVTRefer>`
 

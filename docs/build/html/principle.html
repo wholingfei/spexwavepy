@@ -84,9 +84,49 @@
              
   <section id="the-speckle-based-wavefront-sensing-techniques">
 <h1>The speckle-based wavefront sensing techniques<a class="headerlink" href="#the-speckle-based-wavefront-sensing-techniques" title="Permalink to this heading"></a></h1>
-<p><em>Description goes here…</em>
-<em>Mention that we don’t do 2D XSS, that means all the method about
-XSS is 1D-XSS for Sebastien. For acquisition time concerns.</em></p>
+<p>When shining a laser through a diffuser,
+a two-dimensional random intensity (speckle) patterns will be generated.
+Speckle-based techniques have long been used in metrology
+and other applications that using visible light.
+Those visible light techniques have been extended to X-ray regime
+a decade ago by early researchers <a class="reference internal" href="#berujonprl" id="id1"><span>[BerujonPRL]</span></a> and <a class="reference internal" href="#morganapl" id="id2"><span>[MorganAPL]</span></a>.
+Since then, the X-ray speckle-based techniques was burgeoning over time.
+These techniques stand out due to their relatively simple
+experimental requirements and ease of use.</p>
+<p>A typical experimental setup for hard X-ray is shown in the
+following picture. The diffuser used is a sandpaper.
+It is mounted on a 2D scannable high precision stage.
+The detector used a scintillator to convert the incident
+X-ray to the visible light and coupled with a microscopy
+imaging system.</p>
+<figure class="align-default" id="id20">
+<a class="reference internal image-reference" href="_images/ExpsetupB16.png"><img alt="_images/ExpsetupB16.png" src="_images/ExpsetupB16.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">A typical setup for the speckle wavefront sensing experiment.
+This picture was taken at the Test beamline B16 at Diamond Light Source Ltd.</span><a class="headerlink" href="#id20" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The early technique developed is the conventional X-ray Speckle
+Tracking (XST) method <a class="reference internal" href="#berujonprl" id="id3"><span>[BerujonPRL]</span></a>.
+Only two images are required for this method.
+In order to further improve the spatial resolution of the
+data processing, the scan based techniques were proposed
+<a class="reference internal" href="#berujonpra" id="id4"><span>[BerujonPRA]</span></a>, <a class="reference internal" href="#berujonoe" id="id5"><span>[BerujonOE]</span></a>.
+They are referred as X-ray Speckle Scanning (XSS) techniques.
+To trade off between the spatial resolution of the data processing
+and the data acquisition time, X-ray Speckle Vector Tracking (XSVT)
+was developed <a class="reference internal" href="#berujonzieglerpra" id="id6"><span>[BerujonZieglerPRA]</span></a>.</p>
+<p>For a complete review of the theoretical and experimental part of
+the speckle-based wavefront sensing techniques, please refere to
+<a class="reference internal" href="#jsrtheory" id="id7"><span>[JSRTheory]</span></a> and <a class="reference internal" href="#jsrexperiment" id="id8"><span>[JSRExperiment]</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this package, we didn’t implement the 2D version
+of XSS techniques as introduced in <a class="reference internal" href="#jsrtheory" id="id9"><span>[JSRTheory]</span></a> and <a class="reference internal" href="#jsrexperiment" id="id10"><span>[JSRExperiment]</span></a>,
+taking the practical data acquisition time into consideration.
+Thus, all the XSS-techniques used in this package correspond to the
+1D scan of the XSS techniques.</p>
+</div>
 <p>In general, the speckle-based X-ray wavefront characterization
 methods can be divided into <strong>two modes</strong>. They depend on whether the
 reference beam is available or not.</p>
@@ -97,7 +137,7 @@ treated as a reference beam.
 The speckle patterns acquired with or without the tested optical
 element are comparable with each other.
 This mode corresponds to the ‘differetial mode’
-discussed in <strong>[Add ref]</strong>.
+discussed in <a class="reference internal" href="#jsrtheory" id="id11"><span>[JSRTheory]</span></a>.
 In this documentation, we call this mode with the suffix
 <strong>‘with reference beam’</strong>.</p>
 <p>For the strong-focusing optics, such as curved mirror,
@@ -106,8 +146,6 @@ the tested optics in the beam.
 In this case, no reference beam is available.
 The speckle patterns to be compared come from the same data set
 in which the tested optics are always in the beam.
-This mode corresponds to the ‘absolute mode’
-discussed in <strong>[Add ref]</strong>.
 Here, in this documentation, we call this mode with the prefix
 <strong>‘self-reference’</strong>.</p>
 <p>Regardless of the characterization modes, the various techniques
@@ -132,7 +170,7 @@ of each technique, please see the following sections.</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Conventional XST</p></td>
+<tr class="row-even"><td><p>Conventional XST <a class="footnote-reference brackets" href="#id13" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p></td>
 <td><p>1 image for both reference and
 sample dataset.</p></td>
 <td><p>Wavefront slope</p></td>
@@ -162,12 +200,75 @@ the number of random scans.</p></td>
 </tr>
 </tbody>
 </table>
-<p><em>Don’t forget to add footnote on the situation along z direction.</em></p>
+<aside class="footnote brackets" id="id13" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">1</a><span class="fn-bracket">]</span></span>
+<p>The conventional XST technique in this package refers to the case with and without tested optic in the beam.
+It is the ‘differential mode’ in <a class="reference internal" href="#jsrtheory" id="id14"><span>[JSRTheory]</span></a>. However, the data processing procedure for the ‘absolute mode’
+is almost the same.</p>
+</aside>
+<div role="list" class="citation-list">
+<div class="citation" id="berujonprl" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BerujonPRL<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id3">2</a>,<a role="doc-backlink" href="#id15">3</a>)</span>
+<p>Berujon S, Ziegler E, Cerbino R, Peverini L.
+Two-dimensional x-ray beam phase sensing.
+Phys Rev Lett. 2012 Apr 13;108(15):158102.
+<a class="reference external" href="https://doi.org/10.1103/PhysRevLett.108.158102">https://doi.org/10.1103/PhysRevLett.108.158102</a></p>
+</div>
+<div class="citation" id="morganapl" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">MorganAPL</a><span class="fn-bracket">]</span></span>
+<p>Kaye S. Morgan, David M. Paganin, Karen K. W. Siu
+X-ray phase imaging with a paper analyzer.
+Appl. Phys. Lett. 19 March 2012; 100 (12): 124102.
+<a class="reference external" href="https://doi.org/10.1063/1.3694918">https://doi.org/10.1063/1.3694918</a></p>
+</div>
+<div class="citation" id="berujonpra" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">BerujonPRA</a><span class="fn-bracket">]</span></span>
+<p>Berujon, S., Wang, H., &amp; Sawhney, K.J.
+(2012). X-ray multimodal imaging using a random-phase object.
+Physical Review A, 86, 063813.
+<a class="reference external" href="https://doi.org/10.1103/PhysRevA.86.063813">https://doi.org/10.1103/PhysRevA.86.063813</a></p>
+</div>
+<div class="citation" id="berujonoe" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">BerujonOE</a><span class="fn-bracket">]</span></span>
+<p>Berujon, S., Wang, H., Alcock, S.G., &amp; Sawhney, K.J.
+(2014). At-wavelength metrology of hard X-ray mirror using near field speckle.
+Optics express, 22 6, 6438-46.
+<a class="reference external" href="https://doi.org/10.1364/OE.22.006438">https://doi.org/10.1364/OE.22.006438</a></p>
+</div>
+<div class="citation" id="berujonzieglerpra" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BerujonZieglerPRA<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id6">1</a>,<a role="doc-backlink" href="#id19">2</a>)</span>
+<p>Berujon, S., &amp; Ziegler, E. (2017).
+Near-field speckle-scanning-based X-ray tomography.
+Physical Review A, 95.
+<a class="reference external" href="https://doi.org/10.1103/PhysRevA.95.063822">https://doi.org/10.1103/PhysRevA.95.063822</a></p>
+</div>
+<div class="citation" id="jsrtheory" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>JSRTheory<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id7">1</a>,<a role="doc-backlink" href="#id9">2</a>,<a role="doc-backlink" href="#id11">3</a>,<a role="doc-backlink" href="#id14">4</a>)</span>
+<p>Berujon, S., Cojocaru, R., Piault, P., Celestre, R., Roth, T., Barrett, R. &amp; Ziegler, E. (2020).
+X-ray optics and beam characterization using random modulation: theory
+J. Synchrotron Rad. 27, 284-292.
+<a class="reference external" href="https://doi.org/10.1107/S1600577520000491">https://doi.org/10.1107/S1600577520000491</a></p>
+</div>
+<div class="citation" id="jsrexperiment" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>JSRExperiment<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id8">1</a>,<a role="doc-backlink" href="#id10">2</a>)</span>
+<p>Berujon, S., Cojocaru, R., Piault, P., Celestre, R., Roth, T., Barrett, R. &amp; Ziegler, E. (2020).
+X-ray optics and beam characterization using random modulation: experiments
+J. Synchrotron Rad. 27, 293-304.
+<a class="reference external" href="https://doi.org/10.1107/S1600577520000508">https://doi.org/10.1107/S1600577520000508</a></p>
+</div>
+</div>
+<p>This page only introduces the basic principle of each technique.
+For the actual implementation of these methods in the code,
+please refer to the <a class="reference internal" href="userguide.html"><span class="doc">user guide</span></a>.</p>
 <section id="conventional-x-ray-speckle-tracking-xst-technique-with-reference-beam">
 <span id="prinxstrefer"></span><h2>Conventional X-ray Speckle Tracking (XST) technique with reference beam<a class="headerlink" href="#conventional-x-ray-speckle-tracking-xst-technique-with-reference-beam" title="Permalink to this heading"></a></h2>
 <p>The conventional XST technique with reference beam was developed at the
 early stage of the <em>in-situ</em> at-wavelength characterization of the X-ray
-wavefront using speckle pattern <strong>[Add refs]</strong>.
+wavefront using speckle pattern <a class="reference internal" href="#berujonprl" id="id15"><span>[BerujonPRL]</span></a>.
 It is inspired by the popular digital imaging correlation analysis which
 is commonly used in visible light metrology and mechanical
 engineering applications. As the name suggests,
@@ -182,11 +283,11 @@ that the speckle pattern generated by the tested optical element is not comparab
 to that by the incident beam.</p>
 <p>The following figure shows the experiment
 setup for this technique.</p>
-<figure class="align-default" id="id1">
+<figure class="align-default" id="id21">
 <a class="reference internal image-reference" href="_images/conXST_principle.png"><img alt="_images/conXST_principle.png" src="_images/conXST_principle.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-text">The experiment layout for the conventional X-ray speckle tracking
-technique with reference beam.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+technique with reference beam.</span><a class="headerlink" href="#id21" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>During the experiment, the tested optical element is moved away from the X-ray
@@ -218,18 +319,18 @@ As a result, the images to be tracked are both from sample images.</p>
 They are acquired at two different diffuser positions.</p>
 <p>The following figure shows the experiment
 setup for this technique.</p>
-<figure class="align-default" id="id2">
+<figure class="align-default" id="id22">
 <a class="reference internal image-reference" href="_images/conXST2_principle.png"><img alt="_images/conXST2_principle.png" src="_images/conXST2_principle.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-text">The experiment layout for the self-reference
 conventional X-ray speckle tracking
-technique.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+technique.</span><a class="headerlink" href="#id22" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>The self-reference conventional XST technique may look ostensibly like the above mentioned
 conventional XST technique with reference beam.
 However, the physical quantities obtained directly from the speckle pattern shifts are
-very much different <strong>[Add refs]</strong>.</p>
+very much different <a class="reference internal" href="#huxstoe" id="id16"><span>[HuXSTOE]</span></a>.</p>
 <p>We use <span class="math notranslate nohighlight">\(s_x\)</span> and <span class="math notranslate nohighlight">\(s_y\)</span> to represent the displacement in two directions for the pizeo
 at two different positions, <span class="math notranslate nohighlight">\(ix\)</span> and <span class="math notranslate nohighlight">\(iy\)</span> to represnt the shifts of the
 speckle pattern in the cooresponding direction.
@@ -243,6 +344,15 @@ the wavefront slopes in x and y directions, repectively.</p>
 the second derivative of the wavefront.</p>
 <p>See the examples for the applications of the <a class="reference internal" href="example.html#expkbalign"><span class="std std-ref">1D</span></a> and <a class="reference internal" href="example.html#expxssvsxst"><span class="std std-ref">2D</span></a> self-reference
 XST technique.</p>
+<div role="list" class="citation-list">
+<div class="citation" id="huxstoe" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id16">HuXSTOE</a><span class="fn-bracket">]</span></span>
+<p>Hu, L., Wang, H., Fox, O., &amp; Sawhney, K. (2022).
+Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique.
+Opt. Exp., 30(18), 33259-33273.
+<a class="reference external" href="https://doi.org/10.1364/OE.460163">https://doi.org/10.1364/OE.460163</a></p>
+</div>
+</div>
 </section>
 <section id="x-ray-speckle-scanning-xss-technique-with-reference-beam">
 <span id="prinxssrefer"></span><h2>X-ray Speckle Scanning (XSS) technique with reference beam<a class="headerlink" href="#x-ray-speckle-scanning-xss-technique-with-reference-beam" title="Permalink to this heading"></a></h2>
@@ -257,14 +367,14 @@ high sensitivity and precision.</p>
 the XSS-like techniques have two modes, depending on
 whether the reference beam is available.</p>
 <p>The following figure shows the data acquisition process
-of the XSS technique with reference beam <strong>[Add refs]</strong>.
+of the XSS technique with reference beam <a class="reference internal" href="#huxssjsr" id="id17"><span>[HuXSSJSR]</span></a>.
 Note that compared to the above XST-like techniques,
 the difusser is scanned.</p>
-<figure class="align-default" id="id3">
+<figure class="align-default" id="id23">
 <a class="reference internal image-reference" href="_images/referXSS_principle.png"><img alt="_images/referXSS_principle.png" src="_images/referXSS_principle.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-text">The experiment layout for the X-ray speckle scanning
-technique with reference beam.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+technique with reference beam.</span><a class="headerlink" href="#id23" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>The data is processed pixel-wisely in the scan direction.
@@ -288,22 +398,32 @@ in x and y directions, <span class="math notranslate nohighlight">\(s_x\)</span>
 two directions, <span class="math notranslate nohighlight">\(D\)</span> is the distance between the detector plane and
 the diffuser.</p>
 <p>This technique has been shown in the <a class="reference internal" href="example.html#expplane"><span class="std std-ref">example</span></a>.</p>
+<div role="list" class="citation-list">
+<div class="citation" id="huxssjsr" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id17">HuXSSJSR</a><span class="fn-bracket">]</span></span>
+<p>Hu, L., Wang, H., Fox, O., &amp; Sawhney, K. (2022).
+Two-dimensional speckle technique for slope error measurements of
+weakly focusing reflective X-ray optics.
+J. Synchrotron Rad. 29(6).
+<a class="reference external" href="https://doi.org/10.1107/S160057752200916X">https://doi.org/10.1107/S160057752200916X</a></p>
+</div>
+</div>
 </section>
 <section id="self-reference-x-ray-speckle-scanning-xss-technique">
 <span id="prinxssself"></span><h2>Self-reference X-ray Speckle Scanning (XSS) technique<a class="headerlink" href="#self-reference-x-ray-speckle-scanning-xss-technique" title="Permalink to this heading"></a></h2>
 <p>As the name indicates, when there is no reference beam,
 this technique is used.</p>
 <p>The image data are acquired during the scan of the diffuser in
-either x or y direction**[Add refs]**. For this technique,
+either x or y direction <a class="reference internal" href="#wangxssoe" id="id18"><span>[WangXSSOE]</span></a>. For this technique,
 only one image stack is acquired.
 It is obtained with the tested optical element in the beam.</p>
 <p>The following figure shows the data acquisition procedure for
 the self-reference XSS technique.</p>
-<figure class="align-default" id="id4">
+<figure class="align-default" id="id24">
 <a class="reference internal image-reference" href="_images/selfXSS_principle.png"><img alt="_images/selfXSS_principle.png" src="_images/selfXSS_principle.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-text">The experiment layout for the self-reference
-X-ray speckle scanning technique.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+X-ray speckle scanning technique.</span><a class="headerlink" href="#id24" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>Like the self-reference conventional XST method,
@@ -319,14 +439,61 @@ They are the second derivatives of the wavefront in the
 horizontal and vertical directions.
 <span class="math notranslate nohighlight">\(ix\)</span> and <span class="math notranslate nohighlight">\(iy\)</span> are the tracked shifts of the speckle pattern,
 <span class="math notranslate nohighlight">\(s_x\)</span> and <span class="math notranslate nohighlight">\(s_y\)</span> are the scan steps,
+<span class="math notranslate nohighlight">\(p\)</span> is the pixel size of the detector,
 <span class="math notranslate nohighlight">\(D\)</span> is the distance between the detector plane and
 the diffuser.</p>
 <p>Please see <a class="reference internal" href="example.html#exp2ndderiv"><span class="std std-ref">this example</span></a> for the use of self-reference XSS technique to
 measure wavefront local curvature after a plane mirror.</p>
+<div role="list" class="citation-list">
+<div class="citation" id="wangxssoe" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id18">WangXSSOE</a><span class="fn-bracket">]</span></span>
+<p>Wang H, Sutter J, Sawhney K.
+Advanced in situ metrology for x-ray beam shaping with super precision.
+Opt Express 2015, 23(2): 1605-1614.
+<a class="reference external" href="https://doi.org/10.1364/OE.23.001605">https://doi.org/10.1364/OE.23.001605</a></p>
+</div>
+</div>
 </section>
 <section id="x-ray-speckle-vector-tracking-xsvt-technique">
 <span id="prinxsvtrefer"></span><h2>X-ray Speckle Vector Tracking (XSVT) technique<a class="headerlink" href="#x-ray-speckle-vector-tracking-xsvt-technique" title="Permalink to this heading"></a></h2>
-<p><em>Say something here…</em></p>
+<p>The XSS technique enables pixel-wise data analysis along the scan direction.
+whereas the XST technique requires at least several speckle grains to be
+included in the subregion which is to be tracked.
+On the other hand, the XSS techinque requires a number of scans
+in order to obtain reliable tracking results,
+while the XST technique only needs two images.</p>
+<p>The X-ray speckle vector tracking was proposed <a class="reference internal" href="#berujonzieglerpra" id="id19"><span>[BerujonZieglerPRA]</span></a> to
+trade off between the number of images to be obtained
+and the spatial resolution achieved for the data processing.</p>
+<p>For XSVT method, the reference and sample images are taken at the same
+piezo positions. The piezo are moving randomly during the
+data acquisition.</p>
+<figure class="align-default" id="id25">
+<a class="reference internal image-reference" href="_images/XSVT_principle.png"><img alt="_images/XSVT_principle.png" src="_images/XSVT_principle.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">The experiment layout for the X-ray speckle vector tracking technique.</span><a class="headerlink" href="#id25" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Like the XSS technique with reference beam, two datasets will be obtained
+in the end. The data processing procedure for XSVT also resembles the XSS
+technique. A new image will be formed by extracting the data row(column) by
+row(column) and stiched together along the “random scan direction”.
+However, due to the random scan of the piezo, the tracked speckle pattern
+shift in the scan direction has no clear phsycial meaning and is dropped out.
+The shift in the orthogonal direction is in the unit of detector pixel size
+other than the scan step size as in the XSS technique.</p>
+<p>It should be noted that XSVT method cannot be used in the self-reference case
+since the scan direction is random rather than along x or y
+direction. So the tracked speckle pattern shift from XSVT method represents
+the slope, i.e., the first derivative of the measured wavefront.</p>
+<p>As a result, we have the following equations:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\alpha_x = \frac{\partial W}{\partial x} = \frac{ix \times p}{D}\\\alpha_y = \frac{\partial W}{\partial y} = \frac{iy \times p}{D}\end{aligned}\end{align} \]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha_x\)</span>, <span class="math notranslate nohighlight">\(\alpha_y\)</span> are the slopes of the wavefront,
+<span class="math notranslate nohighlight">\(ix\)</span> and <span class="math notranslate nohighlight">\(iy\)</span> are the tracked shifts of the speckle pattern
+in x and y directions, <span class="math notranslate nohighlight">\(p\)</span> is the pixel size of the detector,
+<span class="math notranslate nohighlight">\(D\)</span> is the distance between the detector plane and
+the diffuser.</p>
 </section>
 </section>
 
