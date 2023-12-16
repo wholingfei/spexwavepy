@@ -52,7 +52,6 @@ Other methods haven't been implemented in this package.
 For more information of the **template matching** in OpenCv-Python (cv2) package, 
 please refer to `this link <https://docs.opencv.org/3.4/de/da9/tutorial_template_matching.html>`_.
     
-
 .. _usesubpix:
 
 Sub-pixel registration
@@ -67,15 +66,7 @@ The subpixel registration functions are defined in :py:mod:`~spexwavepy.corefun`
 
 Default method 
 ^^^^^^^^^^^^^^
-The default sub-pixel registration method can be found [defaultref1]_ in and [defaultref2]_.
-
-.. note::
-   .. [defaultref1] Fisher, G. H., & Welsch, B.T. 
-                    "FLCT: a fast, efficient method for performing local correlation tracking." 
-                    Subsurface and Atmospheric Influences on Solar Activity. Vol. 383. 2008.
-   .. [defaultref2] Qiao, Zhi, et al. 
-                    "Wavelet-transform-based speckle vector tracking method for X-ray phase imaging." 
-                    Optics Express 28.22 (2020): 33053-33067. 
+The default sub-pixel registration method can be found in [defaultref1]_ and [defaultref2]_.
 
 This method can be described in the following.
 The method can be described in the following. 
@@ -104,11 +95,6 @@ Gaussian peak finding method
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Both this method and :ref:`Parabola peak finding method <subpara>` can be find in [gaussref1]_. 
 
-.. note::
-  .. [gaussref1] Debella-Gilo, M, and Kääb, A. 
-     "Sub-pixel precision image matching for measuring surface displacements on mass movements using normalized cross-correlation." 
-     Remote Sensing of Environment 115.1 (2011): 130-142. 
-
 Assuming the coefficient matrix :math:`R(x, y)` can be fitted by a 2D Gaussian function, 
 the peak location of the fitted function is: 
 
@@ -118,7 +104,6 @@ the peak location of the fitted function is:
   y_m = x_0 + \frac{\ln(R(x_{0}, y_{0}-1))-\ln(R(x_{0}, y_{0}+1))}{2\ln(R(x_{0}, y_{0}+1))-4\ln(R(x_{0}, y_{0}))+2\ln(R(x_{0}, y_{0}-1))}
 
 where :math:`x_0` and :math:`y_0` are the pixel indices in the two dimensions with the maximum value of :math:`R(x, y)`. 
-
 
 .. _subpara:
 
@@ -134,6 +119,18 @@ The peak location of the fitted function is:
   y_m = x_0 + \frac{R(x_{0}, y_{0}-1)-R(x_{0}, y_{0}+1)}{2R(x_{0}, y_{0}+1)-4R(x_{0}, y_{0})+2R(x_{0}, y_{0}-1)}
 
 where :math:`x_0` and :math:`y_0` are the pixel indices in the two dimensions with the maximum value of :math:`R(x, y)`. 
+
+.. [defaultref1] Fisher, G. H., & Welsch, B.T. 
+                 "FLCT: a fast, efficient method for performing local correlation tracking." 
+                 Subsurface and Atmospheric Influences on Solar Activity. Vol. 383. 2008.
+
+.. [defaultref2] Qiao, Zhi, et al. 
+                 "Wavelet-transform-based speckle vector tracking method for X-ray phase imaging." 
+                 Optics Express 28.22 (2020): 33053-33067. 
+
+.. [gaussref1] Debella-Gilo, M, and Kääb, A. 
+     "Sub-pixel precision image matching for measuring surface displacements on mass movements using normalized cross-correlation." 
+     Remote Sensing of Environment 115.1 (2011): 130-142. 
 
 .. _useimmatch:
 
@@ -154,6 +151,43 @@ and also the related cross-correlatin coefficient matrix ``res_mat`` (if ``res``
 
 .. figure:: _static/imagematch.jpg
    :width: 80%
+
+.. _usenorm:
+
+Image normalization
+^^^^^^^^^^^^^^^^^^^
+We do normalization to mitigate the impact of the non-uniformity of the images. 
+
+.. image:: _static/rawimage.JPG
+   :width: 40%
+
+Wherever to do the normalization, the basic function to call is 
+:py:func:`~spexwavepy.corefun.NormImage`.
+The process is as follows.
+
+:math:`b_j` and :math:`c_i` are the partial sums of each column and row of the raw image, respectively. 
+
+.. image:: _static/rowsum.JPG
+   :width: 40%
+
+.. image:: _static/colsum.JPG
+   :width: 40%
+
+:math:`\bar{a}_{i,j}` is generated as the following. 
+First, for every index :math:`j`, the column of the raw image, :math:`a_{i,j}`, divides :math:`b_j`.
+Second, after the above first step, for every index :math:`i`, the row of the generated image divides :math:`c_i`.
+
+Then we do the common normalization. 
+:math:`\bar{a}` is the mean value of :math:`\bar{a}_{i,j}`, :math:`\sigma` is the std of :math:`\bar{a}_{i,j}`,
+then we have each element of the final generated image as :math:`(\bar{a}_{i,j}-\bar{a})/\sigma`.
+
+As the images shown in the following, the main purpose of doing normalization is to 
+get rid of the "wrinkles" come from the incident beam. If the normalization is not
+effect to the raw images, we recommend to do the normalization to the stiched images later.
+Besides, if the incident beam is clean enough, there is no need to do the normalization.
+
+.. image:: _static/normCRL.png
+   :width: 100%
 
 .. _useauxfunc:
 
@@ -193,59 +227,92 @@ the start and the end position of x coordinate. The start and the end coordinate
 
 Image stack and its functions
 =============================
-*Say something...*
+To use this python package to process the experiment data, 
+you need to load the acquired image data into an image stack.
+A class is defined to achieve this. 
+Other reltated functions are also been covered in this 
+:py:mod:`~spexwavepy.imstackfun` module.
 
 .. _useimstack:
 
 Image stack
 -----------
-*Say something...*
+From all the given :doc:`examples <example>`, 
+the first thing you need to do is to creat the :py:class:`~spexwavepy.imstackfun.Imagestack` class.
+It is the image stack serves as a container for the acquired images which are read into the memory.
+
+A typical excerpt of the code to create the :py:class:`~spexwavepy.imstackfun.Imagestack` class is 
+as follows:
+
+.. code-block:: Python
+
+   from spexwavepy.imstackfun import Imagestack
+
+   folder_path = "/Your/data/folder/path/"
+   ROI = [0, 2048, 0, 2048]
+   imstack = Imagestack(fileFolder=folder_path, ROI=ROI)
+
+Two parameters are needed as the input to create the :py:class:`~spexwavepy.imstackfun.Imagestack` class. 
+``fileFolder`` is the data folder path for the acquired images, 
+``ROI`` is the region of interest to be cropped from the raw image.
+``ROI=[y_start, y_end, x_start, x_end]``. 
+Its defination can also be found in the :ref:`above section <useauxfunc>`.
+
+Data reading
+------------
+There are other properties that are automatically defined when initiating the 
+:py:class:`~spexwavepy.imstackfun.Imagestack` class. 
+Most of them relate to the raw data reading. 
+
+``fstart`` defines the number of the first image to be loaded into memory. The default value is 0.
+That means the first image. Otherwise, data loading will be start from image number of ``fstart``.
+
+``fstep`` defines the step of the data reading when iterating over the dataset. The default value is 1.
+That means to read every image until it reaches the designated end. 
+
+``fnum`` defines the terminated number of images to be read in the dataset. The default value is negative.
+That means to read all the files in the dataset. 
+If it is a positive number, the image reading will stop at the number of ``fnum``.
+
+After properly defining the above attributes, the following code can be used to read the data:
+
+.. code-block:: Python
+   
+   imstack.read_data()
+
+The above code is not mandatory. The raw data can be loaded later as long as the ``rawdata`` is ``None``.
+
+The :py:meth:`~spexwavepy.imstackfun.Imagestack.read_data` method of the 
+:py:class:`~spexwavepy.imstackfun.Imagestack` class is called to load the data into the memory. 
+After the invoking of this method, the raw data is stored in the read-only ``rawdata`` attribute,
+the same raw data is also stored in the ``data`` attribute. 
+This attribute can be modified when other methods are called.
+
+In general, :py:meth:`~spexwavepy.imstackfun.Imagestack.read_data` method reads from 
+the image start with the number of ``fstart``, ends with the number of ``fnum``, 
+the reading step is defined as ``fstep``.
 
 .. _usepreprocess:
 
 Preprocessing of the images
 ---------------------------
 *Say something...*
+There are some other methods defined in :py:class:`~spexwavepy.imstackfun.Imagestack` class. 
+They are mainly used to preprocess the raw images in the image stack.
 
-.. _usenorm:
+.. _usenormstack:
 
 Normalization
 ^^^^^^^^^^^^^
-We do normalization to mitigate the impact of the non-uniformity of the images. 
-There are two places in this package to do the normalization. 
-One is to normalize the raw images, the other one is to normalize the stitched images. 
-**Usually, we only choose one place to do the normalization.**
+The :py:meth:`~spexwavepy.imstackfun.Imagestack.norm` method is called to normalize the raw images in 
+the image stack. The normalization algorithm used for each image is described in the 
+:ref:`above section <usenorm>`.
 
-.. image:: _static/rawimage.JPG
-   :width: 40%
-
-Wherever to do the normalization, the basic function to call is 
-:py:func:`~spexwavepy.corefun.NormImage`.
-The process is as follows.
-
-:math:`b_j` and :math:`c_i` are the partial sums of each column and row of the raw image, respectively. 
-
-.. image:: _static/rowsum.JPG
-   :width: 40%
-
-.. image:: _static/colsum.JPG
-   :width: 40%
-
-:math:`\bar{a}_{i,j}` is generated as the following. 
-First, for every index :math:`j`, the column of the raw image, :math:`a_{i,j}`, divides :math:`b_j`.
-Second, after the above first step, for every index :math:`i`, the row of the generated image divides :math:`c_i`.
-
-Then we do the common normalization. 
-:math:`\bar{a}` is the mean value of :math:`\bar{a}_{i,j}`, :math:`\sigma` is the std of :math:`\bar{a}_{i,j}`,
-then we have each element of the final generated image as :math:`(\bar{a}_{i,j}-\bar{a})/\sigma`.
-
-As the images shown in the following, the main purpose of doing normalization is to 
-get rid of the "wrinkles" come from the incident beam. If the normalization is not
-effect to the raw images, we recommend to do the normalization to the stiched images later.
-Besides, if the incident beam is clean enough, there is no need to do the normalization.
-
-.. image:: _static/normCRL.png
-   :width: 100%
+.. note::
+   There are two places in this package to do the normalization. 
+   One is to normalize the raw images, the other one is to normalize the 
+   stitched images (see in the following sections for the ``Tracking`` class). 
+   **Usually, we only choose one place to do the normalization.**
 
 .. _usesmooth:
 
@@ -267,6 +334,17 @@ will look like.
 
 .. figure:: _static/smoothing.png
    :width: 100%
+
+.. _useflip:
+
+Fliping the images
+^^^^^^^^^^^^^^^^^^
+
+.. _userot:
+
+Rotating the images
+^^^^^^^^^^^^^^^^^^^
+*Two functions, rot90deg and rotate...*
 
 .. _usedetpix:
 

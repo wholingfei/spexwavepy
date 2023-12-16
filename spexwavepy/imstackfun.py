@@ -16,8 +16,6 @@ import copy
 sys.path.append(os.path.join('..'))
 from spexwavepy.corefun import _indicator, read_one, crop_one, NormImage, Imagematch
 
-__DEBUG = True#False#True
-
 class Imagestack:
     """
     A class to represent one image stack.
@@ -447,20 +445,3 @@ class Imagestack:
 
         return pixsize
 
-
-if __name__ == "__main__":
-    if __DEBUG:
-        fileFolder = "/dls/science/groups/b16/SpeckleData/planemXSSself/Xscan/354343-pcoedge-files/"
-        ROI = [400, 1600, 700, 1250]           #[y_start, y_end, x_start, x_end]
-        Imstack_2 = Imagestack(fileFolder, ROI)
-        Imstack_2.read_data()
-        #Imstack_2.smooth('Gaussian', 5, verbose=True)
-        Imstack_2.smooth_multi('Gaussian', 2, cpu_no=16, verbose=True)
-        Imstack_3 = Imagestack(fileFolder, ROI)
-        Imstack_3.read_data()
-        #Imstack_3.smooth('Box', 5, verbose=True)
-        Imstack_3.smooth_multi('Box', 5, cpu_no=16, verbose=True)
-        sys.exit(0)
-        #Imstack_1.norm() 
-        subROI = [1500, 2000, 500, 2000]      #[y_start, y_end, x_start, x_end]
-        pixsize = Imstack_1.getpixsize(subROI, dim='x', step=10.0)

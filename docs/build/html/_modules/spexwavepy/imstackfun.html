@@ -90,8 +90,6 @@
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">))</span>
 <span class="kn">from</span> <span class="nn">spexwavepy.corefun</span> <span class="kn">import</span> <span class="n">_indicator</span><span class="p">,</span> <span class="n">read_one</span><span class="p">,</span> <span class="n">crop_one</span><span class="p">,</span> <span class="n">NormImage</span><span class="p">,</span> <span class="n">Imagematch</span>
 
-<span class="n">__DEBUG</span> <span class="o">=</span> <span class="kc">True</span><span class="c1">#False#True</span>
-
 <div class="viewcode-block" id="Imagestack"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.imstackfun.Imagestack">[docs]</a><span class="k">class</span> <span class="nc">Imagestack</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A class to represent one image stack.</span>
@@ -521,23 +519,6 @@
 
         <span class="k">return</span> <span class="n">pixsize</span></div></div>
 
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">__DEBUG</span><span class="p">:</span>
-        <span class="n">fileFolder</span> <span class="o">=</span> <span class="s2">&quot;/dls/science/groups/b16/SpeckleData/planemXSSself/Xscan/354343-pcoedge-files/&quot;</span>
-        <span class="n">ROI</span> <span class="o">=</span> <span class="p">[</span><span class="mi">400</span><span class="p">,</span> <span class="mi">1600</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mi">1250</span><span class="p">]</span>           <span class="c1">#[y_start, y_end, x_start, x_end]</span>
-        <span class="n">Imstack_2</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">fileFolder</span><span class="p">,</span> <span class="n">ROI</span><span class="p">)</span>
-        <span class="n">Imstack_2</span><span class="o">.</span><span class="n">read_data</span><span class="p">()</span>
-        <span class="c1">#Imstack_2.smooth(&#39;Gaussian&#39;, 5, verbose=True)</span>
-        <span class="n">Imstack_2</span><span class="o">.</span><span class="n">smooth_multi</span><span class="p">(</span><span class="s1">&#39;Gaussian&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">cpu_no</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">Imstack_3</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">fileFolder</span><span class="p">,</span> <span class="n">ROI</span><span class="p">)</span>
-        <span class="n">Imstack_3</span><span class="o">.</span><span class="n">read_data</span><span class="p">()</span>
-        <span class="c1">#Imstack_3.smooth(&#39;Box&#39;, 5, verbose=True)</span>
-        <span class="n">Imstack_3</span><span class="o">.</span><span class="n">smooth_multi</span><span class="p">(</span><span class="s1">&#39;Box&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">cpu_no</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        <span class="c1">#Imstack_1.norm() </span>
-        <span class="n">subROI</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>      <span class="c1">#[y_start, y_end, x_start, x_end]</span>
-        <span class="n">pixsize</span> <span class="o">=</span> <span class="n">Imstack_1</span><span class="o">.</span><span class="n">getpixsize</span><span class="p">(</span><span class="n">subROI</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
 </pre></div>
 
            </div>
