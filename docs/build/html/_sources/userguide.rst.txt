@@ -504,7 +504,7 @@ dimension ``scandim``, each column represnts a data processing mode.
 
 The implementation of each of these tracking modes used in this package will be introduced in this section. 
 For the explanation of the physics and theory of these tracking modes please refer to 
-:doc:`this section: The speckle-based wavefront sensing techniques <principle>`.
+:doc:`The speckle-based wavefront sensing techniques <principle>`.
 
 .. _trastable:
 

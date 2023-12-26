@@ -429,7 +429,26 @@ the diffuser.
 
 Other X-ray Speckle-based techniques
 ====================================
-*Mention Sebastien's definition of absolute method, its differences to ours definition...
-Also mention other methods included in the Tracking module. Such as Hartmann mode...*
+Due to special experimental considerations, all the techniques described in the above keep 
+the detector fixed. As a result, 
+all the so called "absolute mode" sepckle-based techniques (see [JSRTheory]_ and [JSRExperiment]_)
+are not inculded in this python package ostensibly. 
+However, the data processing procedure for thees "absolute mode" techniques 
+are the same as their corresponding techniques in the above. 
 
+For instance, the "absolute mode" XST technique is equavalent to the
+:ref:`conventional XST with reference beam <prinXSTRefer>`, only to 
+replace :math:`D` the distance between the diffuser and the detector plane
+to the detector moving distance. Similarly, 
+the "absolute mode" XSVT technique is euqvalent to the 
+:ref:`XSVT technique <prinXSVTRefer>`. Again, we need only to 
+replace :math:`D` the distance between the diffuser and the detector plane
+to the detector moving distance. 
 
+For any other novel techniques, finding the equivalent methods in this package 
+is left to the discretion of the users.
+
+**All the techniques described in the above have been implemented in the** 
+:py:class:`~spexwavepy.trackfun.Tracking` **class.**
+**Please refer to the** :ref:`User guide <usetrack>` **for any other methods 
+implemented in** :py:class:`~spexwavepy.trackfun.Tracking` **class.**
