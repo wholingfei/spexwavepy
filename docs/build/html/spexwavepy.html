@@ -99,7 +99,7 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fpath</strong> (<em>str</em>) – File folder path.</p></li>
 <li><p><strong>roi</strong> (<em>4-element tuple</em><em>, </em><em>(</em><em>int</em><em>, </em><em>int</em><em>, </em><em>int</em><em>, </em><em>int</em><em>)</em>) – Region of interest.</p></li>
-<li><p><strong>fstep</strong> (<em>int</em>) – File step for file reading. (default 1)</p></li>
+<li><p><strong>fstep</strong> (<em>int</em>) – Step for file reading. (default 1)</p></li>
 <li><p><strong>fnum</strong> (<em>int</em>) – Total file number, if &lt;=0, consider all the files in the folder.</p></li>
 <li><p><strong>fstart</strong> (<em>int</em>) – Starting file number for dataset loading. (defaul 0)</p></li>
 <li><p><strong>verbose</strong> (<em>bool</em>) – Print out information or not. (default True)</p></li>
@@ -108,7 +108,7 @@
 <li><p><strong>normalize</strong> (<em>bool</em>) – Do the normalization or not. (default False)</p></li>
 <li><p><strong>flip</strong> (<em>string</em>) – To flip the images in the stack or not.
 ‘x’ is to flip horizontally, ‘y’ is to flip vertically.
-It is necessary when the test optic is a mirror. (default None)</p></li>
+It is necessary when the test optic is a mirror and a reference beam exists. (default None)</p></li>
 </ul>
 </dd>
 </dl>

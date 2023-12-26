@@ -330,9 +330,9 @@ Most of them relate to the raw data reading.</p>
 That means the first image. Otherwise, data loading will be start from image number of <code class="docutils literal notranslate"><span class="pre">fstart</span></code>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">fstep</span></code> defines the step of the data reading when iterating over the dataset. The default value is 1.
 That means to read every image until it reaches the designated end.</p>
-<p><code class="docutils literal notranslate"><span class="pre">fnum</span></code> defines the terminated number of images to be read in the dataset. The default value is negative.
+<p><code class="docutils literal notranslate"><span class="pre">fnum</span></code> defines the total number of images to be read in the dataset. The default value is negative.
 That means to read all the files in the dataset.
-If it is a positive number, the image reading will stop at the number of <code class="docutils literal notranslate"><span class="pre">fnum</span></code>.</p>
+If it is a positive number, the number of images reading into memory equals the value of <code class="docutils literal notranslate"><span class="pre">fnum</span></code>.</p>
 <p>After properly defining the above attributes, the following code can be used to read the data:</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">imstack</span><span class="o">.</span><span class="n">read_data</span><span class="p">()</span>
 </pre></div>
@@ -344,13 +344,12 @@ After the invoking of this method, the raw data is stored in the read-only <code
 the same raw data is also stored in the <code class="docutils literal notranslate"><span class="pre">data</span></code> attribute.
 This attribute can be modified when other methods are called.</p>
 <p>In general, <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack.read_data" title="spexwavepy.imstackfun.Imagestack.read_data"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read_data()</span></code></a> method reads from
-the image start with the number of <code class="docutils literal notranslate"><span class="pre">fstart</span></code>, ends with the number of <code class="docutils literal notranslate"><span class="pre">fnum</span></code>,
-the reading step is defined as <code class="docutils literal notranslate"><span class="pre">fstep</span></code>.</p>
+the image start with the number of <code class="docutils literal notranslate"><span class="pre">fstart</span></code>,
+with the loading step of <code class="docutils literal notranslate"><span class="pre">fstep</span></code>, total image number of <code class="docutils literal notranslate"><span class="pre">fnum</span></code>.</p>
 </section>
 <section id="preprocessing-of-the-images">
 <span id="usepreprocess"></span><h3>Preprocessing of the images<a class="headerlink" href="#preprocessing-of-the-images" title="Permalink to this heading"></a></h3>
-<p><em>Say something…</em>
-There are some other methods defined in <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack" title="spexwavepy.imstackfun.Imagestack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Imagestack</span></code></a> class.
+<p>There are some other methods defined in <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack" title="spexwavepy.imstackfun.Imagestack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Imagestack</span></code></a> class.
 They are mainly used to preprocess the raw images in the image stack.</p>
 <section id="normalization">
 <span id="usenormstack"></span><h4>Normalization<a class="headerlink" href="#normalization" title="Permalink to this heading"></a></h4>
@@ -361,8 +360,20 @@ the image stack. The normalization algorithm used for each image is described in
 <p class="admonition-title">Note</p>
 <p>There are two places in this package to do the normalization.
 One is to normalize the raw images, the other one is to normalize the
-stitched images (see in the following sections for the <code class="docutils literal notranslate"><span class="pre">Tracking</span></code> class).
+stitched images (see in the following sections for the
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class).
 <strong>Usually, we only choose one place to do the normalization.</strong></p>
+</div>
+<p>If you want to do the normalization for the raw images in the dataset,
+set the <code class="docutils literal notranslate"><span class="pre">normalize</span></code> attribute to <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">imstack</span><span class="o">.</span><span class="n">normalize</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+<p>Then when you call the <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack.read_data" title="spexwavepy.imstackfun.Imagestack.read_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_data()</span></code></a> function,
+the raw images will be normalized during data loading.</p>
+<p>Another way is to explicitly call <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack.norm" title="spexwavepy.imstackfun.Imagestack.norm"><code class="xref py py-meth docutils literal notranslate"><span class="pre">norm()</span></code></a> method:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">imstack</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span>
+</pre></div>
 </div>
 </section>
 <section id="smoothing">
@@ -371,7 +382,7 @@ stitched images (see in the following sections for the <code class="docutils lit
 <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack.smooth" title="spexwavepy.imstackfun.Imagestack.smooth"><code class="xref py py-func docutils literal notranslate"><span class="pre">smooth()</span></code></a> and
 <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack.smooth_multi" title="spexwavepy.imstackfun.Imagestack.smooth_multi"><code class="xref py py-func docutils literal notranslate"><span class="pre">smooth_multi()</span></code></a> functions are
 used to smooth the raw images in the image stack. The latter is the
-multiprocessing version of the former. Two smoothing are available at
+multiprocessing version of the former. Two smoothing methods are available at
 present, they are <code class="docutils literal notranslate"><span class="pre">Gaussian</span></code> and <code class="docutils literal notranslate"><span class="pre">Box</span></code>, respectively. If the
 <code class="docutils literal notranslate"><span class="pre">meth</span></code> is <code class="docutils literal notranslate"><span class="pre">Gaussian</span></code>, a Gaussian function will be used for the
 smoothing, the parameter of <code class="docutils literal notranslate"><span class="pre">pixel</span></code> determines the sigma of the
@@ -383,13 +394,71 @@ will look like.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="_images/smoothing.png"><img alt="_images/smoothing.png" src="_images/smoothing.png" style="width: 100%;" /></a>
 </figure>
+<p>To do the smoothing, you need to call the following function with parameters <code class="docutils literal notranslate"><span class="pre">meth</span></code> and <code class="docutils literal notranslate"><span class="pre">pixel</span></code>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">imstack</span><span class="o">.</span><span class="n">smooth</span><span class="p">(</span><span class="n">meth</span><span class="o">=</span><span class="s1">&#39;Gaussian&#39;</span><span class="p">,</span> <span class="n">pixel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">verbos</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
 </section>
 <section id="fliping-the-images">
 <span id="useflip"></span><h4>Fliping the images<a class="headerlink" href="#fliping-the-images" title="Permalink to this heading"></a></h4>
+<p>Sometimes you need to flip the images in the dataset to match the reference image,
+such as to measure <a class="reference internal" href="example.html#expplane"><span class="std std-ref">a planar mirror using XSS technique with reference beam</span></a>.</p>
+<p>An attribute <code class="docutils literal notranslate"><span class="pre">flip</span></code> is used to tell the codes how to flip the image.
+The default value is <code class="docutils literal notranslate"><span class="pre">None</span></code>. The acceptable values are <code class="docutils literal notranslate"><span class="pre">x</span></code> or <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p>
+<p>If</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">imstack</span><span class="o">.</span><span class="n">flip</span> <span class="o">=</span> <span class="s1">&#39;x&#39;</span>
+</pre></div>
+</div>
+<p>The raw images in the dataset will flip in the horizontal direction when
+<a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack.read_data" title="spexwavepy.imstackfun.Imagestack.read_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_data()</span></code></a> function is called.</p>
+<p>Otherwise,</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">imstack</span><span class="o">.</span><span class="n">flip</span> <span class="o">=</span> <span class="s1">&#39;y&#39;</span>
+</pre></div>
+</div>
+<p>The raw images in the dataset will flip in the vertical direction when
+<a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack.read_data" title="spexwavepy.imstackfun.Imagestack.read_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_data()</span></code></a> function is called.</p>
+<figure class="align-default" id="id13">
+<a class="reference internal image-reference" href="_images/Flip.png"><img alt="_images/Flip.png" src="_images/Flip.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">On the left is the raw image. In the middle is the image flipped horizontally, Imagestack.flip=’x’.
+On the right is the image flipped vertically, Imagestack.flip=’y’.</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>You can also directly call <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack.flipstack" title="spexwavepy.imstackfun.Imagestack.flipstack"><code class="xref py py-meth docutils literal notranslate"><span class="pre">flipstack()</span></code></a> method once the above
+attribute has been set:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">imstack</span><span class="o">.</span><span class="n">flipstack</span><span class="p">()</span>
+</pre></div>
+</div>
 </section>
 <section id="rotating-the-images">
 <span id="userot"></span><h4>Rotating the images<a class="headerlink" href="#rotating-the-images" title="Permalink to this heading"></a></h4>
-<p><em>Two functions, rot90deg and rotate…</em></p>
+<p>In some cases, you need to rotate the raw images for some degrees,
+such as in the example of <a class="reference internal" href="example.html#expplane"><span class="std std-ref">plane mirror measurement with reference beam</span></a>.</p>
+<p>Two methods are provided to do the rotation.
+One is to rotate the raw images 90 degrees counterclockwise.
+The method name is <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack.rot90deg" title="spexwavepy.imstackfun.Imagestack.rot90deg"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rot90deg()</span></code></a>.
+To call this method:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">imstack</span><span class="o">.</span><span class="n">rot90deg</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default" id="id14">
+<a class="reference internal image-reference" href="_images/rot90deg.png"><img alt="_images/rot90deg.png" src="_images/rot90deg.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">On the left is the raw image, on the right is the rotated image.
+The rotation is 90 degrees counterclockwise.</span><a class="headerlink" href="#id14" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Another method is <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack.rotate" title="spexwavepy.imstackfun.Imagestack.rotate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">rotate()</span></code></a>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">imstack</span><span class="o">.</span><span class="n">rot90deg</span><span class="p">(</span><span class="mi">45</span><span class="p">)</span>      <span class="c1"># In [deg]</span>
+</pre></div>
+</div>
+<figure class="align-default" id="id15">
+<a class="reference internal image-reference" href="_images/rotate45deg.png"><img alt="_images/rotate45deg.png" src="_images/rotate45deg.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">On the left is the raw image. In the middle is the image ratated with +45 degrees.
+On the right is the image rotated with -45 degrees.</span><a class="headerlink" href="#id15" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
 </section>
 <section id="detector-pixel-size-determination">
 <span id="usedetpix"></span><h4>Detector pixel size determination<a class="headerlink" href="#detector-pixel-size-determination" title="Permalink to this heading"></a></h4>
@@ -413,12 +482,13 @@ parameter is the coordinate to the newly cropped images by <code class="docutils
 the raw images.</p>
 </div>
 <p>If <code class="docutils literal notranslate"><span class="pre">display</span></code> is True, the fitting results will be shown.</p>
-<figure class="align-center" id="id13">
+<figure class="align-center" id="id16">
 <a class="reference internal image-reference" href="_images/pixdet2.jpg"><img alt="_images/pixdet2.jpg" src="_images/pixdet2.jpg" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-text">The fitting results and the residuals.</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The fitting results and the residuals.</span><a class="headerlink" href="#id16" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
+<p>Please refer to the <a class="reference internal" href="getstart.html#tudetpix"><span class="std std-ref">Tutorial</span></a> for the use of this method.</p>
 </section>
 </section>
 </section>
@@ -538,16 +608,16 @@ At each scan position, an image was taken.</p>
 <p>For <strong>1D case</strong>, only a small strip of data from each raw image is extracted.
 As a result, the whole image stack is cropped. This is done by setting <code class="docutils literal notranslate"><span class="pre">ROI</span></code>
 for the image stacks.</p>
-<figure class="align-default" id="id14">
+<figure class="align-default" id="id17">
 <a class="reference internal image-reference" href="_images/XSSrefer_1.png"><img alt="_images/XSSrefer_1.png" src="_images/XSSrefer_1.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">The cropped data strip for 1D data processing in y scan direction.</span><a class="headerlink" href="#id14" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The cropped data strip for 1D data processing in y scan direction.</span><a class="headerlink" href="#id17" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-default" id="id15">
+<figure class="align-default" id="id18">
 <a class="reference internal image-reference" href="_images/XSSrefer_1x.png"><img alt="_images/XSSrefer_1x.png" src="_images/XSSrefer_1x.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">The cropped data strip for 1D data processing in x scan direction.</span><a class="headerlink" href="#id15" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The cropped data strip for 1D data processing in x scan direction.</span><a class="headerlink" href="#id18" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>The XSS technique then process the data row(column) by row(column).
@@ -555,16 +625,16 @@ Each raw image in the image stack are taken at different diffuser position.
 If we extract the <em>ith</em> row/column of every raw images and then stitch them together,
 a new image is generated. Two images will be generated from both reference image stack
 and the image stack with test optic.</p>
-<figure class="align-default" id="id16">
+<figure class="align-default" id="id19">
 <a class="reference internal image-reference" href="_images/XSSrefer_2.png"><img alt="_images/XSSrefer_2.png" src="_images/XSSrefer_2.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">The stiched images for y scan data.</span><a class="headerlink" href="#id16" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The stiched images for y scan data.</span><a class="headerlink" href="#id19" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-default" id="id17">
+<figure class="align-default" id="id20">
 <a class="reference internal image-reference" href="_images/XSSrefer_2x.png"><img alt="_images/XSSrefer_2x.png" src="_images/XSSrefer_2x.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">The stiched images for x scan data.</span><a class="headerlink" href="#id17" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The stiched images for x scan data.</span><a class="headerlink" href="#id20" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>The newly generated two images are cross-correlated to track the speckle pattern shifts.
@@ -573,10 +643,10 @@ the y scan data. On the contrary, <code class="docutils literal notranslate"><sp
 not used for the y scan data.
 <code class="docutils literal notranslate"><span class="pre">edge_z</span></code> are used for both data set. <em>z</em> is the direction representing
 the scan number.</p>
-<figure class="align-default" id="id18">
+<figure class="align-default" id="id21">
 <a class="reference internal image-reference" href="_images/XSSrefer_3.png"><img alt="_images/XSSrefer_3.png" src="_images/XSSrefer_3.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Stiched image for 1D data processing.</span><a class="headerlink" href="#id18" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Stiched image for 1D data processing.</span><a class="headerlink" href="#id21" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>Loop over each row in the raw image, a 1D speckle shift results will be obtained.</p>
@@ -585,19 +655,19 @@ The data processing resembles the 1D case in each loop. For y scan direction,
 the outmost layer of the loop is along the x direction,
 as shown in the following picture. The obtained speckle pattern shift is in
 the y direction.</p>
-<figure class="align-default" id="id19">
+<figure class="align-default" id="id22">
 <a class="reference internal image-reference" href="_images/XSVT_refer2.png"><img alt="_images/XSVT_refer2.png" src="_images/XSVT_refer2.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">The loop is over x direction when the scan is along y direction.</span><a class="headerlink" href="#id19" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The loop is over x direction when the scan is along y direction.</span><a class="headerlink" href="#id22" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>Similar, if the scan direction is x, the outmost loop of the 2D data processing
 will be along the y direction. The obtained speckle pattern shift is in the
 x direction.</p>
-<figure class="align-default" id="id20">
+<figure class="align-default" id="id23">
 <a class="reference internal image-reference" href="_images/XSVT_refer3.png"><img alt="_images/XSVT_refer3.png" src="_images/XSVT_refer3.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">The loop is over y direction when the scan is along x direction.</span><a class="headerlink" href="#id20" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The loop is over y direction when the scan is along x direction.</span><a class="headerlink" href="#id23" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>According to the above description, two more parameters play important roles.
@@ -614,16 +684,16 @@ Apparently, <code class="docutils literal notranslate"><span class="pre">pad_xy[
 <code class="docutils literal notranslate"><span class="pre">edge_x(edge_y)[0]</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_x(edge_y)[1]</span></code>, respectively.
 The larger the <code class="docutils literal notranslate"><span class="pre">pad_xy</span></code> is, the more trackable the image is, the slower the
 tracking process can be.</p>
-<figure class="align-default" id="id21">
+<figure class="align-default" id="id24">
 <a class="reference internal image-reference" href="_images/XSSrefer_4.png"><img alt="_images/XSSrefer_4.png" src="_images/XSSrefer_4.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">2D image processing for y scan data.</span><a class="headerlink" href="#id21" title="Permalink to this image"></a></p>
+<p><span class="caption-text">2D image processing for y scan data.</span><a class="headerlink" href="#id24" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-default" id="id22">
+<figure class="align-default" id="id25">
 <a class="reference internal image-reference" href="_images/XSSrefer_4x.png"><img alt="_images/XSSrefer_4x.png" src="_images/XSSrefer_4x.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">2D image processing for x scan data.</span><a class="headerlink" href="#id22" title="Permalink to this image"></a></p>
+<p><span class="caption-text">2D image processing for x scan data.</span><a class="headerlink" href="#id25" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>The remaing operations are the same as the 1D case.
@@ -683,31 +753,31 @@ They are along <code class="docutils literal notranslate"><span class="pre">x</s
 Like the scan-based techniques, a stripe of data along
 the <code class="docutils literal notranslate"><span class="pre">y</span></code> or <code class="docutils literal notranslate"><span class="pre">x</span></code> direction is extracted. And again,
 this is done by setting <code class="docutils literal notranslate"><span class="pre">ROI</span></code> for the image stacks.</p>
-<figure class="align-default" id="id23">
+<figure class="align-default" id="id26">
 <a class="reference internal image-reference" href="_images/XSTrefer_1.png"><img alt="_images/XSTrefer_1.png" src="_images/XSTrefer_1.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">The cropped data strip for 1D data processing in y direction.</span><a class="headerlink" href="#id23" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The cropped data strip for 1D data processing in y direction.</span><a class="headerlink" href="#id26" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-default" id="id24">
+<figure class="align-default" id="id27">
 <a class="reference internal image-reference" href="_images/XSTrefer_1x.png"><img alt="_images/XSTrefer_1x.png" src="_images/XSTrefer_1x.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">The cropped data strip for 1D data processing in x direction.</span><a class="headerlink" href="#id24" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The cropped data strip for 1D data processing in x direction.</span><a class="headerlink" href="#id27" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>Compared to the XSS method, there are some more parameters needed
 for this technique. Those parameters are <code class="docutils literal notranslate"><span class="pre">edge_x</span></code>, <code class="docutils literal notranslate"><span class="pre">edge_y</span></code>,
 <code class="docutils literal notranslate"><span class="pre">hw_xy</span></code>, <code class="docutils literal notranslate"><span class="pre">pad_x</span></code> and <code class="docutils literal notranslate"><span class="pre">pad_y</span></code>.</p>
-<figure class="align-default" id="id25">
+<figure class="align-default" id="id28">
 <a class="reference internal image-reference" href="_images/XSTrefer_2.png"><img alt="_images/XSTrefer_2.png" src="_images/XSTrefer_2.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Parameters for 1D data processing in y direction</span><a class="headerlink" href="#id25" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Parameters for 1D data processing in y direction</span><a class="headerlink" href="#id28" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-default" id="id26">
+<figure class="align-default" id="id29">
 <a class="reference internal image-reference" href="_images/XSTrefer_2x.png"><img alt="_images/XSTrefer_2x.png" src="_images/XSTrefer_2x.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Parameters for 1D data processing in x direction</span><a class="headerlink" href="#id26" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Parameters for 1D data processing in x direction</span><a class="headerlink" href="#id29" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p><code class="docutils literal notranslate"><span class="pre">edge_x</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> define the area to be cut from the template
@@ -721,16 +791,16 @@ useless in this case.</p>
 <p>For <strong>2D case</strong>, there are several more parameters needed apart from
 those in the 1D case. Also, some parameters are slightly different
 compared to the 1D case.</p>
-<figure class="align-default" id="id27">
+<figure class="align-default" id="id30">
 <a class="reference internal image-reference" href="_images/XSTrefer_3.png"><img alt="_images/XSTrefer_3.png" src="_images/XSTrefer_3.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Parameters for 2D data processing in y direction</span><a class="headerlink" href="#id27" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Parameters for 2D data processing in y direction</span><a class="headerlink" href="#id30" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-default" id="id28">
+<figure class="align-default" id="id31">
 <a class="reference internal image-reference" href="_images/XSTrefer_3x.png"><img alt="_images/XSTrefer_3x.png" src="_images/XSTrefer_3x.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Parameters for 2D data processing in x direction</span><a class="headerlink" href="#id28" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Parameters for 2D data processing in x direction</span><a class="headerlink" href="#id31" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>As shown in the above images, <code class="docutils literal notranslate"><span class="pre">edge_x</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> define the
@@ -817,18 +887,18 @@ processing procedure resembles the 2D case XSS technique
 with reference beam.</p>
 <p>To obtain the speckle pattern shift in the x direction, the outmost
 loop is along the same direction.</p>
-<figure class="align-default" id="id29">
+<figure class="align-default" id="id32">
 <a class="reference internal image-reference" href="_images/XSVT_refer2.png"><img alt="_images/XSVT_refer2.png" src="_images/XSVT_refer2.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">The loop is over x direction to obtain the speckle pattern shift in this direction.</span><a class="headerlink" href="#id29" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The loop is over x direction to obtain the speckle pattern shift in this direction.</span><a class="headerlink" href="#id32" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>Likewise, the outmost loop is along y direction if the speckle pattern
 shift in y direction is to be tracked.</p>
-<figure class="align-default" id="id30">
+<figure class="align-default" id="id33">
 <a class="reference internal image-reference" href="_images/XSVT_refer3.png"><img alt="_images/XSVT_refer3.png" src="_images/XSVT_refer3.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">The loop is over y direction to obtain the speckle pattern shift in this direction.</span><a class="headerlink" href="#id30" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The loop is over y direction to obtain the speckle pattern shift in this direction.</span><a class="headerlink" href="#id33" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>Note to distinguish the above data processing procedure with the

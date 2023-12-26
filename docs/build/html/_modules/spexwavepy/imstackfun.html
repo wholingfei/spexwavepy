@@ -102,7 +102,7 @@
 <span class="sd">    roi : 4-element tuple, (int, int, int, int)</span>
 <span class="sd">        Region of interest.</span>
 <span class="sd">    fstep : int</span>
-<span class="sd">        File step for file reading. (default 1)</span>
+<span class="sd">        Step for file reading. (default 1)</span>
 <span class="sd">    fnum : int</span>
 <span class="sd">        Total file number, if &lt;=0, consider all the files in the folder.</span>
 <span class="sd">    fstart : int</span>
@@ -118,7 +118,7 @@
 <span class="sd">    flip : string </span>
 <span class="sd">        To flip the images in the stack or not. </span>
 <span class="sd">        &#39;x&#39; is to flip horizontally, &#39;y&#39; is to flip vertically.</span>
-<span class="sd">        It is necessary when the test optic is a mirror. (default None)</span>
+<span class="sd">        It is necessary when the test optic is a mirror and a reference beam exists. (default None)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fileFolder</span><span class="p">,</span> <span class="n">ROI</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -206,7 +206,7 @@
                 <span class="n">fileNames</span> <span class="o">=</span> <span class="n">fileNames</span><span class="p">[</span><span class="n">file_start</span><span class="p">::</span><span class="n">file_step</span><span class="p">]</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">fnum</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fileNames</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">fileNames</span> <span class="o">=</span> <span class="n">fileNames</span><span class="p">[</span><span class="n">file_start</span><span class="p">:</span><span class="n">file_start</span><span class="o">+</span><span class="n">file_num</span><span class="p">:</span><span class="n">file_step</span><span class="p">]</span>
+                <span class="n">fileNames</span> <span class="o">=</span> <span class="n">fileNames</span><span class="p">[</span><span class="n">file_start</span><span class="p">:</span><span class="n">file_start</span><span class="o">+</span><span class="n">file_num</span><span class="o">*</span><span class="n">file_step</span><span class="p">:</span><span class="n">file_step</span><span class="p">]</span>
             <span class="c1">###Read the first image. get x_dim, y_dim</span>
             <span class="n">im_one</span> <span class="o">=</span> <span class="n">read_one</span><span class="p">(</span><span class="n">fileNames</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ShowImage</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
             <span class="n">im_crop</span> <span class="o">=</span> <span class="n">crop_one</span><span class="p">(</span><span class="n">im_one</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">roi</span><span class="p">,</span> <span class="n">ShowImage</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -261,6 +261,9 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Flip the images in the stack.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">flip</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please set flip direction for the image stack!&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">imNo</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>

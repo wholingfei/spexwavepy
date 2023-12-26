@@ -270,9 +270,9 @@ That means the first image. Otherwise, data loading will be start from image num
 ``fstep`` defines the step of the data reading when iterating over the dataset. The default value is 1.
 That means to read every image until it reaches the designated end. 
 
-``fnum`` defines the terminated number of images to be read in the dataset. The default value is negative.
+``fnum`` defines the total number of images to be read in the dataset. The default value is negative.
 That means to read all the files in the dataset. 
-If it is a positive number, the image reading will stop at the number of ``fnum``.
+If it is a positive number, the number of images reading into memory equals the value of ``fnum``.
 
 After properly defining the above attributes, the following code can be used to read the data:
 
@@ -289,14 +289,13 @@ the same raw data is also stored in the ``data`` attribute.
 This attribute can be modified when other methods are called.
 
 In general, :py:meth:`~spexwavepy.imstackfun.Imagestack.read_data` method reads from 
-the image start with the number of ``fstart``, ends with the number of ``fnum``, 
-the reading step is defined as ``fstep``.
+the image start with the number of ``fstart``, 
+with the loading step of ``fstep``, total image number of ``fnum``.
 
 .. _usepreprocess:
 
 Preprocessing of the images
 ---------------------------
-*Say something...*
 There are some other methods defined in :py:class:`~spexwavepy.imstackfun.Imagestack` class. 
 They are mainly used to preprocess the raw images in the image stack.
 
@@ -311,8 +310,25 @@ the image stack. The normalization algorithm used for each image is described in
 .. note::
    There are two places in this package to do the normalization. 
    One is to normalize the raw images, the other one is to normalize the 
-   stitched images (see in the following sections for the ``Tracking`` class). 
+   stitched images (see in the following sections for the 
+   :py:class:`~spexwavepy.trackfun.Tracking` class). 
    **Usually, we only choose one place to do the normalization.**
+
+If you want to do the normalization for the raw images in the dataset, 
+set the ``normalize`` attribute to ``True``.
+
+.. code-block:: Python
+   
+   imstack.normalize = True
+
+Then when you call the :py:func:`~spexwavepy.imstackfun.Imagestack.read_data` function, 
+the raw images will be normalized during data loading. 
+
+Another way is to explicitly call :py:meth:`~spexwavepy.imstackfun.Imagestack.norm` method:
+
+.. code-block:: Python
+
+   imstack.norm()
 
 .. _usesmooth:
 
@@ -322,7 +338,7 @@ If the raw image quaility is very low, sometimes you need to smooth it.
 :py:func:`~spexwavepy.imstackfun.Imagestack.smooth` and
 :py:func:`~spexwavepy.imstackfun.Imagestack.smooth_multi` functions are 
 used to smooth the raw images in the image stack. The latter is the 
-multiprocessing version of the former. Two smoothing are available at 
+multiprocessing version of the former. Two smoothing methods are available at 
 present, they are ``Gaussian`` and ``Box``, respectively. If the 
 ``meth`` is ``Gaussian``, a Gaussian function will be used for the 
 smoothing, the parameter of ``pixel`` determines the sigma of the 
@@ -335,16 +351,86 @@ will look like.
 .. figure:: _static/smoothing.png
    :width: 100%
 
+To do the smoothing, you need to call the following function with parameters ``meth`` and ``pixel``:
+
+.. code-block:: Python
+
+   imstack.smooth(meth='Gaussian', pixel=2, verbos=False)
+
 .. _useflip:
 
 Fliping the images
 ^^^^^^^^^^^^^^^^^^
+Sometimes you need to flip the images in the dataset to match the reference image, 
+such as to measure :ref:`a planar mirror using XSS technique with reference beam <expplane>`.
+
+An attribute ``flip`` is used to tell the codes how to flip the image. 
+The default value is ``None``. The acceptable values are ``x`` or ``y``.
+
+If 
+
+.. code-block:: Python
+
+   imstack.flip = 'x'
+
+The raw images in the dataset will flip in the horizontal direction when 
+:py:func:`~spexwavepy.imstackfun.Imagestack.read_data` function is called. 
+
+Otherwise,
+
+.. code-block:: Python
+
+   imstack.flip = 'y'
+
+The raw images in the dataset will flip in the vertical direction when  
+:py:func:`~spexwavepy.imstackfun.Imagestack.read_data` function is called. 
+
+.. figure:: _static/Flip.png
+   :width: 100%
+
+   On the left is the raw image. In the middle is the image flipped horizontally, Imagestack.flip='x'. 
+   On the right is the image flipped vertically, Imagestack.flip='y'.
+
+You can also directly call :py:meth:`~spexwavepy.imstackfun.Imagestack.flipstack` method once the above
+attribute has been set:
+
+.. code-block:: Python
+
+   imstack.flipstack()
 
 .. _userot:
 
 Rotating the images
 ^^^^^^^^^^^^^^^^^^^
-*Two functions, rot90deg and rotate...*
+In some cases, you need to rotate the raw images for some degrees, 
+such as in the example of :ref:`plane mirror measurement with reference beam <expplane>`.
+
+Two methods are provided to do the rotation.
+One is to rotate the raw images 90 degrees counterclockwise.
+The method name is :py:meth:`~spexwavepy.imstackfun.Imagestack.rot90deg`.
+To call this method:
+
+.. code-block:: Python
+
+   imstack.rot90deg()
+
+.. figure:: _static/rot90deg.png
+   :width: 100%
+
+   On the left is the raw image, on the right is the rotated image. 
+   The rotation is 90 degrees counterclockwise.
+
+Another method is :py:meth:`~spexwavepy.imstackfun.Imagestack.rotate`.
+
+.. code-block:: Python
+
+   imstack.rot90deg(45)      # In [deg]
+
+.. figure:: _static/rotate45deg.png
+   :width: 100%
+
+   On the left is the raw image. In the middle is the image ratated with +45 degrees.
+   On the right is the image rotated with -45 degrees.
 
 .. _usedetpix:
 
@@ -380,8 +466,7 @@ If ``display`` is True, the fitting results will be shown.
 
    The fitting results and the residuals.
 
-
-
+Please refer to the :ref:`Tutorial <tudetpix>` for the use of this method.
 
 .. _usetrack:
 

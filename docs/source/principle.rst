@@ -424,3 +424,12 @@ where :math:`\alpha_x`, :math:`\alpha_y` are the slopes of the wavefront,
 in x and y directions, :math:`p` is the pixel size of the detector,
 :math:`D` is the distance between the detector plane and 
 the diffuser.
+
+.. _prinOther:
+
+Other X-ray Speckle-based techniques
+====================================
+*Mention Sebastien's definition of absolute method, its differences to ours definition...
+Also mention other methods included in the Tracking module. Such as Hartmann mode...*
+
+

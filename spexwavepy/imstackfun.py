@@ -28,7 +28,7 @@ class Imagestack:
     roi : 4-element tuple, (int, int, int, int)
         Region of interest.
     fstep : int
-        File step for file reading. (default 1)
+        Step for file reading. (default 1)
     fnum : int
         Total file number, if <=0, consider all the files in the folder.
     fstart : int
@@ -44,7 +44,7 @@ class Imagestack:
     flip : string 
         To flip the images in the stack or not. 
         'x' is to flip horizontally, 'y' is to flip vertically.
-        It is necessary when the test optic is a mirror. (default None)
+        It is necessary when the test optic is a mirror and a reference beam exists. (default None)
     """
     def __init__(self, fileFolder, ROI):
         """
@@ -132,7 +132,7 @@ class Imagestack:
                 fileNames = fileNames[file_start::file_step]
                 self.fnum = len(fileNames)
             else:
-                fileNames = fileNames[file_start:file_start+file_num:file_step]
+                fileNames = fileNames[file_start:file_start+file_num*file_step:file_step]
             ###Read the first image. get x_dim, y_dim
             im_one = read_one(fileNames[0], ShowImage=False)
             im_crop = crop_one(im_one, self.roi, ShowImage=False)
@@ -187,6 +187,9 @@ class Imagestack:
         """
         Flip the images in the stack.
         """
+        if self.flip not in ['x', 'y']:
+            print("Please set flip direction for the image stack!")
+            sys.exit(0)
         if self.data is not None:
             imNo, _, _ = self.data.shape
             if self.verbose:
@@ -211,6 +214,7 @@ class Imagestack:
         """
         Rotate the raw images in the stack 90 degrees.
         It is very useful when dealing the x scan data.
+        It rotates counterclockwise.
         """
         if self.rawdata is None:
             self.read_data()
@@ -229,6 +233,7 @@ class Imagestack:
     def rotate(self, angle):
         """
         Rotate the raw images in the stack according to the angle.
+        It rotate counterclockwise.
 
         Parameters
         ----------
