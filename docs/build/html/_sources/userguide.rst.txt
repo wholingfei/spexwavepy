@@ -472,26 +472,44 @@ Please refer to the :ref:`Tutorial <tudetpix>` for the use of this method.
 
 The speckle-based techniques included in :py:class:`~spexwavepy.trackfun.Tracking` class 
 ========================================================================================
-The most important parameters for the :py:class:`~spexwavepy.trackfun.Tracking` class 
-are the image stacks. At least 1 image stack is needed to construct 
-the :py:class:`~spexwavepy.trackfun.Tracking` class. There are up to 4 image stacks needed 
-according to the different data processing modes. The following list shows how to input
-these image stacks for different data processing modes. Each row represents a scan
-dimension ``scandim``, each column represnts a data processing mode.
+The :py:class:`~spexwavepy.trackfun.Tracking` class is the container for the various 
+speckle-based techniques.
+At least one image stack is needed as the input of the :py:class:`~spexwavepy.trackfun.Tracking` 
+class. These image stacks are defined as the :py:class:`~spexwavepy.imstackfun.Imagestack` classes.
+There are up to 4 image stacks needed 
+according to the different data processing modes. The following list shows the number of 
+image stacks needed for different modes. 
+Each row has the same scan dimension ``scandim`` for each technique, 
+each column represnts a specific type of the technique.
 
-+---------+-----------------+--------------------------------------------------------+-----------------------------------------------+----------------------------+-----------------------+
-|         | XSS self        | XST self [2]_                                          | XSS with reference                            | XST with reference         | XSVT with reference   |
-+=========+=================+========================================================+===============================================+============================+=======================+
-| x       | imstack1(x sam) | imstack1(x sam1), 2(x sam2)                            | imstack1(x sam), 2(x ref)                     | \-                         | \-                    |
-+---------+-----------------+--------------------------------------------------------+-----------------------------------------------+----------------------------+-----------------------+
-| y       | imstack1(y sam) | imstack1(y sam1), 2(y sam2)                            | imstack1(y sam), 2(y ref)                     | \-                         | \-                    |
-+---------+-----------------+--------------------------------------------------------+-----------------------------------------------+----------------------------+-----------------------+
-| xy [1]_ | \-              | imstack1(x sam1), 2(x sam2), 3(y sam1), 4(y sam2) [3]_ | imstack1(x sam), 2(x ref), 3(y sam), 4(y ref) | \-                         | \-                    |
-+---------+-----------------+--------------------------------------------------------+-----------------------------------------------+----------------------------+-----------------------+
-| random  | \-              | \-                                                     | \-                                            | imstack1(sam), 2(ref) [4]_ | imstack1(sam), 2(ref) |
-+---------+-----------------+--------------------------------------------------------+-----------------------------------------------+----------------------------+-----------------------+
+``imstack1``, ``imstack2``, ``imstack3``, ``imstack4`` represent the 
+:py:class:`~spexwavepy.imstackfun.Imagestack` class needed for each tracking mode.
 
-.. [1] The ``scandim`` set to 'xy' is exclusively used for '2D' data processing, it is valid only when ``Tracking.dimension`` is '2D'.
++-------------+--------------+---------------+--------------+----------------+-----------------+
+| Scan        | XSS self     | XST self [2]_ | XSS with     | XST with       | XSVT with       |
+| dimension   |              |               | references   | reference [4]_ | reference       |
++=============+==============+===============+==============+================+=================+
+| x           | imstack1(x   | imstack1(x    | imstack1(x   | \-             | \-              |
+|             | sam)         | sam1),        | sam),        |                |                 |
+|             |              | 2(x sam2)     | 2(x ref)     |                |                 |
++-------------+--------------+---------------+--------------+----------------+-----------------+
+| y           | imstack1(y   | imsatck1(y    | imstack1(y   | \-             | \-              | 
+|             | sam)         | sam1),        | sam),        |                |                 |
+|             |              | 2(y sam2)     | 2(y ref)     |                |                 |
++-------------+--------------+---------------+--------------+----------------+-----------------+
+| xy [1]_     | \-           | imstack1(x    | imstack1(x   | \-             | \-              | 
+|             |              | sam1),        | sam),        |                |                 |
+|             |              | 2(x sam2),    | 2(x ref),    |                |                 |
+|             |              | 3(y sam1),    | 3(y sam),    |                |                 |
+|             |              | 4(y sam2)     | 4(y ref)     |                |                 |
+|             |              | [3]_          |              |                |                 |
++-------------+--------------+---------------+--------------+----------------+-----------------+
+| random      | \-           | \-            | \-           | imstack1(sam), | imstack1(sam),  |
+|             |              |               |              | 2(ref)         | 2(ref)          |
++-------------+--------------+---------------+--------------+----------------+-----------------+
+
+.. [1] The ``scandim`` set to 'xy' is exclusively used for '2D' data processing, 
+       it is valid only when ``Tracking.dimension`` is '2D'.
 
 .. [2] For XST techniques (self or with reference), there will be only one image in each image stacks.
 
@@ -499,19 +517,28 @@ dimension ``scandim``, each column represnts a data processing mode.
 
 .. [4] The ``scandim`` is not valid and not used in XST technique with reference beam.
 
-``imstack1``, ``imstack2``, ``imstack3``, ``imstack4`` represent the 
-:py:class:`~spexwavepy.imstackfun.Imagestack` class needed for each tracking mode.
 
-The implementation of each of these tracking modes used in this package will be introduced in this section. 
-For the explanation of the physics and theory of these tracking modes please refer to 
+The implementation of each of these tracking modes used 
+in this package will be introduced in this section. 
+For the explanation of the physics and theory of these 
+tracking modes please refer to 
 :doc:`The speckle-based wavefront sensing techniques <principle>`.
+
+Apart from the above mentioned speckle-based techniques, 
+the :py:class:`~spexwavepy.trackfun.Tracking` class has provided 
+other auxiliary functions. They are also described in 
+the following.
 
 .. _trastable:
 
 Stability checking using speckle patterns
 -----------------------------------------
-To do stability checking, the reference image is the first image in the image folder.
-The rest images are all compared with the reference image.
+The :py:meth:`~spexwavepy.trackfun.Tracking.stability` method 
+defined in the :py:class:`~spexwavepy.trackfun.Tracking` class 
+is used for the stability checking.
+
+To do stability checking, the reference image is the **first** image in the image folder.
+The rest images are all compared with this reference image.
 This tracking mode calls the :py:func:`~spexwavepy.corefun.Imagematch` function directly. 
 
 Thus, before tracking, the template image will be cut according to the ``edge_x`` and ``edge_y``.
@@ -522,22 +549,38 @@ Thus, before tracking, the template image will be cut according to the ``edge_x`
 If ``delayX`` and ``delayY`` are the tracked results, the real shifts should be
 ``delayX`` - ``edge_x[0]`` and ``delayY`` - ``edge_y[0]``.
 
+Refer to :ref:`Tutorial <tustable>` for the use of this method.
+The multiprocessing mode of this method named as 
+:py:meth:`~spexwavepy.trackfun.Tracking.stability_multi` 
+is also implemented.
+
 .. _tracolli:
 
 Reference and sample image stacks collimating before tracking
 -------------------------------------------------------------
 There are some occasions that you need to collimate the speckle pattrns from 
-two image stacks before you do any trackings. It is needed particularly 
+two image stacks before you do any speckle tracking. It is needed particularly 
 when the tested  optic is a planar reflecting mirror and we have another 
 incident beam image stack for reference. 
-The :py:func:`~spexwavepy.trackfun.Tracking.collimate` function is designed for this purpose. 
+The :py:func:`~spexwavepy.trackfun.Tracking.collimate` function is designed 
+for such situation. 
 
-Usually, we use the first image from the two image stacks to do the collimation.
-Similar to the stability check, we cut one image to make it as a template. 
-Unlike the stability check, for collimating, usually a very large area is cropped.
-After that, we call the :py:func:`~spexwavepy.corefun.Imagematch` fucntion to 
-cross-correlate this two images. Finally, we move the images in the image stack 
+In order to use :py:func:`~spexwavepy.trackfun.Tracking.collimate` function,
+two image stacks :py:class:`~spexwavepy.imstackfun.Imagestack` need to be defined 
+and as the input of the :py:class:`~spexwavepy.trackfun.Tracking` class. 
+
+We use the first image from the two image stacks to do the collimation.
+Similar to the :ref:`stability check <trastable>`, 
+we cut one image in the first image stack according to ``edge_x`` and ``edge_y``.
+Usually a very large area is cropped for collimating.
+We still invoke the :py:func:`~spexwavepy.corefun.Imagematch` fucntion to 
+cross-correlate the two images from two different image stacks. 
+Finally, we move all the images in the two image stacks 
 according to the obtained speckle pattern shifts.
+After calling this method, all the images in the two image stacks will be aligned.
+
+Please refer to the example :ref:`Plane mirror measurement with reference beam <expplane>`
+for the use of :py:func:`~spexwavepy.trackfun.Tracking.collimate` function. 
 
 .. _traXSS:
 

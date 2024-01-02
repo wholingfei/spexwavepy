@@ -494,41 +494,69 @@ the raw images.</p>
 </section>
 <section id="the-speckle-based-techniques-included-in-tracking-class">
 <span id="usetrack"></span><h2>The speckle-based techniques included in <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class<a class="headerlink" href="#the-speckle-based-techniques-included-in-tracking-class" title="Permalink to this heading"></a></h2>
-<p>The most important parameters for the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class
-are the image stacks. At least 1 image stack is needed to construct
-the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class. There are up to 4 image stacks needed
-according to the different data processing modes. The following list shows how to input
-these image stacks for different data processing modes. Each row represents a scan
-dimension <code class="docutils literal notranslate"><span class="pre">scandim</span></code>, each column represnts a data processing mode.</p>
+<p>The <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class is the container for the various
+speckle-based techniques.
+At least one image stack is needed as the input of the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a>
+class. These image stacks are defined as the <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack" title="spexwavepy.imstackfun.Imagestack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Imagestack</span></code></a> classes.
+There are up to 4 image stacks needed
+according to the different data processing modes. The following list shows the number of
+image stacks needed for different modes.
+Each row has the same scan dimension <code class="docutils literal notranslate"><span class="pre">scandim</span></code> for each technique,
+each column represnts a specific type of the technique.</p>
+<p><code class="docutils literal notranslate"><span class="pre">imstack1</span></code>, <code class="docutils literal notranslate"><span class="pre">imstack2</span></code>, <code class="docutils literal notranslate"><span class="pre">imstack3</span></code>, <code class="docutils literal notranslate"><span class="pre">imstack4</span></code> represent the
+<a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack" title="spexwavepy.imstackfun.Imagestack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Imagestack</span></code></a> class needed for each tracking mode.</p>
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head"></th>
+<tr class="row-odd"><th class="head"><p>Scan
+dimension</p></th>
 <th class="head"><p>XSS self</p></th>
 <th class="head"><p>XST self <a class="footnote-reference brackets" href="#id9" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p></th>
-<th class="head"><p>XSS with reference</p></th>
-<th class="head"><p>XST with reference</p></th>
-<th class="head"><p>XSVT with reference</p></th>
+<th class="head"><p>XSS with
+references</p></th>
+<th class="head"><p>XST with
+reference <a class="footnote-reference brackets" href="#id11" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></p></th>
+<th class="head"><p>XSVT with
+reference</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>x</p></td>
-<td><p>imstack1(x sam)</p></td>
-<td><p>imstack1(x sam1), 2(x sam2)</p></td>
-<td><p>imstack1(x sam), 2(x ref)</p></td>
+<td><p>imstack1(x
+sam)</p></td>
+<td><p>imstack1(x
+sam1),
+2(x sam2)</p></td>
+<td><p>imstack1(x
+sam),
+2(x ref)</p></td>
 <td><p>-</p></td>
 <td><p>-</p></td>
 </tr>
 <tr class="row-odd"><td><p>y</p></td>
-<td><p>imstack1(y sam)</p></td>
-<td><p>imstack1(y sam1), 2(y sam2)</p></td>
-<td><p>imstack1(y sam), 2(y ref)</p></td>
+<td><p>imstack1(y
+sam)</p></td>
+<td><p>imsatck1(y
+sam1),
+2(y sam2)</p></td>
+<td><p>imstack1(y
+sam),
+2(y ref)</p></td>
 <td><p>-</p></td>
 <td><p>-</p></td>
 </tr>
-<tr class="row-even"><td><p>xy <a class="footnote-reference brackets" href="#id8" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p></td>
+<tr class="row-even"><td><p>xy <a class="footnote-reference brackets" href="#id8" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p></td>
 <td><p>-</p></td>
-<td><p>imstack1(x sam1), 2(x sam2), 3(y sam1), 4(y sam2) <a class="footnote-reference brackets" href="#id10" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p></td>
-<td><p>imstack1(x sam), 2(x ref), 3(y sam), 4(y ref)</p></td>
+<td><p>imstack1(x
+sam1),
+2(x sam2),
+3(y sam1),
+4(y sam2)
+<a class="footnote-reference brackets" href="#id10" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p></td>
+<td><p>imstack1(x
+sam),
+2(x ref),
+3(y sam),
+4(y ref)</p></td>
 <td><p>-</p></td>
 <td><p>-</p></td>
 </tr>
@@ -536,36 +564,46 @@ dimension <code class="docutils literal notranslate"><span class="pre">scandim</
 <td><p>-</p></td>
 <td><p>-</p></td>
 <td><p>-</p></td>
-<td><p>imstack1(sam), 2(ref) <a class="footnote-reference brackets" href="#id11" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></p></td>
-<td><p>imstack1(sam), 2(ref)</p></td>
+<td><p>imstack1(sam),
+2(ref)</p></td>
+<td><p>imstack1(sam),
+2(ref)</p></td>
 </tr>
 </tbody>
 </table>
 <aside class="footnote brackets" id="id8" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">1</a><span class="fn-bracket">]</span></span>
-<p>The <code class="docutils literal notranslate"><span class="pre">scandim</span></code> set to ‘xy’ is exclusively used for ‘2D’ data processing, it is valid only when <code class="docutils literal notranslate"><span class="pre">Tracking.dimension</span></code> is ‘2D’.</p>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">1</a><span class="fn-bracket">]</span></span>
+<p>The <code class="docutils literal notranslate"><span class="pre">scandim</span></code> set to ‘xy’ is exclusively used for ‘2D’ data processing,
+it is valid only when <code class="docutils literal notranslate"><span class="pre">Tracking.dimension</span></code> is ‘2D’.</p>
 </aside>
 <aside class="footnote brackets" id="id9" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">2</a><span class="fn-bracket">]</span></span>
 <p>For XST techniques (self or with reference), there will be only one image in each image stacks.</p>
 </aside>
 <aside class="footnote brackets" id="id10" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">3</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">3</a><span class="fn-bracket">]</span></span>
 <p>For self-reference XST technique, it is possible that imsatck1 and imstack3 are identical.</p>
 </aside>
 <aside class="footnote brackets" id="id11" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">4</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">4</a><span class="fn-bracket">]</span></span>
 <p>The <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is not valid and not used in XST technique with reference beam.</p>
 </aside>
-<p><code class="docutils literal notranslate"><span class="pre">imstack1</span></code>, <code class="docutils literal notranslate"><span class="pre">imstack2</span></code>, <code class="docutils literal notranslate"><span class="pre">imstack3</span></code>, <code class="docutils literal notranslate"><span class="pre">imstack4</span></code> represent the
-<a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack" title="spexwavepy.imstackfun.Imagestack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Imagestack</span></code></a> class needed for each tracking mode.</p>
-<p>The implementation of each of these tracking modes used in this package will be introduced in this section.
-For the explanation of the physics and theory of these tracking modes please refer to
+<p>The implementation of each of these tracking modes used
+in this package will be introduced in this section.
+For the explanation of the physics and theory of these
+tracking modes please refer to
 <a class="reference internal" href="principle.html"><span class="doc">The speckle-based wavefront sensing techniques</span></a>.</p>
+<p>Apart from the above mentioned speckle-based techniques,
+the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class has provided
+other auxiliary functions. They are also described in
+the following.</p>
 <section id="stability-checking-using-speckle-patterns">
 <span id="trastable"></span><h3>Stability checking using speckle patterns<a class="headerlink" href="#stability-checking-using-speckle-patterns" title="Permalink to this heading"></a></h3>
-<p>To do stability checking, the reference image is the first image in the image folder.
-The rest images are all compared with the reference image.
+<p>The <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.stability" title="spexwavepy.trackfun.Tracking.stability"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stability()</span></code></a> method
+defined in the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class
+is used for the stability checking.</p>
+<p>To do stability checking, the reference image is the <strong>first</strong> image in the image folder.
+The rest images are all compared with this reference image.
 This tracking mode calls the <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.Imagematch" title="spexwavepy.corefun.Imagematch"><code class="xref py py-func docutils literal notranslate"><span class="pre">Imagematch()</span></code></a> function directly.</p>
 <p>Thus, before tracking, the template image will be cut according to the <code class="docutils literal notranslate"><span class="pre">edge_x</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_y</span></code>.</p>
 <figure class="align-default">
@@ -573,20 +611,33 @@ This tracking mode calls the <a class="reference internal" href="spexwavepy.html
 </figure>
 <p>If <code class="docutils literal notranslate"><span class="pre">delayX</span></code> and <code class="docutils literal notranslate"><span class="pre">delayY</span></code> are the tracked results, the real shifts should be
 <code class="docutils literal notranslate"><span class="pre">delayX</span></code> - <code class="docutils literal notranslate"><span class="pre">edge_x[0]</span></code> and <code class="docutils literal notranslate"><span class="pre">delayY</span></code> - <code class="docutils literal notranslate"><span class="pre">edge_y[0]</span></code>.</p>
+<p>Refer to <a class="reference internal" href="getstart.html#tustable"><span class="std std-ref">Tutorial</span></a> for the use of this method.
+The multiprocessing mode of this method named as
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.stability_multi" title="spexwavepy.trackfun.Tracking.stability_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stability_multi()</span></code></a>
+is also implemented.</p>
 </section>
 <section id="reference-and-sample-image-stacks-collimating-before-tracking">
 <span id="tracolli"></span><h3>Reference and sample image stacks collimating before tracking<a class="headerlink" href="#reference-and-sample-image-stacks-collimating-before-tracking" title="Permalink to this heading"></a></h3>
 <p>There are some occasions that you need to collimate the speckle pattrns from
-two image stacks before you do any trackings. It is needed particularly
+two image stacks before you do any speckle tracking. It is needed particularly
 when the tested  optic is a planar reflecting mirror and we have another
 incident beam image stack for reference.
-The <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.collimate" title="spexwavepy.trackfun.Tracking.collimate"><code class="xref py py-func docutils literal notranslate"><span class="pre">collimate()</span></code></a> function is designed for this purpose.</p>
-<p>Usually, we use the first image from the two image stacks to do the collimation.
-Similar to the stability check, we cut one image to make it as a template.
-Unlike the stability check, for collimating, usually a very large area is cropped.
-After that, we call the <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.Imagematch" title="spexwavepy.corefun.Imagematch"><code class="xref py py-func docutils literal notranslate"><span class="pre">Imagematch()</span></code></a> fucntion to
-cross-correlate this two images. Finally, we move the images in the image stack
-according to the obtained speckle pattern shifts.</p>
+The <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.collimate" title="spexwavepy.trackfun.Tracking.collimate"><code class="xref py py-func docutils literal notranslate"><span class="pre">collimate()</span></code></a> function is designed
+for such situation.</p>
+<p>In order to use <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.collimate" title="spexwavepy.trackfun.Tracking.collimate"><code class="xref py py-func docutils literal notranslate"><span class="pre">collimate()</span></code></a> function,
+two image stacks <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack" title="spexwavepy.imstackfun.Imagestack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Imagestack</span></code></a> need to be defined
+and as the input of the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class.</p>
+<p>We use the first image from the two image stacks to do the collimation.
+Similar to the <a class="reference internal" href="#trastable"><span class="std std-ref">stability check</span></a>,
+we cut one image in the first image stack according to <code class="docutils literal notranslate"><span class="pre">edge_x</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_y</span></code>.
+Usually a very large area is cropped for collimating.
+We still invoke the <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.Imagematch" title="spexwavepy.corefun.Imagematch"><code class="xref py py-func docutils literal notranslate"><span class="pre">Imagematch()</span></code></a> fucntion to
+cross-correlate the two images from two different image stacks.
+Finally, we move all the images in the two image stacks
+according to the obtained speckle pattern shifts.
+After calling this method, all the images in the two image stacks will be aligned.</p>
+<p>Please refer to the example <a class="reference internal" href="example.html#expplane"><span class="std std-ref">Plane mirror measurement with reference beam</span></a>
+for the use of <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.collimate" title="spexwavepy.trackfun.Tracking.collimate"><code class="xref py py-func docutils literal notranslate"><span class="pre">collimate()</span></code></a> function.</p>
 </section>
 <section id="xss-technique-with-reference-beam">
 <span id="traxss"></span><h3>XSS technique with reference beam<a class="headerlink" href="#xss-technique-with-reference-beam" title="Permalink to this heading"></a></h3>

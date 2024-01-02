@@ -209,7 +209,7 @@ class Tracking:
         Returns
         -------
         ixs, iys, res : numpy.array
-            Shifts in two dimensions and the coefficient.
+            Shifts in two dimensions and the correlation coefficient.
         """
         if self.imstack1.rawdata is not None:
             imNo, y_size, x_size = self.imstack1.data.shape
@@ -241,7 +241,7 @@ class Tracking:
                 fileNames = fileNames[file_start::file_step]
                 self.fnum = len(fileNames)
             else:
-                fileNames = fileNames[file_start:file_start+fileNum:file_step]
+                fileNames = fileNames[file_start:file_start+fileNum*file_step:file_step]
             im1_tmp = read_one(fileNames[0], ShowImage=False)
             im1 = crop_one(im1_tmp, self.imstack1.roi)
             imNo = len(fileNames)
@@ -305,7 +305,7 @@ class Tracking:
             self.fnum = len(fileNames)
             fileNum = self.fnum
         else:
-            fileNames = fileNames[file_start:file_start+fileNum:file_step]
+            fileNames = fileNames[file_start:file_start+fileNum*file_step:file_step]
         jxs = list(np.arange(0, fileNum-1, 1))
         if isinstance(edge_x, int):
             edge_x = (edge_x, edge_x)
@@ -345,7 +345,8 @@ class Tracking:
     def collimate(self, edge_x, edge_y):
         """
         This function uses the first image from both imstack1 and imstack2
-        to align the speckle patterns. It is called before any further tracking.
+        to align the speckle patterns in the image stacks. 
+        It is called before any further tracking method.
 
         Parameters
         ----------
@@ -413,6 +414,8 @@ class Tracking:
             x_tmp = min(x_tmp1, x_tmp2)
             self.imstack1.data = self.imstack1.data[:, :, np.abs(ix_tmp):np.abs(ix_tmp)+x_tmp]
             self.imstack2.data = self.imstack2.data[:, :, 0:x_tmp]
+
+        return
 
     def _XSS_2stacks_1D(self, edge_xy, edge_z, normalize=False, display=False, verbose=True, _Resreturn=False):
         """

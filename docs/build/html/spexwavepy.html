@@ -817,7 +817,8 @@ Needed when do 2D data processing. (default None)</p></li>
 <dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.collimate">
 <span class="sig-name descname"><span class="pre">collimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/trackfun.html#Tracking.collimate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.trackfun.Tracking.collimate" title="Permalink to this definition"></a></dt>
 <dd><p>This function uses the first image from both imstack1 and imstack2
-to align the speckle patterns. It is called before any further tracking.</p>
+to align the speckle patterns in the image stacks.
+It is called before any further tracking method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -879,7 +880,7 @@ to the list [int, int].</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ixs, iys, res</strong> – Shifts in two dimensions and the coefficient.</p>
+<dd class="field-even"><p><strong>ixs, iys, res</strong> – Shifts in two dimensions and the correlation coefficient.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>numpy.array</p>
