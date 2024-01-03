@@ -380,7 +380,8 @@ class Tracking:
 
         if np.max(res_tmp) < 0.5:
             warnings.warn("Too low correlate coefficient, may have wrong tracking value!")
-            print("The coefficient is {:.3f}".format(np.max(res_tmp)))
+        
+        print("The coefficient is {:.3f}".format(np.max(res_tmp)))
 
         if iy_tmp > 0:
             data1_tmp = self.imstack1.data[0]

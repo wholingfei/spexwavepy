@@ -636,8 +636,30 @@ cross-correlate the two images from two different image stacks.
 Finally, we move all the images in the two image stacks
 according to the obtained speckle pattern shifts.
 After calling this method, all the images in the two image stacks will be aligned.</p>
+<p>The following images show that before the collimation,
+two images from the different image stacks are not aligned well.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/collima_before.png"><img alt="_images/collima_before.png" src="_images/collima_before.png" style="width: 80%;" /></a>
+</figure>
+<p>Then we do the collimating.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">spexwavepy.trackfun</span> <span class="kn">import</span> <span class="n">Tracking</span>
+
+<span class="n">track</span> <span class="o">=</span> <span class="n">Tracking</span><span class="p">(</span><span class="n">imstack_sam</span><span class="p">,</span> <span class="n">imstack_ref</span><span class="p">)</span>
+<span class="n">track</span><span class="o">.</span><span class="n">collimate</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Where in the above code block, <code class="docutils literal notranslate"><span class="pre">imstack_sam</span></code> and <code class="docutils literal notranslate"><span class="pre">imsatck_ref</span></code> are two
+<a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack" title="spexwavepy.imstackfun.Imagestack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Imagestack</span></code></a> classes.
+They represent the loaded reference and sample image stacks, respectively.</p>
+<p>After we invoke the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.collimate" title="spexwavepy.trackfun.Tracking.collimate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">collimate()</span></code></a> method,
+the two images from the reference and sample image stack are well aligned,
+as shown in the following images.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/collima_after.png"><img alt="_images/collima_after.png" src="_images/collima_after.png" style="width: 80%;" /></a>
+</figure>
 <p>Please refer to the example <a class="reference internal" href="example.html#expplane"><span class="std std-ref">Plane mirror measurement with reference beam</span></a>
-for the use of <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.collimate" title="spexwavepy.trackfun.Tracking.collimate"><code class="xref py py-func docutils literal notranslate"><span class="pre">collimate()</span></code></a> function.</p>
+for the use of <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.collimate" title="spexwavepy.trackfun.Tracking.collimate"><code class="xref py py-func docutils literal notranslate"><span class="pre">collimate()</span></code></a> function
+in real data processing procedure.</p>
 </section>
 <section id="xss-technique-with-reference-beam">
 <span id="traxss"></span><h3>XSS technique with reference beam<a class="headerlink" href="#xss-technique-with-reference-beam" title="Permalink to this heading"></a></h3>

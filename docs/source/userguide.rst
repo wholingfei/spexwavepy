@@ -579,8 +579,35 @@ Finally, we move all the images in the two image stacks
 according to the obtained speckle pattern shifts.
 After calling this method, all the images in the two image stacks will be aligned.
 
+The following images show that before the collimation, 
+two images from the different image stacks are not aligned well.
+
+.. figure:: _static/collima_before.png
+   :width: 80%
+
+Then we do the collimating.
+
+.. code-block:: python
+   
+   from spexwavepy.trackfun import Tracking
+
+   track = Tracking(imstack_sam, imstack_ref)
+   track.collimate(150, 250)
+
+Where in the above code block, ``imstack_sam`` and ``imsatck_ref`` are two 
+:py:class:`~spexwavepy.imstackfun.Imagestack` classes. 
+They represent the loaded reference and sample image stacks, respectively. 
+
+After we invoke the :py:meth:`~spexwavepy.trackfun.Tracking.collimate` method,
+the two images from the reference and sample image stack are well aligned, 
+as shown in the following images.
+
+.. figure:: _static/collima_after.png
+   :width: 80%
+
 Please refer to the example :ref:`Plane mirror measurement with reference beam <expplane>`
-for the use of :py:func:`~spexwavepy.trackfun.Tracking.collimate` function. 
+for the use of :py:func:`~spexwavepy.trackfun.Tracking.collimate` function 
+in real data processing procedure. 
 
 .. _traXSS:
 
