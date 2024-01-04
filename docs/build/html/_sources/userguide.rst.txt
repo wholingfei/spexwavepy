@@ -524,6 +524,15 @@ For the explanation of the physics and theory of these
 tracking modes please refer to 
 :doc:`The speckle-based wavefront sensing techniques <principle>`.
 
+As to the practical implementation of these techniques within this python package,
+two essential methods are :py:meth:`~spexwavepy.trackfun.Tracking.XSS_withrefer` 
+and :py:meth:`~spexwavepy.trackfun.Tracking.XST_self`, as well as their 
+multiprocessing form of :py:meth:`~spexwavepy.trackfun.Tracking.XSS_withrefer_multi` 
+and :py:meth:`~spexwavepy.trackfun.Tracking.XST_self_multi`. 
+They represent the :ref:`XSS technhique with reference beam <prinXSSRefer>` and 
+:ref:`Self-reference XST technique <prinXSTSelf>`, respectively. 
+Other methods are based upon these two methods. 
+
 Apart from the above mentioned speckle-based techniques, 
 the :py:class:`~spexwavepy.trackfun.Tracking` class has provided 
 other auxiliary functions. They are also described in 

@@ -720,6 +720,8 @@ class Tracking:
                 #if scandim != 'diag':
                 self._sloX = slope_pixel(self._delayX, self.pixsize, self.dist)
                 self._sloY = slope_pixel(self._delayY, self.pixsize, self.dist)
+
+        return
     
     def XSS_withrefer_multi(self, edge_x, edge_y, edge_z, hw_xy, pad_xy, cpu_no, normalize=False, verbose=True):
         """

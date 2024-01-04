@@ -593,6 +593,14 @@ in this package will be introduced in this section.
 For the explanation of the physics and theory of these
 tracking modes please refer to
 <a class="reference internal" href="principle.html"><span class="doc">The speckle-based wavefront sensing techniques</span></a>.</p>
+<p>As to the practical implementation of these techniques within this python package,
+two essential methods are <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer" title="spexwavepy.trackfun.Tracking.XSS_withrefer"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XSS_withrefer()</span></code></a>
+and <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_self" title="spexwavepy.trackfun.Tracking.XST_self"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XST_self()</span></code></a>, as well as their
+multiprocessing form of <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer_multi" title="spexwavepy.trackfun.Tracking.XSS_withrefer_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XSS_withrefer_multi()</span></code></a>
+and <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_self_multi" title="spexwavepy.trackfun.Tracking.XST_self_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XST_self_multi()</span></code></a>.
+They represent the <a class="reference internal" href="principle.html#prinxssrefer"><span class="std std-ref">XSS technhique with reference beam</span></a> and
+<a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">Self-reference XST technique</span></a>, respectively.
+Other methods are based upon these two methods.</p>
 <p>Apart from the above mentioned speckle-based techniques,
 the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class has provided
 other auxiliary functions. They are also described in
