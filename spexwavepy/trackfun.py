@@ -422,27 +422,10 @@ class Tracking:
         """
         **1D** speckle tracking for XSS technique with reference beam.
 
-        Parameters
-        ----------
-        edge_xy : int, or [int, int]
-            Area needs to be cut in x or y dimension.
-            If it is a single integer, it will be expanded automatically 
-            to the list [int, int].
-        edge_z : int, or [int, int]
-            Area needs to be cut in scan number dimension.
-            If it is a single integer, it will be expanded automatically 
-            to the list [int, int].
-        normalize : bool
-            To normalize the stitched image or not. (default False)
-        display : bool
-            To display or not. (default False)
-        verbose : bool
-            To show the information or not. (default True)
-
         Returns
         -------
         ixs, iys, resmax : numpy.array
-            Shifts in x and y and the coefficient.
+            Shifts in x and y and the coefficient if _Resreturn=True.
         """
         scandim = self.scandim
         if scandim not in ['x', 'y']:
@@ -505,6 +488,7 @@ class Tracking:
     def XSS_withrefer(self, edge_x, edge_y, edge_z, hw_xy=None, pad_xy=None, normalize=False, display=False, verbose=True):
         """
         Speckle tracking for XSS technique with reference beam.
+        Two image stacks are needed to define the Tracking class.
         The fisrt image stack is the one with test optic.
         The second image stack is the reference image stack.
 
@@ -513,18 +497,20 @@ class Tracking:
         edge_x : int, or [int, int]
             Area needs to be cut in x dimension.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int]. If scan in x direction, it is useless.
+            to (int, int). 
+            If Tracking.scandim='x' (scan in x direction), it is useless.
         edge_y : int, or [int, int]
             Area needs to be cut in y dimension.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int]. If scan in y direction, it is useless.
+            to (int, int). 
+            If Tracking.scandim='y' (scan in y direction), it is useless.
         edge_z : int, or [int, int]
             Area needs to be cut in scan number dimension.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int].
+            to (int, int).
         hw_xy : int
-            The width/height of the image subregion. If ``scandim`` is 'x',
-            it is the height of the subregion; if ``scandim`` is 'y',
+            The width/height of the image subregion. If Tracking.scandim is 'x',
+            it is the height of the subregion; if Tracking.scandim is 'y',
             it is the width of the subregion.
             Needed when do 2D data processing. (default None) 
         pad_xy : int, or [int, int]

@@ -627,7 +627,7 @@ and :py:meth:`~spexwavepy.trackfun.Tracking.XSS_withrefer_multi` function
 are used to process the scanned data. 
 In this method, a reference image stack is needed.
 Please refer to :ref:`XSS technique with reference beam <prinXSSRefer>` 
-for the detailed description of this technique.
+for the detailed description of the physics of this technique.
 
 The important parameters of these two functions are ``edge_x``, ``edge_y``, 
 ``edge_z``, ``hw_xy``, ``pad_xy``. The last two parameters, ``hw_xy`` 
@@ -673,7 +673,7 @@ and the image stack with test optic.
 
 The newly generated two images are cross-correlated to track the speckle pattern shifts.
 As mentioned in the above, ``edge_x`` is used for the y scan data. It is not used for 
-the y scan data. On the contrary, ``edge_y`` is used for the x scan data, 
+the x scan data. On the contrary, ``edge_y`` is used for the x scan data, 
 not used for the y scan data.
 ``edge_z`` are used for both data set. *z* is the direction representing
 the scan number. 
@@ -683,22 +683,22 @@ the scan number.
    
    Stiched image for 1D data processing.
 
-Loop over each row in the raw image, a 1D speckle shift results will be obtained. 
+Loop over each row in the raw image stack, a 1D speckle shift will be obtained. 
 
-For **2D case**, the data processing procedure loop over one direction. 
-The data processing resembles the 1D case in each loop. For y scan direction, 
-the outmost layer of the loop is along the x direction, 
-as shown in the following picture. The obtained speckle pattern shift is in 
-the y direction.
+For **2D case**, the similar 1D data processing procedure described in the above 
+will be looped over the horizontal or vertical direction. 
+For y scan direction, the outmost layer of the loop is along the x direction, 
+as shown in the following picture. The obtained speckle pattern shift is the 
+2D shift along the the y direction.
 
 .. figure:: _static/XSVT_refer2.png
    :width: 80%
    
    The loop is over x direction when the scan is along y direction.
 
-Similar, if the scan direction is x, the outmost loop of the 2D data processing 
-will be along the y direction. The obtained speckle pattern shift is in the
-x direction.
+Likewise, if the scan direction is x, the outmost loop of the 2D data processing 
+will be along the y direction. The obtained speckle pattern shift is in the 2D 
+shift along the x direction.
 
 .. figure:: _static/XSVT_refer3.png
    :width: 80%
@@ -707,12 +707,12 @@ x direction.
 
 According to the above description, two more parameters play important roles. 
 As in the 1D case, ``edge_x``, ``edge_y`` and ``edge_z`` define how to 
-cut the raw image stack. ``hw_xy`` defines the width (height) of 
-the subregion for the 2D data processing if the ``scandim`` is 'y' ('x'). 
-Each subregion is a strip of data resemble that in 1D case. 
+cut the raw images in the image stack. ``hw_xy`` defines the width / height of 
+the subregion for the 2D data processing if the ``scandim`` is 'y' / 'x'. 
+Each subregion is a strip of data resembles that in 1D case. 
 The subregion will move to cover the whole range of the raw images.
-We use ``hw_xy`` to define the width (height) of the window, i.e., 
-the stitched images to be coross-correlated during each loop. 
+We use ``hw_xy`` to define the width / height of the window, i.e., 
+the stitched image, to be coross-correlated during each loop. 
 The reference stitched image should be larger than the template,
 we use ``pad_xy`` to define how larger the reference stitched image is.
 Apparently, ``pad_xy[0]`` and ``pad_xy[1]`` should be smaller or equal to 
@@ -730,13 +730,13 @@ tracking process can be.
 
    2D image processing for x scan data.
 
-The remaing operations are the same as the 1D case.
+The remaing operations are the same as the 1D case described in the above.
 Note that in order to do the integration, if ``scandim`` is `'xy'`, 
 the 2D results in two directions will be cut to the same size automatically.
 
-As already described in the :ref:`XSS technique with reference beam <prinXSSRefer>` 
+As been described in the :ref:`XSS technique with reference beam <prinXSSRefer>` 
 section, after obtaining the speckle patter shifts, we can reconstruct the 
-slope of the wavefront from this techinque. Thus, ths ``sloX`` and/or ``sloY``
+slope of the wavefront from this techinque. Thus, the ``sloX`` and/or ``sloY``
 are stored in the :py:class:`~spexwavepy.trackfun.Tracking` class according 
 to the scan direction. The related postprocess fucntions are 
 :py:func:`~spexwavepy.postfun.slope_pixel` and 
