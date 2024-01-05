@@ -676,7 +676,7 @@ and <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Trac
 are used to process the scanned data.
 In this method, a reference image stack is needed.
 Please refer to <a class="reference internal" href="principle.html#prinxssrefer"><span class="std std-ref">XSS technique with reference beam</span></a>
-for the detailed description of this technique.</p>
+for the detailed description of the physics of this technique.</p>
 <p>The important parameters of these two functions are <code class="docutils literal notranslate"><span class="pre">edge_x</span></code>, <code class="docutils literal notranslate"><span class="pre">edge_y</span></code>,
 <code class="docutils literal notranslate"><span class="pre">edge_z</span></code>, <code class="docutils literal notranslate"><span class="pre">hw_xy</span></code>, <code class="docutils literal notranslate"><span class="pre">pad_xy</span></code>. The last two parameters, <code class="docutils literal notranslate"><span class="pre">hw_xy</span></code>
 and <code class="docutils literal notranslate"><span class="pre">pad_xy</span></code> are only important in 2D case.</p>
@@ -720,7 +720,7 @@ and the image stack with test optic.</p>
 </figure>
 <p>The newly generated two images are cross-correlated to track the speckle pattern shifts.
 As mentioned in the above, <code class="docutils literal notranslate"><span class="pre">edge_x</span></code> is used for the y scan data. It is not used for
-the y scan data. On the contrary, <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> is used for the x scan data,
+the x scan data. On the contrary, <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> is used for the x scan data,
 not used for the y scan data.
 <code class="docutils literal notranslate"><span class="pre">edge_z</span></code> are used for both data set. <em>z</em> is the direction representing
 the scan number.</p>
@@ -730,21 +730,21 @@ the scan number.</p>
 <p><span class="caption-text">Stiched image for 1D data processing.</span><a class="headerlink" href="#id21" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<p>Loop over each row in the raw image, a 1D speckle shift results will be obtained.</p>
-<p>For <strong>2D case</strong>, the data processing procedure loop over one direction.
-The data processing resembles the 1D case in each loop. For y scan direction,
-the outmost layer of the loop is along the x direction,
-as shown in the following picture. The obtained speckle pattern shift is in
-the y direction.</p>
+<p>Loop over each row in the raw image stack, a 1D speckle shift will be obtained.</p>
+<p>For <strong>2D case</strong>, the similar 1D data processing procedure described in the above
+will be looped over the horizontal or vertical direction.
+For y scan direction, the outmost layer of the loop is along the x direction,
+as shown in the following picture. The obtained speckle pattern shift is the
+2D shift along the the y direction.</p>
 <figure class="align-default" id="id22">
 <a class="reference internal image-reference" href="_images/XSVT_refer2.png"><img alt="_images/XSVT_refer2.png" src="_images/XSVT_refer2.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-text">The loop is over x direction when the scan is along y direction.</span><a class="headerlink" href="#id22" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<p>Similar, if the scan direction is x, the outmost loop of the 2D data processing
-will be along the y direction. The obtained speckle pattern shift is in the
-x direction.</p>
+<p>Likewise, if the scan direction is x, the outmost loop of the 2D data processing
+will be along the y direction. The obtained speckle pattern shift is in the 2D
+shift along the x direction.</p>
 <figure class="align-default" id="id23">
 <a class="reference internal image-reference" href="_images/XSVT_refer3.png"><img alt="_images/XSVT_refer3.png" src="_images/XSVT_refer3.png" style="width: 80%;" /></a>
 <figcaption>
@@ -753,12 +753,12 @@ x direction.</p>
 </figure>
 <p>According to the above description, two more parameters play important roles.
 As in the 1D case, <code class="docutils literal notranslate"><span class="pre">edge_x</span></code>, <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_z</span></code> define how to
-cut the raw image stack. <code class="docutils literal notranslate"><span class="pre">hw_xy</span></code> defines the width (height) of
-the subregion for the 2D data processing if the <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’ (‘x’).
-Each subregion is a strip of data resemble that in 1D case.
+cut the raw images in the image stack. <code class="docutils literal notranslate"><span class="pre">hw_xy</span></code> defines the width / height of
+the subregion for the 2D data processing if the <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’ / ‘x’.
+Each subregion is a strip of data resembles that in 1D case.
 The subregion will move to cover the whole range of the raw images.
-We use <code class="docutils literal notranslate"><span class="pre">hw_xy</span></code> to define the width (height) of the window, i.e.,
-the stitched images to be coross-correlated during each loop.
+We use <code class="docutils literal notranslate"><span class="pre">hw_xy</span></code> to define the width / height of the window, i.e.,
+the stitched image, to be coross-correlated during each loop.
 The reference stitched image should be larger than the template,
 we use <code class="docutils literal notranslate"><span class="pre">pad_xy</span></code> to define how larger the reference stitched image is.
 Apparently, <code class="docutils literal notranslate"><span class="pre">pad_xy[0]</span></code> and <code class="docutils literal notranslate"><span class="pre">pad_xy[1]</span></code> should be smaller or equal to
@@ -777,12 +777,12 @@ tracking process can be.</p>
 <p><span class="caption-text">2D image processing for x scan data.</span><a class="headerlink" href="#id25" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<p>The remaing operations are the same as the 1D case.
+<p>The remaing operations are the same as the 1D case described in the above.
 Note that in order to do the integration, if <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is <cite>‘xy’</cite>,
 the 2D results in two directions will be cut to the same size automatically.</p>
-<p>As already described in the <a class="reference internal" href="principle.html#prinxssrefer"><span class="std std-ref">XSS technique with reference beam</span></a>
+<p>As been described in the <a class="reference internal" href="principle.html#prinxssrefer"><span class="std std-ref">XSS technique with reference beam</span></a>
 section, after obtaining the speckle patter shifts, we can reconstruct the
-slope of the wavefront from this techinque. Thus, ths <code class="docutils literal notranslate"><span class="pre">sloX</span></code> and/or <code class="docutils literal notranslate"><span class="pre">sloY</span></code>
+slope of the wavefront from this techinque. Thus, the <code class="docutils literal notranslate"><span class="pre">sloX</span></code> and/or <code class="docutils literal notranslate"><span class="pre">sloY</span></code>
 are stored in the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class according
 to the scan direction. The related postprocess fucntions are
 <a class="reference internal" href="spexwavepy.html#spexwavepy.postfun.slope_pixel" title="spexwavepy.postfun.slope_pixel"><code class="xref py py-func docutils literal notranslate"><span class="pre">slope_pixel()</span></code></a> and
