@@ -55,7 +55,9 @@ class Tracking:
         detector pixel size, unit in :math:`\mu m`. (default None)
     dist : float
         distance from diffuser to detector plane, 
+        if it's the downstream mode, ``mempos`` is 'downstream' (default),
         unit in mm. If the diffuser is placed in the upstream,
+        ``mempos`` is 'upstream',
         usually it is set to be the distance between the centre 
         of the optic to the detector. (default None)
     subpixelmeth : str

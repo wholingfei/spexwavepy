@@ -1,6 +1,8 @@
 ============================================================
 The speckle-based wavefront sensing techniques
 ============================================================
+**Debug according to Yujie's corrections!!! ...**
+
 When shining a laser through a diffuser, 
 a two-dimensional random intensity (speckle) patterns will be generated. 
 Speckle-based techniques have long been used in metrology 
@@ -83,6 +85,14 @@ Otherwise, when in self-reference mode,
 the speckle pattern shift is caused by the 
 second derivative, i.e., the curvature of the measured wavefront. 
 
+Another variation for the data acquisation is the position of 
+diffuser. It can be placed in the upstream or downstream 
+of the tested optic, depending on the type of it.
+In general, the diffuser can be placed in either the upstream or 
+the downstream of the tested optic if it is a weakly focusing optic.
+Otherwise, the diffuser is usually placed in the downstream of the 
+optic.
+
 The following table gives a summary of the speckle-based techniques 
 included in this package. For the detailed description of the principle
 of each technique, please see the following sections.
@@ -152,6 +162,14 @@ This page only introduces the basic principle of each technique.
 For the actual implementation of these methods in the code, 
 please refer to the :doc:`user guide <userguide>`.
 
+.. note:: 
+
+   In this package, we assume the incident beam is from the quasi-parallel 
+   beam from the synchrotron radiation source going through the beamline 
+   without any other optics except one monochrometer.
+   If the incident is a quasi-spherical wave, some modifications are needed 
+   for some techniques.
+
 .. _prinXSTRefer:
 
 Conventional X-ray Speckle Tracking (XST) technique with reference beam 
@@ -194,11 +212,14 @@ can be acquired.
 
 The physical quantity directly obtained from this method is the wavefront slope.
 We use :math:`ix` and :math:`iy` to represnt the shift in the cooresponding direction. 
-The pixel size of the detector, the distance between the diffuser and the detector plane, 
+The pixel size of the detector,  
 and the wavefront slopes in x and y directions can be represented by :math:`p`, 
-:math:`D`, 
 :math:`\alpha_x` 
 and :math:`\alpha_y`, respectively.
+:math:`D` represents the distance between the diffuser and the detector plane 
+if the diffuser is placed in the downstream of the tested optic.
+Otherwise, it is the distance between the centre of the tested optic and the 
+detector plane.
 
 The following equations satisfy:
 
@@ -224,7 +245,7 @@ They are acquired at two different diffuser positions.
 The following figure shows the experiment 
 setup for this technique. 
 
-.. figure:: _static/conXST2_principle.png
+.. figure:: _static/conXST3_principle.png
    :width: 80%
    
    The experiment layout for the self-reference 
@@ -239,9 +260,13 @@ very much different [HuXSTOE]_.
 We use :math:`s_x` and :math:`s_y` to represent the displacement in two directions for the pizeo 
 at two different positions, :math:`ix` and :math:`iy` to represnt the shifts of the 
 speckle pattern in the cooresponding direction. 
-:math:`p`, :math:`D`, :math:`\alpha_x` and :math:`\alpha_y` represent 
-the pixel size of the detector, the distance between the diffuser and the detector plane,
+:math:`p`, :math:`\alpha_x` and :math:`\alpha_y` represent 
+the pixel size of the detector, 
 the wavefront slopes in x and y directions, repectively.
+:math:`D` represents the distance between the diffuser and the detector plane 
+if the diffuser is placed in the downstream of the tested optic.
+Otherwise, it is the distance between the centre of the tested optic and the 
+detector plane.
 
 We have the following equations:
 
@@ -312,8 +337,11 @@ The following equations satisfy:
 where :math:`\alpha_x`, :math:`\alpha_y` are the slopes of the wavefront, 
 :math:`ix` and :math:`iy` are the tracked shifts of the speckle pattern 
 in x and y directions, :math:`s_x` and :math:`s_y` are the scan steps in 
-two directions, :math:`D` is the distance between the detector plane and 
-the diffuser.
+two directions. 
+:math:`D` represents the distance between the diffuser and the detector plane 
+if the diffuser is placed in the downstream of the tested optic.
+Otherwise, it is the distance between the centre of the tested optic and the 
+detector plane.
 
 This technique has been shown in the :ref:`example <expplane>`.
 
@@ -363,8 +391,10 @@ horizontal and vertical directions.
 :math:`ix` and :math:`iy` are the tracked shifts of the speckle pattern, 
 :math:`s_x` and :math:`s_y` are the scan steps,
 :math:`p` is the pixel size of the detector,
-:math:`D` is the distance between the detector plane and 
-the diffuser.
+:math:`D` represents the distance between the diffuser and the detector plane 
+if the diffuser is placed in the downstream of the tested optic.
+Otherwise, it is the distance between the centre of the tested optic and the 
+detector plane.
 
 Please see :ref:`this example <exp2ndderiv>` for the use of self-reference XSS technique to 
 measure wavefront local curvature after a plane mirror.
@@ -422,8 +452,10 @@ As a result, we have the following equations:
 where :math:`\alpha_x`, :math:`\alpha_y` are the slopes of the wavefront, 
 :math:`ix` and :math:`iy` are the tracked shifts of the speckle pattern 
 in x and y directions, :math:`p` is the pixel size of the detector,
-:math:`D` is the distance between the detector plane and 
-the diffuser.
+:math:`D` represents the distance between the diffuser and the detector plane 
+if the diffuser is placed in the downstream of the tested optic.
+Otherwise, it is the distance between the centre of the tested optic and the 
+detector plane.
 
 .. _prinOther:
 

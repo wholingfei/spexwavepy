@@ -437,7 +437,9 @@ details of it. (default ‘downstream’)</p></li>
 <li><p><strong>scanstep</strong> (<em>float</em>) – scan step size, unit in <span class="math notranslate nohighlight">\(\mu m\)</span>. (default None)</p></li>
 <li><p><strong>pixsize</strong> (<em>float</em>) – detector pixel size, unit in <span class="math notranslate nohighlight">\(\mu m\)</span>. (default None)</p></li>
 <li><p><strong>dist</strong> (<em>float</em>) – distance from diffuser to detector plane,
+if it’s the downstream mode, <code class="docutils literal notranslate"><span class="pre">mempos</span></code> is ‘downstream’ (default),
 unit in mm. If the diffuser is placed in the upstream,
+<code class="docutils literal notranslate"><span class="pre">mempos</span></code> is ‘upstream’,
 usually it is set to be the distance between the centre
 of the optic to the detector. (default None)</p></li>
 <li><p><strong>subpixelmeth</strong> (<em>str</em>) – ‘default’, ‘gausspeak’ or ‘parapeak’. (default ‘default’).

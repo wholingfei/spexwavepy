@@ -472,6 +472,16 @@ Please refer to the :ref:`Tutorial <tudetpix>` for the use of this method.
 
 The speckle-based techniques included in :py:class:`~spexwavepy.trackfun.Tracking` class 
 ========================================================================================
+.. note:: 
+
+   In this package, we assume the incident beam is from the quasi-parallel 
+   beam from the synchrotron radiation source going through the beamline 
+   without any other optics except one monochrometer.
+   If the incident is a quasi-spherical wave, some modifications are needed 
+   for some techniques.
+
+**Should mention upstream and Downstream problem!!! ......**
+
 The :py:class:`~spexwavepy.trackfun.Tracking` class is the container for the various 
 speckle-based techniques.
 At least one image stack is needed as the input of the :py:class:`~spexwavepy.trackfun.Tracking` 
