@@ -234,8 +234,8 @@ the first derivatives of the wavefront.
 
 .. _prinXSTSelf:
 
-Self-reference conventional X-ray Speckle Tracking (XST) technique 
-==================================================================
+Self-reference X-ray Speckle Tracking (XST) technique 
+=====================================================
 No reference beam exists for this type of tracking method. 
 As a result, the images to be tracked are both from sample images. 
 
@@ -249,11 +249,11 @@ setup for this technique.
    :width: 80%
    
    The experiment layout for the self-reference 
-   conventional X-ray speckle tracking 
+   X-ray speckle tracking 
    technique. 
 
-The self-reference conventional XST technique may look ostensibly like the above mentioned 
-conventional XST technique with reference beam. 
+The self-reference XST technique may look ostensibly like the above mentioned 
+XST technique with reference beam. 
 However, the physical quantities obtained directly from the speckle pattern shifts are 
 very much different [HuXSTOE]_. 
 

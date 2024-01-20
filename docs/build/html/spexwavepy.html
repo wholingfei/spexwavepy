@@ -547,6 +547,8 @@ it is the height of the subregion; if Tracking.scandim is ‘y’,
 it is the width of the subregion.
 Needed when do 2D data processing. (default None)</p></li>
 <li><p><strong>pad_xy</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the extra part the reference image needed to do the tracking.
+If it is a single integer, it will be expanded automatically
+to (int, int).
 Needed when do 2D data processing. (default None)</p></li>
 <li><p><strong>normalize</strong> (<em>bool</em>) – To normalize the stitched image or not. (default False)</p></li>
 <li><p><strong>display</strong> (<em>bool</em>) – To display or not. (default False)</p></li>
@@ -571,18 +573,23 @@ The second image stack is the reference image stack.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>edge_x</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in x dimension.
 If it is a single integer, it will be expanded automatically
-to the list [int, int]. If scan in x direction, it is useless.</p></li>
+to (int, int).
+If Tracking.scandim=’x’ (scan in x direction), it is useless.</p></li>
 <li><p><strong>edge_y</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in y dimension.
 If it is a single integer, it will be expanded automatically
-to the list [int, int]. If scan in y direction, it is useless.</p></li>
+to (int, int).
+If Tracking.scandim=’y’ (scan in y direction), it is useless.</p></li>
 <li><p><strong>edge_z</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in scan number dimension.
 If it is a single integer, it will be expanded automatically
-to the list [int, int].</p></li>
-<li><p><strong>hw_xy</strong> (<em>int</em>) – The width/height of the image subregion. If <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’,
-it is the height of the subregion; if <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’,
+to (int, int).</p></li>
+<li><p><strong>hw_xy</strong> (<em>int</em>) – The width/height of the image subregion. If Tracking.scandim is ‘x’,
+it is the height of the subregion; if Tracking.scandim is ‘y’,
 it is the width of the subregion.
 Needed when do 2D data processing. (default None)</p></li>
-<li><p><strong>pad_xy</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the extra part the reference image needed to do the tracking.</p></li>
+<li><p><strong>pad_xy</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the extra part the reference image needed to do the tracking.
+If it is a single integer, it will be expanded automatically
+to (int, int).
+Needed when do 2D data processing. (default None)</p></li>
 <li><p><strong>cpu_no</strong> (<em>int</em>) – The number of CPUs that is available.</p></li>
 <li><p><strong>normalize</strong> (<em>bool</em>) – To normalize the stitched image or not. (default False)</p></li>
 <li><p><strong>verbose</strong> (<em>bool</em>) – To show the information or not. (default True)</p></li>
@@ -596,36 +603,47 @@ Needed when do 2D data processing. (default None)</p></li>
 <span class="sig-name descname"><span class="pre">XST_self</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hw_xy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/trackfun.html#Tracking.XST_self"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.trackfun.Tracking.XST_self" title="Permalink to this definition"></a></dt>
 <dd><p>Speckle tracking for self-reference XST technique.
 Two image stacks are needed. Both are with test optic.
-One image stack consists one image when the diffuser is at one position,
+One image stack consists only one image when the diffuser is at one position,
 another image stack consists another image when the diffuser
 is at another position.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This technique has been described in the following paper:</p>
-<p>L. Hu, H. Wang, O. Fox, and K. Sawhney,
-“Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique”
-Opt. Express 30(18), 33259-33273 (2022).</p>
+<p>This technique has been described in <a class="reference internal" href="#xst-selfpaper" id="id1"><span>[XST_selfpaper]</span></a>:</p>
+<div role="list" class="citation-list">
+<div class="citation" id="xst-selfpaper" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">XST_selfpaper</a><span class="fn-bracket">]</span></span>
+<p>Hu, L., Wang, H., Fox, O., &amp; Sawhney, K. (2022).
+Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique.
+Opt. Exp., 30(18), 33259-33273.
+<a class="reference external" href="https://doi.org/10.1364/OE.460163">https://doi.org/10.1364/OE.460163</a></p>
+</div>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>edge_x</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in x dimension.
 If it is a single integer, it will be expanded automatically
-to the list [int, int].</p></li>
+to (int, int).
+If Tracking.scandim=’x’ (scan in x direction), it is useless.</p></li>
 <li><p><strong>edge_y</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – Area needs to be cut in y dimension.
 If it is a single integer, it will be expanded automatically
-to the list [int, int].</p></li>
+to (int, int).
+If Tracking.scandim=’y’ (scan in y direction), it is useless.</p></li>
 <li><p><strong>pad_x</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the extra part the reference image needed to do
-the tracking in x direction. If <code class="docutils literal notranslate"><span class="pre">dimension</span></code>  is ‘1D’ and
-<code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’, it is useless.</p></li>
+the tracking in x direction. If Tracking.dimension  is ‘1D’
+<strong>and</strong> Tracking.scandim is is ‘y’, it is useless.
+If it is a single integer, it will be expanded automatically
+to (int, int).</p></li>
 <li><p><strong>pad_y</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the extra part the reference image needed to do
-the tracking in y direction. If <code class="docutils literal notranslate"><span class="pre">dimension</span></code>  is ‘1D’ and
-<code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’, it is useless.</p></li>
-<li><p><strong>hw_xy</strong> (<em>int</em>) – The height (when <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’) or the width (when <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’)
+the tracking in y direction. If Tracking.dimension  is ‘1D’
+<strong>and</strong> Tracking.scandim is is ‘x’, it is useless.
+If it is a single integer, it will be expanded automatically
+to (int, int).</p></li>
+<li><p><strong>hw_xy</strong> (<em>int</em>) – The height (when Tracking.scandim is ‘y’)
+or the width (when Tracking.scandim is ‘x’)
 of the subregion to be chosen from the template for cross-correlation.</p></li>
-<li><p><strong>window</strong> (<em>int</em>) – The width (when <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘y’) or the height (when <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘x’)
+<li><p><strong>window</strong> (<em>int</em>) – The width (when Tracking.scandim is ‘y’)
+or the height (when Tracking.scandim is ‘x’)
 of the subregion to be chosen from the template for cross-correlation.
-Only used when <code class="docutils literal notranslate"><span class="pre">dimension</span></code> is ‘2D’. (default None)</p></li>
+Only used when Tracking.dimension is ‘2D’. (default None)</p></li>
 <li><p><strong>normalize</strong> (<em>bool</em>) – To normalize the stitched image or not. (default False)</p></li>
 <li><p><strong>display</strong> (<em>bool</em>) – To display or not. (default False)</p></li>
 <li><p><strong>verbose</strong> (<em>bool</em>) – To show the information or not. (default True)</p></li>

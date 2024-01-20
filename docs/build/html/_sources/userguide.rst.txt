@@ -474,7 +474,7 @@ The speckle-based techniques included in :py:class:`~spexwavepy.trackfun.Trackin
 ========================================================================================
 .. note:: 
 
-   In this package, we assume the incident beam is from the quasi-parallel 
+   In this package, we assume the incident beam is from the **quasi-parallel** 
    beam from the synchrotron radiation source going through the beamline 
    without any other optics except one monochrometer.
    If the incident is a quasi-spherical wave, some modifications are needed 
@@ -741,19 +741,20 @@ tracking process can be.
    2D image processing for x scan data.
 
 The remaing operations are the same as the 1D case described in the above.
-Note that in order to do the integration, if ``scandim`` is `'xy'`, 
-the 2D results in two directions will be cut to the same size automatically.
+**Note that in order to do the integration to reconstruct the wavefront, 
+if ``scandim`` is `'xy'`, 
+the 2D results in two directions will be cut to the same size automatically.**
 
 As been described in the :ref:`XSS technique with reference beam <prinXSSRefer>` 
-section, after obtaining the speckle patter shifts, we can reconstruct the 
+section, by tracking the speckle patter shifts, we can obtain the 
 slope of the wavefront from this techinque. Thus, the ``sloX`` and/or ``sloY``
-are stored in the :py:class:`~spexwavepy.trackfun.Tracking` class according 
+are stored in the :py:class:`~spexwavepy.trackfun.Tracking` class due 
 to the scan direction. The related postprocess fucntions are 
 :py:func:`~spexwavepy.postfun.slope_pixel` and 
 :py:func:`~spexwavepy.postfun.slope_scan`. Please refere to 
 :ref:`Slope reconstruction <slope>` in the 
 :ref:`Post processing of the tracked speckle pattern shifts <postfun>` 
-section for more information.
+section for more description of the algorithms.
 
 .. _traXSSself:
 
@@ -797,67 +798,96 @@ section for details.
 
 .. _traXSTrefer:
 
-XST technique with reference beam
----------------------------------
-Function :py:func:`~spexwavepy.trackfun.Tracking.XST_withrefer` and 
-:py:func:`~spexwavepy.trackfun.Tracking.XST_withrefer_multi` is used
-for the XST technique with reference beam. 
+Self-reference XST technique 
+-----------------------------
+Function :py:func:`~spexwavepy.trackfun.Tracking.XST_self` 
+and its multiprocessing version 
+:py:func:`~spexwavepy.trackfun.Tracking.XST_self_multi` is used
+for the self-reference XST technique. 
 
 Unlike the scan-based techniques, XST techinque only requires two images.
+Each image is taken when the diffuser is at one position. 
+The diffuser can be moved vertically or horizontally, 
+as long as the step of the movement is known.
+Each image constitutes the image stack. 
 
-For **1D case**, two modes are provided. 
-They are along ``x`` and ``y`` direction, respectively.
-Like the scan-based techniques, a stripe of data along 
-the ``y`` or ``x`` direction is extracted. And again, 
-this is done by setting ``ROI`` for the image stacks.
+For more of the principle of this technique, 
+please refer to :ref:`Self-reference X-ray Speckle Tracking (XST) technique <prinXSTSelf>`.
+We only elaberate the implementation of this technique here.
 
-.. figure:: _static/XSTrefer_1.png
-   :width: 80%
-
-   The cropped data strip for 1D data processing in y direction.
-
+For **1D case**, like the scan-based techniques, 
+a stripe of data along the ``x`` or ``y`` direction 
+is extracted, depending on the ``scandim``.
+The data strip needed is set by ``ROI``. 
 
 .. figure:: _static/XSTrefer_1x.png
    :width: 80%
 
-   The cropped data strip for 1D data processing in x direction.
+   The cropped data strip for 1D data processing in x direction, Tracking.scadim is 'x'.
+   The strip of the image is extracted according to the ROI.
 
-Compared to the XSS method, there are some more parameters needed 
-for this technique. Those parameters are ``edge_x``, ``edge_y``, 
-``hw_xy``, ``pad_x`` and ``pad_y``.
 
-.. figure:: _static/XSTrefer_2.png
+.. figure:: _static/XSTrefer_1.png
    :width: 80%
 
-   Parameters for 1D data processing in y direction
+   The cropped data strip for 1D data processing in y direction, Tracking.scadim is 'y'.
+   The strip of the image is extracted according to the ROI.
+
+There are some important parameters needed for the implementation 
+of this technique. Those parameters are ``edge_x``, ``edge_y``, 
+``hw_xy``, ``pad_x`` and ``pad_y``.
 
 .. figure:: _static/XSTrefer_2x.png
    :width: 80%
 
    Parameters for 1D data processing in x direction
 
+
+.. figure:: _static/XSTrefer_2.png
+   :width: 80%
+
+   Parameters for 1D data processing in y direction
+
 ``edge_x`` and ``edge_y`` define the area to be cut from the template 
 in order to be able to do the cross-correlation. Unlike the XSS technique, 
 we need ``hw_xy`` to generate the subregion from the template for 
-cross-correlation. If the ``scandim`` is 'x', then ``hw_xy`` is the 
-width you want to choose to generate the subregion, also in this case,
-``pad_y`` is useless ; if the ``scandim`` is 'y', ``hw_xy`` is the 
-height you want to choose for your subregion, ``pad_x`` is 
-useless in this case.
+cross-correlation. Besides, ``pad_x`` or ``pad_y`` is also needed 
+depending on the ``scandim``.  
 
-For **2D case**, there are several more parameters needed apart from 
+If the ``scandim`` is 'x', then ``hw_xy`` is the 
+width you want to choose for the generated subregion,
+``pad_x`` defines the extra area in the reference image 
+that is needed to do the cross-correlation,
+``pad_y`` is useless in this case; 
+if the ``scandim`` is 'y', ``hw_xy`` is the 
+height you want to choose for your subregion, 
+``pad_y`` defines the extra area needed in the reference image,
+``pad_x`` is useless in this case.
+
+Repeat the above procedure horizontally (``scandim`` is 'x') or 
+vertically (``scandim`` is 'y') for the whole extracted subimage,
+a 1D speckle shift will be obtained.
+
+For **2D case**, the above procedure for 1D shift will be repeated 
+horizontally or vertically for the whole image, depending on the 
+``scandim``. If the ``scandim`` is 'x', 
+the 1D procedure will be repeated vertically.
+Otherwise, the 1D procedure will be repeated horizontally.
+
+There are several more parameters needed apart from 
 those in the 1D case. Also, some parameters are slightly different
 compared to the 1D case.
-
-.. figure:: _static/XSTrefer_3.png
-   :width: 80%
-
-   Parameters for 2D data processing in y direction
 
 .. figure:: _static/XSTrefer_3x.png
    :width: 80%
 
-   Parameters for 2D data processing in x direction
+   Parameters for 2D data processing when Trackong.scandim is 'x'. 
+
+
+.. figure:: _static/XSTrefer_3.png
+   :width: 80%
+
+   Parameters for 2D data processing when Tracking.scandim is 'y'.
 
 As shown in the above images, ``edge_x`` and ``edge_y`` define the 
 cutting areas for the raw template image. Then ``window`` and ``hw_xy``
@@ -867,21 +897,25 @@ If the ``scandim`` is 'y', ``window`` is the width of the subregion,
 height of the subregion and ``hw_xy`` is the width of it. 
 ``pad_x`` and ``pad_y`` determines the extra area for tracking. 
 
+At each loop, we do the 1D data processing procedure. 
+The whole loop will cover the full area of the image.
+
 .. note::
 
    If ``scandim`` is 'xy', then ``edge_x`` and ``edge_y`` should be the same, as well as the elements within them. 
    So is the ``pad_x`` and ``pad_y``.
 
-Since this technique has a reference, after we obtain the speckle pattern shifts, 
-we can calculate the ``sloX`` and/or ``sloY``. These are stored in the 
-:py:class:`~spexwavepy.trackfun.Tracking` class. The slopes are calculated using 
-:py:func:`~spexwavepy.postfun.slope_pixel` function. See :ref:`Slope reconstruction <slope>`
-for more details.
+We can calculate the wavefront local curvature from the obtained speckle tracking shifts, 
+according to :ref:`the principle of the self-reference XST technique <prinXSTSelf>`. 
+As a result, only ``curvX`` or ``curvY`` are stored in the 
+:py:class:`~spexwavepy.trackfun.Tracking` class. 
+The related postprocess fucntion is :py:func:`~spexwavepy.postfun.curv_pixel`.
+See :ref:`Local curvature reconstruction <curvature>` for more details.
 
 .. _traXSTself:
 
-Self-reference XST technique 
-----------------------------
+Conventional XST technique with reference beam
+----------------------------------------------
 :py:func:`~spexwavepy.trackfun.Tracking.XST_self` and 
 :py:func:`~spexwavepy.trackfun.Tracking.XST_self_multi` are the 
 two functions used for the data processing of the 

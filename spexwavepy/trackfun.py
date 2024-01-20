@@ -517,6 +517,8 @@ class Tracking:
             Needed when do 2D data processing. (default None) 
         pad_xy : int, or [int, int]
             It defines the extra part the reference image needed to do the tracking.
+            If it is a single integer, it will be expanded automatically 
+            to (int, int).
             Needed when do 2D data processing. (default None)
         normalize : bool
             To normalize the stitched image or not. (default False)
@@ -724,22 +726,27 @@ class Tracking:
         edge_x : int, or [int, int]
             Area needs to be cut in x dimension.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int]. If scan in x direction, it is useless.
+            to (int, int). 
+            If Tracking.scandim='x' (scan in x direction), it is useless.
         edge_y : int, or [int, int]
             Area needs to be cut in y dimension.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int]. If scan in y direction, it is useless.
+            to (int, int). 
+            If Tracking.scandim='y' (scan in y direction), it is useless.
         edge_z : int, or [int, int]
             Area needs to be cut in scan number dimension.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int].
+            to (int, int).
         hw_xy : int
-            The width/height of the image subregion. If ``scandim`` is 'x',
-            it is the height of the subregion; if ``scandim`` is 'y',
+            The width/height of the image subregion. If Tracking.scandim is 'x',
+            it is the height of the subregion; if Tracking.scandim is 'y',
             it is the width of the subregion.
             Needed when do 2D data processing. (default None) 
         pad_xy : int, or [int, int]
             It defines the extra part the reference image needed to do the tracking.
+            If it is a single integer, it will be expanded automatically 
+            to (int, int).
+            Needed when do 2D data processing. (default None)
         cpu_no : int
             The number of CPUs that is available.
         normalize : bool
@@ -941,6 +948,7 @@ class Tracking:
                 self._sloX = slope_pixel(self._delayX, self.pixsize, self.dist)
                 self._sloY = slope_pixel(self._delayY, self.pixsize, self.dist)
 
+        return
 
     def XSS_self(self, edge_x, edge_y, edge_z, nstep, hw_xy=None, pad_xy=None, normalize=False, display=False, verbose=True):
         """
@@ -1175,47 +1183,54 @@ class Tracking:
         if _Resreturn:
             return ixs, iys, resmax
 
-
     def XST_self(self, edge_x, edge_y, pad_x, pad_y, hw_xy, window=None, normalize=False, display=False, verbose=True):
         """
         Speckle tracking for self-reference XST technique.
         Two image stacks are needed. Both are with test optic.
-        One image stack consists one image when the diffuser is at one position,
+        One image stack consists only one image when the diffuser is at one position,
         another image stack consists another image when the diffuser
         is at another position.
 
-        .. note:: 
-            This technique has been described in the following paper:
-
-            L. Hu, H. Wang, O. Fox, and K. Sawhney, 
-            "Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique" 
-            Opt. Express 30(18), 33259-33273 (2022). 
+        This technique has been described in [XST_selfpaper]_:
+        
+        .. [XST_selfpaper] Hu, L., Wang, H., Fox, O., & Sawhney, K. (2022). 
+             Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique. 
+             Opt. Exp., 30(18), 33259-33273.
+             https://doi.org/10.1364/OE.460163
 
         Parameters
         ----------
         edge_x : int, or [int, int]
             Area needs to be cut in x dimension.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int]. 
+            to (int, int). 
+            If Tracking.scandim='x' (scan in x direction), it is useless.
         edge_y : int, or [int, int]
             Area needs to be cut in y dimension.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int]. 
+            to (int, int). 
+            If Tracking.scandim='y' (scan in y direction), it is useless.
         pad_x : int, or [int, int]
             It defines the extra part the reference image needed to do 
-            the tracking in x direction. If ``dimension``  is '1D' and 
-            ``scandim`` is 'y', it is useless.
+            the tracking in x direction. If Tracking.dimension  is '1D' 
+            **and** Tracking.scandim is is 'y', it is useless.
+            If it is a single integer, it will be expanded automatically 
+            to (int, int). 
         pad_y : int, or [int, int]
             It defines the extra part the reference image needed to do 
-            the tracking in y direction. If ``dimension``  is '1D' and 
-            ``scandim`` is 'x', it is useless.
+            the tracking in y direction. If Tracking.dimension  is '1D' 
+            **and** Tracking.scandim is is 'x', it is useless.
+            If it is a single integer, it will be expanded automatically 
+            to (int, int). 
         hw_xy : int
-            The height (when ``scandim`` is 'y') or the width (when ``scandim`` is 'x') 
+            The height (when Tracking.scandim is 'y') 
+            or the width (when Tracking.scandim is 'x') 
             of the subregion to be chosen from the template for cross-correlation.
         window : int
-            The width (when ``scandim`` is 'y') or the height (when ``scandim`` is 'x') 
+            The width (when Tracking.scandim is 'y') 
+            or the height (when Tracking.scandim is 'x') 
             of the subregion to be chosen from the template for cross-correlation.
-            Only used when ``dimension`` is '2D'. (default None)
+            Only used when Tracking.dimension is '2D'. (default None)
         normalize : bool
             To normalize the stitched image or not. (default False)
         display : bool

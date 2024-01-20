@@ -591,6 +591,8 @@
 <span class="sd">            Needed when do 2D data processing. (default None) </span>
 <span class="sd">        pad_xy : int, or [int, int]</span>
 <span class="sd">            It defines the extra part the reference image needed to do the tracking.</span>
+<span class="sd">            If it is a single integer, it will be expanded automatically </span>
+<span class="sd">            to (int, int).</span>
 <span class="sd">            Needed when do 2D data processing. (default None)</span>
 <span class="sd">        normalize : bool</span>
 <span class="sd">            To normalize the stitched image or not. (default False)</span>
@@ -798,22 +800,27 @@
 <span class="sd">        edge_x : int, or [int, int]</span>
 <span class="sd">            Area needs to be cut in x dimension.</span>
 <span class="sd">            If it is a single integer, it will be expanded automatically </span>
-<span class="sd">            to the list [int, int]. If scan in x direction, it is useless.</span>
+<span class="sd">            to (int, int). </span>
+<span class="sd">            If Tracking.scandim=&#39;x&#39; (scan in x direction), it is useless.</span>
 <span class="sd">        edge_y : int, or [int, int]</span>
 <span class="sd">            Area needs to be cut in y dimension.</span>
 <span class="sd">            If it is a single integer, it will be expanded automatically </span>
-<span class="sd">            to the list [int, int]. If scan in y direction, it is useless.</span>
+<span class="sd">            to (int, int). </span>
+<span class="sd">            If Tracking.scandim=&#39;y&#39; (scan in y direction), it is useless.</span>
 <span class="sd">        edge_z : int, or [int, int]</span>
 <span class="sd">            Area needs to be cut in scan number dimension.</span>
 <span class="sd">            If it is a single integer, it will be expanded automatically </span>
-<span class="sd">            to the list [int, int].</span>
+<span class="sd">            to (int, int).</span>
 <span class="sd">        hw_xy : int</span>
-<span class="sd">            The width/height of the image subregion. If ``scandim`` is &#39;x&#39;,</span>
-<span class="sd">            it is the height of the subregion; if ``scandim`` is &#39;y&#39;,</span>
+<span class="sd">            The width/height of the image subregion. If Tracking.scandim is &#39;x&#39;,</span>
+<span class="sd">            it is the height of the subregion; if Tracking.scandim is &#39;y&#39;,</span>
 <span class="sd">            it is the width of the subregion.</span>
 <span class="sd">            Needed when do 2D data processing. (default None) </span>
 <span class="sd">        pad_xy : int, or [int, int]</span>
 <span class="sd">            It defines the extra part the reference image needed to do the tracking.</span>
+<span class="sd">            If it is a single integer, it will be expanded automatically </span>
+<span class="sd">            to (int, int).</span>
+<span class="sd">            Needed when do 2D data processing. (default None)</span>
 <span class="sd">        cpu_no : int</span>
 <span class="sd">            The number of CPUs that is available.</span>
 <span class="sd">        normalize : bool</span>
@@ -1013,8 +1020,9 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">sloY</span> <span class="o">=</span> <span class="n">slope_scan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">delayY</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">scanstep</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">)</span>
                 <span class="c1">#if scandim != &#39;diag&#39;:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_sloX</span> <span class="o">=</span> <span class="n">slope_pixel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_delayX</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pixsize</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_sloY</span> <span class="o">=</span> <span class="n">slope_pixel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_delayY</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pixsize</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">)</span></div>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_sloY</span> <span class="o">=</span> <span class="n">slope_pixel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_delayY</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pixsize</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist</span><span class="p">)</span>
 
+        <span class="k">return</span></div>
 
 <div class="viewcode-block" id="Tracking.XSS_self"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_self">[docs]</a>    <span class="k">def</span> <span class="nf">XSS_self</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">edge_z</span><span class="p">,</span> <span class="n">nstep</span><span class="p">,</span> <span class="n">hw_xy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pad_xy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -1249,47 +1257,54 @@
         <span class="k">if</span> <span class="n">_Resreturn</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">ixs</span><span class="p">,</span> <span class="n">iys</span><span class="p">,</span> <span class="n">resmax</span>
 
-
 <div class="viewcode-block" id="Tracking.XST_self"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.trackfun.Tracking.XST_self">[docs]</a>    <span class="k">def</span> <span class="nf">XST_self</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">pad_x</span><span class="p">,</span> <span class="n">pad_y</span><span class="p">,</span> <span class="n">hw_xy</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Speckle tracking for self-reference XST technique.</span>
 <span class="sd">        Two image stacks are needed. Both are with test optic.</span>
-<span class="sd">        One image stack consists one image when the diffuser is at one position,</span>
+<span class="sd">        One image stack consists only one image when the diffuser is at one position,</span>
 <span class="sd">        another image stack consists another image when the diffuser</span>
 <span class="sd">        is at another position.</span>
 
-<span class="sd">        .. note:: </span>
-<span class="sd">            This technique has been described in the following paper:</span>
-
-<span class="sd">            L. Hu, H. Wang, O. Fox, and K. Sawhney, </span>
-<span class="sd">            &quot;Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique&quot; </span>
-<span class="sd">            Opt. Express 30(18), 33259-33273 (2022). </span>
+<span class="sd">        This technique has been described in [XST_selfpaper]_:</span>
+<span class="sd">        </span>
+<span class="sd">        .. [XST_selfpaper] Hu, L., Wang, H., Fox, O., &amp; Sawhney, K. (2022). </span>
+<span class="sd">             Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique. </span>
+<span class="sd">             Opt. Exp., 30(18), 33259-33273.</span>
+<span class="sd">             https://doi.org/10.1364/OE.460163</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        edge_x : int, or [int, int]</span>
 <span class="sd">            Area needs to be cut in x dimension.</span>
 <span class="sd">            If it is a single integer, it will be expanded automatically </span>
-<span class="sd">            to the list [int, int]. </span>
+<span class="sd">            to (int, int). </span>
+<span class="sd">            If Tracking.scandim=&#39;x&#39; (scan in x direction), it is useless.</span>
 <span class="sd">        edge_y : int, or [int, int]</span>
 <span class="sd">            Area needs to be cut in y dimension.</span>
 <span class="sd">            If it is a single integer, it will be expanded automatically </span>
-<span class="sd">            to the list [int, int]. </span>
+<span class="sd">            to (int, int). </span>
+<span class="sd">            If Tracking.scandim=&#39;y&#39; (scan in y direction), it is useless.</span>
 <span class="sd">        pad_x : int, or [int, int]</span>
 <span class="sd">            It defines the extra part the reference image needed to do </span>
-<span class="sd">            the tracking in x direction. If ``dimension``  is &#39;1D&#39; and </span>
-<span class="sd">            ``scandim`` is &#39;y&#39;, it is useless.</span>
+<span class="sd">            the tracking in x direction. If Tracking.dimension  is &#39;1D&#39; </span>
+<span class="sd">            **and** Tracking.scandim is is &#39;y&#39;, it is useless.</span>
+<span class="sd">            If it is a single integer, it will be expanded automatically </span>
+<span class="sd">            to (int, int). </span>
 <span class="sd">        pad_y : int, or [int, int]</span>
 <span class="sd">            It defines the extra part the reference image needed to do </span>
-<span class="sd">            the tracking in y direction. If ``dimension``  is &#39;1D&#39; and </span>
-<span class="sd">            ``scandim`` is &#39;x&#39;, it is useless.</span>
+<span class="sd">            the tracking in y direction. If Tracking.dimension  is &#39;1D&#39; </span>
+<span class="sd">            **and** Tracking.scandim is is &#39;x&#39;, it is useless.</span>
+<span class="sd">            If it is a single integer, it will be expanded automatically </span>
+<span class="sd">            to (int, int). </span>
 <span class="sd">        hw_xy : int</span>
-<span class="sd">            The height (when ``scandim`` is &#39;y&#39;) or the width (when ``scandim`` is &#39;x&#39;) </span>
+<span class="sd">            The height (when Tracking.scandim is &#39;y&#39;) </span>
+<span class="sd">            or the width (when Tracking.scandim is &#39;x&#39;) </span>
 <span class="sd">            of the subregion to be chosen from the template for cross-correlation.</span>
 <span class="sd">        window : int</span>
-<span class="sd">            The width (when ``scandim`` is &#39;y&#39;) or the height (when ``scandim`` is &#39;x&#39;) </span>
+<span class="sd">            The width (when Tracking.scandim is &#39;y&#39;) </span>
+<span class="sd">            or the height (when Tracking.scandim is &#39;x&#39;) </span>
 <span class="sd">            of the subregion to be chosen from the template for cross-correlation.</span>
-<span class="sd">            Only used when ``dimension`` is &#39;2D&#39;. (default None)</span>
+<span class="sd">            Only used when Tracking.dimension is &#39;2D&#39;. (default None)</span>
 <span class="sd">        normalize : bool</span>
 <span class="sd">            To normalize the stitched image or not. (default False)</span>
 <span class="sd">        display : bool</span>
