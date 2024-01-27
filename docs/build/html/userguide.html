@@ -786,10 +786,13 @@ tracking process can be.</p>
 <p><span class="caption-text">2D image processing for x scan data.</span><a class="headerlink" href="#id25" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<p>The remaing operations are the same as the 1D case described in the above.
-<strong>Note that in order to do the integration to reconstruct the wavefront,
-if ``scandim`` is `’xy’`,
-the 2D results in two directions will be cut to the same size automatically.</strong></p>
+<p>The remaing operations are the same as the 1D case described in the above.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that in order to do the integration to reconstruct the wavefront,
+if <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is ‘xy’,
+the 2D results in two directions will be cut to the same size automatically.</p>
+</div>
 <p>As been described in the <a class="reference internal" href="principle.html#prinxssrefer"><span class="std std-ref">XSS technique with reference beam</span></a>
 section, by tracking the speckle patter shifts, we can obtain the
 slope of the wavefront from this techinque. Thus, the <code class="docutils literal notranslate"><span class="pre">sloX</span></code> and/or <code class="docutils literal notranslate"><span class="pre">sloY</span></code>
@@ -808,25 +811,31 @@ and <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Trac
 are used for the <a class="reference internal" href="principle.html#prinxssself"><span class="std std-ref">self-reference XSS technique</span></a>.
 In terms of speckle pattern tracking, they are only a special case of
 <a class="reference internal" href="#traxss"><span class="std std-ref">XSS technique with reference beam</span></a>. We only need to
-be careful that for this technique, usually only one image stack is
-provided.</p>
+be careful that for this technique, usually <strong>only one image stack is
+provided</strong> for the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class.</p>
 <p>Since it is a self-reference scheme, the template image stack and the
 reference image stack are the same one. Slightly differ from
 <a class="reference internal" href="#traxss"><span class="std std-ref">XSS technique with reference beam</span></a>, the generated
 stiched images are from different (<em>i</em> th and <em>j</em> th) rows/columns
 extracted from the same raw images in the stack.</p>
+<figure class="align-default" id="id26">
 <a class="reference internal image-reference" href="_images/XSS_self.png"><img alt="_images/XSS_self.png" src="_images/XSS_self.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">The generation of stiched images from two seperate rows of the
+raw images within the image stack.</span><a class="headerlink" href="#id26" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
 <p>Apart from the newly introduced <code class="docutils literal notranslate"><span class="pre">nstep</span></code> parameter, all the other
 parameters are the same as in the corresponding
 <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer" title="spexwavepy.trackfun.Tracking.XSS_withrefer"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSS_withrefer()</span></code></a> and
 <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer_multi" title="spexwavepy.trackfun.Tracking.XSS_withrefer_multi"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSS_withrefer_multi()</span></code></a> functions,
-as already been described in the above
-<a class="reference internal" href="#traxss"><span class="std std-ref">XSS technique with reference beam</span></a>.</p>
-<p>However, in the technique, the physical quantities directly reconstructed
-from the tracked speckle pattern shifts are dfferent from the
-<a class="reference internal" href="principle.html#prinxssrefer"><span class="std std-ref">XSS technique with reference beam</span></a>. The directly rconstructed
-quantity in <a class="reference internal" href="principle.html#prinxssself"><span class="std std-ref">self-reference XSS technique</span></a> is the
-local curvature of the wavefront.</p>
+as already been described in the above.</p>
+<p>However, the physical quantities directly reconstructed
+from this technique are dfferent from the
+<a class="reference internal" href="principle.html#prinxssrefer"><span class="std std-ref">XSS technique with reference beam</span></a>.
+They are the local curvatures of the wavefront.
+Please refer to <a class="reference internal" href="principle.html#prinxssself"><span class="std std-ref">self-reference XSS technique</span></a>
+for detailed physics.</p>
 <p>As a result, only <code class="docutils literal notranslate"><span class="pre">curvX</span></code> or <code class="docutils literal notranslate"><span class="pre">curvY</span></code> are stored in the
 <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class. The related
 postprocess fucntion is <a class="reference internal" href="spexwavepy.html#spexwavepy.postfun.curv_scan" title="spexwavepy.postfun.curv_scan"><code class="xref py py-func docutils literal notranslate"><span class="pre">curv_scan()</span></code></a>.
@@ -834,7 +843,7 @@ Please refer to <a class="reference internal" href="#curvature"><span class="std
 section for details.</p>
 </section>
 <section id="self-reference-xst-technique">
-<span id="traxstrefer"></span><h3>Self-reference XST technique<a class="headerlink" href="#self-reference-xst-technique" title="Permalink to this heading"></a></h3>
+<span id="traxstself"></span><h3>Self-reference XST technique<a class="headerlink" href="#self-reference-xst-technique" title="Permalink to this heading"></a></h3>
 <p>Function <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_self" title="spexwavepy.trackfun.Tracking.XST_self"><code class="xref py py-func docutils literal notranslate"><span class="pre">XST_self()</span></code></a>
 and its multiprocessing version
 <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_self_multi" title="spexwavepy.trackfun.Tracking.XST_self_multi"><code class="xref py py-func docutils literal notranslate"><span class="pre">XST_self_multi()</span></code></a> is used
@@ -851,33 +860,33 @@ We only elaberate the implementation of this technique here.</p>
 a stripe of data along the <code class="docutils literal notranslate"><span class="pre">x</span></code> or <code class="docutils literal notranslate"><span class="pre">y</span></code> direction
 is extracted, depending on the <code class="docutils literal notranslate"><span class="pre">scandim</span></code>.
 The data strip needed is set by <code class="docutils literal notranslate"><span class="pre">ROI</span></code>.</p>
-<figure class="align-default" id="id26">
+<figure class="align-default" id="id27">
 <a class="reference internal image-reference" href="_images/XSTrefer_1x.png"><img alt="_images/XSTrefer_1x.png" src="_images/XSTrefer_1x.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-text">The cropped data strip for 1D data processing in x direction, Tracking.scadim is ‘x’.
-The strip of the image is extracted according to the ROI.</span><a class="headerlink" href="#id26" title="Permalink to this image"></a></p>
+The strip of the image is extracted according to the ROI.</span><a class="headerlink" href="#id27" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-default" id="id27">
+<figure class="align-default" id="id28">
 <a class="reference internal image-reference" href="_images/XSTrefer_1.png"><img alt="_images/XSTrefer_1.png" src="_images/XSTrefer_1.png" style="width: 80%;" /></a>
 <figcaption>
 <p><span class="caption-text">The cropped data strip for 1D data processing in y direction, Tracking.scadim is ‘y’.
-The strip of the image is extracted according to the ROI.</span><a class="headerlink" href="#id27" title="Permalink to this image"></a></p>
+The strip of the image is extracted according to the ROI.</span><a class="headerlink" href="#id28" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>There are some important parameters needed for the implementation
 of this technique. Those parameters are <code class="docutils literal notranslate"><span class="pre">edge_x</span></code>, <code class="docutils literal notranslate"><span class="pre">edge_y</span></code>,
 <code class="docutils literal notranslate"><span class="pre">hw_xy</span></code>, <code class="docutils literal notranslate"><span class="pre">pad_x</span></code> and <code class="docutils literal notranslate"><span class="pre">pad_y</span></code>.</p>
-<figure class="align-default" id="id28">
+<figure class="align-default" id="id29">
 <a class="reference internal image-reference" href="_images/XSTrefer_2x.png"><img alt="_images/XSTrefer_2x.png" src="_images/XSTrefer_2x.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Parameters for 1D data processing in x direction</span><a class="headerlink" href="#id28" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Parameters for 1D data processing in x direction</span><a class="headerlink" href="#id29" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-default" id="id29">
+<figure class="align-default" id="id30">
 <a class="reference internal image-reference" href="_images/XSTrefer_2.png"><img alt="_images/XSTrefer_2.png" src="_images/XSTrefer_2.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Parameters for 1D data processing in y direction</span><a class="headerlink" href="#id29" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Parameters for 1D data processing in y direction</span><a class="headerlink" href="#id30" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p><code class="docutils literal notranslate"><span class="pre">edge_x</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> define the area to be cut from the template
@@ -905,16 +914,16 @@ Otherwise, the 1D procedure will be repeated horizontally.</p>
 <p>There are several more parameters needed apart from
 those in the 1D case. Also, some parameters are slightly different
 compared to the 1D case.</p>
-<figure class="align-default" id="id30">
+<figure class="align-default" id="id31">
 <a class="reference internal image-reference" href="_images/XSTrefer_3x.png"><img alt="_images/XSTrefer_3x.png" src="_images/XSTrefer_3x.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Parameters for 2D data processing when Trackong.scandim is ‘x’.</span><a class="headerlink" href="#id30" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Parameters for 2D data processing when Tracking.scandim is ‘x’.</span><a class="headerlink" href="#id31" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-default" id="id31">
+<figure class="align-default" id="id32">
 <a class="reference internal image-reference" href="_images/XSTrefer_3.png"><img alt="_images/XSTrefer_3.png" src="_images/XSTrefer_3.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Parameters for 2D data processing when Tracking.scandim is ‘y’.</span><a class="headerlink" href="#id31" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Parameters for 2D data processing when Tracking.scandim is ‘y’.</span><a class="headerlink" href="#id32" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>As shown in the above images, <code class="docutils literal notranslate"><span class="pre">edge_x</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> define the
@@ -939,57 +948,61 @@ The related postprocess fucntion is <a class="reference internal" href="spexwave
 See <a class="reference internal" href="#curvature"><span class="std std-ref">Local curvature reconstruction</span></a> for more details.</p>
 </section>
 <section id="conventional-xst-technique-with-reference-beam">
-<span id="traxstself"></span><h3>Conventional XST technique with reference beam<a class="headerlink" href="#conventional-xst-technique-with-reference-beam" title="Permalink to this heading"></a></h3>
-<p><a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_self" title="spexwavepy.trackfun.Tracking.XST_self"><code class="xref py py-func docutils literal notranslate"><span class="pre">XST_self()</span></code></a> and
-<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_self_multi" title="spexwavepy.trackfun.Tracking.XST_self_multi"><code class="xref py py-func docutils literal notranslate"><span class="pre">XST_self_multi()</span></code></a> are the
+<span id="traxstrefer"></span><h3>Conventional XST technique with reference beam<a class="headerlink" href="#conventional-xst-technique-with-reference-beam" title="Permalink to this heading"></a></h3>
+<p>Function <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_withrefer" title="spexwavepy.trackfun.Tracking.XST_withrefer"><code class="xref py py-func docutils literal notranslate"><span class="pre">XST_withrefer()</span></code></a> and
+its multiprocessing form
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_withrefer_multi" title="spexwavepy.trackfun.Tracking.XST_withrefer_multi"><code class="xref py py-func docutils literal notranslate"><span class="pre">XST_withrefer_multi()</span></code></a> are the
 two functions used for the data processing of the
-<a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">self-reference XST technique</span></a>. Unlike the
-<a class="reference internal" href="#traxssself"><span class="std std-ref">self-reference XSS technqiue</span></a>, we still need
-two image stacks here. Each image stack has only one image. Since
-no reference beam is available, the reference and template images
-are both that with tested optic in the beam, only at two different
-diffuser positions.</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="_images/XSTselfcode.png"><img alt="_images/XSTselfcode.png" src="_images/XSTselfcode.png" style="width: 80%;" /></a>
-</figure>
-<p>After defining the necessary two image stacks, all the other parameters
-for <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_self" title="spexwavepy.trackfun.Tracking.XST_self"><code class="xref py py-func docutils literal notranslate"><span class="pre">XST_self()</span></code></a> and
-<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_self_multi" title="spexwavepy.trackfun.Tracking.XST_self_multi"><code class="xref py py-func docutils literal notranslate"><span class="pre">XST_self_multi()</span></code></a> are the same as
-the <a class="reference internal" href="#traxstrefer"><span class="std std-ref">XST technique with reference beam</span></a> and have
-been described there.</p>
-<p>However, unlike the <a class="reference internal" href="principle.html#prinxstrefer"><span class="std std-ref">XST technique with reference beam</span></a>,
+<a class="reference internal" href="principle.html#prinxstrefer"><span class="std std-ref">Conventional XST technique</span></a>.
+Two image stacks should be provided for this method.
+Each image stack has only <strong>one image</strong>.
+The fisrt image stack consists one image when the diffuser is in the beam.
+The second image stack consists one reference image without
+the tested optical elements.</p>
+<p>All the parameters for <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_withrefer" title="spexwavepy.trackfun.Tracking.XST_withrefer"><code class="xref py py-func docutils literal notranslate"><span class="pre">XST_withrefer()</span></code></a> and
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_withrefer_multi" title="spexwavepy.trackfun.Tracking.XST_withrefer_multi"><code class="xref py py-func docutils literal notranslate"><span class="pre">XST_withrefer_multi()</span></code></a> are the same as
+the <a class="reference internal" href="#traxstself"><span class="std std-ref">Self-reference XST technique</span></a> which have
+been described in the above.</p>
+<p>However, unlike the <a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">Self-reference XST technique</span></a>,
 the physical quantities directly reconstructed
-from the tracked speckle pattern shifts are local curvature of the wavefront.
+from this technique are local curvatures of the wavefront.
 They are stored in the parameters <code class="docutils literal notranslate"><span class="pre">curvX</span></code> and/or <code class="docutils literal notranslate"><span class="pre">curvY</span></code> in the
 <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class. The related
 postprocess fucntion is <a class="reference internal" href="spexwavepy.html#spexwavepy.postfun.curv_pixel" title="spexwavepy.postfun.curv_pixel"><code class="xref py py-func docutils literal notranslate"><span class="pre">curv_pixel()</span></code></a>.
 Please refer to <a class="reference internal" href="#curvature"><span class="std std-ref">Local radius of curvature reconstruction</span></a>
-section for details.</p>
+section for the details.</p>
 </section>
 <section id="xsvt-technique">
 <span id="traxsvtrefer"></span><h3>XSVT technique<a class="headerlink" href="#xsvt-technique" title="Permalink to this heading"></a></h3>
-<p><a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSVT_withrefer" title="spexwavepy.trackfun.Tracking.XSVT_withrefer"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSVT_withrefer()</span></code></a> and
-<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSVT_withrefer_multi" title="spexwavepy.trackfun.Tracking.XSVT_withrefer_multi"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSVT_withrefer_multi()</span></code></a> are the
+<p><a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSVT_withrefer" title="spexwavepy.trackfun.Tracking.XSVT_withrefer"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSVT_withrefer()</span></code></a>
+and its multiprocessing form
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSVT_withrefer_multi" title="spexwavepy.trackfun.Tracking.XSVT_withrefer_multi"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSVT_withrefer_multi()</span></code></a> are
 two functions used for the data processing of the
 <a class="reference internal" href="principle.html#prinxsvtrefer"><span class="std std-ref">XSVT technique</span></a>. Since this type of technique needs
 images of the reference beam and the beam with tested optics, so we need
 two image stacks. Each image in the image stacks are taken at one random
 scan position of the diffuser during the movement. As a result, the
-<code class="docutils literal notranslate"><span class="pre">scandim</span></code> is set to be ‘random’, the <code class="docutils literal notranslate"><span class="pre">scanstep</span></code> is useless.</p>
+<code class="docutils literal notranslate"><span class="pre">scandim</span></code> of the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class
+is set to be ‘random’, the <code class="docutils literal notranslate"><span class="pre">scanstep</span></code> is useless.</p>
 <p>Like the XSS-type techniques, the raw image stack is a 3D data set.
 Unlike the XSS-type techniques, the scan step in this technique has
-no clear physical meaning. It has no use in the data processing. Also,
-the ‘1D’ mode is not supported in this technique. The data processing
+no clear physical meaning. Also,
+the ‘1D’ mode is <strong>NOT</strong> supported in this technique. The data processing
 mode in this technique is assumed to be two-dimentional.</p>
 <p>The important parameters of these two functions are <code class="docutils literal notranslate"><span class="pre">edge_xy</span></code>, <code class="docutils literal notranslate"><span class="pre">edge_z</span></code>,
 <code class="docutils literal notranslate"><span class="pre">hw_xy</span></code>, <code class="docutils literal notranslate"><span class="pre">pad_xy</span></code>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">hw_xy</span></code> defines the window size of the subregion to be processed
 on the raw image. As shown in the picture below. Note the selected area
 is a square.</p>
-<figure class="align-default">
+<figure class="align-default" id="id33">
 <a class="reference internal image-reference" href="_images/XSVT_refer1.png"><img alt="_images/XSVT_refer1.png" src="_images/XSVT_refer1.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Subregions choosed from the image stack in one loop of the
+whole data processing procedure.</span><a class="headerlink" href="#id33" title="Permalink to this image"></a></p>
+</figcaption>
 </figure>
-<p>Like the XSS-type techniques, the XSVT technique will process the data
+<p>Like the XSS-type techniques, the <a class="reference internal" href="principle.html#prinxsvtrefer"><span class="std std-ref">XSVT technique</span></a>
+will process the data
 row by row and column by column to obtain the displacements in two
 dimensions. Unlike the XSS-type techniques, since there is no clear
 physcial meaning in the scan direction, we obtain the speckle pattern
@@ -1000,30 +1013,36 @@ as in the XSS-type techniques.</p>
 <p>Due to the above reasons, for the practical implementation of the
 XSVT technique, we do the speckle tracking data processing two times
 to obtain the shifts in x and y direction, respectively. The data
-processing procedure resembles the 2D case XSS technique
-with reference beam.</p>
+processing procedure resembles the
+<a class="reference internal" href="#traxss"><span class="std std-ref">2D case XSS technique with reference beam</span></a>.</p>
 <p>To obtain the speckle pattern shift in the x direction, the outmost
 loop is along the same direction.</p>
-<figure class="align-default" id="id32">
+<figure class="align-default" id="id34">
 <a class="reference internal image-reference" href="_images/XSVT_refer2.png"><img alt="_images/XSVT_refer2.png" src="_images/XSVT_refer2.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">The loop is over x direction to obtain the speckle pattern shift in this direction.</span><a class="headerlink" href="#id32" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The loop is over x direction to obtain the speckle pattern shift in this direction.</span><a class="headerlink" href="#id34" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>Likewise, the outmost loop is along y direction if the speckle pattern
 shift in y direction is to be tracked.</p>
-<figure class="align-default" id="id33">
+<figure class="align-default" id="id35">
 <a class="reference internal image-reference" href="_images/XSVT_refer3.png"><img alt="_images/XSVT_refer3.png" src="_images/XSVT_refer3.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">The loop is over y direction to obtain the speckle pattern shift in this direction.</span><a class="headerlink" href="#id33" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The loop is over y direction to obtain the speckle pattern shift in this direction.</span><a class="headerlink" href="#id35" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<p>Note to distinguish the above data processing procedure with the
-XSS-type techniques. Although the implementation of the codes are
-almost the same, the way to obtain the speckle pattern shifts for
-these two techniques are different. The shifts obtained from XSVT
-technique are in the unit of pixel size. Unlike it, the shifts
-obtained from the XSS-type techniques are in the unit of scan step.</p>
+<p>Although the implementation of the codes are
+almost the same as the <a class="reference internal" href="#traxss"><span class="std std-ref">XSS technique with reference beam</span></a>,
+the shifts obtained from XSVT technique are in the unit of pixel size rather than
+the scan step as from the XSS-type techniques.</p>
+<p>Refer to the principle of the <a class="reference internal" href="principle.html#prinxsvtrefer"><span class="std std-ref">XSVT technique</span></a>,
+the physical quantities directly reconstructed from this technique are
+the wavefront slopes in x and y directions.
+They are stored in the <code class="docutils literal notranslate"><span class="pre">sloX</span></code> and <code class="docutils literal notranslate"><span class="pre">sloY</span></code> attribute in the
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class.
+They are reconstructed using the postprocessing function of
+<a class="reference internal" href="spexwavepy.html#spexwavepy.postfun.slope_pixel" title="spexwavepy.postfun.slope_pixel"><code class="xref py py-func docutils literal notranslate"><span class="pre">slope_pixel()</span></code></a>.
+See <a class="reference internal" href="#slope"><span class="std std-ref">Slope reconstruction</span></a> for more details.</p>
 </section>
 </section>
 <section id="post-processing-of-the-tracked-speckle-pattern-shifts">

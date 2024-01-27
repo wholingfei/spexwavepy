@@ -960,24 +960,28 @@ class Tracking:
         edge_x : int, or [int, int]
             Area needs to be cut in x dimension.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int]. If scan in x direction, it is useless.
+            to (int, int). 
+            If Tracking.scandim='x' (scan in x direction), it is useless.
         edge_y : int, or [int, int]
             Area needs to be cut in y dimension.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int]. If scan in y direction, it is useless.
+            to (int, int). 
+            If Tracking.scandim='y' (scan in y direction), it is useless.
         edge_z : int, or [int, int]
             Area needs to be cut in scan number dimension.
             If it is a single integer, it will be expanded automatically 
+            to (int, int).
         nstep : int
             The space between two chosen columns or rows.
-            to the list [int, int].
         hw_xy : int
-            the width/height of the image subregion. if ``scandim`` is 'x',
-            it is the height of the subregion; if ``scandim`` is 'y',
+            The width/height of the image subregion. If Tracking.scandim is 'x',
+            it is the height of the subregion; if Tracking.scandim is 'y',
             it is the width of the subregion.
-            Needed when do 2d data processing. (default none) 
+            Needed when do 2D data processing. (default None) 
         pad_xy : int, or [int, int]
             It defines the extra part the reference image needed to do the tracking.
+            If it is a single integer, it will be expanded automatically 
+            to (int, int).
             Needed when do 2D data processing. (default None)
         normalize : bool
             To normalize the stitched image or not. (default False)
@@ -1018,6 +1022,8 @@ class Tracking:
         if scandim == 'y':
             self.curvY = curv_scan(self.delayY, self.scanstep, self.dist, self.pixsize, nstep, self.mempos)
 
+        return
+
     def XSS_self_multi(self, edge_x, edge_y, edge_z, nstep, hw_xy, pad_xy, cpu_no, normalize=False, verbose=True):
         """
         Speckle tracking for self-reference XSS technique. 
@@ -1030,22 +1036,29 @@ class Tracking:
         edge_x : int, or [int, int]
             Area needs to be cut in x dimension.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int]. If scan in x direction, it is useless.
+            to (int, int). 
+            If Tracking.scandim='x' (scan in x direction), it is useless.
         edge_y : int, or [int, int]
             Area needs to be cut in y dimension.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int]. If scan in y direction, it is useless.
+            to (int, int). 
+            If Tracking.scandim='y' (scan in y direction), it is useless.
         edge_z : int, or [int, int]
             Area needs to be cut in scan number dimension.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int].
+            to (int, int).
+        nstep : int
+            The space between two chosen columns or rows.
         hw_xy : int
-            the width/height of the image subregion. if ``scandim`` is 'x',
-            it is the height of the subregion; if ``scandim`` is 'y',
+            The width/height of the image subregion. If Tracking.scandim is 'x',
+            it is the height of the subregion; if Tracking.scandim is 'y',
             it is the width of the subregion.
-            needed when do 2d data processing. (default none) 
+            Needed when do 2D data processing.
         pad_xy : int, or [int, int]
             It defines the extra part the reference image needed to do the tracking.
+            If it is a single integer, it will be expanded automatically 
+            to (int, int).
+            Needed when do 2D data processing. 
         cpu_no : int
             The number of CPUs that is available.
         normalize : bool
@@ -1084,6 +1097,8 @@ class Tracking:
             self.curvX = curv_scan(self.delayX, self.scanstep, self.dist, self.pixsize, nstep, self.mempos)
         if scandim == 'y':
             self.curvY = curv_scan(self.delayY, self.scanstep, self.dist, self.pixsize, nstep, self.mempos)
+
+        return
 
     def _XST_2images_1D(self, edge_x, edge_y, pad_xy, hw_xy, normalize=False, display=False, verbose=True, _Resreturn=False):
         """
@@ -1414,6 +1429,8 @@ class Tracking:
                 self.curvY = curv_pixel(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
                 self._curvX = None
 
+        return
+
     def XST_self_multi(self, edge_x, edge_y, pad_x, pad_y, hw_xy, window, cpu_no, normalize=False, verbose=True):
         """
         Speckle tracking for self-reference XST technique.
@@ -1422,12 +1439,12 @@ class Tracking:
         another image stack consists another image when the diffuser
         is at another position.
 
-        .. note:: 
-            This technique has been described in the following paper:
-
-            L. Hu, H. Wang, O. Fox, and K. Sawhney, 
-            "Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique" 
-            Opt. Express 30(18), 33259-33273 (2022). 
+        This technique has been described in [XST_selfpaper2]_:
+        
+        .. [XST_selfpaper2] Hu, L., Wang, H., Fox, O., & Sawhney, K. (2022). 
+             Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique. 
+             Opt. Exp., 30(18), 33259-33273.
+             https://doi.org/10.1364/OE.460163
 
         .. warning:: **BE CAREFUL** to check the available and safe cpu numbers before run this function!!
 
@@ -1436,26 +1453,34 @@ class Tracking:
         edge_x : int, or [int, int]
             Area needs to be cut in x dimension.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int]. 
+            to (int, int). 
+            If Tracking.scandim='x' (scan in x direction), it is useless.
         edge_y : int, or [int, int]
             Area needs to be cut in y dimension.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int]. 
+            to (int, int). 
+            If Tracking.scandim='y' (scan in y direction), it is useless.
         pad_x : int, or [int, int]
             It defines the extra part the reference image needed to do 
-            the tracking in x direction. If ``dimension``  is '1D' and 
-            ``scandim`` is 'y', it is useless.
+            the tracking in x direction. If Tracking.dimension  is '1D' 
+            **and** Tracking.scandim is is 'y', it is useless.
+            If it is a single integer, it will be expanded automatically 
+            to (int, int). 
         pad_y : int, or [int, int]
             It defines the extra part the reference image needed to do 
-            the tracking in y direction. If ``dimension``  is '1D' and 
-            ``scandim`` is 'x', it is useless.
+            the tracking in y direction. If Tracking.dimension  is '1D' 
+            **and** Tracking.scandim is is 'x', it is useless.
+            If it is a single integer, it will be expanded automatically 
+            to (int, int). 
         hw_xy : int
-            The height (when ``scandim`` is 'y') or the width (when ``scandim`` is 'x') 
+            The height (when Tracking.scandim is 'y') 
+            or the width (when Tracking.scandim is 'x') 
             of the subregion to be chosen from the template for cross-correlation.
         window : int
-            The width (when ``scandim`` is 'y') or the height (when ``scandim`` is 'x') 
+            The width (when Tracking.scandim is 'y') 
+            or the height (when Tracking.scandim is 'x') 
             of the subregion to be chosen from the template for cross-correlation.
-            Only used when ``dimension`` is '2D'. (default None)
+            Only used when Tracking.dimension is '2D'. (default None)
         cpu_no : int
             The number of CPUs that is available.
         normalize : bool
@@ -1648,37 +1673,48 @@ class Tracking:
                 self.curvY = curv_pixel(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
                 self._curvX = None
 
+        return
+
     def XST_withrefer(self, edge_x, edge_y, pad_x, pad_y, hw_xy, window=None, normalize=False, display=False, verbose=True):
         """
         Speckle tracking for conventional XST technique, with reference beam.
-        The fisrt image stack is the one with test optic.
-        The second image stack is the reference image stack.
+        Two image stacks are needed. 
+        The fisrt image stack consists one image when the diffuser is in the beam,
+        another image stack consists one reference image without the tested optic.
 
         Parameters
         ----------
         edge_x : int, or [int, int]
             Area needs to be cut in x dimension.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int]. 
+            to (int, int). 
+            If Tracking.scandim='x' (scan in x direction), it is useless.
         edge_y : int, or [int, int]
             Area needs to be cut in y dimension.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int]. 
+            to (int, int). 
+            If Tracking.scandim='y' (scan in y direction), it is useless.
         pad_x : int, or [int, int]
             It defines the extra part the reference image needed to do 
-            the tracking in x direction. If ``dimension``  is '1D' and 
-            ``scandim`` is 'y', it is useless.
+            the tracking in x direction. If Tracking.dimension  is '1D' 
+            **and** Tracking.scandim is is 'y', it is useless.
+            If it is a single integer, it will be expanded automatically 
+            to (int, int). 
         pad_y : int, or [int, int]
             It defines the extra part the reference image needed to do 
-            the tracking in y direction. If ``dimension``  is '1D' and 
-            ``scandim`` is 'x', it is useless.
+            the tracking in y direction. If Tracking.dimension  is '1D' 
+            **and** Tracking.scandim is is 'x', it is useless.
+            If it is a single integer, it will be expanded automatically 
+            to (int, int). 
         hw_xy : int
-            The height (when ``scandim`` is 'y') or the width (when ``scandim`` is 'x') 
+            The height (when Tracking.scandim is 'y') 
+            or the width (when Tracking.scandim is 'x') 
             of the subregion to be chosen from the template for cross-correlation.
         window : int
-            The width (when ``scandim`` is 'y') or the height (when ``scandim`` is 'x') 
+            The width (when Tracking.scandim is 'y') 
+            or the height (when Tracking.scandim is 'x') 
             of the subregion to be chosen from the template for cross-correlation.
-            Only used when ``dimension`` is '2D'. (default None)
+            Only used when Tracking.dimension is '2D'. (default None)
         normalize : bool
             To normalize the stitched image or not. (default False)
         display : bool
@@ -1706,14 +1742,15 @@ class Tracking:
 
         self.scandim = 'random'
 
+        return
+
 
     def XST_withrefer_multi(self, edge_x, edge_y, pad_x, pad_y, hw_xy, window, cpu_no, normalize=False, verbose=True):
         """
-        Speckle tracking for self-reference XST technique.
-        Two image stacks are needed. Both are with test optic.
-        One image stack consists one image when the diffuser is at one position,
-        another image stack consists another image when the diffuser
-        is at another position.
+        Speckle tracking for conventional XST technique, with reference beam.
+        Two image stacks are needed. 
+        The fisrt image stack consists one image when the diffuser is in the beam,
+        another image stack consists one reference image without the tested optic.
 
         .. warning:: **BE CAREFUL** to check the available and safe cpu numbers before run this function!!
 
@@ -1722,26 +1759,34 @@ class Tracking:
         edge_x : int, or [int, int]
             Area needs to be cut in x dimension.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int]. 
+            to (int, int). 
+            If Tracking.scandim='x' (scan in x direction), it is useless.
         edge_y : int, or [int, int]
             Area needs to be cut in y dimension.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int]. 
+            to (int, int). 
+            If Tracking.scandim='y' (scan in y direction), it is useless.
         pad_x : int, or [int, int]
             It defines the extra part the reference image needed to do 
-            the tracking in x direction. If ``dimension``  is '1D' and 
-            ``scandim`` is 'y', it is useless.
+            the tracking in x direction. If Tracking.dimension  is '1D' 
+            **and** Tracking.scandim is is 'y', it is useless.
+            If it is a single integer, it will be expanded automatically 
+            to (int, int). 
         pad_y : int, or [int, int]
             It defines the extra part the reference image needed to do 
-            the tracking in y direction. If ``dimension``  is '1D' and 
-            ``scandim`` is 'x', it is useless.
+            the tracking in y direction. If Tracking.dimension  is '1D' 
+            **and** Tracking.scandim is is 'x', it is useless.
+            If it is a single integer, it will be expanded automatically 
+            to (int, int). 
         hw_xy : int
-            The height (when ``scandim`` is 'y') or the width (when ``scandim`` is 'x') 
+            The height (when Tracking.scandim is 'y') 
+            or the width (when Tracking.scandim is 'x') 
             of the subregion to be chosen from the template for cross-correlation.
         window : int
-            The width (when ``scandim`` is 'y') or the height (when ``scandim`` is 'x') 
+            The width (when Tracking.scandim is 'y') 
+            or the height (when Tracking.scandim is 'x') 
             of the subregion to be chosen from the template for cross-correlation.
-            Only used when ``dimension`` is '2D'. (default None)
+            Only used when Tracking.dimension is '2D'. 
         cpu_no : int
             The number of CPUs that is available.
         normalize : bool
@@ -1769,6 +1814,7 @@ class Tracking:
 
         self.scandim = 'random'
 
+        return
 
     def XSVT_withrefer(self, edge_xy, edge_z, hw_xy=None, pad_xy=None, normalize=False, display=False, verbose=True):
         """
@@ -1779,19 +1825,20 @@ class Tracking:
         Parameters
         ----------
         edge_xy : int, or [int, int]
-            Area needs to be cut in x and y dimension.
+            Area needs to be cut in x and y dimensions.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int]. In other words, the selected area is 
-            a square in this technique.
+            to (int, int). 
         edge_z : int, or [int, int]
             Area needs to be cut in scan number dimension.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int].
+            to (int, int).
         hw_xy : int
             The width and height of the image subregion. 
             Needed when do 2D data processing. (default None) 
         pad_xy : int, or [int, int]
             It defines the extra part the reference image needed to do the tracking.
+            If it is a single integer, it will be expanded automatically 
+            to (int, int). 
             Needed when do 2D data processing. (default None)
         normalize : bool
             To normalize the stitched image or not. (default False)
@@ -1839,6 +1886,8 @@ class Tracking:
 
         self.scandim = 'random' 
 
+        return
+
     def XSVT_withrefer_multi(self, edge_xy, edge_z, hw_xy, pad_xy, cpu_no, normalize=False, verbose=True):
         """
         Speckle tracking for XSVT technique with reference beam.
@@ -1849,25 +1898,22 @@ class Tracking:
 
         Parameters
         ----------
-        edge_x : int, or [int, int]
-            Area needs to be cut in x dimension.
+        edge_xy : int, or [int, int]
+            Area needs to be cut in x and y dimensions.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int]. If scan in x direction, it is useless.
-        edge_y : int, or [int, int]
-            Area needs to be cut in y dimension.
-            If it is a single integer, it will be expanded automatically 
-            to the list [int, int]. If scan in y direction, it is useless.
+            to (int, int). 
         edge_z : int, or [int, int]
             Area needs to be cut in scan number dimension.
             If it is a single integer, it will be expanded automatically 
-            to the list [int, int].
+            to (int, int).
         hw_xy : int
-            The width/height of the image subregion. If ``scandim`` is 'x',
-            it is the height of the subregion; if ``scandim`` is 'y',
-            it is the width of the subregion.
-            Needed when do 2D data processing. (default None) 
+            The width and height of the image subregion. 
+            Needed when do 2D data processing.  
         pad_xy : int, or [int, int]
             It defines the extra part the reference image needed to do the tracking.
+            If it is a single integer, it will be expanded automatically 
+            to (int, int). 
+            Needed when do 2D data processing. 
         cpu_no : int
             The number of CPUs that is available.
         normalize : bool
@@ -1913,29 +1959,6 @@ class Tracking:
 
         self.scandim = 'random' 
 
-
-if __name__ == "__main__":
-    if __DEBUG:
-        ref_folder = "/home/lingfei/spexwavepy/tmp/CRLreferspiral/"
-        ROI = [700, 1200, 1100, 1600]
-        imstack_1 = Imagestack(ref_folder, ROI) 
-        imstack_1.normalize =True 
-
-        sam_folder = "/home/lingfei/spexwavepy/tmp/CRLsamplespiral/"
-        ROI = [700, 1200, 1100, 1600]
-        imstack_2 = Imagestack(sam_folder, ROI) 
-        imstack_2.normalize = True 
-
-        track_XSVT = Tracking(imstack_1, imstack_2)
-        track_XSVT.dimension = '2D'
-        track_XSVT.dist = 557.   # [mm] 
-        track_XSVT.pixsize = 2.3  # [um]
-
-        sys.exit(0)
-
-        edge_x = 10
-        edge_y = 10
-        edge_z = 10
-        nstep = 2
+        return
 
 

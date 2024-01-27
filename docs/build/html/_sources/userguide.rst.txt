@@ -741,9 +741,11 @@ tracking process can be.
    2D image processing for x scan data.
 
 The remaing operations are the same as the 1D case described in the above.
-**Note that in order to do the integration to reconstruct the wavefront, 
-if ``scandim`` is `'xy'`, 
-the 2D results in two directions will be cut to the same size automatically.**
+
+.. note::
+   Note that in order to do the integration to reconstruct the wavefront, 
+   if ``scandim`` is 'xy', 
+   the 2D results in two directions will be cut to the same size automatically.
 
 As been described in the :ref:`XSS technique with reference beam <prinXSSRefer>` 
 section, by tracking the speckle patter shifts, we can obtain the 
@@ -765,8 +767,8 @@ and :py:meth:`~spexwavepy.trackfun.Tracking.XSS_self_multi` function
 are used for the :ref:`self-reference XSS technique <prinXSSSelf>`.
 In terms of speckle pattern tracking, they are only a special case of 
 :ref:`XSS technique with reference beam <traXSS>`. We only need to 
-be careful that for this technique, usually only one image stack is 
-provided. 
+be careful that for this technique, usually **only one image stack is 
+provided** for the :py:class:`~spexwavepy.trackfun.Tracking` class. 
 
 Since it is a self-reference scheme, the template image stack and the 
 reference image stack are the same one. Slightly differ from 
@@ -774,21 +776,24 @@ reference image stack are the same one. Slightly differ from
 stiched images are from different (*i* th and *j* th) rows/columns 
 extracted from the same raw images in the stack.
 
-.. image:: _static/XSS_self.png
+.. figure:: _static/XSS_self.png
    :width: 80%
+
+   The generation of stiched images from two seperate rows of the 
+   raw images within the image stack.
 
 Apart from the newly introduced ``nstep`` parameter, all the other 
 parameters are the same as in the corresponding 
 :py:func:`~spexwavepy.trackfun.Tracking.XSS_withrefer` and 
 :py:func:`~spexwavepy.trackfun.Tracking.XSS_withrefer_multi` functions, 
-as already been described in the above 
-:ref:`XSS technique with reference beam <traXSS>`.
+as already been described in the above. 
 
-However, in the technique, the physical quantities directly reconstructed 
-from the tracked speckle pattern shifts are dfferent from the
-:ref:`XSS technique with reference beam <prinXSSRefer>`. The directly rconstructed
-quantity in :ref:`self-reference XSS technique <prinXSSSelf>` is the 
-local curvature of the wavefront.
+However, the physical quantities directly reconstructed 
+from this technique are dfferent from the
+:ref:`XSS technique with reference beam <prinXSSRefer>`. 
+They are the local curvatures of the wavefront.
+Please refer to :ref:`self-reference XSS technique <prinXSSSelf>`
+for detailed physics.
 
 As a result, only ``curvX`` or ``curvY`` are stored in the 
 :py:class:`~spexwavepy.trackfun.Tracking` class. The related 
@@ -796,7 +801,7 @@ postprocess fucntion is :py:func:`~spexwavepy.postfun.curv_scan`.
 Please refer to :ref:`Local radius of curvature reconstruction <curvature>`
 section for details.
 
-.. _traXSTrefer:
+.. _traXSTself:
 
 Self-reference XST technique 
 -----------------------------
@@ -881,7 +886,7 @@ compared to the 1D case.
 .. figure:: _static/XSTrefer_3x.png
    :width: 80%
 
-   Parameters for 2D data processing when Trackong.scandim is 'x'. 
+   Parameters for 2D data processing when Tracking.scandim is 'x'. 
 
 
 .. figure:: _static/XSTrefer_3.png
@@ -912,55 +917,54 @@ As a result, only ``curvX`` or ``curvY`` are stored in the
 The related postprocess fucntion is :py:func:`~spexwavepy.postfun.curv_pixel`.
 See :ref:`Local curvature reconstruction <curvature>` for more details.
 
-.. _traXSTself:
+.. _traXSTrefer:
 
 Conventional XST technique with reference beam
 ----------------------------------------------
-:py:func:`~spexwavepy.trackfun.Tracking.XST_self` and 
-:py:func:`~spexwavepy.trackfun.Tracking.XST_self_multi` are the 
+Function :py:func:`~spexwavepy.trackfun.Tracking.XST_withrefer` and 
+its multiprocessing form
+:py:func:`~spexwavepy.trackfun.Tracking.XST_withrefer_multi` are the 
 two functions used for the data processing of the 
-:ref:`self-reference XST technique <prinXSTSelf>`. Unlike the 
-:ref:`self-reference XSS technqiue <traXSSself>`, we still need
-two image stacks here. Each image stack has only one image. Since 
-no reference beam is available, the reference and template images 
-are both that with tested optic in the beam, only at two different 
-diffuser positions.
+:ref:`Conventional XST technique <prinXSTRefer>`. 
+Two image stacks should be provided for this method. 
+Each image stack has only **one image**. 
+The fisrt image stack consists one image when the diffuser is in the beam.
+The second image stack consists one reference image without 
+the tested optical elements.
 
-.. figure:: _static/XSTselfcode.png
-   :width: 80%
+All the parameters for :py:func:`~spexwavepy.trackfun.Tracking.XST_withrefer` and 
+:py:func:`~spexwavepy.trackfun.Tracking.XST_withrefer_multi` are the same as 
+the :ref:`Self-reference XST technique <traXSTself>` which have 
+been described in the above.
 
-After defining the necessary two image stacks, all the other parameters 
-for :py:func:`~spexwavepy.trackfun.Tracking.XST_self` and 
-:py:func:`~spexwavepy.trackfun.Tracking.XST_self_multi` are the same as 
-the :ref:`XST technique with reference beam <traXSTrefer>` and have 
-been described there.
-
-However, unlike the :ref:`XST technique with reference beam <prinXSTRefer>`,
+However, unlike the :ref:`Self-reference XST technique <prinXSTSelf>`,
 the physical quantities directly reconstructed 
-from the tracked speckle pattern shifts are local curvature of the wavefront.
+from this technique are local curvatures of the wavefront.
 They are stored in the parameters ``curvX`` and/or ``curvY`` in the 
 :py:class:`~spexwavepy.trackfun.Tracking` class. The related 
 postprocess fucntion is :py:func:`~spexwavepy.postfun.curv_pixel`.
 Please refer to :ref:`Local radius of curvature reconstruction <curvature>`
-section for details.
+section for the details.
 
 .. _traXSVTrefer:
 
 XSVT technique
 --------------
-:py:func:`~spexwavepy.trackfun.Tracking.XSVT_withrefer` and 
-:py:func:`~spexwavepy.trackfun.Tracking.XSVT_withrefer_multi` are the 
+:py:func:`~spexwavepy.trackfun.Tracking.XSVT_withrefer` 
+and its multiprocessing form 
+:py:func:`~spexwavepy.trackfun.Tracking.XSVT_withrefer_multi` are 
 two functions used for the data processing of the 
 :ref:`XSVT technique <prinXSVTRefer>`. Since this type of technique needs
 images of the reference beam and the beam with tested optics, so we need 
 two image stacks. Each image in the image stacks are taken at one random 
 scan position of the diffuser during the movement. As a result, the 
-``scandim`` is set to be 'random', the ``scanstep`` is useless. 
+``scandim`` of the :py:class:`~spexwavepy.trackfun.Tracking` class 
+is set to be 'random', the ``scanstep`` is useless. 
 
 Like the XSS-type techniques, the raw image stack is a 3D data set. 
 Unlike the XSS-type techniques, the scan step in this technique has 
-no clear physical meaning. It has no use in the data processing. Also, 
-the '1D' mode is not supported in this technique. The data processing 
+no clear physical meaning. Also, 
+the '1D' mode is **NOT** supported in this technique. The data processing 
 mode in this technique is assumed to be two-dimentional. 
 
 The important parameters of these two functions are ``edge_xy``, ``edge_z``, 
@@ -973,7 +977,11 @@ is a square.
 .. figure:: _static/XSVT_refer1.png
    :width: 80%
 
-Like the XSS-type techniques, the XSVT technique will process the data 
+   Subregions choosed from the image stack in one loop of the 
+   whole data processing procedure. 
+
+Like the XSS-type techniques, the :ref:`XSVT technique <prinXSVTRefer>`
+will process the data 
 row by row and column by column to obtain the displacements in two 
 dimensions. Unlike the XSS-type techniques, since there is no clear 
 physcial meaning in the scan direction, we obtain the speckle pattern 
@@ -985,8 +993,8 @@ as in the XSS-type techniques.
 Due to the above reasons, for the practical implementation of the 
 XSVT technique, we do the speckle tracking data processing two times
 to obtain the shifts in x and y direction, respectively. The data 
-processing procedure resembles the 2D case XSS technique 
-with reference beam. 
+processing procedure resembles the 
+:ref:`2D case XSS technique with reference beam <traXSS>`. 
 
 To obtain the speckle pattern shift in the x direction, the outmost 
 loop is along the same direction. 
@@ -1004,12 +1012,19 @@ shift in y direction is to be tracked.
    
    The loop is over y direction to obtain the speckle pattern shift in this direction.
 
-Note to distinguish the above data processing procedure with the 
-XSS-type techniques. Although the implementation of the codes are 
-almost the same, the way to obtain the speckle pattern shifts for 
-these two techniques are different. The shifts obtained from XSVT 
-technique are in the unit of pixel size. Unlike it, the shifts 
-obtained from the XSS-type techniques are in the unit of scan step.
+Although the implementation of the codes are 
+almost the same as the :ref:`XSS technique with reference beam <traXSS>`, 
+the shifts obtained from XSVT technique are in the unit of pixel size rather than 
+the scan step as from the XSS-type techniques.
+
+Refer to the principle of the :ref:`XSVT technique <prinXSVTRefer>`, 
+the physical quantities directly reconstructed from this technique are 
+the wavefront slopes in x and y directions. 
+They are stored in the ``sloX`` and ``sloY`` attribute in the 
+:py:class:`~spexwavepy.trackfun.Tracking` class.
+They are reconstructed using the postprocessing function of 
+:py:func:`~spexwavepy.postfun.slope_pixel`. 
+See :ref:`Slope reconstruction <slope>` for more details.
 
 .. _postfun:
 

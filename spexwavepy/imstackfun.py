@@ -1,7 +1,3 @@
-r"""
-**This module contains the functions used for dealing with the image stacks.**
-"""
-
 import numpy as np
 import matplotlib.pyplot as plt
 import os

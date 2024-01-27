@@ -171,15 +171,15 @@ def subpix_default(res, meth='cv2.TM_CCOEFF_NORMED'):
     """
     The default subpix registration method. 
 
-    .. note:: This subpixel registrition method can be found from 
+    This subpixel registrition method can be found from [FLCT]_ and [QiaoWavelet]_. 
 
-              1. Fisher, G. H., & Welsch, B.T. 
-              "FLCT: a fast, efficient method for performing local correlation tracking." 
-              Subsurface and Atmospheric Influences on Solar Activity. Vol. 383. 2008.
+    .. [FLCT] Fisher, G. H., & Welsch, B.T. 
+         "FLCT: a fast, efficient method for performing local correlation tracking." 
+         Subsurface and Atmospheric Influences on Solar Activity. Vol. 383. 2008.
 
-              2. Qiao, Zhi, et al. 
-              "Wavelet-transform-based speckle vector tracking method for X-ray phase imaging." 
-              Optics Express 28.22 (2020): 33053-33067. 
+    .. [QiaoWavelet] Qiao, Zhi, et al. 
+        "Wavelet-transform-based speckle vector tracking method for X-ray phase imaging." 
+        Optics Express 28.22 (2020): 33053-33067. 
 
     Parameters
     ----------
@@ -348,3 +348,5 @@ def _contiDisplay(fig, h1, h2, h3, h4, plane1t, plane2, res):
     plt.pause(1e-3)
 
     connection_id = fig.canvas.mpl_connect('button_press_event', _onclick)
+
+    return
