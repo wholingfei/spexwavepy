@@ -1030,12 +1030,16 @@ See :ref:`Slope reconstruction <slope>` for more details.
 
 Post processing of the tracked speckle pattern shifts
 =====================================================
+For various speckle tracking modes, the tracked speckle pattern shifts can 
+represent different physical quantities. 
+Please refer to the 
+:doc:`principle of the speckle-based wavefront sensing techniques <principle>` 
+for detailed description of the physics.
 
-.. _use2Dint:
-
-2D integration for post processing
-----------------------------------
-*Say something here for 2D integration...*
+The :py:mod:`~spexwavepy.postfun` module 
+converts the tracked speckle pattern shifts to the phsycial quantities 
+according to the specific speckle tracking technique. 
+We will describe the functions included in this module in the following.
 
 .. _slope:
 
@@ -1157,7 +1161,8 @@ The local curvature of the wavefront at the detector plane is:
    is usually better since its focus is always very far.
 
 
-.. _integral:
+.. _use2Dint:
 
-2D integration from the slope
------------------------------
+2D integration for post processing
+----------------------------------
+*Say something here for 2D integration...*

@@ -6,7 +6,7 @@ import sys
 def slope_scan(delay, scanstep, dist):
     """
     Get wavefront slope (slope error) from tracked shift. 
-    Used when scanned.
+    Used for scan-based technique with reference beam.
 
     Parameters
     ----------
@@ -15,8 +15,11 @@ def slope_scan(delay, scanstep, dist):
     scanstep : float
         scan step size. Unit in :math: `\mu m`.
     dist : float
-        distance from diffusor to detector plane.
-        Unit in mm.
+        distance from diffusor to detector plane,
+        if it's the downstream mode, unit in mm. 
+        If the diffuser is placed in the upstream,
+        usually it is set to be the distance between the centre 
+        of the optic to the detector. 
 
     Returns
     -------
