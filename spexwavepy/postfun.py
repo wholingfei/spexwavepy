@@ -42,8 +42,11 @@ def slope_pixel(delay, pixsize, dist):
     pixsize : float
         detector pixel size. Unit in :math: `\mu m`.
     dist : float
-        distance from diffusor to detector plane.
-        Unit in mm.
+        distance from diffusor to detector plane,
+        if it's the downstream mode, unit in mm. 
+        If the diffuser is placed in the upstream,
+        usually it is set to be the distance between the centre 
+        of the optic to the detector. 
 
     Returns
     -------
@@ -81,12 +84,13 @@ def Integration2D_SCS(slope_x, slope_y, neg_corr=True, pad=0, pad_mode="linear_r
     because the DC-component of the FFT-window is zero.
     Assuming the space of the mesh grid is 1 :math:`\mu m`.
 
-    .. note::
-       The SCS method can be found from
+    The SCS method can be found from [SCSIntegration]_.
 
-       1. Simchony, Tal, et al.
-       "Direct analytical methods for solving Poisson equations in computer vision problems"
-       IEEE transactions on pattern analysis and machine intelligence, 12(5), 435-446.
+    .. [SCSIntegration] Simchony T, Chellappa R, Shao, M.
+            Direct analytical methods for solving Poisson equations in computer vision problems
+            IEEE transactions on pattern analysis and machine intelligence 
+            1990, 12(5), 435-446.
+            https://doi.org/10.1109/34.55103
 
     Parameters
     ----------
@@ -155,12 +159,13 @@ def Integration2D_FC(slope_x, slope_y, neg_corr=True):
     because the DC-component of the FFT-window is zero.
     Assuming the space of the mesh grid is 1 :math:`\mu m`.
 
-    .. note::
-        Frankot-Chellappa method can be found from
+    Frankot-Chellappa method can be found from [FCIntegration]_.
 
-        1. Frankot, Robert T., & Chellappa, Roma.
-        "A method for enforcing integrability in shape from shading algorithms."
-        IEEE Transactions on pattern analysis and machine intelligence, 10(4), 439-451.
+    .. [FCIntegration] Frankot, R, & Chellappa, R.
+             A method for enforcing integrability in shape from shading algorithms
+             IEEE Transactions on pattern analysis and machine intelligence, 
+             1998, 10(4), 439-451.
+             https://doi.org/10.1109/34.3909
 
     Parameters
     ----------
@@ -197,10 +202,12 @@ def curv_scan(delay, scanstep, dist, pixsize, nstep, mempos):
     Get wavefront local curvature (curvature error) from tracked shift.
     Used when scanned. The corresponding wavefront is **on the detector plane**.
 
-    .. note:: 
-        Eq. (3) in H. Wang, J. Sutter, and K. Sawhney, 
-        "Advanced in situ metrology for x-ray beam shaping with super precision," 
-        Opt. Express  23, 1605-1614 (2015). 
+    This function corresponds to Eq. (3) in [WangXSSOEpaper]_.
+
+    .. [WangXSSOEpaper] Wang H, Sutter J, Sawhney K. 
+               Advanced in situ metrology for x-ray beam shaping with super precision. 
+               Opt Express 2015, 23(2): 1605-1614.
+               https://doi.org/10.1364/OE.23.001605
 
     Parameters
     ----------
@@ -210,16 +217,20 @@ def curv_scan(delay, scanstep, dist, pixsize, nstep, mempos):
     scanstep : float
         Step size of piezo [:math:`\mu m`], :math:`\mu` in the paper.
     dist : float
-        Distance between membrane and detector [mm], *d* in the paper
+        Distance from diffusor to detector plane,
+        if it's the downstream mode [:math:`mm`]. 
+        If the diffuser is placed in the upstream,
+        usually it is set to be the distance between the centre 
+        of the optic to the detector. :math:`d` in the paper.
     pixsize : float
-        Detector pixel size [:math:`\mu m`], *p* in the paper
+        Detector pixel size [:math:`\mu m`], :math:`p` in the paper
     nstep : int
-        ntep, (j-i) in the paper
+        ntep, :math:`(j-i)` in the paper
     mempos : str
         'downstream' or 'upstream'. Use this to define the position of 
         the diffusor in respect to the focus of the optics. 'downstream'
         means the diffuser is placed downstream of the focus. See 
-        :ref:`User guide: Local curvature reconstruction <curvature>` for more 
+        :ref:`Local curvature reconstruction <curvature>` for more 
         details of it. 
 
     Returns
@@ -237,58 +248,18 @@ def curv_scan(delay, scanstep, dist, pixsize, nstep, mempos):
 
     return curvature              #[1/m]
 
-def curv_scan_XST(delay, scanstep, dist, pixsize, mempos):
-    """
-    Get wavefront local curvature (curvature error) from tracked shift.
-    Used when scanned. The corresponding wavefront is **on the detector plane**.
-
-    .. note:: 
-        Add reference.
-        Opt. Express  
-
-    Parameters
-    ----------
-    delay: numpy.ndarray
-        Tracked shift in the scanned direction.
-        :math:`\epsilon` in the paper, it must be **positive**.
-    scanstep : float
-        Step size of piezo [:math:`\mu m`], :math:`\mu` in the paper.
-    dist : float
-        Distance between membrane and detector [mm], *d* in the paper
-    pixsize : float
-        Detector pixel size [:math:`\mu m`], *p* in the paper
-    mempos : str
-        'downstream' or 'upstream'. Use this to define the position of 
-        the diffusor in respect to the focus of the optics. 'downstream'
-        means the diffuser is placed downstream of the focus. See 
-        :ref:`User guide: Local curvature reconstruction <curvature>` for more 
-        details of it. 
-
-    Returns
-    -------
-    curvature : numpy.ndarray   
-        Local curvature [m^-1]
-    """
-    dist *= 1.e-3           # [m]
-    delay = np.abs(delay)
-    mag = scanstep / delay / pixsize 
-    if mempos == 'downstream':
-        curvature = (1 - mag) / dist 
-    if mempos == 'upstream':
-        curvature = (1 + mag) / dist 
-
-    return curvature              #[1/m]
-
-def curv_pixel(delay, scanstep, dist, pixsize, mempos):
+def curv_XST(delay, scanstep, dist, pixsize, mempos):
     """
     Get wavefront local curvature (curvature error) from tracked shift.
     Used for self-reference XST technique. 
     The corresponding wavefront is **on the detector plane**.
 
-    .. note:: 
-        Eq. (2) in L. Hu, H. Wang, O. Fox, and K. Sawhney, 
-        "Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique" 
-        Opt. Express 30(18), 33259-33273 (2022). 
+    This function corresponds to Eq. (2) of [HuXSTOEpaper]_.
+
+    .. [HuXSTOEpaper] Hu, L., Wang, H., Fox, O., & Sawhney, K. (2022). 
+             Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique. 
+             Opt. Exp., 30(18), 33259-33273.
+             https://doi.org/10.1364/OE.460163
 
     Parameters
     ----------
@@ -298,14 +269,18 @@ def curv_pixel(delay, scanstep, dist, pixsize, mempos):
     scanstep : float
         Step size of piezo [:math:`\mu m`], :math:`s` in the paper.
     dist : float
-        Distance between membrane and detector [mm], :math:`D` in the paper.
+        Distance from diffusor to detector plane,
+        if it's the downstream mode [mm]. 
+        If the diffuser is placed in the upstream,
+        usually it is set to be the distance between the centre 
+        of the optic to the detector. :math:`D` in the paper.
     pixsize : float
         Detector pixel size [:math:`\mu m`], :math:`p` in the paper.
     mempos : str
         'downstream' or 'upstream'. Use this to define the position of 
         the diffusor in respect to the focus of the optics. 'downstream'
         means the diffuser is placed downstream of the focus. See 
-        :ref:`User guide: Local curvature reconstruction <curvature>` for more 
+        :ref:`Local curvature reconstruction <curvature>` for more 
         details of it. 
 
     Returns

@@ -13,7 +13,7 @@ sys.path.append(os.path.join('..'))
 from spexwavepy.imstackfun import Imagestack
 from spexwavepy.corefun import _indicator, read_one, crop_one, Imagematch, NormImage
 from spexwavepy.corefun import _initDisplay, _contiDisplay
-from spexwavepy.postfun import slope_scan, slope_pixel, curv_scan, curv_pixel 
+from spexwavepy.postfun import slope_scan, slope_pixel, curv_scan, curv_XST 
 
 __DEBUG = True
 
@@ -33,7 +33,7 @@ class Tracking:
     imstack3 : Imagestack class
         The third image stack. 
         For XSS technique, it is scanned in y direction.
-        Not always necessary. (default None)
+        /Not always necessary. (default None)
     imstack4 : Imagestack class
         The fourth image stack. 
         For XSS technique, it is scanned in y direction.
@@ -1316,8 +1316,8 @@ class Tracking:
                 pad_xy = pad_y
                 self._XST_2images_1D(edge_x, edge_y, pad_xy, hw_xy, normalize, display, verbose)
 
-            if self.delayX is not None: self.curvX = curv_pixel(self.delayX, self.scanstep, self.dist, self.pixsize, self.mempos)
-            if self.delayY is not None: self.curvY = curv_pixel(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
+            if self.delayX is not None: self.curvX = curv_XST(self.delayX, self.scanstep, self.dist, self.pixsize, self.mempos)
+            if self.delayY is not None: self.curvY = curv_XST(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
 
         if self.dimension == '2D':
             if scandim == 'x' or scandim == 'xy': 
@@ -1363,14 +1363,14 @@ class Tracking:
                 self.delayY = delayY_2D
                 self._delayX = delayX_2D
                 self.resY = res_2D
-                self.curvY = curv_pixel(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
+                self.curvY = curv_XST(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
                 self._curvX = None
 
             if scandim == 'x' or scandim == 'xy': #or scandim == 'diag':
                 self.delayX = np.rot90(delayY_2D, k=-1)
                 self._delayY = np.rot90(delayX_2D, k=-1)
                 self.resX = np.rot90(res_2D, k=-1)
-                self.curvX = curv_pixel(self.delayX, self.scanstep, self.dist, self.pixsize, self.mempos)
+                self.curvX = curv_XST(self.delayX, self.scanstep, self.dist, self.pixsize, self.mempos)
                 self._curvY = None
 
             if scandim == 'xy':
@@ -1426,7 +1426,7 @@ class Tracking:
                 self.imstack1.data = imstack1_data
                 self.imstack2.data = imstack2_data
 
-                self.curvY = curv_pixel(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
+                self.curvY = curv_XST(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
                 self._curvX = None
 
         return
@@ -1597,14 +1597,14 @@ class Tracking:
                 self.delayY = delayY_2D
                 self._delayX = delayX_2D
                 self.resY = res_2D
-                self.curvY = curv_pixel(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
+                self.curvY = curv_XST(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
                 self._curvX = None
 
             if scandim == 'x' or scandim == 'xy': #or scandim == 'diag':
                 self.delayX = np.rot90(delayY_2D, k=-1)
                 self._delayY = np.rot90(delayX_2D, k=-1)
                 self.resX = np.rot90(res_2D, k=-1)
-                self.curvX = curv_pixel(self.delayX, self.scanstep, self.dist, self.pixsize, self.mempos)
+                self.curvX = curv_XST(self.delayX, self.scanstep, self.dist, self.pixsize, self.mempos)
                 self._curvY = None
 
             if scandim == 'xy':
@@ -1670,7 +1670,7 @@ class Tracking:
                 self.imstack1.data = imstack1_data
                 self.imstack2.data = imstack2_data
 
-                self.curvY = curv_pixel(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
+                self.curvY = curv_XST(self.delayY, self.scanstep, self.dist, self.pixsize, self.mempos)
                 self._curvX = None
 
         return

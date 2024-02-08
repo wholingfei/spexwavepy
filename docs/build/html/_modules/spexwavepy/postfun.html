@@ -80,7 +80,7 @@
 <div class="viewcode-block" id="slope_scan"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.postfun.slope_scan">[docs]</a><span class="k">def</span> <span class="nf">slope_scan</span><span class="p">(</span><span class="n">delay</span><span class="p">,</span> <span class="n">scanstep</span><span class="p">,</span> <span class="n">dist</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get wavefront slope (slope error) from tracked shift. </span>
-<span class="sd">    Used when scanned.</span>
+<span class="sd">    Used for scan-based technique with reference beam.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -89,8 +89,11 @@
 <span class="sd">    scanstep : float</span>
 <span class="sd">        scan step size. Unit in :math: `\mu m`.</span>
 <span class="sd">    dist : float</span>
-<span class="sd">        distance from diffusor to detector plane.</span>
-<span class="sd">        Unit in mm.</span>
+<span class="sd">        distance from diffusor to detector plane,</span>
+<span class="sd">        if it&#39;s the downstream mode, unit in mm. </span>
+<span class="sd">        If the diffuser is placed in the upstream,</span>
+<span class="sd">        usually it is set to be the distance between the centre </span>
+<span class="sd">        of the optic to the detector. </span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -113,8 +116,11 @@
 <span class="sd">    pixsize : float</span>
 <span class="sd">        detector pixel size. Unit in :math: `\mu m`.</span>
 <span class="sd">    dist : float</span>
-<span class="sd">        distance from diffusor to detector plane.</span>
-<span class="sd">        Unit in mm.</span>
+<span class="sd">        distance from diffusor to detector plane,</span>
+<span class="sd">        if it&#39;s the downstream mode, unit in mm. </span>
+<span class="sd">        If the diffuser is placed in the upstream,</span>
+<span class="sd">        usually it is set to be the distance between the centre </span>
+<span class="sd">        of the optic to the detector. </span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -152,12 +158,13 @@
 <span class="sd">    because the DC-component of the FFT-window is zero.</span>
 <span class="sd">    Assuming the space of the mesh grid is 1 :math:`\mu m`.</span>
 
-<span class="sd">    .. note::</span>
-<span class="sd">       The SCS method can be found from</span>
+<span class="sd">    The SCS method can be found from [SCSIntegration]_.</span>
 
-<span class="sd">       1. Simchony, Tal, et al.</span>
-<span class="sd">       &quot;Direct analytical methods for solving Poisson equations in computer vision problems&quot;</span>
-<span class="sd">       IEEE transactions on pattern analysis and machine intelligence, 12(5), 435-446.</span>
+<span class="sd">    .. [SCSIntegration] Simchony T, Chellappa R, Shao, M.</span>
+<span class="sd">            Direct analytical methods for solving Poisson equations in computer vision problems</span>
+<span class="sd">            IEEE transactions on pattern analysis and machine intelligence </span>
+<span class="sd">            1990, 12(5), 435-446.</span>
+<span class="sd">            https://doi.org/10.1109/34.55103</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -226,12 +233,13 @@
 <span class="sd">    because the DC-component of the FFT-window is zero.</span>
 <span class="sd">    Assuming the space of the mesh grid is 1 :math:`\mu m`.</span>
 
-<span class="sd">    .. note::</span>
-<span class="sd">        Frankot-Chellappa method can be found from</span>
+<span class="sd">    Frankot-Chellappa method can be found from [FCIntegration]_.</span>
 
-<span class="sd">        1. Frankot, Robert T., &amp; Chellappa, Roma.</span>
-<span class="sd">        &quot;A method for enforcing integrability in shape from shading algorithms.&quot;</span>
-<span class="sd">        IEEE Transactions on pattern analysis and machine intelligence, 10(4), 439-451.</span>
+<span class="sd">    .. [FCIntegration] Frankot, R, &amp; Chellappa, R.</span>
+<span class="sd">             A method for enforcing integrability in shape from shading algorithms</span>
+<span class="sd">             IEEE Transactions on pattern analysis and machine intelligence, </span>
+<span class="sd">             1998, 10(4), 439-451.</span>
+<span class="sd">             https://doi.org/10.1109/34.3909</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -268,10 +276,12 @@
 <span class="sd">    Get wavefront local curvature (curvature error) from tracked shift.</span>
 <span class="sd">    Used when scanned. The corresponding wavefront is **on the detector plane**.</span>
 
-<span class="sd">    .. note:: </span>
-<span class="sd">        Eq. (3) in H. Wang, J. Sutter, and K. Sawhney, </span>
-<span class="sd">        &quot;Advanced in situ metrology for x-ray beam shaping with super precision,&quot; </span>
-<span class="sd">        Opt. Express  23, 1605-1614 (2015). </span>
+<span class="sd">    This function corresponds to Eq. (3) in [WangXSSOEpaper]_.</span>
+
+<span class="sd">    .. [WangXSSOEpaper] Wang H, Sutter J, Sawhney K. </span>
+<span class="sd">               Advanced in situ metrology for x-ray beam shaping with super precision. </span>
+<span class="sd">               Opt Express 2015, 23(2): 1605-1614.</span>
+<span class="sd">               https://doi.org/10.1364/OE.23.001605</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -281,16 +291,20 @@
 <span class="sd">    scanstep : float</span>
 <span class="sd">        Step size of piezo [:math:`\mu m`], :math:`\mu` in the paper.</span>
 <span class="sd">    dist : float</span>
-<span class="sd">        Distance between membrane and detector [mm], *d* in the paper</span>
+<span class="sd">        Distance from diffusor to detector plane,</span>
+<span class="sd">        if it&#39;s the downstream mode [:math:`mm`]. </span>
+<span class="sd">        If the diffuser is placed in the upstream,</span>
+<span class="sd">        usually it is set to be the distance between the centre </span>
+<span class="sd">        of the optic to the detector. :math:`d` in the paper.</span>
 <span class="sd">    pixsize : float</span>
-<span class="sd">        Detector pixel size [:math:`\mu m`], *p* in the paper</span>
+<span class="sd">        Detector pixel size [:math:`\mu m`], :math:`p` in the paper</span>
 <span class="sd">    nstep : int</span>
-<span class="sd">        ntep, (j-i) in the paper</span>
+<span class="sd">        ntep, :math:`(j-i)` in the paper</span>
 <span class="sd">    mempos : str</span>
 <span class="sd">        &#39;downstream&#39; or &#39;upstream&#39;. Use this to define the position of </span>
 <span class="sd">        the diffusor in respect to the focus of the optics. &#39;downstream&#39;</span>
 <span class="sd">        means the diffuser is placed downstream of the focus. See </span>
-<span class="sd">        :ref:`User guide: Local curvature reconstruction &lt;curvature&gt;` for more </span>
+<span class="sd">        :ref:`Local curvature reconstruction &lt;curvature&gt;` for more </span>
 <span class="sd">        details of it. </span>
 
 <span class="sd">    Returns</span>
@@ -308,58 +322,18 @@
 
     <span class="k">return</span> <span class="n">curvature</span>              <span class="c1">#[1/m]</span></div>
 
-<div class="viewcode-block" id="curv_scan_XST"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.postfun.curv_scan_XST">[docs]</a><span class="k">def</span> <span class="nf">curv_scan_XST</span><span class="p">(</span><span class="n">delay</span><span class="p">,</span> <span class="n">scanstep</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">pixsize</span><span class="p">,</span> <span class="n">mempos</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get wavefront local curvature (curvature error) from tracked shift.</span>
-<span class="sd">    Used when scanned. The corresponding wavefront is **on the detector plane**.</span>
-
-<span class="sd">    .. note:: </span>
-<span class="sd">        Add reference.</span>
-<span class="sd">        Opt. Express  </span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    delay: numpy.ndarray</span>
-<span class="sd">        Tracked shift in the scanned direction.</span>
-<span class="sd">        :math:`\epsilon` in the paper, it must be **positive**.</span>
-<span class="sd">    scanstep : float</span>
-<span class="sd">        Step size of piezo [:math:`\mu m`], :math:`\mu` in the paper.</span>
-<span class="sd">    dist : float</span>
-<span class="sd">        Distance between membrane and detector [mm], *d* in the paper</span>
-<span class="sd">    pixsize : float</span>
-<span class="sd">        Detector pixel size [:math:`\mu m`], *p* in the paper</span>
-<span class="sd">    mempos : str</span>
-<span class="sd">        &#39;downstream&#39; or &#39;upstream&#39;. Use this to define the position of </span>
-<span class="sd">        the diffusor in respect to the focus of the optics. &#39;downstream&#39;</span>
-<span class="sd">        means the diffuser is placed downstream of the focus. See </span>
-<span class="sd">        :ref:`User guide: Local curvature reconstruction &lt;curvature&gt;` for more </span>
-<span class="sd">        details of it. </span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    curvature : numpy.ndarray   </span>
-<span class="sd">        Local curvature [m^-1]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">dist</span> <span class="o">*=</span> <span class="mf">1.e-3</span>           <span class="c1"># [m]</span>
-    <span class="n">delay</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">delay</span><span class="p">)</span>
-    <span class="n">mag</span> <span class="o">=</span> <span class="n">scanstep</span> <span class="o">/</span> <span class="n">delay</span> <span class="o">/</span> <span class="n">pixsize</span> 
-    <span class="k">if</span> <span class="n">mempos</span> <span class="o">==</span> <span class="s1">&#39;downstream&#39;</span><span class="p">:</span>
-        <span class="n">curvature</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">mag</span><span class="p">)</span> <span class="o">/</span> <span class="n">dist</span> 
-    <span class="k">if</span> <span class="n">mempos</span> <span class="o">==</span> <span class="s1">&#39;upstream&#39;</span><span class="p">:</span>
-        <span class="n">curvature</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">mag</span><span class="p">)</span> <span class="o">/</span> <span class="n">dist</span> 
-
-    <span class="k">return</span> <span class="n">curvature</span>              <span class="c1">#[1/m]</span></div>
-
-<div class="viewcode-block" id="curv_pixel"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.postfun.curv_pixel">[docs]</a><span class="k">def</span> <span class="nf">curv_pixel</span><span class="p">(</span><span class="n">delay</span><span class="p">,</span> <span class="n">scanstep</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">pixsize</span><span class="p">,</span> <span class="n">mempos</span><span class="p">):</span>
+<div class="viewcode-block" id="curv_XST"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.postfun.curv_XST">[docs]</a><span class="k">def</span> <span class="nf">curv_XST</span><span class="p">(</span><span class="n">delay</span><span class="p">,</span> <span class="n">scanstep</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">pixsize</span><span class="p">,</span> <span class="n">mempos</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get wavefront local curvature (curvature error) from tracked shift.</span>
 <span class="sd">    Used for self-reference XST technique. </span>
 <span class="sd">    The corresponding wavefront is **on the detector plane**.</span>
 
-<span class="sd">    .. note:: </span>
-<span class="sd">        Eq. (2) in L. Hu, H. Wang, O. Fox, and K. Sawhney, </span>
-<span class="sd">        &quot;Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique&quot; </span>
-<span class="sd">        Opt. Express 30(18), 33259-33273 (2022). </span>
+<span class="sd">    This function corresponds to Eq. (2) of [HuXSTOEpaper]_.</span>
+
+<span class="sd">    .. [HuXSTOEpaper] Hu, L., Wang, H., Fox, O., &amp; Sawhney, K. (2022). </span>
+<span class="sd">             Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique. </span>
+<span class="sd">             Opt. Exp., 30(18), 33259-33273.</span>
+<span class="sd">             https://doi.org/10.1364/OE.460163</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -369,14 +343,18 @@
 <span class="sd">    scanstep : float</span>
 <span class="sd">        Step size of piezo [:math:`\mu m`], :math:`s` in the paper.</span>
 <span class="sd">    dist : float</span>
-<span class="sd">        Distance between membrane and detector [mm], :math:`D` in the paper.</span>
+<span class="sd">        Distance from diffusor to detector plane,</span>
+<span class="sd">        if it&#39;s the downstream mode [mm]. </span>
+<span class="sd">        If the diffuser is placed in the upstream,</span>
+<span class="sd">        usually it is set to be the distance between the centre </span>
+<span class="sd">        of the optic to the detector. :math:`D` in the paper.</span>
 <span class="sd">    pixsize : float</span>
 <span class="sd">        Detector pixel size [:math:`\mu m`], :math:`p` in the paper.</span>
 <span class="sd">    mempos : str</span>
 <span class="sd">        &#39;downstream&#39; or &#39;upstream&#39;. Use this to define the position of </span>
 <span class="sd">        the diffusor in respect to the focus of the optics. &#39;downstream&#39;</span>
 <span class="sd">        means the diffuser is placed downstream of the focus. See </span>
-<span class="sd">        :ref:`User guide: Local curvature reconstruction &lt;curvature&gt;` for more </span>
+<span class="sd">        :ref:`Local curvature reconstruction &lt;curvature&gt;` for more </span>
 <span class="sd">        details of it. </span>
 
 <span class="sd">    Returns</span>

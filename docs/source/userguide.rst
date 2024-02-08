@@ -914,7 +914,7 @@ We can calculate the wavefront local curvature from the obtained speckle trackin
 according to :ref:`the principle of the self-reference XST technique <prinXSTSelf>`. 
 As a result, only ``curvX`` or ``curvY`` are stored in the 
 :py:class:`~spexwavepy.trackfun.Tracking` class. 
-The related postprocess fucntion is :py:func:`~spexwavepy.postfun.curv_pixel`.
+The related postprocess fucntion is :py:func:`~spexwavepy.postfun.curv_XST`.
 See :ref:`Local curvature reconstruction <curvature>` for more details.
 
 .. _traXSTrefer:
@@ -942,7 +942,7 @@ the physical quantities directly reconstructed
 from this technique are local curvatures of the wavefront.
 They are stored in the parameters ``curvX`` and/or ``curvY`` in the 
 :py:class:`~spexwavepy.trackfun.Tracking` class. The related 
-postprocess fucntion is :py:func:`~spexwavepy.postfun.curv_pixel`.
+postprocess fucntion is :py:func:`~spexwavepy.postfun.curv_XST`.
 Please refer to :ref:`Local radius of curvature reconstruction <curvature>`
 section for the details.
 
@@ -1034,34 +1034,41 @@ For various speckle tracking modes, the tracked speckle pattern shifts can
 represent different physical quantities. 
 Please refer to the 
 :doc:`principle of the speckle-based wavefront sensing techniques <principle>` 
-for detailed description of the physics.
-
+for detailed description of the physical meanings of the shifts.
 The :py:mod:`~spexwavepy.postfun` module 
-converts the tracked speckle pattern shifts to the phsycial quantities 
-according to the specific speckle tracking technique. 
+converts these shifts to the phsycial quantities 
+according to the specific technique. 
 We will describe the functions included in this module in the following.
 
 .. _slope:
 
 Slope reconstruction
 --------------------
-Two functions are provided in the package, the are 
+According to the 
+:doc:`principle of the speckle-based wavefront sensing techniques <principle>`,
+in general, we can reconstruct the local wavefront slope from the tracked shifts
+if **the reference beam is existed**.
+Two functions, 
 :py:func:`~spexwavepy.postfun.slope_scan` and
-:py:func:`~spexwavepy.postfun.slope_pixel`, respectively. 
-These two functions are called depending on the unit of the 
-tracked shifts.
+:py:func:`~spexwavepy.postfun.slope_pixel`, 
+are provided in the :py:mod:`~spexwavepy.postfun` module.
+They are called depending on which speckle tracking technique 
+is used.
 
-Usually, for the XSS (both :ref:`with reference beam <prinXSSRefer>` or 
-:ref:`self-reference <prinXSSSelf>`), the tracked
-shifts are in the unit of scan step in the scan direction, thus, the 
-:py:func:`~spexwavepy.postfun.slope_scan` function is called. If the tracked 
-shifts are in the unit of pixel size, such as other tracking methods, then the 
-:py:func:`~spexwavepy.postfun.slope_pixel` function is called.
+For the :ref:`XSS technique with reference beam <prinXSSRefer>`,  
+the tracked shifts are in the unit of scan step along the scan direction, 
+the :py:func:`~spexwavepy.postfun.slope_scan` function is called. 
+If the tracked shifts are in the unit of pixel size, 
+such as the other direction (perpendicular to the scan direction) of 
+the :ref:`XSS technique with reference beam <prinXSSRefer>`,  
+both directions of the 
+:ref:`conventional XST technique <prinXSTRefer>` and 
+:ref:`XSVT technique <prinXSVTRefer>`,
+the :py:func:`~spexwavepy.postfun.slope_pixel` function is called.
 
 If we use :math:`\mu` to represent the tracked shifts regardless of its unit, 
-:math:`p` the detector pixel size, :math:`s` the scan step size, :math:`d` 
-the distacne betweeen the diffuser and the detector, for 
-:py:func:`~spexwavepy.postfun.slope_scan` function, we have:
+:math:`p` the detector pixel size, :math:`s` the scan step size, 
+for :py:func:`~spexwavepy.postfun.slope_scan` function, we have:
 
 .. math::
 
@@ -1073,42 +1080,68 @@ for :py:func:`~spexwavepy.postfun.slope_pixel` function, we have:
 
    slope = \frac{\mu \times p}{d}
 
+In the above two equations, :math:`d` represents the distance. 
+If the diffuser is placed in the **downstream** of the tested optic, 
+:math:`d` is the distance betweeen the diffuser and the detector.
+Otherwise, if the diffuser is placed in the **upstream**,  
+:math:`d` is usually set to be the distance between the 
+centre of the optic and the detector.
+
 .. _curvature:
 
 Local curvature reconstruction
 ------------------------------
-Usually, the local radius of curvature is reconstructed from the 
-:ref:`self-reference XSS technique <prinXSSSelf>` and 
-:ref:`self-reference XST technique <prinXSTSelf>` techniques. 
-There are two geometric relations used to calculate the local 
-radius of curvature depending on where the diffuser is placed. This information 
-is stored in the ``mempos`` attribute of the :py:class:`~spexwavepy.trackfun.Tracking`
-class. The :py:func:`~spexwavepy.postfun.curv_scan` function is used for 
-the XSS technique, the :py:func:`~spexwavepy.postfun.curv_pixel` function
-is used for the XST technique.
+Refer to the
+:doc:`principle of the speckle-based wavefront sensing techniques <principle>`,
+if there is no reference beam, usually the local radius of curvature is 
+reconstructed from the tracked speckle pattern shifts. 
+Similar to the functions for the :ref:`local wavefront slope reconstruction <slope>`,
+two functions are also provided to reconstruct local wavefront curvature 
+depending on the specific speckle tracking technique.
+They are :py:func:`~spexwavepy.postfun.curv_scan` and 
+:py:func:`~spexwavepy.postfun.curv_XST`, respectively. 
 They both return the local 
 curvature of the wavefront **at the detector plane**. It is easy to convert this 
 to the wavefront curvature at the diffuser plane.
 
-We show the downstream case at first.
+The :py:func:`~spexwavepy.postfun.curv_scan` function is used by 
+:py:class:`~spexwavepy.trackfun.Tracking` class for the 
+:ref:`self-reference XSS technique <prinXSSSelf>`, while 
+the :py:func:`~spexwavepy.postfun.curv_XST` function is used by 
+the same class for the :ref:`self-reference XST technique <prinXSTSelf>`.
 
-.. image:: _static/downstream.jpg
-   :width: 80%
+Similar to the :ref:`local wavefront slope reconstruction <slope>`, 
+we use :math:`d` to represent the distance used for the 
+local wavefront curvature reconstruction. 
+Two situations need to be distingushed. 
+If the diffuser is placed in the **downstream** of the tested optic, 
+:math:`d` is the distance betweeen the diffuser and the detector.
+Otherwise, if the diffuser is placed in the **upstream**,  
+:math:`d` is usually set to be the distance between the 
+centre of the optic and the detector.
 
-In downstream case, the diffuser is placed in the downstream of the focus of the 
-tested optic if it has one. If we use :math:`p` to represent the detector pixel 
+We show the **downstream** case at first.
+
+.. figure:: _static/downstream.jpg
+   :width: 70%
+
+   The downstream case.
+
+If we use :math:`p` to represent the detector pixel 
 size, :math:`\mu` the tracked shift, :math:`s` the scan step size, :math:`j-i` the 
-spacing of the columns/rows to be extracted and stiched, :math:`d` the distacne 
-betweeen the diffuser and the detector, :math:`m` the magnification 
-factor, then we have the following equation.
+spacing of the columns/rows to be extracted and stiched, 
+:math:`m` the magnification 
+factor, then we have the following equations.
 
-For :ref:`self-reference XSS technique <prinXSSSelf>`:
+For :ref:`self-reference XSS technique <prinXSSSelf>`
+(:py:func:`~spexwavepy.postfun.curv_scan`):
 
 .. math::
    
    m = \frac{\mu \times s}{(j-i) \times p} = \frac{R-d}{R}
 
-For :ref:`self-reference XST technique <prinXSTSelf>`:
+For :ref:`self-reference XST technique <prinXSTSelf>`
+(:py:func:`~spexwavepy.postfun.curv_XST`):
 
 .. math::
    
@@ -1121,26 +1154,30 @@ have:
 
    \frac{1}{R} = \frac{1-m}{d}
 
-Now let's look at the upstream case.
+Now let's look at the **upstream** case.
 
-.. image:: _static/upstream.jpg
+.. figure:: _static/upstream.jpg
    :width: 80%
 
+   The upstream case.
+
 We use the same symbols to represent the related physical quantity. For the upstream case, 
-the distance betweeen the diffuser and the detector :math:`d` is assumed to be **the centre 
-of the tested optic and the detector**, since we assume the incident beam has negligible 
+the distance betweeen the diffuser and the detector is assumed to be the centre 
+of the tested optic and the detector, since we assume the incident beam has negligible 
 divergence and the beam is modulated only after the optic.
 
 The equation to describe the geometric relation is slightly different from the downstream 
 case.
 
-For :ref:`self-reference XSS technique <prinXSSSelf>`:
+For :ref:`self-reference XSS technique <prinXSSSelf>`
+(:py:func:`~spexwavepy.postfun.curv_scan`):
 
 .. math::
 
    m = \frac{\mu \times s}{(j-i) \times p} = \frac{d-R}{R}
 
-For :ref:`self-reference XST technique <prinXSTSelf>`:
+For :ref:`self-reference XST technique <prinXSTSelf>`
+(:py:func:`~spexwavepy.postfun.curv_XST`):
 
 .. math::
    
@@ -1157,7 +1194,7 @@ The local curvature of the wavefront at the detector plane is:
    Apart from the above two cases, there are other geometric situations. However,
    these other situations can be equivalent to the the above two cases, only need 
    to note that the obtained curvature may no longer at the detector plane, it may 
-   at the diffuser plane instead. For plane mirror, set ``mempos`` to downstream 
+   at the diffuser plane instead. For **plane mirror**, set ``mempos`` to downstream 
    is usually better since its focus is always very far.
 
 
@@ -1165,4 +1202,56 @@ The local curvature of the wavefront at the detector plane is:
 
 2D integration for post processing
 ----------------------------------
-*Say something here for 2D integration...*
+We also provide functions to do the 2D integration from the 
+gradients in x and y directions. 
+These functions are useful when reconstructing the wavefront 
+from the local wavefront slope and in some other situations.
+Two functions, :py:func:`~spexwavepy.postfun.Integration2D_SCS` 
+and :py:func:`~spexwavepy.postfun.Integration2D_FC`,
+are provided to do the 2D integration in this package.
+
+The detailed mathematics of the SCS method can be found from [SCSmeth]_,
+the FC method from [FCmeth]_.
+
+These two functions can be called once the local wavefront slope 
+in two directions are obtained. The wavefront slope information is 
+stored in ``sloX`` and ``sloY`` of the `~spexwavepy.trackfun.Tracking` class.
+
+The function is invoked as: 
+
+.. code-block:: Python
+   
+   from spexwavepy.postfun import Integration2D_SCS, Integration2D_FC
+   surface = Integration2D_SCS(Tracking.sloX, Tracking.sloY)
+
+or
+
+.. code-block:: Python
+   
+   surface = Integration2D_FC(Tracking.sloX, Tracking.sloY)
+
+Please refer to :ref:`Tutorial <tuCRL>` for the use of 2D integration 
+to obtain the wavrfront.
+
+.. [SCSmeth] Simchony T, Chellappa R, Shao, M.
+                Direct analytical methods for solving Poisson equations in computer vision problems
+                IEEE transactions on pattern analysis and machine intelligence 
+                1990, 12(5), 435-446.
+                https://doi.org/10.1109/34.55103
+
+.. [FCmeth] Frankot, R, & Chellappa, R.
+                A method for enforcing integrability in shape from shading algorithms
+                IEEE Transactions on pattern analysis and machine intelligence, 
+                1998, 10(4), 439-451.
+                https://doi.org/10.1109/34.3909
+
+.. _useAux:
+
+Auxiliary functions
+-------------------
+:py:func:`~spexwavepy.postfun.EllipseSlope` function is an auxiliary function 
+used to calculate the slope error for an elliptical mirror with known parameters.
+This function is used to calculate the slope error on the mirror surface through 
+an iterative algorithm. Please see the 
+:ref:`Mirror slope error curve (1D) reconstructed from the dowmstream setup <iterative>`
+example for the usage of this function.

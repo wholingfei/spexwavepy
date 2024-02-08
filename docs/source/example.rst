@@ -11,12 +11,7 @@ In this example, we would like to show that how to use the
 :ref:`XSS technique with reference beam <prinXSSRefer>` to 
 measure the plane mirror.
 
-.. note:: 
-   This example basically extracts from the following paper
-
-   Hu, L., et al.
-   Two-dimensional speckle technique for slope error measurements of weakly focusing reflective X-ray optics. 
-   Journal of Synchrotron Radiation, (2022):29(6).
+This example basically extracts from [HuXSSJSRpaper]_.
 
 .. code-block:: Python
 
@@ -198,6 +193,12 @@ We also have the tracked shift in 'x' direction.
 Besides, the slope error in *'x'* direction has been stored in the ``slopeX`` of 
 ``track_XSS`` class.
 
+.. [HuXSSJSRpaper] Hu, L., Wang, H., Fox, O., & Sawhney, K. (2022). 
+              Two-dimensional speckle technique for slope error measurements of 
+              weakly focusing reflective X-ray optics. 
+              J. Synchrotron Rad. 29(6).
+              https://doi.org/10.1107/S160057752200916X
+
 .. _exp2ndderiv:
 
 Measurement of the wavefront local curvature after a plane mirror
@@ -207,11 +208,7 @@ the local curvature of the wavefront after a plane mirror. Then we will
 show that the fine structures appeared on the intensity image correspond 
 to the lcoal curvature map.
 
-.. note::
-   This example is extracted from the following publication.
-
-   Hu, L et al., "Investigation of the stripe patterns from X-ray reflection optics," 
-   Opt. Express 29, 4270-4286 (2021) 
+This example is extracted from [HuStripeOEpaper]_.
 
 After the general settings of the image stack ``imstack`` and the 
 Tracking class ``track_XSS``, 
@@ -269,6 +266,11 @@ Then we show the intensity image.
 From the two images shown in the above, we can find that those structures in 
 the intensity image can be related to the structures appeared 
 in the local curvature 2D map.
+
+.. [HuStripeOEpaper] Hu, L., Wang, H., Sutter, J., & Sawhney, K. (2021).
+                     Investigation of the stripe patterns from X-ray reflection optics.
+                     Opt. Express 29, 4270-4286  
+                     https://doi.org/10.1364/OE.417030
 
 .. _iterative:
 
@@ -332,14 +334,8 @@ measurement, we need to project the wavefront at the detector plane
 back to the mirror surface. To do that, 
 we need the following iterative algorithm.
 
-.. note::
-
-   The main idea of the following iterative algorithm is very similar 
-   to this published paper:
-   
-   S. Berujon, and E. Ziegler, 
-   "Grating-based at-wavelength metrology of hard x-ray reflective 
-   optics", Opt. Lett. 37, 4464-4466 (2012).
+The main idea of the following iterative algorithm is very similar 
+to [SebastienGrating]_. 
 
 Two relations are used to devise the iterative algorithm.
 First, the slope of the mirror can be calculated as
@@ -469,6 +465,12 @@ is 3.08 mrad.
    The initial value ``theta``, ``D`` can be fine adjusted 
    to match the off-line NOM data. 
 
+
+.. [SebastienGrating] S. Berujon, and E. Ziegler, 
+                      Grating-based at-wavelength metrology of hard x-ray reflective optics
+                      Opt. Lett. 37, 4464-4466 (2012).
+                      https://doi.org/10.1364/OL.37.004464
+
 .. _expxssvsxst:
 
 Comparison between self-reference XSS technique and self-reference XST technique
@@ -476,13 +478,8 @@ Comparison between self-reference XSS technique and self-reference XST technique
 In this example, we will compare the 1D 
 :ref:`self-reference XSS technique <prinXSSSelf>` 
 and the 1D :ref:`self-reference XST technique <prinXSTSelf>` at first. 
-The optic we used is a plane mirror. Similar results has been published from the 
-following literature:
-
-.. note::
-   L. Hu, H. Wang, O. Fox, and K. Sawhney, 
-   "Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique" 
-   Opt. Express 30(18), 33259-33273 (2022). 
+The optic we used is a plane mirror. Similar results has been published 
+from [HuXSTOEPaperFast]_.
 
 The plane mirror speckle data is the same as in 
 :ref:`Plane mirror measurement with reference beam <expplane>`, and we only use the 
@@ -636,18 +633,18 @@ we still have the following 2D wavefront map.
 The wavefront curvature map from the self-reference XST technique has lower spatial resolution 
 and accuracy compared to the self-reference XSS technique. 
 
+.. [HuXSTOEPaperFast] Hu, L., Wang, H., Fox, O., & Sawhney, K. (2022). 
+               Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique. 
+               Opt. Exp., 30(18), 33259-33273.
+               https://doi.org/10.1364/OE.460163
+
 .. _expKBalign:
 
 KB mirror alignment using self-reference XST technique
 ======================================================
 In this example we will show how to align KB mirror's pitch angle (:math:`\theta`) 
 using the :ref:`self-reference XST technique <prinXSTSelf>`. This example is similar 
-to Fig.5 in the following paper:
-
-.. note::
-   L. Hu, H. Wang, O. Fox, and K. Sawhney, 
-   "Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique" 
-   Opt. Express 30(18), 33259-33273 (2022). 
+to Fig.5 in [HuXSTOEPaperFast2]_.
 
 The basic idea is also described in the above paper. At the nominal angle :math:`\theta`, 
 the local curvature is constant along the mirror length. However, if it deviates to the 
@@ -760,3 +757,7 @@ position where the fitted slope is close to 0.
    The fitted slope for the above measured curves.
 
 
+.. [HuXSTOEPaperFast2] Hu, L., Wang, H., Fox, O., & Sawhney, K. (2022). 
+               Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique. 
+               Opt. Exp., 30(18), 33259-33273.
+               https://doi.org/10.1364/OE.460163

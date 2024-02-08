@@ -129,7 +129,6 @@ All the functions in each module will be covered.
 
     - :ref:`Local curvature reconstruction <curvature>`
 
-    - :ref:`2D integration from the slope <integral>`
 
 API reference
 =============
