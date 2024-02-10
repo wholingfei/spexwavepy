@@ -1,8 +1,6 @@
 ============================================================
 The speckle-based wavefront sensing techniques
 ============================================================
-**Debug according to Yujie's corrections!!! ...**
-
 When shining a laser through a diffuser, 
 a two-dimensional random intensity (speckle) patterns will be generated. 
 Speckle-based techniques have long been used in metrology 
@@ -219,7 +217,7 @@ and :math:`\alpha_y`, respectively.
 :math:`D` represents the distance between the diffuser and the detector plane 
 if the diffuser is placed in the downstream of the tested optic.
 Otherwise, it is the distance between the centre of the tested optic and the 
-detector plane.
+detector plane. :math:`W` represents the equiphase surface.
 
 The following equations satisfy:
 
@@ -258,15 +256,15 @@ However, the physical quantities obtained directly from the speckle pattern shif
 very much different [HuXSTOE]_. 
 
 We use :math:`s_x` and :math:`s_y` to represent the displacement in two directions for the pizeo 
-at two different positions, :math:`ix` and :math:`iy` to represnt the shifts of the 
+at two different positions, :math:`ix` and :math:`iy` to represent the shifts of the 
 speckle pattern in the cooresponding direction. 
 :math:`p`, :math:`\alpha_x` and :math:`\alpha_y` represent 
 the pixel size of the detector, 
-the wavefront slopes in x and y directions, repectively.
+the wavefront slopes in x and y directions, respectively.
 :math:`D` represents the distance between the diffuser and the detector plane 
 if the diffuser is placed in the downstream of the tested optic.
 Otherwise, it is the distance between the centre of the tested optic and the 
-detector plane.
+detector plane. :math:`W` represents the equiphase surface.
 
 We have the following equations:
 
@@ -305,7 +303,7 @@ whether the reference beam is available.
 The following figure shows the data acquisition process
 of the XSS technique with reference beam [HuXSSJSR]_. 
 Note that compared to the above XST-like techniques, 
-the difusser is scanned. 
+the diffuser is scanned. 
 
 .. figure:: _static/referXSS_principle.png
    :width: 80%
@@ -341,7 +339,7 @@ two directions.
 :math:`D` represents the distance between the diffuser and the detector plane 
 if the diffuser is placed in the downstream of the tested optic.
 Otherwise, it is the distance between the centre of the tested optic and the 
-detector plane.
+detector plane. :math:`W` represents the equiphase surface.
 
 This technique has been shown in the :ref:`example <expplane>`.
 
@@ -373,7 +371,7 @@ the self-reference XSS technique.
    X-ray speckle scanning technique. 
 
 Like the self-reference conventional XST method, 
-the phsycial quantity directly derived from the tracked 
+the physical quantity directly derived from the tracked 
 speckle pattern shift for this technique 
 is the wavefront slope, i.e., the second derivative 
 of the wavefront.
@@ -394,7 +392,7 @@ horizontal and vertical directions.
 :math:`D` represents the distance between the diffuser and the detector plane 
 if the diffuser is placed in the downstream of the tested optic.
 Otherwise, it is the distance between the centre of the tested optic and the 
-detector plane.
+detector plane. :math:`W` represents the equiphase surface.
 
 Please see :ref:`this example <exp2ndderiv>` for the use of self-reference XSS technique to 
 measure wavefront local curvature after a plane mirror.
@@ -408,7 +406,7 @@ measure wavefront local curvature after a plane mirror.
 
 X-ray Speckle Vector Tracking (XSVT) technique
 ==============================================
-The XSS technique enables pixel-wise data analysis along the scan direction.
+The XSS technique enables pixel-wise data analysis along the scan direction,
 whereas the XST technique requires at least several speckle grains to be 
 included in the subregion which is to be tracked. 
 On the other hand, the XSS techinque requires a number of scans 
@@ -433,7 +431,7 @@ in the end. The data processing procedure for XSVT also resembles the XSS
 technique. A new image will be formed by extracting the data row(column) by 
 row(column) and stiched together along the "random scan direction".
 However, due to the random scan of the piezo, the tracked speckle pattern 
-shift in the scan direction has no clear phsycial meaning and is dropped out.
+shift in the scan direction has no clear physical meaning and is dropped out.
 The shift in the orthogonal direction is in the unit of detector pixel size 
 other than the scan step size as in the XSS technique.
 
@@ -455,7 +453,7 @@ in x and y directions, :math:`p` is the pixel size of the detector,
 :math:`D` represents the distance between the diffuser and the detector plane 
 if the diffuser is placed in the downstream of the tested optic.
 Otherwise, it is the distance between the centre of the tested optic and the 
-detector plane.
+detector plane. :math:`W` represents the equiphase surface.
 
 .. _prinOther:
 
@@ -465,14 +463,14 @@ Due to special experimental considerations, all the techniques described in the 
 the detector fixed. As a result, 
 all the so called "absolute mode" sepckle-based techniques (see [JSRTheory]_ and [JSRExperiment]_)
 are not inculded in this python package ostensibly. 
-However, the data processing procedure for thees "absolute mode" techniques 
-are the same as their corresponding techniques in the above. 
+However, the data processing procedure for these "absolute mode" techniques 
+is the same as their corresponding techniques in the above. 
 
-For instance, the "absolute mode" XST technique is equavalent to the
+For instance, the "absolute mode" XST technique is equivalent to the
 :ref:`conventional XST with reference beam <prinXSTRefer>`, only to 
 replace :math:`D` the distance between the diffuser and the detector plane
 to the detector moving distance. Similarly, 
-the "absolute mode" XSVT technique is euqvalent to the 
+the "absolute mode" XSVT technique is equivalent to the 
 :ref:`XSVT technique <prinXSVTRefer>`. Again, we need only to 
 replace :math:`D` the distance between the diffuser and the detector plane
 to the detector moving distance. 

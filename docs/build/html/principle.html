@@ -85,7 +85,6 @@
              
   <section id="the-speckle-based-wavefront-sensing-techniques">
 <h1>The speckle-based wavefront sensing techniques<a class="headerlink" href="#the-speckle-based-wavefront-sensing-techniques" title="Permalink to this heading"></a></h1>
-<p><strong>Debug according to Yujie’s corrections!!! …</strong></p>
 <p>When shining a laser through a diffuser,
 a two-dimensional random intensity (speckle) patterns will be generated.
 Speckle-based techniques have long been used in metrology
@@ -324,7 +323,7 @@ and <span class="math notranslate nohighlight">\(\alpha_y\)</span>, respectively
 <span class="math notranslate nohighlight">\(D\)</span> represents the distance between the diffuser and the detector plane
 if the diffuser is placed in the downstream of the tested optic.
 Otherwise, it is the distance between the centre of the tested optic and the
-detector plane.</p>
+detector plane. <span class="math notranslate nohighlight">\(W\)</span> represents the equiphase surface.</p>
 <p>The following equations satisfy:</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}\alpha_x = \frac{\partial W}{\partial x} = \frac{ix \times p}{D}\\\alpha_y = \frac{\partial W}{\partial y} = \frac{iy \times p}{D}\end{aligned}\end{align} \]</div>
@@ -352,15 +351,15 @@ XST technique with reference beam.
 However, the physical quantities obtained directly from the speckle pattern shifts are
 very much different <a class="reference internal" href="#huxstoe" id="id16"><span>[HuXSTOE]</span></a>.</p>
 <p>We use <span class="math notranslate nohighlight">\(s_x\)</span> and <span class="math notranslate nohighlight">\(s_y\)</span> to represent the displacement in two directions for the pizeo
-at two different positions, <span class="math notranslate nohighlight">\(ix\)</span> and <span class="math notranslate nohighlight">\(iy\)</span> to represnt the shifts of the
+at two different positions, <span class="math notranslate nohighlight">\(ix\)</span> and <span class="math notranslate nohighlight">\(iy\)</span> to represent the shifts of the
 speckle pattern in the cooresponding direction.
 <span class="math notranslate nohighlight">\(p\)</span>, <span class="math notranslate nohighlight">\(\alpha_x\)</span> and <span class="math notranslate nohighlight">\(\alpha_y\)</span> represent
 the pixel size of the detector,
-the wavefront slopes in x and y directions, repectively.
+the wavefront slopes in x and y directions, respectively.
 <span class="math notranslate nohighlight">\(D\)</span> represents the distance between the diffuser and the detector plane
 if the diffuser is placed in the downstream of the tested optic.
 Otherwise, it is the distance between the centre of the tested optic and the
-detector plane.</p>
+detector plane. <span class="math notranslate nohighlight">\(W\)</span> represents the equiphase surface.</p>
 <p>We have the following equations:</p>
 <div class="math notranslate nohighlight">
 \[ \begin{align}\begin{aligned}\frac{1}{R_x} \approx \frac{\partial^{2}W}{\partial x^2} = \frac{1}{D} - \frac{s_x}{i_x \times p \times D}\\\frac{1}{R_y} \approx \frac{\partial^{2}W}{\partial y^2} = \frac{1}{D} - \frac{s_y}{i_y \times p \times D}\end{aligned}\end{align} \]</div>
@@ -393,7 +392,7 @@ whether the reference beam is available.</p>
 <p>The following figure shows the data acquisition process
 of the XSS technique with reference beam <a class="reference internal" href="#huxssjsr" id="id17"><span>[HuXSSJSR]</span></a>.
 Note that compared to the above XST-like techniques,
-the difusser is scanned.</p>
+the diffuser is scanned.</p>
 <figure class="align-default" id="id25">
 <a class="reference internal image-reference" href="_images/referXSS_principle.png"><img alt="_images/referXSS_principle.png" src="_images/referXSS_principle.png" style="width: 80%;" /></a>
 <figcaption>
@@ -423,7 +422,7 @@ two directions.
 <span class="math notranslate nohighlight">\(D\)</span> represents the distance between the diffuser and the detector plane
 if the diffuser is placed in the downstream of the tested optic.
 Otherwise, it is the distance between the centre of the tested optic and the
-detector plane.</p>
+detector plane. <span class="math notranslate nohighlight">\(W\)</span> represents the equiphase surface.</p>
 <p>This technique has been shown in the <a class="reference internal" href="example.html#expplane"><span class="std std-ref">example</span></a>.</p>
 <div role="list" class="citation-list">
 <div class="citation" id="huxssjsr" role="doc-biblioentry">
@@ -454,7 +453,7 @@ X-ray speckle scanning technique.</span><a class="headerlink" href="#id26" title
 </figcaption>
 </figure>
 <p>Like the self-reference conventional XST method,
-the phsycial quantity directly derived from the tracked
+the physical quantity directly derived from the tracked
 speckle pattern shift for this technique
 is the wavefront slope, i.e., the second derivative
 of the wavefront.</p>
@@ -470,7 +469,7 @@ horizontal and vertical directions.
 <span class="math notranslate nohighlight">\(D\)</span> represents the distance between the diffuser and the detector plane
 if the diffuser is placed in the downstream of the tested optic.
 Otherwise, it is the distance between the centre of the tested optic and the
-detector plane.</p>
+detector plane. <span class="math notranslate nohighlight">\(W\)</span> represents the equiphase surface.</p>
 <p>Please see <a class="reference internal" href="example.html#exp2ndderiv"><span class="std std-ref">this example</span></a> for the use of self-reference XSS technique to
 measure wavefront local curvature after a plane mirror.</p>
 <div role="list" class="citation-list">
@@ -485,7 +484,7 @@ Opt Express 2015, 23(2): 1605-1614.
 </section>
 <section id="x-ray-speckle-vector-tracking-xsvt-technique">
 <span id="prinxsvtrefer"></span><h2>X-ray Speckle Vector Tracking (XSVT) technique<a class="headerlink" href="#x-ray-speckle-vector-tracking-xsvt-technique" title="Permalink to this heading"></a></h2>
-<p>The XSS technique enables pixel-wise data analysis along the scan direction.
+<p>The XSS technique enables pixel-wise data analysis along the scan direction,
 whereas the XST technique requires at least several speckle grains to be
 included in the subregion which is to be tracked.
 On the other hand, the XSS techinque requires a number of scans
@@ -508,7 +507,7 @@ in the end. The data processing procedure for XSVT also resembles the XSS
 technique. A new image will be formed by extracting the data row(column) by
 row(column) and stiched together along the “random scan direction”.
 However, due to the random scan of the piezo, the tracked speckle pattern
-shift in the scan direction has no clear phsycial meaning and is dropped out.
+shift in the scan direction has no clear physical meaning and is dropped out.
 The shift in the orthogonal direction is in the unit of detector pixel size
 other than the scan step size as in the XSS technique.</p>
 <p>It should be noted that XSVT method cannot be used in the self-reference case
@@ -524,7 +523,7 @@ in x and y directions, <span class="math notranslate nohighlight">\(p\)</span> i
 <span class="math notranslate nohighlight">\(D\)</span> represents the distance between the diffuser and the detector plane
 if the diffuser is placed in the downstream of the tested optic.
 Otherwise, it is the distance between the centre of the tested optic and the
-detector plane.</p>
+detector plane. <span class="math notranslate nohighlight">\(W\)</span> represents the equiphase surface.</p>
 </section>
 <section id="other-x-ray-speckle-based-techniques">
 <span id="prinother"></span><h2>Other X-ray Speckle-based techniques<a class="headerlink" href="#other-x-ray-speckle-based-techniques" title="Permalink to this heading"></a></h2>
@@ -532,13 +531,13 @@ detector plane.</p>
 the detector fixed. As a result,
 all the so called “absolute mode” sepckle-based techniques (see <a class="reference internal" href="#jsrtheory" id="id20"><span>[JSRTheory]</span></a> and <a class="reference internal" href="#jsrexperiment" id="id21"><span>[JSRExperiment]</span></a>)
 are not inculded in this python package ostensibly.
-However, the data processing procedure for thees “absolute mode” techniques
-are the same as their corresponding techniques in the above.</p>
-<p>For instance, the “absolute mode” XST technique is equavalent to the
+However, the data processing procedure for these “absolute mode” techniques
+is the same as their corresponding techniques in the above.</p>
+<p>For instance, the “absolute mode” XST technique is equivalent to the
 <a class="reference internal" href="#prinxstrefer"><span class="std std-ref">conventional XST with reference beam</span></a>, only to
 replace <span class="math notranslate nohighlight">\(D\)</span> the distance between the diffuser and the detector plane
 to the detector moving distance. Similarly,
-the “absolute mode” XSVT technique is euqvalent to the
+the “absolute mode” XSVT technique is equivalent to the
 <a class="reference internal" href="#prinxsvtrefer"><span class="std std-ref">XSVT technique</span></a>. Again, we need only to
 replace <span class="math notranslate nohighlight">\(D\)</span> the distance between the diffuser and the detector plane
 to the detector moving distance.</p>
