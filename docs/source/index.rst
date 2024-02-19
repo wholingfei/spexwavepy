@@ -17,7 +17,15 @@ spexwavepy
 
 What is spexwavepy
 ==================
-*Introduction here...*
+**Spexwavepy** is an open-source Python package dedicated to the speckle-based wavefront sensing 
+techniques for X-ray optics. 
+It covers a variety of X-ray speckle-based techniques, provides examples with real experiment data.
+This documentation will show the users how to get the spexwavepy package, 
+where to download the shared experiment data, how to run the examples, 
+how to build your own python code using this package, etc.
+We hope this python package can help the users to process the data easily.
+
+.. image:: _static/banner.jpg
 
 The speckle-based wavefront sensing techniques
 ==============================================

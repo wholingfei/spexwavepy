@@ -1026,6 +1026,12 @@ They are reconstructed using the postprocessing function of
 :py:func:`~spexwavepy.postfun.slope_pixel`. 
 See :ref:`Slope reconstruction <slope>` for more details.
 
+.. _traHart:
+
+Hartmann-like data processing scheme
+------------------------------------
+*To be filled...*
+
 .. _postfun:
 
 Post processing of the tracked speckle pattern shifts
@@ -1215,7 +1221,8 @@ the FC method from [FCmeth]_.
 
 These two functions can be called once the local wavefront slope 
 in two directions are obtained. The wavefront slope information is 
-stored in ``sloX`` and ``sloY`` of the `~spexwavepy.trackfun.Tracking` class.
+stored in ``sloX`` and ``sloY`` of the 
+:py:class:`~spexwavepy.trackfun.Tracking` class.
 
 The function is invoked as: 
 

@@ -9,6 +9,12 @@ Installing spexwavepy
 =====================
 *Say something...*
 
+.. _comput:
+
+Computational consumption
+=========================
+*Say something...*
+
 .. _tutorial:
 
 Tutorial
