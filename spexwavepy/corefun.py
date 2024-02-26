@@ -350,3 +350,54 @@ def _contiDisplay(fig, h1, h2, h3, h4, plane1t, plane2, res):
     connection_id = fig.canvas.mpl_connect('button_press_event', _onclick)
 
     return
+
+def Hartmann_mesh_show(imag, cen_xmesh, cen_ymesh, size, cmap='jet', lw=2, ec='red'):
+    """
+    Show defined mesh grid for Hartmann-like 
+    data processing scheme.
+
+    ..note::
+        Add plt.show() to you code where it is appropriate to enable this function 
+        to show the results.
+
+    Parameters
+    ----------
+    imag : 2d numpy array
+       The input image. The mesh grid will shown on it. 
+    cen_xmsh : 2D numpy array 
+       Mesh grid of the x coordinate of the box centre.
+    cen_ymsh : 2D numpy array 
+       Mesh grid of the x coordinate of the box centre.
+    size : int, or [int, int]
+       It defines the size of the box used for Hartmann-like tracking mode.
+       If it is a single integer, it will be expanded automatically 
+       to (int, int). size[0] is the half width of the chosen box, size[1] is 
+       the half height of the chosen box.
+    cmap : string, optional.
+       Color map. Default is 'jet'.
+    lw : int, optional
+       Line width of the box, default 2. 
+    ec : string, optional
+       Edge color of the box, default 'red'.
+    """
+    if isinstance(size, int):
+        size = (size, size)
+    cen_x = copy.deepcopy(cen_xmesh)
+    cen_x.shape = (1, cen_xmesh.shape[0]*cen_xmesh.shape[1])
+    x_cen = cen_x[0]
+    cen_y = copy.deepcopy(cen_ymesh)
+    cen_y.shape = (1, cen_ymesh.shape[0]*cen_ymesh.shape[1])
+    y_cen = cen_y[0]
+    cen = [(x_cen[i], y_cen[i]) for i in range(len(x_cen))]
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    ax.imshow(imag, cmap=cmap)
+
+    for ic, cen_coord in enumerate(cen):
+        ax.add_patch(Rectangle((cen_coord[0]-size[0], cen_coord[1]+size[1]), 
+            2*size[0], -2*size[1], lw=lw, ec=ec, fc='none'))
+
+    return
+
+
+

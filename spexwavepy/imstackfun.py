@@ -118,6 +118,7 @@ class Imagestack:
         """
         Read the raw image data. 
         """
+        cwd = os.getcwd()
         if self.rawdata is None:
             fileFolder = self.fpath
             file_start = self.fstart
@@ -157,6 +158,8 @@ class Imagestack:
 
             if self.flip is not None:
                 self.flipstack()
+
+            os.chdir(cwd)
 
     def norm(self):
         """
