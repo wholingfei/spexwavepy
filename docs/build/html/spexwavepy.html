@@ -207,6 +207,34 @@ the width and height of the square used for smoothing. (default 0)</p></li>
 <section id="module-spexwavepy.corefun">
 <span id="corefun-module"></span><h2>corefun module<a class="headerlink" href="#module-spexwavepy.corefun" title="Permalink to this heading"></a></h2>
 <dl class="py function">
+<dt class="sig sig-object py" id="spexwavepy.corefun.Hartmann_mesh_show">
+<span class="sig-prename descclassname"><span class="pre">spexwavepy.corefun.</span></span><span class="sig-name descname"><span class="pre">Hartmann_mesh_show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cen_xmesh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cen_ymesh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jet'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'red'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/corefun.html#Hartmann_mesh_show"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.corefun.Hartmann_mesh_show" title="Permalink to this definition"></a></dt>
+<dd><p>Show defined mesh grid for Hartmann-like
+data processing scheme.</p>
+<dl class="simple">
+<dt>..note::</dt><dd><p>Add plt.show() to you code where it is appropriate to enable this function
+to show the results.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>imag</strong> (<em>2d numpy array</em>) – The input image. The mesh grid will shown on it.</p></li>
+<li><p><strong>cen_xmsh</strong> (<em>2D numpy array</em>) – Mesh grid of the x coordinate of the box centre.</p></li>
+<li><p><strong>cen_ymsh</strong> (<em>2D numpy array</em>) – Mesh grid of the x coordinate of the box centre.</p></li>
+<li><p><strong>size</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the size of the box used for Hartmann-like tracking mode.
+If it is a single integer, it will be expanded automatically
+to (int, int). size[0] is the half width of the chosen box, size[1] is
+the half height of the chosen box.</p></li>
+<li><p><strong>cmap</strong> (<em>string</em><em>, </em><em>optional.</em>) – Color map. Default is ‘jet’.</p></li>
+<li><p><strong>lw</strong> (<em>int</em><em>, </em><em>optional</em>) – Line width of the box, default 2.</p></li>
+<li><p><strong>ec</strong> (<em>string</em><em>, </em><em>optional</em>) – Edge color of the box, default ‘red’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="spexwavepy.corefun.Imagematch">
 <span class="sig-prename descclassname"><span class="pre">spexwavepy.corefun.</span></span><span class="sig-name descname"><span class="pre">Imagematch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">im2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">meth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cv2.TM_CCOEFF_NORMED'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subpixelmeth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/corefun.html#Imagematch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.corefun.Imagematch" title="Permalink to this definition"></a></dt>
 <dd><p>Find the shifts between two images (im1 and im2) with subpixel accuracy.</p>

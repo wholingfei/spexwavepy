@@ -157,6 +157,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Read the raw image data. </span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rawdata</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">fileFolder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fpath</span>
             <span class="n">file_start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fstart</span>
@@ -195,7 +196,9 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rawdata</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">flip</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">flipstack</span><span class="p">()</span></div>
+                <span class="bp">self</span><span class="o">.</span><span class="n">flipstack</span><span class="p">()</span>
+
+            <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">cwd</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Imagestack.norm"><a class="viewcode-back" href="../../spexwavepy.html#spexwavepy.imstackfun.Imagestack.norm">[docs]</a>    <span class="k">def</span> <span class="nf">norm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
