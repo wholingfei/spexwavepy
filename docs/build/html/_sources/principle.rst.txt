@@ -455,6 +455,11 @@ if the diffuser is placed in the downstream of the tested optic.
 Otherwise, it is the distance between the centre of the tested optic and the 
 detector plane. :math:`W` represents the equiphase surface.
 
+.. _prinHart:
+
+Hartmann-like data processing method
+====================================
+
 .. _prinOther:
 
 Other X-ray Speckle-based techniques
@@ -480,5 +485,5 @@ is left to the discretion of the users.
 
 **All the techniques described in the above have been implemented in the** 
 :py:class:`~spexwavepy.trackfun.Tracking` **class.**
-**Please refer to the** :ref:`User guide <usetrack>` **for any other methods 
-implemented in** :py:class:`~spexwavepy.trackfun.Tracking` **class.**
+**Please refer to the** :ref:`User guide <usetrack>` **for the detailed 
+implemention in the code.**

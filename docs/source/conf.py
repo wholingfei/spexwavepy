@@ -54,7 +54,7 @@ exclude_patterns = []
 #
 #html_theme = 'sphinx_rtd_theme'
 html_theme = 'nature'
-html_show_sourcelink = True
+html_show_sourcelink = False#True
 html_theme_options = {
         'body_max_width':'50%'
         }

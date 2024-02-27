@@ -1962,3 +1962,89 @@ class Tracking:
         return
 
 
+    def Hartmann_XST(self, cen_xmesh, cen_ymesh, pad, size, normalize=False, display=False, verbose=True):
+        """
+        Hartmann-like data processing procedure.
+        Two image stacks are needed.
+        The fisrt image stack consists one sample image.
+        The second image stack consists another reference image.
+
+        .. note::
+            For simplicity, unlike other mode of data processing, 
+            we only provide ``Tracking.delayX`` and ``Tracking.delayY``
+            for this method. To recover the appropriate physical quantities 
+            from the speckle shifts is left to the discretion of the users.
+            
+
+        Parameters
+        ----------
+        cen_xmsh : numpy.ndarray 
+           Mesh grid of the x coordinate of the box centre. A 2D array.
+        cen_ymsh : numpy.ndarray 
+           Mesh grid of the y coordinate of the box centre. A 2D array.
+        pad : int, or [int, int]
+           It defines the extra part the reference image needed to do the tracking.
+           If it is a single integer, it will be expanded automatically 
+           to (int, int). 
+        size : int, or [int, int]
+           It defines the size of the box used for Hartmann-like tracking mode.
+           If it is a single integer, it will be expanded automatically 
+           to (int, int). size[0] is the half width of the chosen box, size[1] is 
+           the half height of the chosen box.
+        normalize : bool
+            To normalize the stitched image or not. (default False)
+        display : bool
+            To display or not. (default False)
+        verbose : bool
+            To show the information or not. (default True)
+        """
+        if self._flag is None: self._flag = "Hartmann-like"
+        if self.imstack2 == None:
+            print("Please provide another image stack.")
+            sys.exit(0)
+        if self.imstack1.rawdata is None:
+            self.imstack1.read_data()
+        if self.imstack2.rawdata is None:
+            self.imstack2.read_data()
+        if isinstance(pad, int):
+            pad = (pad, pad)
+        if isinstance(size, int):
+            size = (size, size)
+        y_dim_tmp, x_dim_tmp = cen_xmesh.shape
+        delayX_2D = np.empty((y_dim_tmp, x_dim_tmp))
+        delayY_2D = np.empty((y_dim_tmp, x_dim_tmp))
+        res_2D = np.empty((y_dim_tmp, x_dim_tmp))
+        imstack1_data = copy.deepcopy(self.imstack1.data)
+        imstack2_data = copy.deepcopy(self.imstack2.data)
+        im_sam_init = imstack1_data[0][cen_ymesh[0, 0]-size[1]:cen_ymesh[0, 0]+size[1], cen_xmesh[0, 0]-size[0]:cen_xmesh[0, 0]+size[0]] 
+        im_ref_init = imstack2_data[0][cen_ymesh[0, 0]-size[1]-pad[1]:cen_ymesh[0, 0]+size[1]+pad[1], cen_xmesh[0, 0]-size[0]-pad[0]:cen_xmesh[0, 0]+size[0]+pad[0]] 
+        subpixelmeth = self.subpixelmeth 
+        if normalize:
+            im_sam_init = NormImage(im_sam_init) 
+            im_ref_init = NormImage(im_ref_init) 
+        ix_init, iy_init, res_init = Imagematch(im_ref_init, im_sam_init, subpixelmeth=subpixelmeth)
+        if display:
+            fig, h1, h2, h3, h4 = _initDisplay(im_sam_init, im_ref_init, res_init)
+        for iy in range(y_dim_tmp):
+            if verbose:
+                _indicator(iy, y_dim_tmp, comments = self._flag)
+            for ix in range(x_dim_tmp):
+                cen_index_x = cen_xmesh[iy, ix]
+                cen_index_y = cen_ymesh[iy, ix]
+                im_sam = imstack1_data[0][cen_index_y-size[1]:cen_index_y+size[1], cen_index_x-size[0]:cen_index_x+size[0]] 
+                im_ref = imstack2_data[0][cen_index_y-size[1]-pad[1]:cen_index_y+size[1]+pad[1], cen_index_x-size[0]-pad[0]:cen_index_x+size[0]+pad[0]] 
+                subpixelmeth = self.subpixelmeth 
+                if normalize:
+                    im_sam = NormImage(im_sam) 
+                    im_ref = NormImage(im_ref) 
+                ix_tmp, iy_tmp, res_tmp = Imagematch(im_ref, im_sam, subpixelmeth=subpixelmeth)
+                delayX_2D[iy, ix] = ix_tmp - pad[0]
+                delayY_2D[iy, ix] = iy_tmp - pad[1]
+                res_2D[iy, ix] = np.max(res_tmp)
+                if display:
+                    _contiDisplay(fig, h1, h2, h3, h4, im_sam, im_ref, res_tmp)
+        
+        self.delayY = delayY_2D
+        self.delayX = delayX_2D
+    
+        return

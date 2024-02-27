@@ -4,6 +4,8 @@ import os
 import sys
 import warnings
 import cv2
+import copy
+from matplotlib.patches import Rectangle
 
 def _indicator(num, length, comments=None):
     """
@@ -356,7 +358,7 @@ def Hartmann_mesh_show(imag, cen_xmesh, cen_ymesh, size, cmap='jet', lw=2, ec='r
     Show defined mesh grid for Hartmann-like 
     data processing scheme.
 
-    ..note::
+    .. note::
         Add plt.show() to you code where it is appropriate to enable this function 
         to show the results.
 

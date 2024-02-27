@@ -223,6 +223,45 @@ the start and the end position of x coordinate. The start and the end coordinate
 .. image:: _static/readone.png
    :width: 80%
 
+The :py:func:`~spexwavepy.corefun.Hartmann_mesh_show` function 
+is used to show the boxes chosen for the :ref:`Hartmann-like data processing method <prinHart>`.
+
+.. code-block:: Python
+
+   from spexwavepy.corefun import read_one, crop_one, Hartmann_mesh_show
+
+   ROI_ref = [540, 1570, 750, 1800] 
+   im_full = read_one(filepath=IMAGE / FILE / PATH, ShowImage=False)
+   im_crop = crop_one(im_full, ROI_ref, ShowImage=False)
+
+The shape of the cropped image is 1050(x) :math:`\times` 1030(y).
+The centres of the boxes used for Hartmann-like data processing is defined as:
+
+.. code-block:: Python
+
+   import numpy as np
+   x_cens = np.arange(50, 1050, 50)
+   y_cens = np.arange(60, 1000, 50)
+
+The four mandatory inputs for :py:func:`~spexwavepy.corefun.Hartmann_mesh_show` function
+are the image to be processed, the mesh grid of box's centre coordinate for x and y axis 
+and half size of the chosen box.
+
+.. code-block:: Python
+
+   x_cens, y_cens = np.meshgrid(x_cens, y_cens) 
+   size = 15
+   Hartmann_mesh_show(im_crop, x_cens, y_cens, size)
+
+   plt.show()
+
+In the above code, the width and height of the box are 2*size=30 both.
+After evoking ``plt.show()``, the boxes used for Hartmann-like data processing 
+are shown.
+
+.. image:: _static/Hartmann1.png
+   :width: 80%
+
 .. _useimstackclass:
 
 Image stack and its functions

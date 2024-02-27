@@ -767,3 +767,33 @@ position where the fitted slope is close to 0.
 
 Hartmann-like data processing scheme 
 ====================================
+We have also implemented a speckle-based data processing methods that 
+resemble the conventional Hartmann-like data processing method. 
+We will demonstrate it in this example.
+
+.. code-block:: Python
+
+   ROI_sam = [540, 1570, 750, 1800]
+   ROI_ref = ROI_sam
+
+   Imstack_sam = Imagestack(, ROI_sam)
+   Imstack_ref = Imagestack(ref_folder, ROI_ref)
+   Imstack_sam.read_data()
+   Imstack_ref.read_data()
+
+For this data processing mode, one reference and one sample image stack 
+are needed. There will be only one image in each image stack.
+
+.. code-block:: Python
+
+   print(Imstack_sam.data.shape) 
+   print(Imstack_ref.data.shape) 
+
+.. parsed-literal::
+
+   (1, 1030, 1050) 
+   (1, 1030, 1050) 
+
+For Hartmann-like data processing mode, we need to define the subregions used for 
+pattern shift tracking. The subregion is a rectangular box. 
+We need to define the centre and the size of each box.

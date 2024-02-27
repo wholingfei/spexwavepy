@@ -211,11 +211,11 @@ the width and height of the square used for smoothing. (default 0)</p></li>
 <span class="sig-prename descclassname"><span class="pre">spexwavepy.corefun.</span></span><span class="sig-name descname"><span class="pre">Hartmann_mesh_show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">imag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cen_xmesh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cen_ymesh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmap</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'jet'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'red'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/corefun.html#Hartmann_mesh_show"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.corefun.Hartmann_mesh_show" title="Permalink to this definition"></a></dt>
 <dd><p>Show defined mesh grid for Hartmann-like
 data processing scheme.</p>
-<dl class="simple">
-<dt>..note::</dt><dd><p>Add plt.show() to you code where it is appropriate to enable this function
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Add plt.show() to you code where it is appropriate to enable this function
 to show the results.</p>
-</dd>
-</dl>
+</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -445,6 +445,40 @@ Method used for subpixel registration.</p></li>
 </ul>
 </dd>
 </dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.Hartmann_XST">
+<span class="sig-name descname"><span class="pre">Hartmann_XST</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cen_xmesh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cen_ymesh</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/trackfun.html#Tracking.Hartmann_XST"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.trackfun.Tracking.Hartmann_XST" title="Permalink to this definition"></a></dt>
+<dd><p>Hartmann-like data processing procedure.
+Two image stacks are needed.
+The fisrt image stack consists one sample image.
+The second image stack consists another reference image.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For simplicity, unlike other mode of data processing,
+we only provide <code class="docutils literal notranslate"><span class="pre">Tracking.delayX</span></code> and <code class="docutils literal notranslate"><span class="pre">Tracking.delayY</span></code>
+for this method. To recover the appropriate physical quantities
+from the speckle shifts is left to the discretion of the users.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cen_xmsh</strong> (<em>numpy.ndarray</em>) – Mesh grid of the x coordinate of the box centre. A 2D array.</p></li>
+<li><p><strong>cen_ymsh</strong> (<em>numpy.ndarray</em>) – Mesh grid of the y coordinate of the box centre. A 2D array.</p></li>
+<li><p><strong>pad</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the extra part the reference image needed to do the tracking.
+If it is a single integer, it will be expanded automatically
+to (int, int).</p></li>
+<li><p><strong>size</strong> (<em>int</em><em>, or </em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – It defines the size of the box used for Hartmann-like tracking mode.
+If it is a single integer, it will be expanded automatically
+to (int, int). size[0] is the half width of the chosen box, size[1] is
+the half height of the chosen box.</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em>) – To normalize the stitched image or not. (default False)</p></li>
+<li><p><strong>display</strong> (<em>bool</em>) – To display or not. (default False)</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – To show the information or not. (default True)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="spexwavepy.trackfun.Tracking.XSS_self">
 <span class="sig-name descname"><span class="pre">XSS_self</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">edge_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edge_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hw_xy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pad_xy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">display</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/spexwavepy/trackfun.html#Tracking.XSS_self"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spexwavepy.trackfun.Tracking.XSS_self" title="Permalink to this definition"></a></dt>
@@ -1244,13 +1278,6 @@ Unit in <span class="math notranslate nohighlight">\(\mu rad\)</span>.</p>
     <p class="topless"><a href="api.html"
                           title="previous chapter">API reference</a></p>
   </div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/spexwavepy.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">

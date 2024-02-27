@@ -215,6 +215,36 @@ function. The <code class="docutils literal notranslate"><span class="pre">ShowI
 the start and the end position of y coordinate, the last parameters of <code class="docutils literal notranslate"><span class="pre">ROI</span></code> is
 the start and the end position of x coordinate. The start and the end coordinates are shown below.</p>
 <a class="reference internal image-reference" href="_images/readone.png"><img alt="_images/readone.png" src="_images/readone.png" style="width: 80%;" /></a>
+<p>The <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.Hartmann_mesh_show" title="spexwavepy.corefun.Hartmann_mesh_show"><code class="xref py py-func docutils literal notranslate"><span class="pre">Hartmann_mesh_show()</span></code></a> function
+is used to show the boxes chosen for the <a class="reference internal" href="principle.html#prinhart"><span class="std std-ref">Hartmann-like data processing method</span></a>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">spexwavepy.corefun</span> <span class="kn">import</span> <span class="n">read_one</span><span class="p">,</span> <span class="n">crop_one</span><span class="p">,</span> <span class="n">Hartmann_mesh_show</span>
+
+<span class="n">ROI_ref</span> <span class="o">=</span> <span class="p">[</span><span class="mi">540</span><span class="p">,</span> <span class="mi">1570</span><span class="p">,</span> <span class="mi">750</span><span class="p">,</span> <span class="mi">1800</span><span class="p">]</span>
+<span class="n">im_full</span> <span class="o">=</span> <span class="n">read_one</span><span class="p">(</span><span class="n">filepath</span><span class="o">=</span><span class="n">IMAGE</span> <span class="o">/</span> <span class="n">FILE</span> <span class="o">/</span> <span class="n">PATH</span><span class="p">,</span> <span class="n">ShowImage</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">im_crop</span> <span class="o">=</span> <span class="n">crop_one</span><span class="p">(</span><span class="n">im_full</span><span class="p">,</span> <span class="n">ROI_ref</span><span class="p">,</span> <span class="n">ShowImage</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The shape of the cropped image is 1050(x) <span class="math notranslate nohighlight">\(\times\)</span> 1030(y).
+The centres of the boxes used for Hartmann-like data processing is defined as:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">x_cens</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">1050</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">y_cens</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The four mandatory inputs for <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.Hartmann_mesh_show" title="spexwavepy.corefun.Hartmann_mesh_show"><code class="xref py py-func docutils literal notranslate"><span class="pre">Hartmann_mesh_show()</span></code></a> function
+are the image to be processed, the mesh grid of box’s centre coordinate for x and y axis
+and half size of the chosen box.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">x_cens</span><span class="p">,</span> <span class="n">y_cens</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x_cens</span><span class="p">,</span> <span class="n">y_cens</span><span class="p">)</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mi">15</span>
+<span class="n">Hartmann_mesh_show</span><span class="p">(</span><span class="n">im_crop</span><span class="p">,</span> <span class="n">x_cens</span><span class="p">,</span> <span class="n">y_cens</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In the above code, the width and height of the box are 2*size=30 both.
+After evoking <code class="docutils literal notranslate"><span class="pre">plt.show()</span></code>, the boxes used for Hartmann-like data processing
+are shown.</p>
+<a class="reference internal image-reference" href="_images/Hartmann1.png"><img alt="_images/Hartmann1.png" src="_images/Hartmann1.png" style="width: 80%;" /></a>
 </section>
 </section>
 <section id="image-stack-and-its-functions">
@@ -1234,13 +1264,6 @@ example for the usage of this function.</p>
     <p class="topless"><a href="api.html"
                           title="next chapter">API reference</a></p>
   </div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/userguide.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">

@@ -710,6 +710,31 @@ Opt. Exp., 30(18), 33259-33273.
 </section>
 <section id="hartmann-like-data-processing-scheme">
 <span id="exphart"></span><h2>Hartmann-like data processing scheme<a class="headerlink" href="#hartmann-like-data-processing-scheme" title="Permalink to this heading"></a></h2>
+<p>We have also implemented a speckle-based data processing methods that
+resemble the conventional Hartmann-like data processing method.
+We will demonstrate it in this example.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">ROI_sam</span> <span class="o">=</span> <span class="p">[</span><span class="mi">540</span><span class="p">,</span> <span class="mi">1570</span><span class="p">,</span> <span class="mi">750</span><span class="p">,</span> <span class="mi">1800</span><span class="p">]</span>
+<span class="n">ROI_ref</span> <span class="o">=</span> <span class="n">ROI_sam</span>
+
+<span class="n">Imstack_sam</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(,</span> <span class="n">ROI_sam</span><span class="p">)</span>
+<span class="n">Imstack_ref</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">ref_folder</span><span class="p">,</span> <span class="n">ROI_ref</span><span class="p">)</span>
+<span class="n">Imstack_sam</span><span class="o">.</span><span class="n">read_data</span><span class="p">()</span>
+<span class="n">Imstack_ref</span><span class="o">.</span><span class="n">read_data</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>For this data processing mode, one reference and one sample image stack
+are needed. There will be only one image in each image stack.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">Imstack_sam</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Imstack_ref</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1030</span><span class="p">,</span> <span class="mi">1050</span><span class="p">)</span>
+<span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1030</span><span class="p">,</span> <span class="mi">1050</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For Hartmann-like data processing mode, we need to define the subregions used for
+pattern shift tracking. The subregion is a rectangular box.
+We need to define the centre and the size of each box.</p>
 </section>
 </section>
 
@@ -745,13 +770,6 @@ Opt. Exp., 30(18), 33259-33273.
     <p class="topless"><a href="userguide.html"
                           title="next chapter">User guide</a></p>
   </div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/example.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
