@@ -735,6 +735,57 @@ are needed. There will be only one image in each image stack.</p>
 <p>For Hartmann-like data processing mode, we need to define the subregions used for
 pattern shift tracking. The subregion is a rectangular box.
 We need to define the centre and the size of each box.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">x_cens</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">1050</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">y_cens</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">size</span> <span class="o">=</span> <span class="mi">15</span>
+</pre></div>
+</div>
+<p>According to the <a class="reference internal" href="userguide.html#trahart"><span class="std std-ref">implementation of the Hartmann-like method</span></a>,
+the real size for the subregion is <span class="math notranslate nohighlight">\(2 \times size\)</span> for both width and height.
+We use <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.Hartmann_mesh_show" title="spexwavepy.corefun.Hartmann_mesh_show"><code class="xref py py-func docutils literal notranslate"><span class="pre">Hartmann_mesh_show()</span></code></a> function to show the subregions
+defined for the Hartmann-like data processing method.
+Note the coordinates of the boxes need to be expanded to 2D mesh grid when as the input of
+the <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.Hartmann_mesh_show" title="spexwavepy.corefun.Hartmann_mesh_show"><code class="xref py py-func docutils literal notranslate"><span class="pre">Hartmann_mesh_show()</span></code></a> function.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">spexwavepy.corefun</span> <span class="kn">import</span> <span class="n">Hartmann_mesh_show</span>
+
+<span class="n">X_cens</span><span class="p">,</span> <span class="n">Y_cens</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x_cens</span><span class="p">,</span> <span class="n">y_cens</span><span class="p">)</span>
+<span class="n">Hartmann_mesh_show</span><span class="p">(</span><span class="n">Imstack_ref</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">X_cens</span><span class="p">,</span> <span class="n">Y_cens</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The chosen rectangular boxes are shown in red in the following image.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/Hartmann1.png"><img alt="_images/Hartmann1.png" src="_images/Hartmann1.png" style="width: 80%;" /></a>
+</figure>
+<p>Like other data processing methods, we need to define the
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class. Then we invoke
+the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.Hartmann_XST" title="spexwavepy.trackfun.Tracking.Hartmann_XST"><code class="xref py py-func docutils literal notranslate"><span class="pre">Hartmann_XST()</span></code></a> function
+to obtain the speckle pattern shifts.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">Track_Hartmann</span> <span class="o">=</span> <span class="n">Tracking</span><span class="p">(</span><span class="n">Imstack_sam</span><span class="p">,</span> <span class="n">Imstack_ref</span><span class="p">)</span>
+<span class="n">pad</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">Track_Hartmann</span><span class="o">.</span><span class="n">Hartmann_XST</span><span class="p">(</span><span class="n">X_cens</span><span class="p">,</span> <span class="n">Y_cens</span><span class="p">,</span> <span class="n">pad</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The calculated speckle patterns shifts are stored in <code class="docutils literal notranslate"><span class="pre">Tracking.delayX</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Tracking.delayY</span></code>.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Track_Hartmann</span><span class="o">.</span><span class="n">delayX</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">Track_Hartmann</span><span class="o">.</span><span class="n">delayY</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/Hartmann2.jpg"><img alt="_images/Hartmann2.jpg" src="_images/Hartmann2.jpg" style="width: 80%;" /></a>
+</figure>
+<p>The above results resemble those in the <a class="reference internal" href="getstart.html#tucrl"><span class="std std-ref">Tutorial</span></a>.
+However, the above results have worse spatial resolution.</p>
+<p>Unlike the other data processing methods, for Hartmann-like
+method, we only keep speckle tracking shifts, the physical quantities such as
+wavefront slope and curvature are left to user to recover.
+For more detailed description of this method, please refer to the
+<a class="reference internal" href="userguide.html#trahart"><span class="std std-ref">user guide</span></a>.</p>
 </section>
 </section>
 

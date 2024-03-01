@@ -797,3 +797,64 @@ are needed. There will be only one image in each image stack.
 For Hartmann-like data processing mode, we need to define the subregions used for 
 pattern shift tracking. The subregion is a rectangular box. 
 We need to define the centre and the size of each box.
+
+.. code-block:: Python
+
+   x_cens = np.arange(50, 1050, 50)
+   y_cens = np.arange(60, 1000, 50)
+   size = 15
+
+According to the :ref:`implementation of the Hartmann-like method <traHart>`,
+the real size for the subregion is :math:`2 \times size` for both width and height.
+We use :py:func:`~spexwavepy.corefun.Hartmann_mesh_show` function to show the subregions 
+defined for the Hartmann-like data processing method.
+Note the coordinates of the boxes need to be expanded to 2D mesh grid when as the input of 
+the :py:func:`~spexwavepy.corefun.Hartmann_mesh_show` function.
+
+.. code-block:: Python
+
+   from spexwavepy.corefun import Hartmann_mesh_show
+
+   X_cens, Y_cens = np.meshgrid(x_cens, y_cens)
+   Hartmann_mesh_show(Imstack_ref.data[0], X_cens, Y_cens, size)
+   plt.show()
+
+The chosen rectangular boxes are shown in red in the following image.
+
+.. figure:: _static/Hartmann1.png
+   :width: 80%
+
+Like other data processing methods, we need to define the 
+:py:class:`~spexwavepy.trackfun.Tracking` class. Then we invoke 
+the :py:func:`~spexwavepy.trackfun.Tracking.Hartmann_XST` function 
+to obtain the speckle pattern shifts.
+
+.. code-block:: Python
+
+   Track_Hartmann = Tracking(Imstack_sam, Imstack_ref)
+   pad = 20
+   Track_Hartmann.Hartmann_XST(X_cens, Y_cens, pad, size)
+
+The calculated speckle patterns shifts are stored in ``Tracking.delayX`` and 
+``Tracking.delayY``. 
+
+.. code-block:: Python
+
+   plt.figure()
+   plt.imshow(Track_Hartmann.delayX, cmap='jet')
+   plt.figure()
+   plt.imshow(Track_Hartmann.delayY, cmap='jet')
+
+   plt.show()
+
+.. figure:: _static/Hartmann2.jpg
+   :width: 80%
+
+The above results resemble those in the :ref:`Tutorial <tuCRL>`. 
+However, the above results have worse spatial resolution.
+
+Unlike the other data processing methods, for Hartmann-like 
+method, we only keep speckle tracking shifts, the physical quantities such as 
+wavefront slope and curvature are left to user to recover. 
+For more detailed description of this method, please refer to the 
+:ref:`user guide <traHart>`.

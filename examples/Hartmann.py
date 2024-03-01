@@ -11,6 +11,7 @@ sys.path.append(os.path.join('../..'))
 sys.path.append(os.path.join('../../..'))
 from spexwavepy.imstackfun import Imagestack
 from spexwavepy.trackfun import Tracking 
+from spexwavepy.corefun import Hartmann_mesh_show
 
 if __name__ == "__main__":
     ref_folder = "../tmp/CRLRefer/"
@@ -29,3 +30,18 @@ if __name__ == "__main__":
     x_cens = np.arange(50, 1050, 50)
     y_cens = np.arange(60, 1000, 50)
     size = 15
+
+    X_cens, Y_cens = np.meshgrid(x_cens, y_cens)
+    #Hartmann_mesh_show(Imstack_ref.data[0], X_cens, Y_cens, size)
+    #plt.show()
+
+    Track_Hartmann = Tracking(Imstack_sam, Imstack_ref)
+    pad = 20
+    Track_Hartmann.Hartmann_XST(X_cens, Y_cens, pad, size)
+
+    #plt.figure()
+    #plt.imshow(Track_Hartmann.delayX, cmap='jet')
+    #plt.figure()
+    #plt.imshow(Track_Hartmann.delayY, cmap='jet')
+
+    #plt.show()
