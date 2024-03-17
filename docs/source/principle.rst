@@ -455,14 +455,9 @@ if the diffuser is placed in the downstream of the tested optic.
 Otherwise, it is the distance between the centre of the tested optic and the 
 detector plane. :math:`W` represents the equiphase surface.
 
-.. _prinHart:
-
-Hartmann-like data processing method
-====================================
-
 .. _prinOther:
 
-Other X-ray Speckle-based techniques
+Other X-ray speckle-based techniques
 ====================================
 Due to special experimental considerations, all the techniques described in the above keep 
 the detector fixed. As a result, 

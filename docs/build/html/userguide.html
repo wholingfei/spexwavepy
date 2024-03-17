@@ -167,8 +167,9 @@ and also the related cross-correlatin coefficient matrix <code class="docutils l
 <figure class="align-default">
 <a class="reference internal image-reference" href="_images/imagematch.jpg"><img alt="_images/imagematch.jpg" src="_images/imagematch.jpg" style="width: 80%;" /></a>
 </figure>
+</section>
 <section id="image-normalization">
-<span id="usenorm"></span><h4>Image normalization<a class="headerlink" href="#image-normalization" title="Permalink to this heading"></a></h4>
+<span id="usenorm"></span><h3>Image normalization<a class="headerlink" href="#image-normalization" title="Permalink to this heading"></a></h3>
 <p>We do normalization to mitigate the impact of the non-uniformity of the images.</p>
 <a class="reference internal image-reference" href="_images/rawimage.JPG"><img alt="_images/rawimage.JPG" src="_images/rawimage.JPG" style="width: 40%;" /></a>
 <p>Wherever to do the normalization, the basic function to call is
@@ -188,7 +189,6 @@ get rid of the “wrinkles” come from the incident beam. If the normalization 
 effect to the raw images, we recommend to do the normalization to the stiched images later.
 Besides, if the incident beam is clean enough, there is no need to do the normalization.</p>
 <a class="reference internal image-reference" href="_images/normCRL.png"><img alt="_images/normCRL.png" src="_images/normCRL.png" style="width: 100%;" /></a>
-</section>
 </section>
 <section id="auxiliary-functions">
 <span id="useauxfunc"></span><h3>Auxiliary functions<a class="headerlink" href="#auxiliary-functions" title="Permalink to this heading"></a></h3>
@@ -216,7 +216,7 @@ the start and the end position of y coordinate, the last parameters of <code cla
 the start and the end position of x coordinate. The start and the end coordinates are shown below.</p>
 <a class="reference internal image-reference" href="_images/readone.png"><img alt="_images/readone.png" src="_images/readone.png" style="width: 80%;" /></a>
 <p>The <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.Hartmann_mesh_show" title="spexwavepy.corefun.Hartmann_mesh_show"><code class="xref py py-func docutils literal notranslate"><span class="pre">Hartmann_mesh_show()</span></code></a> function
-is used to show the boxes chosen for the <a class="reference internal" href="principle.html#prinhart"><span class="std std-ref">Hartmann-like data processing method</span></a>.</p>
+is used to show the boxes chosen for the Hartmann-like data processing method.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">spexwavepy.corefun</span> <span class="kn">import</span> <span class="n">read_one</span><span class="p">,</span> <span class="n">crop_one</span><span class="p">,</span> <span class="n">Hartmann_mesh_show</span>
 
 <span class="n">ROI_ref</span> <span class="o">=</span> <span class="p">[</span><span class="mi">540</span><span class="p">,</span> <span class="mi">1570</span><span class="p">,</span> <span class="mi">750</span><span class="p">,</span> <span class="mi">1800</span><span class="p">]</span>
@@ -275,7 +275,7 @@ as follows:</p>
 Its defination can also be found in the <a class="reference internal" href="#useauxfunc"><span class="std std-ref">above section</span></a>.</p>
 </section>
 <section id="data-reading">
-<h3>Data reading<a class="headerlink" href="#data-reading" title="Permalink to this heading"></a></h3>
+<span id="usedatard"></span><h3>Data reading<a class="headerlink" href="#data-reading" title="Permalink to this heading"></a></h3>
 <p>There are other properties that are automatically defined when initiating the
 <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack" title="spexwavepy.imstackfun.Imagestack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Imagestack</span></code></a> class.
 Most of them relate to the raw data reading.</p>
@@ -999,7 +999,45 @@ See <a class="reference internal" href="#slope"><span class="std std-ref">Slope 
 </section>
 <section id="hartmann-like-data-processing-scheme">
 <span id="trahart"></span><h3>Hartmann-like data processing scheme<a class="headerlink" href="#hartmann-like-data-processing-scheme" title="Permalink to this heading"></a></h3>
-<p><em>To be filled…</em></p>
+<p><a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.Hartmann_XST" title="spexwavepy.trackfun.Tracking.Hartmann_XST"><code class="xref py py-func docutils literal notranslate"><span class="pre">Hartmann_XST()</span></code></a> is defined
+to mimic the Hartmann-like data processing scheme.
+Like the <a class="reference internal" href="#traxstrefer"><span class="std std-ref">conventional XST technique with reference beam</span></a>
+described in the above, two image stacks need to be initialized in
+the first place, however, each image stack consists only one image.
+Usually, the fisrt stack contains the image when the diffuser is in the beam,
+the second stack contains the reference image.</p>
+<p>The two images are divided into many subregions.
+Each subregion is a rectangular box.
+The centre and the size of the box has been pre-defined.
+The <code class="docutils literal notranslate"><span class="pre">cen_xmesh</span></code> and <code class="docutils literal notranslate"><span class="pre">cen_ymesh</span></code> are the meshgrid of the x and y
+coordinate of the subregion centres.
+In addition, <code class="docutils literal notranslate"><span class="pre">size[0]</span></code> represents the width of the box,
+while <code class="docutils literal notranslate"><span class="pre">size[1]</span></code> represents the height.
+These parameters are shown in the following figure.
+We can use <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.Hartmann_mesh_show" title="spexwavepy.corefun.Hartmann_mesh_show"><code class="xref py py-func docutils literal notranslate"><span class="pre">Hartmann_mesh_show()</span></code></a> function
+to show the defined subregions.
+Please refer to <a class="reference internal" href="#useauxfunc"><span class="std std-ref">Auxiliary functions</span></a>
+for the usage of this auxiliary function.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="_images/Hart_user1.jpg"><img alt="_images/Hart_user1.jpg" src="_images/Hart_user1.jpg" style="width: 80%;" /></a>
+</figure>
+<p>In order to do the cross-correlation for each subregion,
+we need to expand each box on the reference image,
+the parameter <code class="docutils literal notranslate"><span class="pre">pad</span></code> is used for this purpose.
+Also as shown in the figure, <code class="docutils literal notranslate"><span class="pre">pad[0]</span></code> relates the
+expansion in the x direction, <code class="docutils literal notranslate"><span class="pre">pad[1]</span></code> in the y direction.
+The cross-correlation with subpixel registration accuracy is
+performed by looping over the rectangular boxes.</p>
+<p>For more usage of the
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.Hartmann_XST" title="spexwavepy.trackfun.Tracking.Hartmann_XST"><code class="xref py py-func docutils literal notranslate"><span class="pre">Hartmann_XST()</span></code></a> function,
+please refer to <a class="reference internal" href="example.html#exphart"><span class="std std-ref">this example</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Unlike other data processing mode, we only provide <code class="docutils literal notranslate"><span class="pre">Tracking.delayX</span></code>
+and <code class="docutils literal notranslate"><span class="pre">Tracking.delayY</span></code> for this method.
+Recovering the appropriate physical quantities (slope or curvature)
+from the speckle shifts is left to the discretion of the users.</p>
+</div>
 </section>
 </section>
 <section id="post-processing-of-the-tracked-speckle-pattern-shifts">
@@ -1211,10 +1249,8 @@ example for the usage of this function.</p>
 <li><a class="reference internal" href="#parabola-peak-finding-method">Parabola peak finding method</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#image-match">Image match</a><ul>
+<li><a class="reference internal" href="#image-match">Image match</a></li>
 <li><a class="reference internal" href="#image-normalization">Image normalization</a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#auxiliary-functions">Auxiliary functions</a></li>
 </ul>
 </li>

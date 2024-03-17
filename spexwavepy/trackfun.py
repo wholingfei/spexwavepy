@@ -1972,7 +1972,7 @@ class Tracking:
         .. note::
             For simplicity, unlike other mode of data processing, 
             we only provide ``Tracking.delayX`` and ``Tracking.delayY``
-            for this method. To recover the appropriate physical quantities 
+            for this method. Recovering the appropriate physical quantities 
             from the speckle shifts is left to the discretion of the users.
             
 

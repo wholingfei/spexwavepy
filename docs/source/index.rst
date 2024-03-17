@@ -27,12 +27,8 @@ We hope this python package can help the users to process the data easily.
 
 .. image:: _static/banner.jpg
 
-The speckle-based wavefront sensing techniques
-==============================================
-This part gives the brief introduction of the basic 
-principles of various speckle-based wavefront sensing 
-techniques. 
-
+The principle of speckle-based wavefront sensing techniques
+===========================================================
 - :doc:`The speckle-based wavefront sensing techniques <principle>`
 
   - :ref:`Conventional X-ray Speckle Tracking (XST) technique with reference beam <prinXSTRefer>`
@@ -44,6 +40,8 @@ techniques.
   - :ref:`Self-reference X-ray Speckle Scanning (XSS) technique <prinXSSSelf>`
 
   - :ref:`X-ray Speckle Vector Tracking (XSVT) technique <prinXSVTRefer>`
+
+  - :ref:`Other X-ray speckle-based techniques <prinOther>`
 
 
 Getting started
@@ -66,8 +64,6 @@ Getting started
 
 Examples
 ========
-*Something here...*
-
 - :doc:`Examples <example>`
 
   - :ref:`Plane mirror measurement with reference beam <expplane>`
@@ -80,11 +76,10 @@ Examples
 
   - :ref:`KB mirror alignment using self-reference XST technique <expKBalign>`
 
+  - :ref:`Hartmann-like data processing scheme <exphart>`
+
 User guide
 ==========
-In this page, we will give a detailed explanation of this python package. 
-All the functions in each module will be covered.  
-
 - :doc:`User guide <userguide>`
   
   - :ref:`Fundamental algorithm <usealgorithm>`
@@ -100,19 +95,27 @@ All the functions in each module will be covered.
       - :ref:`Parabola peak fitting method <subpara>`
         
     - :ref:`Image match <useimmatch>`
+
+    - :ref:`Image normalization <usenorm>`
       
     - :ref:`Auxiliary functions <useauxfunc>`
 
   - :ref:`Image stack and its functions <useimstackclass>`
 
     - :ref:`Image stack <useimstack>`
+
+    - :ref:`Data reading <usedatard>`
       
     - :ref:`Preprocessing of the images <usepreprocess>`
 
+      - :ref:`Normalization <usenormstack>`
+
       - :ref:`Smoothing <usesmooth>`
 
-      - :ref:`Normalization <usenorm>`
-        
+      - :ref:`Fliping the images <useflip>`
+
+      - :ref:`Rotating the images <userot>`
+
       - :ref:`Detector pixel size determination <usedetpix>`
 
   - :ref:`The speckle-based techniques included in Tracking class <usetrack>`
@@ -125,17 +128,23 @@ All the functions in each module will be covered.
 
     - :ref:`Self-reference XSS technique <traXSSself>`
 
-    - :ref:`XST technique with reference beam <traXSTrefer>`
-
     - :ref:`Self-reference XST technique <traXSTself>`
 
+    - :ref:`Conventional XST technique with reference beam <traXSTrefer>`
+
     - :ref:`XSVT technique <traXSVTrefer>`
+
+    - :ref:`Hartmann-like data processing scheme <traHart>`
 
   - :ref:`Post processing of the tracked speckle pattern shifts <postfun>`
     
     - :ref:`Slope reconstruction <slope>`
 
     - :ref:`Local curvature reconstruction <curvature>`
+
+    - :ref:`2D integration for post processing <use2Dint>`
+
+    - :ref:`Auxiliary functions <useAux>`
 
 
 API reference

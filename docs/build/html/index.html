@@ -72,11 +72,8 @@ how to build your own python code using this package, etc.
 We hope this python package can help the users to process the data easily.</p>
 <img alt="_images/banner.jpg" src="_images/banner.jpg" />
 </section>
-<section id="the-speckle-based-wavefront-sensing-techniques">
-<h2>The speckle-based wavefront sensing techniques<a class="headerlink" href="#the-speckle-based-wavefront-sensing-techniques" title="Permalink to this heading"></a></h2>
-<p>This part gives the brief introduction of the basic
-principles of various speckle-based wavefront sensing
-techniques.</p>
+<section id="the-principle-of-speckle-based-wavefront-sensing-techniques">
+<h2>The principle of speckle-based wavefront sensing techniques<a class="headerlink" href="#the-principle-of-speckle-based-wavefront-sensing-techniques" title="Permalink to this heading"></a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="principle.html"><span class="doc">The speckle-based wavefront sensing techniques</span></a></p>
 <ul>
@@ -85,6 +82,7 @@ techniques.</p>
 <li><p><a class="reference internal" href="principle.html#prinxssrefer"><span class="std std-ref">X-ray Speckle Scanning (XSS) technique with reference beam</span></a></p></li>
 <li><p><a class="reference internal" href="principle.html#prinxssself"><span class="std std-ref">Self-reference X-ray Speckle Scanning (XSS) technique</span></a></p></li>
 <li><p><a class="reference internal" href="principle.html#prinxsvtrefer"><span class="std std-ref">X-ray Speckle Vector Tracking (XSVT) technique</span></a></p></li>
+<li><p><a class="reference internal" href="principle.html#prinother"><span class="std std-ref">Other X-ray speckle-based techniques</span></a></p></li>
 </ul>
 </li>
 </ul>
@@ -110,7 +108,6 @@ techniques.</p>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
-<p><em>Something here…</em></p>
 <ul class="simple">
 <li><p><a class="reference internal" href="example.html"><span class="doc">Examples</span></a></p>
 <ul>
@@ -119,14 +116,13 @@ techniques.</p>
 <li><p><a class="reference internal" href="example.html#iterative"><span class="std std-ref">Mirror slope error curve (1D) reconstructed from the dowmstream setup</span></a></p></li>
 <li><p><a class="reference internal" href="example.html#expxssvsxst"><span class="std std-ref">Comparison between self-reference XSS technique and self-reference XST technique</span></a></p></li>
 <li><p><a class="reference internal" href="example.html#expkbalign"><span class="std std-ref">KB mirror alignment using self-reference XST technique</span></a></p></li>
+<li><p><a class="reference internal" href="example.html#exphart"><span class="std std-ref">Hartmann-like data processing scheme</span></a></p></li>
 </ul>
 </li>
 </ul>
 </section>
 <section id="user-guide">
 <h2>User guide<a class="headerlink" href="#user-guide" title="Permalink to this heading"></a></h2>
-<p>In this page, we will give a detailed explanation of this python package.
-All the functions in each module will be covered.</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="userguide.html"><span class="doc">User guide</span></a></p>
 <ul>
@@ -141,16 +137,20 @@ All the functions in each module will be covered.</p>
 </ul>
 </li>
 <li><p><a class="reference internal" href="userguide.html#useimmatch"><span class="std std-ref">Image match</span></a></p></li>
+<li><p><a class="reference internal" href="userguide.html#usenorm"><span class="std std-ref">Image normalization</span></a></p></li>
 <li><p><a class="reference internal" href="userguide.html#useauxfunc"><span class="std std-ref">Auxiliary functions</span></a></p></li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="userguide.html#useimstackclass"><span class="std std-ref">Image stack and its functions</span></a></p>
 <ul>
 <li><p><a class="reference internal" href="userguide.html#useimstack"><span class="std std-ref">Image stack</span></a></p></li>
+<li><p><a class="reference internal" href="userguide.html#usedatard"><span class="std std-ref">Data reading</span></a></p></li>
 <li><p><a class="reference internal" href="userguide.html#usepreprocess"><span class="std std-ref">Preprocessing of the images</span></a></p>
 <ul>
+<li><p><a class="reference internal" href="userguide.html#usenormstack"><span class="std std-ref">Normalization</span></a></p></li>
 <li><p><a class="reference internal" href="userguide.html#usesmooth"><span class="std std-ref">Smoothing</span></a></p></li>
-<li><p><a class="reference internal" href="userguide.html#usenorm"><span class="std std-ref">Normalization</span></a></p></li>
+<li><p><a class="reference internal" href="userguide.html#useflip"><span class="std std-ref">Fliping the images</span></a></p></li>
+<li><p><a class="reference internal" href="userguide.html#userot"><span class="std std-ref">Rotating the images</span></a></p></li>
 <li><p><a class="reference internal" href="userguide.html#usedetpix"><span class="std std-ref">Detector pixel size determination</span></a></p></li>
 </ul>
 </li>
@@ -162,15 +162,18 @@ All the functions in each module will be covered.</p>
 <li><p><a class="reference internal" href="userguide.html#tracolli"><span class="std std-ref">Reference and sample image stacks collimating before tracking</span></a></p></li>
 <li><p><a class="reference internal" href="userguide.html#traxss"><span class="std std-ref">XSS technique with reference beam</span></a></p></li>
 <li><p><a class="reference internal" href="userguide.html#traxssself"><span class="std std-ref">Self-reference XSS technique</span></a></p></li>
-<li><p><a class="reference internal" href="userguide.html#traxstrefer"><span class="std std-ref">XST technique with reference beam</span></a></p></li>
 <li><p><a class="reference internal" href="userguide.html#traxstself"><span class="std std-ref">Self-reference XST technique</span></a></p></li>
+<li><p><a class="reference internal" href="userguide.html#traxstrefer"><span class="std std-ref">Conventional XST technique with reference beam</span></a></p></li>
 <li><p><a class="reference internal" href="userguide.html#traxsvtrefer"><span class="std std-ref">XSVT technique</span></a></p></li>
+<li><p><a class="reference internal" href="userguide.html#trahart"><span class="std std-ref">Hartmann-like data processing scheme</span></a></p></li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="userguide.html#postfun"><span class="std std-ref">Post processing of the tracked speckle pattern shifts</span></a></p>
 <ul>
 <li><p><a class="reference internal" href="userguide.html#slope"><span class="std std-ref">Slope reconstruction</span></a></p></li>
 <li><p><a class="reference internal" href="userguide.html#curvature"><span class="std std-ref">Local curvature reconstruction</span></a></p></li>
+<li><p><a class="reference internal" href="userguide.html#use2dint"><span class="std std-ref">2D integration for post processing</span></a></p></li>
+<li><p><a class="reference internal" href="userguide.html#useaux"><span class="std std-ref">Auxiliary functions</span></a></p></li>
 </ul>
 </li>
 </ul>
@@ -207,7 +210,7 @@ All the functions in each module will be covered.</p>
     <ul>
 <li><a class="reference internal" href="#">spexwavepy</a><ul>
 <li><a class="reference internal" href="#what-is-spexwavepy">What is spexwavepy</a></li>
-<li><a class="reference internal" href="#the-speckle-based-wavefront-sensing-techniques">The speckle-based wavefront sensing techniques</a></li>
+<li><a class="reference internal" href="#the-principle-of-speckle-based-wavefront-sensing-techniques">The principle of speckle-based wavefront sensing techniques</a></li>
 <li><a class="reference internal" href="#getting-started">Getting started</a></li>
 <li><a class="reference internal" href="#examples">Examples</a></li>
 <li><a class="reference internal" href="#user-guide">User guide</a></li>

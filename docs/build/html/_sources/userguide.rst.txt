@@ -155,7 +155,7 @@ and also the related cross-correlatin coefficient matrix ``res_mat`` (if ``res``
 .. _usenorm:
 
 Image normalization
-^^^^^^^^^^^^^^^^^^^
+-------------------
 We do normalization to mitigate the impact of the non-uniformity of the images. 
 
 .. image:: _static/rawimage.JPG
@@ -224,7 +224,7 @@ the start and the end position of x coordinate. The start and the end coordinate
    :width: 80%
 
 The :py:func:`~spexwavepy.corefun.Hartmann_mesh_show` function 
-is used to show the boxes chosen for the :ref:`Hartmann-like data processing method <prinHart>`.
+is used to show the boxes chosen for the Hartmann-like data processing method.
 
 .. code-block:: Python
 
@@ -296,6 +296,8 @@ Two parameters are needed as the input to create the :py:class:`~spexwavepy.imst
 ``ROI`` is the region of interest to be cropped from the raw image.
 ``ROI=[y_start, y_end, x_start, x_end]``. 
 Its defination can also be found in the :ref:`above section <useauxfunc>`.
+
+.. _usedatard:
 
 Data reading
 ------------
@@ -1069,7 +1071,48 @@ See :ref:`Slope reconstruction <slope>` for more details.
 
 Hartmann-like data processing scheme
 ------------------------------------
-*To be filled...*
+:py:func:`~spexwavepy.trackfun.Tracking.Hartmann_XST` is defined 
+to mimic the Hartmann-like data processing scheme. 
+Like the :ref:`conventional XST technique with reference beam <traXSTrefer>` 
+described in the above, two image stacks need to be initialized in 
+the first place, however, each image stack consists only one image.
+Usually, the fisrt stack contains the image when the diffuser is in the beam, 
+the second stack contains the reference image.
+
+The two images are divided into many subregions. 
+Each subregion is a rectangular box. 
+The centre and the size of the box has been pre-defined.
+The ``cen_xmesh`` and ``cen_ymesh`` are the meshgrid of the x and y 
+coordinate of the subregion centres. 
+In addition, ``size[0]`` represents the width of the box, 
+while ``size[1]`` represents the height.
+These parameters are shown in the following figure.
+We can use :py:func:`~spexwavepy.corefun.Hartmann_mesh_show` function 
+to show the defined subregions. 
+Please refer to :ref:`Auxiliary functions <useauxfunc>` 
+for the usage of this auxiliary function.
+
+.. figure:: _static/Hart_user1.jpg
+   :width: 80%
+
+In order to do the cross-correlation for each subregion, 
+we need to expand each box on the reference image, 
+the parameter ``pad`` is used for this purpose.
+Also as shown in the figure, ``pad[0]`` relates the 
+expansion in the x direction, ``pad[1]`` in the y direction.
+The cross-correlation with subpixel registration accuracy is 
+performed by looping over the rectangular boxes.
+
+For more usage of the 
+:py:func:`~spexwavepy.trackfun.Tracking.Hartmann_XST` function, 
+please refer to :ref:`this example <exphart>`.
+
+.. note::
+
+   Unlike other data processing mode, we only provide ``Tracking.delayX`` 
+   and ``Tracking.delayY`` for this method. 
+   Recovering the appropriate physical quantities (slope or curvature)
+   from the speckle shifts is left to the discretion of the users.
 
 .. _postfun:
 
