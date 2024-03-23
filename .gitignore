@@ -16,6 +16,9 @@ tags
 #tempt files
 tmp/
 
+#data file
+data/
+
 #Documentation
 #docs/build/
 

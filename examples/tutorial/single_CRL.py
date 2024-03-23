@@ -13,14 +13,18 @@ from spexwavepy.corefun import read_one, crop_one
 from spexwavepy.postfun import Integration2D_SCS
 
 if __name__ == "__main__":
-    ref_folder_x = "/dls/science/groups/b16/SpeckleData/CRLXSS/ReferX1D/402923-pcoedge-files/"
-    sam_folder_x = "/dls/science/groups/b16/SpeckleData/CRLXSS/SampleX1D/402924-pcoedge-files/"
-    ref_folder_y = "/dls/science/groups/b16/SpeckleData/CRLXSS/ReferY1D/402925-pcoedge-files/"
-    sam_folder_y = "/dls/science/groups/b16/SpeckleData/CRLXSS/SampleY1D/402926-pcoedge-files/"
+    ref_folder_x = "/YOUR/DATA/FOLDER/PATH/CRLXSS/ReferX1D/402923-pcoedge-files/"
+    sam_folder_x = "/YOUR/DATA/FOLDER/PATH/CRLXSS/SampleX1D/402924-pcoedge-files/"
+    ref_folder_y = "/YOUR/DATA/FOLDER/PATH/CRLXSS/ReferY1D/402925-pcoedge-files/"
+    sam_folder_y = "/YOUR/DATA/FOLDER/PATH/CRLXSS/SampleY1D/402926-pcoedge-files/"
+    #ref_folder_x = "/home/lingfei/spexwavepy/data/CRLXSS/ReferX1D/402923-pcoedge-files/"
+    #sam_folder_x = "/home/lingfei/spexwavepy/data/CRLXSS/SampleX1D/402924-pcoedge-files/"
+    #ref_folder_y = "/home/lingfei/spexwavepy/data/CRLXSS/ReferY1D/402925-pcoedge-files/"
+    #sam_folder_y = "/home/lingfei/spexwavepy/data/CRLXSS/SampleY1D/402926-pcoedge-files/"
 
     #im_sam_tmp = read_one(sam_folder_y+'00005.tif', ShowImage=True)
     #sys.exit(0)
-    ROI_sam = [540, 1570, 750, 1800]
+    ROI_sam = [530, 1580, 750, 1800]
     ROI_ref = ROI_sam
     #im_crop_tmp = crop_one(im_sam_tmp, ROI_sam, ShowImage=True)
     #im_ref_tmp = read_one(ref_folder_y+'00005.tif', ShowImage=True)
@@ -72,6 +76,10 @@ if __name__ == "__main__":
     sloY_coord = np.arange(200, 780, 1)
     fit_para_Y = np.polyfit(sloY_coord, sloY_cen_fit, deg=1)
 
+    print("Fiiting parameters in x direction:", fit_para_X)
+    print("Fiiting parameters in x direction:", fit_para_Y)
+    #sys.exit(0)
+
     _, x_dim_tmp = track_XSS.sloY.shape
     planeYcoord = np.arange(1, len(sloY_cen)+1, 1)
     planeY = planeYcoord * fit_para_Y[0] + fit_para_Y[1]
@@ -96,6 +104,11 @@ if __name__ == "__main__":
     Z_data = np.ravel(surface2fit)
     p_init = [(150+750)//2, (200+750)//2, 10, np.mean(Z_data)]
     popt, pcov = scipy.optimize.curve_fit(ideal_surf, XY_data, Z_data, p_init)
+    print("f is {:.4f} m.".format(popt[2]/2*track_XSS.pixsize))
+    #sys.exit(0)
+    delta=1.42 * 1.e-6
+    print("R is {:.2f} um.".format(popt[2]*track_XSS.pixsize*delta*1.e6))
+    sys.exit(0)
 
     y_dim_tmp, x_dim_tmp = surface.shape
     x_plot = np.arange(0, x_dim_tmp)

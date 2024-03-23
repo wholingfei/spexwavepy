@@ -9,10 +9,11 @@ from spexwavepy.imstackfun import Imagestack
 from spexwavepy.trackfun import Tracking 
 
 showImage = True
-usemulti = True    #Using multicores or not
+usemulti = True #Using multicores or not
 if showImage: import matplotlib.pyplot as plt
 if __name__ == "__main__":
-    fileFolder = "/dls/science/groups/b16/SpeckleData/example_1/"
+    fileFolder = "/YOUR/DATA/FOLDER/PATH/stabilitycheck/"
+    #fileFolder = "/home/lingfei/spexwavepy/data/stabilitycheck/"
     ROI = [0, 3500, 0, 4500]           #[y_start, y_end, x_start, x_end]
     Imstack_1 = Imagestack(fileFolder, ROI)
     Imstack_1.fnum = 99   #File number to be used for stability check

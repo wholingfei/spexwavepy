@@ -1,13 +1,37 @@
 ===============
 Getting started
 ===============
-*Description goes here ...*
-
 .. _install:
 
-Installing spexwavepy
+Installation
 =====================
 *Say something...*
+
+.. _pip:
+
+Using pip
+---------
+
+.. _source:
+
+From source code
+----------------
+
+.. _rawdata:
+
+Getting raw data
+================
+We provide several :doc:`examples <example>` to help users to learn how to use this python package.
+Every example shown in this documentation can be reproduced using our shared experiment data.
+**To download the shared data, please visit ...**
+
+.. _citation:
+
+Citing spexwavepy
+-----------------
+
+Citing shared data
+------------------
 
 .. _comput:
 
@@ -27,45 +51,56 @@ Let's do it step by step.
 
 1. Read the image stack
 -----------------------
-An image stack is the first class you will create before any other operations. 
-To create it, we need to import ``imstackfun`` module.
+.. note::
+   Please find the example code from */spexwavepy/examples/tutorial/pixel_size.py*
+
+An image stack class :py:class:`~spexwavepy.imstackfun.Imagestack`
+is the first class you will create before any other operations. 
+We need to import it from :py:mod:`~spexwavepy.imstackfun` module.
 
 .. code-block:: Python
 
    from spexwavepy.imstackfun import Imagestack
 
-After that, we can create an instance of Imagestack. 
+As the name indicates, this class is a container of the raw data images.
+It should be created in the first place.
+Let's create an instance of it.
+
 Two mandatory parameters are needed to initialize an Imagestack. 
 One is the data file folder, and the other one is the region of interest (ROI) in the raw images which will be cropped.  
 
 .. code-block:: Python
 
-   fileFolder = "/dls/b16/data/2023/cm33912-1/pixelsizestep10um/402724-pcoedge-files/"
+   fileFolder = "/YOUR/DATA/FOLDER/PATH/pixelsizestep10um/402724-pcoedge-files/"
    ROI = [0, 3500, 0, 4500]           #[y_start, y_end, x_start, x_end]
    Imstack_1 = Imagestack(fileFolder, ROI)
 
-The above codes create a Imagestack instance ``Imstack_1``. 
+.. note::
+   Please change the above ``fileFoder`` to your own folder path 
+   where you store the downloaded experiment data.
+
+The above codes create an Imagestack instance ``Imstack_1``. 
 The raw images are stored in the ``fileFolder``. 
 The ``ROI`` in this case is larger than the real figure size,
-thus, contains the whole image range.
+thus, covers the whole image.
+
 Other parameters, such as start image number, total image number, etc., 
 can be used to define how to load the images in the :py:class:`~spexwavepy.imstackfun.Imagestack`.
 
-Until now, we have only defined one ``Imagestack`` instance, no real data has been loaded.
-To load the raw data into the memory, method :py:meth:`~spexwavepy.imstackfun.Imagestack.read_data`
-needs to be called.
+Until now, we have just defined one :py:class:`~spexwavepy.imstackfun.Imagestack` instance, 
+no real data has been loaded.
+To load the raw data into the memory, :py:meth:`~spexwavepy.imstackfun.Imagestack.read_data`
+method needs to be called.
 
 .. code-block:: Python
 
    Imstack_1.read_data()
 
-After the above operation, the raw data will be stored in the attribute 
-:py:attr:`~spexwavepy.imstackfun.Imagestack.rawdata`.
-The rawdata is read-only. Another attribute 
-:py:attr:`~spexwavepy.imstackfun.Imagestack.data` 
-is used to store the data to be processed in the future.
+After the above operation, the raw data will be stored in ``Imagestack.rawdata``.
+The rawdata is read-only. 
+``Imagestack.data`` is used to store the data that to be processed in the future.
 
-It is also possible that we only need to one image from the folder in the beginning.
+It is also possible that we only need to read one image from the folder at the beginning.
 In this case, we can use the :py:func:`~spexwavepy.corefun.read_one` function from 
 the :py:mod:`~spexwavepy.corefun` module. If you want to crop the raw image, 
 you need to import :py:func:`~spexwavepy.corefun.crop_one` function too.
@@ -79,8 +114,12 @@ you need to input the file path that you want to read.
 
 .. code-block:: Python
 
-   filepath = "/dls/b16/data/2023/cm33912-1/pixelsizestep10um/402724-pcoedge-files/00005.tif"
+   filepath = "/YOUR/DATA/FOLDER/PATH/pixelsizestep10um/402724-pcoedge-files/00005.tif"
    im_raw = read_one(filepath, ShowImage=True)
+
+.. note::
+   Please change the above ``filepath`` to your own folder path 
+   where you store the downloaded experiment data.
 
 If ``ShowImage`` is set to be True, then it will show the image.
 
@@ -89,10 +128,12 @@ If ``ShowImage`` is set to be True, then it will show the image.
 
 Usually we need to crop the raw image for future processing, so we provide ROI for 
 :py:func:`~spexwavepy.corefun.crop_one` function.
+The ROI should be defined as [y_start, y_end, x_start, x_end]. 
+The above picture shows the region enclosed by the defiend rectangle.
 
 .. code-block:: Python
 
-   filepath = "/dls/b16/data/2023/cm33912-1/pixelsizestep10um/402724-pcoedge-files/00005.tif"
+   filepath = "/YOUR/DATA/FOLDER/PATH/pixelsizestep10um/402724-pcoedge-files/00005.tif"
    ROI = [750, 1500, 500, 2000]    #[y_start, y_end, x_start, x_end]
    im_crop = crop_one(im_raw, ROI, ShowImage=True)
 
@@ -105,15 +146,18 @@ Again, if ``ShowImage`` is set to be True, then it will show the cropped image.
 
 2. Determine the detector pixel size
 ------------------------------------
-In many cases, e.g., B16 Test beamline at Diamond Light Source, 
+.. note::
+   Please find the example code from */spexwavepy/examples/tutorial/pixel_size.py*
+
+In many cases, such as B16 Test beamline at Diamond Light Source, 
 the pixel size of the detector used for data acquisition is changeable. 
-The first step is to determine the pixel size.
+In this case, the first step is to determine the pixel size.
 
 ``Imstack_1`` has already loaded the data used for detector pixel size determination,
 we use the :py:meth:`~spexwavepy.imstackfun.Imagestack.getpixsize` method to calculate the pixel size.
 The parameters that needed are ``subROI``, ``dim`` and ``step``.
 ``subROI`` is the ROI used for image matching. 
-``dim`` is either 'x' or 'y' to indicate in which direction the speckle generator was scanned.
+``dim`` is either 'x' or 'y', used to indicate in which direction the speckle generator was scanned.
 ``step`` is the scan step in unit of :math:`\mu m`.
 
 .. note::
@@ -126,7 +170,20 @@ The parameters that needed are ``subROI``, ``dim`` and ``step``.
    subROI = [1500, 2000, 500, 2000]      #[y_start, y_end, x_start, x_end]
    dim = 'x'
    step = 10.0                           #[um]
-   pixsize = Imstack_1.getpixsize(subROI, dim, step)
+   pixsize = Imstack_1.getpixsize(subROI, dim, step, display=True)
+
+The ``display`` is set to ``True``, we show the fitting line and the fitting residual error. 
+
+.. figure:: _static/pixdet2.jpg
+   :width: 100%
+   :align: center
+
+   The fitting results and the residuals.
+ 
+Also, the calculated pixel size has been printed out.
+
+.. parsed-literal::
+   Pixel size is 1.0237 um 
 
 Please refer to the :ref:`detector pixel size determination <usedetpix>` in the user guide to 
 find out how we use speckle patterns to determine the pixel size.
@@ -135,6 +192,9 @@ find out how we use speckle patterns to determine the pixel size.
 
 3. Stability check
 ------------------
+.. note::
+   Please find the example code from */spexwavepy/examples/tutorial/stability.py*
+
 Using speckle patterns to monitor the stability of the beamline is 
 a very simple use of the speckle-based technique. 
 The images are acquired when all the hardware is fixed. 
@@ -142,20 +202,25 @@ The stability is monitored by comparing the images in the whole folder with the 
 
 To enable the stability check, 
 a class called :py:class:`~spexwavepy.trackfun.Tracking` needs to be initialized.
+We import it from the :py:mod:`~spexwavepy.trackfun` module.
 
 .. code-block:: Python 
 
    from spexwavepy.trackfun import Tracking 
 
-Depending on the type of speckle-based technique that is used, 
-one image stack or two image stacks are needed to initialize :py:class:`~spexwavepy.trackfun.Tracking`.
+Depending on the type of the speckle-based technique that is used, 
+one image stack or two image stacks or :ref:`even more <usetrack>` image stacks are needed 
+to initialize the :py:class:`~spexwavepy.trackfun.Tracking` class.
 For stability checking, only one image stack is needed. 
+
+As shown in the above section, we need to create a :py:class:`~spexwavepy.imstackfun.Imagestack`
+class to contain the raw images.
 
 .. code-block:: Python 
 
    from spexwavepy.imstackfun import Imagestack
 
-   fileFolder = "/dls/science/groups/b16/SpeckleData/example_1/"
+   fileFolder = "/YOUR/DATA/FOLDER/PATH/stabilitycheck/"
    ROI = [0, 3500, 0, 4500]           #[y_start, y_end, x_start, x_end]
    Imstack_1 = Imagestack(fileFolder, ROI)
    Imstack_1.fnum = 99   #File number to be used for stability check
@@ -164,11 +229,14 @@ For stability checking, only one image stack is needed.
 
    track = Tracking(Imstack_1)
 
+The :py:class:`~spexwavepy.imstackfun.Imagestack` class ``Imstack_1`` is the 
+input of the :py:class:`~spexwavepy.trackfun.Tracking` class.
+
 Usually, there will be plenty of raw images in one folder. 
-There is no need to load all the data into memory for stability checking. 
-The :py:meth:`~spexwavepy.trackfun.Tracking.stability` method is used for this purpose.
+There is no need to load all the data into memory for **stability checking**. 
+The :py:meth:`~spexwavepy.trackfun.Tracking.stability` method is used for it. 
 ``edge_x`` and ``edge_y`` are the two parameters needed.
-``edge_x`` and ``edge_y`` can be either a single integer or a list of two integers, 
+``edge_x`` and ``edge_y`` can be either a single integer or a list/tuple of two integers, 
 like [int1, int2]. If input as a single integer int0, 
 ``edge_x`` and ``edge_y`` will be expanded as a list of two integers, 
 the elements in the list are the same, i.e., [int0, int0]. 
@@ -178,13 +246,15 @@ the elements in the list are the same, i.e., [int0, int0].
    edge_x, edge_y = 10, 10
    delayX, delayY, res = track.stability(edge_x, edge_y)
 
-Please refer to :ref:`stability check using speckle patterns <trastable>` in the user guide
-to see how to do the stability checking using speckle patterns. 
+The following figure shows the result. 
+We can see that there is a linear drifting in the y direction.
 
 .. image:: _static/stableres.png
    :width: 80%
 
 We can also use multi-cores to accelerate the calculation.
+In this python package, we have implemented multiprocessing form for many tracking method.
+These method usually end with the suffix "multi".
 
 .. code-block:: Python 
    
@@ -192,17 +262,29 @@ We can also use multi-cores to accelerate the calculation.
    edge_x, edge_y = 10, 10
    delayX, delayY, res = track.stability_multi(edge_x, edge_y, cpu_no)
 
-The :py:meth:`~spexwavepy.trackfun.Tracking.stability_multi` method uses the 
-built-in ``multiprocessing`` package.
-
 .. warning::
    Please check the available CPUs before calling :py:meth:`~spexwavepy.trackfun.Tracking.stability_multi` method. 
+
+The :py:meth:`~spexwavepy.trackfun.Tracking.stability_multi` method uses the 
+built-in `multiprocessing`_ package.
+
+.. _multiprocessing: https://docs.python.org/3/library/multiprocessing.html
+
+Please refer to :ref:`stability check using speckle patterns <trastable>` in the user guide
+to see how to do the stability checking using speckle patterns. 
 
 .. _tuCRL:
 
 4. Single CRL measurement
 -------------------------
-*In this section we will show how to obtain a single CRL wavefront using X-ray Speckle Scanning (XSS) ... Then say more things...*
+.. note::
+   Please find the example code from */spexwavepy/examples/tutorial/single_CRL.py*
+
+In this section we will show how to obtain a single CRL wavefront using X-ray Speckle Scanning (XSS) technique, 
+for the principle of this technique, please refer to 
+:ref:`X-ray Speckle Scanning (XSS) technique with reference beam <prinXSSRefer>`.
+As to the detailed description of the implementation of this technique, please go to
+:doc:`User guide <userguide>`.
 
 First, let us load and see the raw images.
 
@@ -212,10 +294,10 @@ First, let us load and see the raw images.
    from spexwavepy.trackfun import Tracking 
    from spexwavepy.corefun import read_one, crop_one
 
-   ref_folder_x = "/dls/science/groups/b16/SpeckleData/CRLXSS/ReferX1D/402923-pcoedge-files/"
-   sam_folder_x = "/dls/science/groups/b16/SpeckleData/CRLXSS/SampleX1D/402924-pcoedge-files/"
-   ref_folder_y = "/dls/science/groups/b16/SpeckleData/CRLXSS/ReferY1D/402925-pcoedge-files/"
-   sam_folder_y = "/dls/science/groups/b16/SpeckleData/CRLXSS/SampleY1D/402926-pcoedge-files/"
+   ref_folder_x = "/YOUR/DATA/FOLDER/PATH/CRLXSS/ReferX1D/402923-pcoedge-files/"
+   sam_folder_x = "/YOUR/DATA/FOLDER/PATH/CRLXSS/SampleX1D/402924-pcoedge-files/"
+   ref_folder_y = "/YOUR/DATA/FOLDER/PATH/CRLXSS/ReferY1D/402925-pcoedge-files/"
+   sam_folder_y = "/YOUR/DATA/FOLDER/PATH/CRLXSS/SampleY1D/402926-pcoedge-files/"
 
    im_sam_tmp = read_one(sam_folder_y+'00005.tif', ShowImage=True)
 
@@ -228,7 +310,7 @@ The reference image should use the same ROI as the CRL image.
 
 .. code-block:: Python
 
-   ROI_sam = [540, 1570, 750, 1800]
+   ROI_sam = [530, 1580, 750, 1800]
    ROI_ref = ROI_sam
    im_crop_tmp = crop_one(im_sam_tmp, ROI_sam, ShowImage=True)
    im_ref_tmp = read_one(ref_folder_y+'00005.tif', ShowImage=True)
@@ -251,29 +333,35 @@ The reference image should use the same ROI as the CRL image.
    Imstack_ref_y.normalize = True
 
 Since we are going to use XSS technique with reference beam, 
-we need at least two image stacks to initialize the :py:class:`~spexwavepy.trackfun.Tracking` class.
+we need at least two image stacks to initialize the :py:class:`~spexwavepy.trackfun.Tracking` class,
+as concluded in :ref:`this table <usetrack>` in :doc:`user guide <userguide>`.
+
 The first image stack to be loaded is the template image stack, i.e., the image stack with test optic.
 The second image stack is the reference image stack.
 In this example, we would like to obtain the 2D slope map in two directions from two
 1D scans. Thus we need four image stacks. Two for references and two for samples, respectively. 
 The first two image stacks are the template image stack and reference image stack 
 in the x (horizontal) scan direction. The last two image stacks are those in the
-y (vertical) direction. Also, we choose to :ref:`normalize <usenorm>` these image stacks in the beginning.
+y (vertical) direction. Also, we choose to :ref:`normalize <usenorm>` these image stacks 
+in the beginning, so we set the ``normalize`` attribute of the 
+:py:class:`~spexwavepy.imstackfun.Imagestack` class to be ``True``.
 
 .. code-block:: Python
 
    track_XSS = Tracking(Imstack_sam_x, Imstack_ref_x, Imstack_sam_y, Imstack_ref_y)
 
-Before we do the real tracking, there are some parameters to be set for ``track_XSS``. 
-``dimension`` is set to be `'1D'` or `'2D'`. 
+Before we do the real tracking, there are some parameters to be set for 
+the :py:class:`~spexwavepy.trackfun.Tracking` class of ``track_XSS``. 
+The parameter of ``dimension`` is set to be `'1D'` or `'2D'`. 
 We use it to tell the code to do `1D` or `2D` data processing. ``scandim`` is used to tell
 the code the `scan direction` of the loaded image stack. For XSS technique, it supports
-`'x', 'y', 'xy' and 'diag'`. In this case, we use `'xy'`. That means we will obtain the
-speckle shifts from both x (horizontal) 1D scan and y (vertical) 1D scan all together.
+`'x'`, `'y'` and `'xy'`. In this case, we use `'xy'`. That means we will obtain the
+speckle shifts from both **x (horizontal)** 1D scan and **y (vertical)** 1D scan all together.
 Thus, 4 image stacks are loaded. Besides, we need to provide
-``dist``, ``pixsize`` and ``scanstep``. They are `distance between diffuser and detector plane` in 
-mm, `detector pixel size` in :math:`\mu m` and `scan step size` in :math:`\mu m`, repectively.
-
+``dist``, ``pixsize`` and ``scanstep``. 
+They are **distance between diffuser and detector planer** in mm, 
+**detector pixel size** in :math:`\mu m` and 
+**scan step size** in :math:`\mu m`, repectively.
 
 .. code-block:: Python
 
@@ -283,9 +371,11 @@ mm, `detector pixel size` in :math:`\mu m` and `scan step size` in :math:`\mu m`
    track_XSS.pixsize = 1.03    #[um]
    track_XSS.scanstep = 1.0    #[um]
 
-
+The :py:func:`~spexwavepy.trackfun.Tracking.XSS_withrefer` method of 
+:py:class:`~spexwavepy.trackfun.Tracking` class is used for the 
+:ref:`XSS technique with reference beam <prinXSSRefer>`.
 There are several compulsory input for 
-:py:func:`~spexwavepy.trackfun.Tracking.XSS_withrefer` function before we call it. 
+:py:func:`~spexwavepy.trackfun.Tracking.XSS_withrefer` method before we call it. 
 ``edge_x``, ``edge_y`` and ``edge_z`` define the edges of the raw images in the image stack to be
 cut in order to be trackable. ``width`` is the window width used for 1D tracking, 
 ``pad_xy`` determines how large the extra area needed for the reference image. 
@@ -301,7 +391,7 @@ See :ref:`User guide <traXSS>` for detailed description.
 
 Then we call :py:func:`~spexwavepy.trackfun.Tracking.XSS_withrefer` function. 
 In the beginning, we can set the ``display`` to be ``True`` to have a check
-of the settings of all the parameters.
+on the settings of all the parameters.
 
 .. code-block:: Python
 
@@ -333,11 +423,16 @@ parameter is ``cpu_no``.
 
    track_XSS.XSS_withrefer_multi(edge_x, edge_y, edge_z, width, pad_xy, cpu_no=16)
 
+.. warning::
+   Please check the available CPUs before calling 
+   :py:meth:`~spexwavepy.trackfun.Tracking.XSS_withrefer_multi` method. 
+
 After calling the :py:func:`~spexwavepy.trackfun.Tracking.XSS_withrefer` or 
 :py:func:`~spexwavepy.trackfun.Tracking.XSS_withrefer_multi` function,
 the 2D shift map in both x and y direction are stored in the ``delayX`` and 
-``delayY`` attribute. Likewise, the 2D slope map are stored in the 
-``sloX`` and ``sloY`` attribute.
+``delayY`` attribute of the :py:class:`~spexwavepy.trackfun.Tracking` class. 
+Likewise, the 2D slope map are stored in the 
+``sloX`` and ``sloY`` attribute of the same class.
 
 .. code-block:: Python
 
@@ -405,7 +500,7 @@ We plot the fitted line and the raw curve together.
 .. image:: _static/XSS_fitx.png
    :width: 80%
 
-Likewise, we do the same thing on y direction.
+Likewise, we do the same on y direction.
 
 .. code-block:: Python
 
@@ -435,8 +530,8 @@ Let's check the fitting parameter in both directions.
    print("Fiiting parameters in y direction:", fit_para_Y)
  
 .. parsed-literal::
-   Fitting parameters in x direction: [ 0.01470974 -6.86428282]
-   Fitting parameters in y direction: [ 0.01475435 -7.04149456]
+   Fiiting parameters in x direction: [ 0.01472175 -6.86434882]
+   Fiiting parameters in x direction: [ 0.01473827 -7.18284839]
 
 We can see the slope of the two fitted straight lines are very close.
 The slope for the ideal single 2D CRL in both directions is a tilted plane.
@@ -485,9 +580,12 @@ After that, we plot the 2D map of the slope error.
    :width: 90%
 
 Next, we can do 2D integration to obtain the surface of the wavefront.
+We invoke :py:func:`~spexwavepy.postfun.Integration2D_SCS` function 
+from :py:mod:`~spexwavepy.postfun` module to do it.
 
 .. code-block:: Python
 
+   from spexwavepy.postfun import Integration2D_SCS
    surface = Integration2D_SCS(track_XSS.sloX, track_XSS.sloY) 
 
 For the 2D integration, please see the :ref:`User guide <use2Dint>` for details.
@@ -549,7 +647,7 @@ the real ``f`` should be 70.16 m.
 
 .. parsed-literal::
 
-   f is 70.1582 m.
+   f is 70.1574 m.
 
 The beam energy is 15.5 keV, the CRL is made of Be, the :math:`\delta` for
 Be at 15.5 keV is around :math:`1.42\times 10^{-6}`.
@@ -580,7 +678,7 @@ From the parameters ``popt`` we can obtain the fitted surface.
    X_plot, Y_plot = np.meshgrid(x_plot, y_plot)
    surf_fit = (((X_plot-popt[0])**2+(Y_plot-popt[1])**2)/popt[2]+popt[3])     
 
-The residual is ``surface``-``surf_fit``. Remeber that the real pixel size is 
+The residual is **surface-surf_fit**. Remember that the real pixel size is 
 1.03 :math:`\mu m` instead of 1 :math:`\mu m`, this factor should be multiplied.
 Also, we cut the outside part of the CRL using a mask.
 

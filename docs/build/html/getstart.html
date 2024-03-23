@@ -47,10 +47,27 @@
             
   <section id="getting-started">
 <h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h1>
-<p><em>Description goes here …</em></p>
-<section id="installing-spexwavepy">
-<span id="install"></span><h2>Installing spexwavepy<a class="headerlink" href="#installing-spexwavepy" title="Permalink to this heading"></a></h2>
+<section id="installation">
+<span id="install"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
 <p><em>Say something…</em></p>
+<section id="using-pip">
+<span id="pip"></span><h3>Using pip<a class="headerlink" href="#using-pip" title="Permalink to this heading"></a></h3>
+</section>
+<section id="from-source-code">
+<span id="source"></span><h3>From source code<a class="headerlink" href="#from-source-code" title="Permalink to this heading"></a></h3>
+</section>
+</section>
+<section id="getting-raw-data">
+<span id="rawdata"></span><h2>Getting raw data<a class="headerlink" href="#getting-raw-data" title="Permalink to this heading"></a></h2>
+<p>We provide several <a class="reference internal" href="example.html"><span class="doc">examples</span></a> to help users to learn how to use this python package.
+Every example shown in this documentation can be reproduced using our shared experiment data.
+<strong>To download the shared data, please visit …</strong></p>
+<section id="citing-spexwavepy">
+<span id="citation"></span><h3>Citing spexwavepy<a class="headerlink" href="#citing-spexwavepy" title="Permalink to this heading"></a></h3>
+</section>
+<section id="citing-shared-data">
+<h3>Citing shared data<a class="headerlink" href="#citing-shared-data" title="Permalink to this heading"></a></h3>
+</section>
 </section>
 <section id="computational-consumption">
 <span id="comput"></span><h2>Computational consumption<a class="headerlink" href="#computational-consumption" title="Permalink to this heading"></a></h2>
@@ -63,37 +80,48 @@ In this tutorial, we try to help new users to get familiar with the basic concep
 Let’s do it step by step.</p>
 <section id="read-the-image-stack">
 <span id="tuimstack"></span><h3>1. Read the image stack<a class="headerlink" href="#read-the-image-stack" title="Permalink to this heading"></a></h3>
-<p>An image stack is the first class you will create before any other operations.
-To create it, we need to import <code class="docutils literal notranslate"><span class="pre">imstackfun</span></code> module.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please find the example code from <em>/spexwavepy/examples/tutorial/pixel_size.py</em></p>
+</div>
+<p>An image stack class <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack" title="spexwavepy.imstackfun.Imagestack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Imagestack</span></code></a>
+is the first class you will create before any other operations.
+We need to import it from <a class="reference internal" href="spexwavepy.html#module-spexwavepy.imstackfun" title="spexwavepy.imstackfun"><code class="xref py py-mod docutils literal notranslate"><span class="pre">imstackfun</span></code></a> module.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">spexwavepy.imstackfun</span> <span class="kn">import</span> <span class="n">Imagestack</span>
 </pre></div>
 </div>
-<p>After that, we can create an instance of Imagestack.
-Two mandatory parameters are needed to initialize an Imagestack.
+<p>As the name indicates, this class is a container of the raw data images.
+It should be created in the first place.
+Let’s create an instance of it.</p>
+<p>Two mandatory parameters are needed to initialize an Imagestack.
 One is the data file folder, and the other one is the region of interest (ROI) in the raw images which will be cropped.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">fileFolder</span> <span class="o">=</span> <span class="s2">&quot;/dls/b16/data/2023/cm33912-1/pixelsizestep10um/402724-pcoedge-files/&quot;</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">fileFolder</span> <span class="o">=</span> <span class="s2">&quot;/YOUR/DATA/FOLDER/PATH/pixelsizestep10um/402724-pcoedge-files/&quot;</span>
 <span class="n">ROI</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4500</span><span class="p">]</span>           <span class="c1">#[y_start, y_end, x_start, x_end]</span>
 <span class="n">Imstack_1</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">fileFolder</span><span class="p">,</span> <span class="n">ROI</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The above codes create a Imagestack instance <code class="docutils literal notranslate"><span class="pre">Imstack_1</span></code>.
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please change the above <code class="docutils literal notranslate"><span class="pre">fileFoder</span></code> to your own folder path
+where you store the downloaded experiment data.</p>
+</div>
+<p>The above codes create an Imagestack instance <code class="docutils literal notranslate"><span class="pre">Imstack_1</span></code>.
 The raw images are stored in the <code class="docutils literal notranslate"><span class="pre">fileFolder</span></code>.
 The <code class="docutils literal notranslate"><span class="pre">ROI</span></code> in this case is larger than the real figure size,
-thus, contains the whole image range.
-Other parameters, such as start image number, total image number, etc.,
+thus, covers the whole image.</p>
+<p>Other parameters, such as start image number, total image number, etc.,
 can be used to define how to load the images in the <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack" title="spexwavepy.imstackfun.Imagestack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Imagestack</span></code></a>.</p>
-<p>Until now, we have only defined one <code class="docutils literal notranslate"><span class="pre">Imagestack</span></code> instance, no real data has been loaded.
-To load the raw data into the memory, method <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack.read_data" title="spexwavepy.imstackfun.Imagestack.read_data"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read_data()</span></code></a>
-needs to be called.</p>
+<p>Until now, we have just defined one <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack" title="spexwavepy.imstackfun.Imagestack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Imagestack</span></code></a> instance,
+no real data has been loaded.
+To load the raw data into the memory, <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack.read_data" title="spexwavepy.imstackfun.Imagestack.read_data"><code class="xref py py-meth docutils literal notranslate"><span class="pre">read_data()</span></code></a>
+method needs to be called.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">Imstack_1</span><span class="o">.</span><span class="n">read_data</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>After the above operation, the raw data will be stored in the attribute
-<code class="xref py py-attr docutils literal notranslate"><span class="pre">rawdata</span></code>.
-The rawdata is read-only. Another attribute
-<code class="xref py py-attr docutils literal notranslate"><span class="pre">data</span></code>
-is used to store the data to be processed in the future.</p>
-<p>It is also possible that we only need to one image from the folder in the beginning.
+<p>After the above operation, the raw data will be stored in <code class="docutils literal notranslate"><span class="pre">Imagestack.rawdata</span></code>.
+The rawdata is read-only.
+<code class="docutils literal notranslate"><span class="pre">Imagestack.data</span></code> is used to store the data that to be processed in the future.</p>
+<p>It is also possible that we only need to read one image from the folder at the beginning.
 In this case, we can use the <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.read_one" title="spexwavepy.corefun.read_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_one()</span></code></a> function from
 the <a class="reference internal" href="spexwavepy.html#module-spexwavepy.corefun" title="spexwavepy.corefun"><code class="xref py py-mod docutils literal notranslate"><span class="pre">corefun</span></code></a> module. If you want to crop the raw image,
 you need to import <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.crop_one" title="spexwavepy.corefun.crop_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">crop_one()</span></code></a> function too.</p>
@@ -102,15 +130,22 @@ you need to import <a class="reference internal" href="spexwavepy.html#spexwavep
 </div>
 <p>To call <a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.read_one" title="spexwavepy.corefun.read_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_one()</span></code></a> function,
 you need to input the file path that you want to read.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">filepath</span> <span class="o">=</span> <span class="s2">&quot;/dls/b16/data/2023/cm33912-1/pixelsizestep10um/402724-pcoedge-files/00005.tif&quot;</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">filepath</span> <span class="o">=</span> <span class="s2">&quot;/YOUR/DATA/FOLDER/PATH/pixelsizestep10um/402724-pcoedge-files/00005.tif&quot;</span>
 <span class="n">im_raw</span> <span class="o">=</span> <span class="n">read_one</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">ShowImage</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please change the above <code class="docutils literal notranslate"><span class="pre">filepath</span></code> to your own folder path
+where you store the downloaded experiment data.</p>
 </div>
 <p>If <code class="docutils literal notranslate"><span class="pre">ShowImage</span></code> is set to be True, then it will show the image.</p>
 <a class="reference internal image-reference" href="_images/readone.png"><img alt="_images/readone.png" src="_images/readone.png" style="width: 80%;" /></a>
 <p>Usually we need to crop the raw image for future processing, so we provide ROI for
-<a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.crop_one" title="spexwavepy.corefun.crop_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">crop_one()</span></code></a> function.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">filepath</span> <span class="o">=</span> <span class="s2">&quot;/dls/b16/data/2023/cm33912-1/pixelsizestep10um/402724-pcoedge-files/00005.tif&quot;</span>
+<a class="reference internal" href="spexwavepy.html#spexwavepy.corefun.crop_one" title="spexwavepy.corefun.crop_one"><code class="xref py py-func docutils literal notranslate"><span class="pre">crop_one()</span></code></a> function.
+The ROI should be defined as [y_start, y_end, x_start, x_end].
+The above picture shows the region enclosed by the defiend rectangle.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">filepath</span> <span class="o">=</span> <span class="s2">&quot;/YOUR/DATA/FOLDER/PATH/pixelsizestep10um/402724-pcoedge-files/00005.tif&quot;</span>
 <span class="n">ROI</span> <span class="o">=</span> <span class="p">[</span><span class="mi">750</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>    <span class="c1">#[y_start, y_end, x_start, x_end]</span>
 <span class="n">im_crop</span> <span class="o">=</span> <span class="n">crop_one</span><span class="p">(</span><span class="n">im_raw</span><span class="p">,</span> <span class="n">ROI</span><span class="p">,</span> <span class="n">ShowImage</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -120,14 +155,18 @@ you need to input the file path that you want to read.</p>
 </section>
 <section id="determine-the-detector-pixel-size">
 <span id="tudetpix"></span><h3>2. Determine the detector pixel size<a class="headerlink" href="#determine-the-detector-pixel-size" title="Permalink to this heading"></a></h3>
-<p>In many cases, e.g., B16 Test beamline at Diamond Light Source,
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please find the example code from <em>/spexwavepy/examples/tutorial/pixel_size.py</em></p>
+</div>
+<p>In many cases, such as B16 Test beamline at Diamond Light Source,
 the pixel size of the detector used for data acquisition is changeable.
-The first step is to determine the pixel size.</p>
+In this case, the first step is to determine the pixel size.</p>
 <p><code class="docutils literal notranslate"><span class="pre">Imstack_1</span></code> has already loaded the data used for detector pixel size determination,
 we use the <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack.getpixsize" title="spexwavepy.imstackfun.Imagestack.getpixsize"><code class="xref py py-meth docutils literal notranslate"><span class="pre">getpixsize()</span></code></a> method to calculate the pixel size.
 The parameters that needed are <code class="docutils literal notranslate"><span class="pre">subROI</span></code>, <code class="docutils literal notranslate"><span class="pre">dim</span></code> and <code class="docutils literal notranslate"><span class="pre">step</span></code>.
 <code class="docutils literal notranslate"><span class="pre">subROI</span></code> is the ROI used for image matching.
-<code class="docutils literal notranslate"><span class="pre">dim</span></code> is either ‘x’ or ‘y’ to indicate in which direction the speckle generator was scanned.
+<code class="docutils literal notranslate"><span class="pre">dim</span></code> is either ‘x’ or ‘y’, used to indicate in which direction the speckle generator was scanned.
 <code class="docutils literal notranslate"><span class="pre">step</span></code> is the scan step in unit of <span class="math notranslate nohighlight">\(\mu m\)</span>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -138,7 +177,18 @@ Thus, <code class="docutils literal notranslate"><span class="pre">subROI</span>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">subROI</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>      <span class="c1">#[y_start, y_end, x_start, x_end]</span>
 <span class="n">dim</span> <span class="o">=</span> <span class="s1">&#39;x&#39;</span>
 <span class="n">step</span> <span class="o">=</span> <span class="mf">10.0</span>                           <span class="c1">#[um]</span>
-<span class="n">pixsize</span> <span class="o">=</span> <span class="n">Imstack_1</span><span class="o">.</span><span class="n">getpixsize</span><span class="p">(</span><span class="n">subROI</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+<span class="n">pixsize</span> <span class="o">=</span> <span class="n">Imstack_1</span><span class="o">.</span><span class="n">getpixsize</span><span class="p">(</span><span class="n">subROI</span><span class="p">,</span> <span class="n">dim</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">display</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, we show the fitting line and the fitting residual error.</p>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="_images/pixdet2.jpg"><img alt="_images/pixdet2.jpg" src="_images/pixdet2.jpg" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-text">The fitting results and the residuals.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Also, the calculated pixel size has been printed out.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Pixel</span> <span class="n">size</span> <span class="ow">is</span> <span class="mf">1.0237</span> <span class="n">um</span>
 </pre></div>
 </div>
 <p>Please refer to the <a class="reference internal" href="userguide.html#usedetpix"><span class="std std-ref">detector pixel size determination</span></a> in the user guide to
@@ -146,21 +196,29 @@ find out how we use speckle patterns to determine the pixel size.</p>
 </section>
 <section id="stability-check">
 <span id="tustable"></span><h3>3. Stability check<a class="headerlink" href="#stability-check" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please find the example code from <em>/spexwavepy/examples/tutorial/stability.py</em></p>
+</div>
 <p>Using speckle patterns to monitor the stability of the beamline is
 a very simple use of the speckle-based technique.
 The images are acquired when all the hardware is fixed.
 The stability is monitored by comparing the images in the whole folder with the <strong>first</strong> one.</p>
 <p>To enable the stability check,
-a class called <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> needs to be initialized.</p>
+a class called <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> needs to be initialized.
+We import it from the <a class="reference internal" href="spexwavepy.html#module-spexwavepy.trackfun" title="spexwavepy.trackfun"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trackfun</span></code></a> module.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">spexwavepy.trackfun</span> <span class="kn">import</span> <span class="n">Tracking</span>
 </pre></div>
 </div>
-<p>Depending on the type of speckle-based technique that is used,
-one image stack or two image stacks are needed to initialize <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a>.
+<p>Depending on the type of the speckle-based technique that is used,
+one image stack or two image stacks or <a class="reference internal" href="userguide.html#usetrack"><span class="std std-ref">even more</span></a> image stacks are needed
+to initialize the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class.
 For stability checking, only one image stack is needed.</p>
+<p>As shown in the above section, we need to create a <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack" title="spexwavepy.imstackfun.Imagestack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Imagestack</span></code></a>
+class to contain the raw images.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">spexwavepy.imstackfun</span> <span class="kn">import</span> <span class="n">Imagestack</span>
 
-<span class="n">fileFolder</span> <span class="o">=</span> <span class="s2">&quot;/dls/science/groups/b16/SpeckleData/example_1/&quot;</span>
+<span class="n">fileFolder</span> <span class="o">=</span> <span class="s2">&quot;/YOUR/DATA/FOLDER/PATH/stabilitycheck/&quot;</span>
 <span class="n">ROI</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4500</span><span class="p">]</span>           <span class="c1">#[y_start, y_end, x_start, x_end]</span>
 <span class="n">Imstack_1</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">fileFolder</span><span class="p">,</span> <span class="n">ROI</span><span class="p">)</span>
 <span class="n">Imstack_1</span><span class="o">.</span><span class="n">fnum</span> <span class="o">=</span> <span class="mi">99</span>   <span class="c1">#File number to be used for stability check</span>
@@ -170,11 +228,13 @@ For stability checking, only one image stack is needed.</p>
 <span class="n">track</span> <span class="o">=</span> <span class="n">Tracking</span><span class="p">(</span><span class="n">Imstack_1</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>The <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack" title="spexwavepy.imstackfun.Imagestack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Imagestack</span></code></a> class <code class="docutils literal notranslate"><span class="pre">Imstack_1</span></code> is the
+input of the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class.</p>
 <p>Usually, there will be plenty of raw images in one folder.
-There is no need to load all the data into memory for stability checking.
-The <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.stability" title="spexwavepy.trackfun.Tracking.stability"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stability()</span></code></a> method is used for this purpose.
+There is no need to load all the data into memory for <strong>stability checking</strong>.
+The <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.stability" title="spexwavepy.trackfun.Tracking.stability"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stability()</span></code></a> method is used for it.
 <code class="docutils literal notranslate"><span class="pre">edge_x</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> are the two parameters needed.
-<code class="docutils literal notranslate"><span class="pre">edge_x</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> can be either a single integer or a list of two integers,
+<code class="docutils literal notranslate"><span class="pre">edge_x</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> can be either a single integer or a list/tuple of two integers,
 like [int1, int2]. If input as a single integer int0,
 <code class="docutils literal notranslate"><span class="pre">edge_x</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> will be expanded as a list of two integers,
 the elements in the list are the same, i.e., [int0, int0].</p>
@@ -182,34 +242,46 @@ the elements in the list are the same, i.e., [int0, int0].</p>
 <span class="n">delayX</span><span class="p">,</span> <span class="n">delayY</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">stability</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Please refer to <a class="reference internal" href="userguide.html#trastable"><span class="std std-ref">stability check using speckle patterns</span></a> in the user guide
-to see how to do the stability checking using speckle patterns.</p>
+<p>The following figure shows the result.
+We can see that there is a linear drifting in the y direction.</p>
 <a class="reference internal image-reference" href="_images/stableres.png"><img alt="_images/stableres.png" src="_images/stableres.png" style="width: 80%;" /></a>
-<p>We can also use multi-cores to accelerate the calculation.</p>
+<p>We can also use multi-cores to accelerate the calculation.
+In this python package, we have implemented multiprocessing form for many tracking method.
+These method usually end with the suffix “multi”.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">cpu_no</span> <span class="o">=</span> <span class="mi">16</span>
 <span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span>
 <span class="n">delayX</span><span class="p">,</span> <span class="n">delayY</span><span class="p">,</span> <span class="n">res</span> <span class="o">=</span> <span class="n">track</span><span class="o">.</span><span class="n">stability_multi</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">cpu_no</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.stability_multi" title="spexwavepy.trackfun.Tracking.stability_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stability_multi()</span></code></a> method uses the
-built-in <code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code> package.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Please check the available CPUs before calling <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.stability_multi" title="spexwavepy.trackfun.Tracking.stability_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stability_multi()</span></code></a> method.</p>
 </div>
+<p>The <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.stability_multi" title="spexwavepy.trackfun.Tracking.stability_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">stability_multi()</span></code></a> method uses the
+built-in <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html">multiprocessing</a> package.</p>
+<p>Please refer to <a class="reference internal" href="userguide.html#trastable"><span class="std std-ref">stability check using speckle patterns</span></a> in the user guide
+to see how to do the stability checking using speckle patterns.</p>
 </section>
 <section id="single-crl-measurement">
 <span id="tucrl"></span><h3>4. Single CRL measurement<a class="headerlink" href="#single-crl-measurement" title="Permalink to this heading"></a></h3>
-<p><em>In this section we will show how to obtain a single CRL wavefront using X-ray Speckle Scanning (XSS) … Then say more things…</em></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please find the example code from <em>/spexwavepy/examples/tutorial/single_CRL.py</em></p>
+</div>
+<p>In this section we will show how to obtain a single CRL wavefront using X-ray Speckle Scanning (XSS) technique,
+for the principle of this technique, please refer to
+<a class="reference internal" href="principle.html#prinxssrefer"><span class="std std-ref">X-ray Speckle Scanning (XSS) technique with reference beam</span></a>.
+As to the detailed description of the implementation of this technique, please go to
+<a class="reference internal" href="userguide.html"><span class="doc">User guide</span></a>.</p>
 <p>First, let us load and see the raw images.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">spexwavepy.imstackfun</span> <span class="kn">import</span> <span class="n">Imagestack</span>
 <span class="kn">from</span> <span class="nn">spexwavepy.trackfun</span> <span class="kn">import</span> <span class="n">Tracking</span>
 <span class="kn">from</span> <span class="nn">spexwavepy.corefun</span> <span class="kn">import</span> <span class="n">read_one</span><span class="p">,</span> <span class="n">crop_one</span>
 
-<span class="n">ref_folder_x</span> <span class="o">=</span> <span class="s2">&quot;/dls/science/groups/b16/SpeckleData/CRLXSS/ReferX1D/402923-pcoedge-files/&quot;</span>
-<span class="n">sam_folder_x</span> <span class="o">=</span> <span class="s2">&quot;/dls/science/groups/b16/SpeckleData/CRLXSS/SampleX1D/402924-pcoedge-files/&quot;</span>
-<span class="n">ref_folder_y</span> <span class="o">=</span> <span class="s2">&quot;/dls/science/groups/b16/SpeckleData/CRLXSS/ReferY1D/402925-pcoedge-files/&quot;</span>
-<span class="n">sam_folder_y</span> <span class="o">=</span> <span class="s2">&quot;/dls/science/groups/b16/SpeckleData/CRLXSS/SampleY1D/402926-pcoedge-files/&quot;</span>
+<span class="n">ref_folder_x</span> <span class="o">=</span> <span class="s2">&quot;/YOUR/DATA/FOLDER/PATH/CRLXSS/ReferX1D/402923-pcoedge-files/&quot;</span>
+<span class="n">sam_folder_x</span> <span class="o">=</span> <span class="s2">&quot;/YOUR/DATA/FOLDER/PATH/CRLXSS/SampleX1D/402924-pcoedge-files/&quot;</span>
+<span class="n">ref_folder_y</span> <span class="o">=</span> <span class="s2">&quot;/YOUR/DATA/FOLDER/PATH/CRLXSS/ReferY1D/402925-pcoedge-files/&quot;</span>
+<span class="n">sam_folder_y</span> <span class="o">=</span> <span class="s2">&quot;/YOUR/DATA/FOLDER/PATH/CRLXSS/SampleY1D/402926-pcoedge-files/&quot;</span>
 
 <span class="n">im_sam_tmp</span> <span class="o">=</span> <span class="n">read_one</span><span class="p">(</span><span class="n">sam_folder_y</span><span class="o">+</span><span class="s1">&#39;00005.tif&#39;</span><span class="p">,</span> <span class="n">ShowImage</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -218,7 +290,7 @@ built-in <code class="docutils literal notranslate"><span class="pre">multiproce
 <p>The raw image of the single CRL shows that we only need to crop the central part of it
 for future processing.
 The reference image should use the same ROI as the CRL image.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">ROI_sam</span> <span class="o">=</span> <span class="p">[</span><span class="mi">540</span><span class="p">,</span> <span class="mi">1570</span><span class="p">,</span> <span class="mi">750</span><span class="p">,</span> <span class="mi">1800</span><span class="p">]</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">ROI_sam</span> <span class="o">=</span> <span class="p">[</span><span class="mi">530</span><span class="p">,</span> <span class="mi">1580</span><span class="p">,</span> <span class="mi">750</span><span class="p">,</span> <span class="mi">1800</span><span class="p">]</span>
 <span class="n">ROI_ref</span> <span class="o">=</span> <span class="n">ROI_sam</span>
 <span class="n">im_crop_tmp</span> <span class="o">=</span> <span class="n">crop_one</span><span class="p">(</span><span class="n">im_sam_tmp</span><span class="p">,</span> <span class="n">ROI_sam</span><span class="p">,</span> <span class="n">ShowImage</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">im_ref_tmp</span> <span class="o">=</span> <span class="n">read_one</span><span class="p">(</span><span class="n">ref_folder_y</span><span class="o">+</span><span class="s1">&#39;00005.tif&#39;</span><span class="p">,</span> <span class="n">ShowImage</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -238,26 +310,32 @@ The reference image should use the same ROI as the CRL image.</p>
 </pre></div>
 </div>
 <p>Since we are going to use XSS technique with reference beam,
-we need at least two image stacks to initialize the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class.
-The first image stack to be loaded is the template image stack, i.e., the image stack with test optic.
+we need at least two image stacks to initialize the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class,
+as concluded in <a class="reference internal" href="userguide.html#usetrack"><span class="std std-ref">this table</span></a> in <a class="reference internal" href="userguide.html"><span class="doc">user guide</span></a>.</p>
+<p>The first image stack to be loaded is the template image stack, i.e., the image stack with test optic.
 The second image stack is the reference image stack.
 In this example, we would like to obtain the 2D slope map in two directions from two
 1D scans. Thus we need four image stacks. Two for references and two for samples, respectively.
 The first two image stacks are the template image stack and reference image stack
 in the x (horizontal) scan direction. The last two image stacks are those in the
-y (vertical) direction. Also, we choose to <a class="reference internal" href="userguide.html#usenorm"><span class="std std-ref">normalize</span></a> these image stacks in the beginning.</p>
+y (vertical) direction. Also, we choose to <a class="reference internal" href="userguide.html#usenorm"><span class="std std-ref">normalize</span></a> these image stacks
+in the beginning, so we set the <code class="docutils literal notranslate"><span class="pre">normalize</span></code> attribute of the
+<a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack" title="spexwavepy.imstackfun.Imagestack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Imagestack</span></code></a> class to be <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">track_XSS</span> <span class="o">=</span> <span class="n">Tracking</span><span class="p">(</span><span class="n">Imstack_sam_x</span><span class="p">,</span> <span class="n">Imstack_ref_x</span><span class="p">,</span> <span class="n">Imstack_sam_y</span><span class="p">,</span> <span class="n">Imstack_ref_y</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Before we do the real tracking, there are some parameters to be set for <code class="docutils literal notranslate"><span class="pre">track_XSS</span></code>.
-<code class="docutils literal notranslate"><span class="pre">dimension</span></code> is set to be <cite>‘1D’</cite> or <cite>‘2D’</cite>.
+<p>Before we do the real tracking, there are some parameters to be set for
+the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class of <code class="docutils literal notranslate"><span class="pre">track_XSS</span></code>.
+The parameter of <code class="docutils literal notranslate"><span class="pre">dimension</span></code> is set to be <cite>‘1D’</cite> or <cite>‘2D’</cite>.
 We use it to tell the code to do <cite>1D</cite> or <cite>2D</cite> data processing. <code class="docutils literal notranslate"><span class="pre">scandim</span></code> is used to tell
 the code the <cite>scan direction</cite> of the loaded image stack. For XSS technique, it supports
-<cite>‘x’, ‘y’, ‘xy’ and ‘diag’</cite>. In this case, we use <cite>‘xy’</cite>. That means we will obtain the
-speckle shifts from both x (horizontal) 1D scan and y (vertical) 1D scan all together.
+<cite>‘x’</cite>, <cite>‘y’</cite> and <cite>‘xy’</cite>. In this case, we use <cite>‘xy’</cite>. That means we will obtain the
+speckle shifts from both <strong>x (horizontal)</strong> 1D scan and <strong>y (vertical)</strong> 1D scan all together.
 Thus, 4 image stacks are loaded. Besides, we need to provide
-<code class="docutils literal notranslate"><span class="pre">dist</span></code>, <code class="docutils literal notranslate"><span class="pre">pixsize</span></code> and <code class="docutils literal notranslate"><span class="pre">scanstep</span></code>. They are <cite>distance between diffuser and detector plane</cite> in
-mm, <cite>detector pixel size</cite> in <span class="math notranslate nohighlight">\(\mu m\)</span> and <cite>scan step size</cite> in <span class="math notranslate nohighlight">\(\mu m\)</span>, repectively.</p>
+<code class="docutils literal notranslate"><span class="pre">dist</span></code>, <code class="docutils literal notranslate"><span class="pre">pixsize</span></code> and <code class="docutils literal notranslate"><span class="pre">scanstep</span></code>.
+They are <strong>distance between diffuser and detector planer</strong> in mm,
+<strong>detector pixel size</strong> in <span class="math notranslate nohighlight">\(\mu m\)</span> and
+<strong>scan step size</strong> in <span class="math notranslate nohighlight">\(\mu m\)</span>, repectively.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">track_XSS</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="s1">&#39;2D&#39;</span>
 <span class="n">track_XSS</span><span class="o">.</span><span class="n">scandim</span> <span class="o">=</span> <span class="s1">&#39;xy&#39;</span>
 <span class="n">track_XSS</span><span class="o">.</span><span class="n">dist</span> <span class="o">=</span> <span class="mf">623.</span>    <span class="c1">#[mm]</span>
@@ -265,8 +343,11 @@ mm, <cite>detector pixel size</cite> in <span class="math notranslate nohighligh
 <span class="n">track_XSS</span><span class="o">.</span><span class="n">scanstep</span> <span class="o">=</span> <span class="mf">1.0</span>    <span class="c1">#[um]</span>
 </pre></div>
 </div>
-<p>There are several compulsory input for
-<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer" title="spexwavepy.trackfun.Tracking.XSS_withrefer"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSS_withrefer()</span></code></a> function before we call it.
+<p>The <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer" title="spexwavepy.trackfun.Tracking.XSS_withrefer"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSS_withrefer()</span></code></a> method of
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class is used for the
+<a class="reference internal" href="principle.html#prinxssrefer"><span class="std std-ref">XSS technique with reference beam</span></a>.
+There are several compulsory input for
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer" title="spexwavepy.trackfun.Tracking.XSS_withrefer"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSS_withrefer()</span></code></a> method before we call it.
 <code class="docutils literal notranslate"><span class="pre">edge_x</span></code>, <code class="docutils literal notranslate"><span class="pre">edge_y</span></code> and <code class="docutils literal notranslate"><span class="pre">edge_z</span></code> define the edges of the raw images in the image stack to be
 cut in order to be trackable. <code class="docutils literal notranslate"><span class="pre">width</span></code> is the window width used for 1D tracking,
 <code class="docutils literal notranslate"><span class="pre">pad_xy</span></code> determines how large the extra area needed for the reference image.
@@ -280,7 +361,7 @@ See <a class="reference internal" href="userguide.html#traxss"><span class="std 
 </div>
 <p>Then we call <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer" title="spexwavepy.trackfun.Tracking.XSS_withrefer"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSS_withrefer()</span></code></a> function.
 In the beginning, we can set the <code class="docutils literal notranslate"><span class="pre">display</span></code> to be <code class="docutils literal notranslate"><span class="pre">True</span></code> to have a check
-of the settings of all the parameters.</p>
+on the settings of all the parameters.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">track_XSS</span><span class="o">.</span><span class="n">XSS_withrefer</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">edge_z</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">pad_xy</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -303,11 +384,17 @@ parameter is <code class="docutils literal notranslate"><span class="pre">cpu_no
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">track_XSS</span><span class="o">.</span><span class="n">XSS_withrefer_multi</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">edge_z</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">pad_xy</span><span class="p">,</span> <span class="n">cpu_no</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 </pre></div>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Please check the available CPUs before calling
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer_multi" title="spexwavepy.trackfun.Tracking.XSS_withrefer_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XSS_withrefer_multi()</span></code></a> method.</p>
+</div>
 <p>After calling the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer" title="spexwavepy.trackfun.Tracking.XSS_withrefer"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSS_withrefer()</span></code></a> or
 <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer_multi" title="spexwavepy.trackfun.Tracking.XSS_withrefer_multi"><code class="xref py py-func docutils literal notranslate"><span class="pre">XSS_withrefer_multi()</span></code></a> function,
 the 2D shift map in both x and y direction are stored in the <code class="docutils literal notranslate"><span class="pre">delayX</span></code> and
-<code class="docutils literal notranslate"><span class="pre">delayY</span></code> attribute. Likewise, the 2D slope map are stored in the
-<code class="docutils literal notranslate"><span class="pre">sloX</span></code> and <code class="docutils literal notranslate"><span class="pre">sloY</span></code> attribute.</p>
+<code class="docutils literal notranslate"><span class="pre">delayY</span></code> attribute of the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class.
+Likewise, the 2D slope map are stored in the
+<code class="docutils literal notranslate"><span class="pre">sloX</span></code> and <code class="docutils literal notranslate"><span class="pre">sloY</span></code> attribute of the same class.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">delayX</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;jet&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x [pixel]&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y [pixel]&#39;</span><span class="p">)</span>
@@ -363,7 +450,7 @@ if we cut the edge of this curve.</p>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/XSS_fitx.png"><img alt="_images/XSS_fitx.png" src="_images/XSS_fitx.png" style="width: 80%;" /></a>
-<p>Likewise, we do the same thing on y direction.</p>
+<p>Likewise, we do the same on y direction.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">sloY_cen</span> <span class="o">=</span> <span class="n">track_XSS</span><span class="o">.</span><span class="n">sloY</span><span class="p">[:,</span> <span class="mi">450</span><span class="p">]</span>
 <span class="n">sloY_cen_fit</span> <span class="o">=</span> <span class="n">sloY_cen</span><span class="p">[</span><span class="mi">200</span><span class="p">:</span><span class="mi">780</span><span class="p">]</span>
 <span class="n">sloY_coord</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">780</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -386,8 +473,8 @@ if we cut the edge of this curve.</p>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fiiting parameters in y direction:&quot;</span><span class="p">,</span> <span class="n">fit_para_Y</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Fitting</span> <span class="n">parameters</span> <span class="ow">in</span> <span class="n">x</span> <span class="n">direction</span><span class="p">:</span> <span class="p">[</span> <span class="mf">0.01470974</span> <span class="o">-</span><span class="mf">6.86428282</span><span class="p">]</span>
-<span class="n">Fitting</span> <span class="n">parameters</span> <span class="ow">in</span> <span class="n">y</span> <span class="n">direction</span><span class="p">:</span> <span class="p">[</span> <span class="mf">0.01475435</span> <span class="o">-</span><span class="mf">7.04149456</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Fiiting</span> <span class="n">parameters</span> <span class="ow">in</span> <span class="n">x</span> <span class="n">direction</span><span class="p">:</span> <span class="p">[</span> <span class="mf">0.01472175</span> <span class="o">-</span><span class="mf">6.86434882</span><span class="p">]</span>
+<span class="n">Fiiting</span> <span class="n">parameters</span> <span class="ow">in</span> <span class="n">x</span> <span class="n">direction</span><span class="p">:</span> <span class="p">[</span> <span class="mf">0.01473827</span> <span class="o">-</span><span class="mf">7.18284839</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>We can see the slope of the two fitted straight lines are very close.
@@ -428,8 +515,11 @@ We use the fitting parameters to generated this plane.</p>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/XSSsloerr.png"><img alt="_images/XSSsloerr.png" src="_images/XSSsloerr.png" style="width: 90%;" /></a>
-<p>Next, we can do 2D integration to obtain the surface of the wavefront.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">surface</span> <span class="o">=</span> <span class="n">Integration2D_SCS</span><span class="p">(</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">sloX</span><span class="p">,</span> <span class="n">track_XSS</span><span class="o">.</span><span class="n">sloY</span><span class="p">)</span>
+<p>Next, we can do 2D integration to obtain the surface of the wavefront.
+We invoke <a class="reference internal" href="spexwavepy.html#spexwavepy.postfun.Integration2D_SCS" title="spexwavepy.postfun.Integration2D_SCS"><code class="xref py py-func docutils literal notranslate"><span class="pre">Integration2D_SCS()</span></code></a> function
+from <a class="reference internal" href="spexwavepy.html#module-spexwavepy.postfun" title="spexwavepy.postfun"><code class="xref py py-mod docutils literal notranslate"><span class="pre">postfun</span></code></a> module to do it.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">spexwavepy.postfun</span> <span class="kn">import</span> <span class="n">Integration2D_SCS</span>
+<span class="n">surface</span> <span class="o">=</span> <span class="n">Integration2D_SCS</span><span class="p">(</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">sloX</span><span class="p">,</span> <span class="n">track_XSS</span><span class="o">.</span><span class="n">sloY</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>For the 2D integration, please see the <a class="reference internal" href="userguide.html#use2dint"><span class="std std-ref">User guide</span></a> for details.
@@ -475,7 +565,7 @@ the real <code class="docutils literal notranslate"><span class="pre">f</span></
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;f is </span><span class="si">{:.4f}</span><span class="s2"> m.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">popt</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="n">track_XSS</span><span class="o">.</span><span class="n">pixsize</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="ow">is</span> <span class="mf">70.1582</span> <span class="n">m</span><span class="o">.</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="ow">is</span> <span class="mf">70.1574</span> <span class="n">m</span><span class="o">.</span>
 </pre></div>
 </div>
 <p>The beam energy is 15.5 keV, the CRL is made of Be, the <span class="math notranslate nohighlight">\(\delta\)</span> for
@@ -500,7 +590,7 @@ which is the value the manufacturer provided.</p>
 <span class="n">surf_fit</span> <span class="o">=</span> <span class="p">(((</span><span class="n">X_plot</span><span class="o">-</span><span class="n">popt</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="n">Y_plot</span><span class="o">-</span><span class="n">popt</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">popt</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="n">popt</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>The residual is <code class="docutils literal notranslate"><span class="pre">surface</span></code>-<code class="docutils literal notranslate"><span class="pre">surf_fit</span></code>. Remeber that the real pixel size is
+<p>The residual is <strong>surface-surf_fit</strong>. Remember that the real pixel size is
 1.03 <span class="math notranslate nohighlight">\(\mu m\)</span> instead of 1 <span class="math notranslate nohighlight">\(\mu m\)</span>, this factor should be multiplied.
 Also, we cut the outside part of the CRL using a mask.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">residual</span> <span class="o">=</span> <span class="n">surface</span> <span class="o">-</span> <span class="n">surf_fit</span>
@@ -555,7 +645,16 @@ surface to the CRL thinckness distribution.</p>
     <h3><a href="index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Getting started</a><ul>
-<li><a class="reference internal" href="#installing-spexwavepy">Installing spexwavepy</a></li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#using-pip">Using pip</a></li>
+<li><a class="reference internal" href="#from-source-code">From source code</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#getting-raw-data">Getting raw data</a><ul>
+<li><a class="reference internal" href="#citing-spexwavepy">Citing spexwavepy</a></li>
+<li><a class="reference internal" href="#citing-shared-data">Citing shared data</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#computational-consumption">Computational consumption</a></li>
 <li><a class="reference internal" href="#tutorial">Tutorial</a><ul>
 <li><a class="reference internal" href="#read-the-image-stack">1. Read the image stack</a></li>

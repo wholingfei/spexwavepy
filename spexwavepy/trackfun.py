@@ -227,7 +227,7 @@ class Tracking:
                 if verbose: _indicator(j, imNo, 'Stability')
                 im2 = self.imstack1.data[j+1]
                 im2 = im2[edge_y[0]:-edge_y[1], edge_x[0]:-edge_x[1]]
-                ix_tmp, iy_tmp, res_tmp = Imagematch(im1, im2, self.subpixelmeth)
+                ix_tmp, iy_tmp, res_tmp = Imagematch(im1, im2, subpixelmeth=self.subpixelmeth)
                 ixs[j] = ix_tmp - edge_x[0]
                 iys[j] = iy_tmp - edge_y[0]
                 res[j] = np.max(res_tmp)
@@ -260,7 +260,7 @@ class Tracking:
                 im2_tmp = crop_one(im2_tmp, self.imstack1.roi)
                 y_dim_tmp, x_dim_tmp = im2_tmp.shape
                 im2 = im2_tmp[edge_y[0]:y_dim_tmp-edge_y[1], edge_x[0]:x_dim_tmp-edge_x[1]]
-                ix_tmp, iy_tmp, res_tmp = Imagematch(im1, im2, self.subpixelmeth) 
+                ix_tmp, iy_tmp, res_tmp = Imagematch(im1, im2, subpixelmeth=self.subpixelmeth) 
                 ix_tmp -= edge_x[0]
                 iy_tmp -= edge_y[0]
                 res_tmp = np.max(res_tmp)
@@ -327,7 +327,7 @@ class Tracking:
             im2_tmp = crop_one(im2_tmp, self.imstack1.roi)
             y_dim_tmp, x_dim_tmp = im2_tmp.shape
             im2 = im2_tmp[edge_y[0]:y_dim_tmp-edge_y[1], edge_x[0]:x_dim_tmp-edge_x[1]]
-            ix_tmp, iy_tmp, res_tmp = Imagematch(im1, im2, self.subpixelmeth) 
+            ix_tmp, iy_tmp, res_tmp = Imagematch(im1, im2, subpixelmeth=self.subpixelmeth) 
             ix_tmp -= edge_x[0]
             iy_tmp -= edge_y[0]
             res_tmp = np.max(res_tmp)
@@ -600,7 +600,7 @@ class Tracking:
             if isinstance(pad_xy, int):
                 pad_xy = (pad_xy, pad_xy)
             if scandim == 'xy':
-                if edge_x != edge_y or edge_x[0] != edge_x[1] or edge_y[0] != edge_y[1]:
+                if edge_x != edge_y or edge_xy[0] != edge_xy[1]: 
                     print("For scandim == 'xy', the edges should be symmetrical, edge_x should be the same as edge_y, and also the elements of each.")
                     sys.exit(0)
             if scandim == 'xy':
@@ -813,7 +813,7 @@ class Tracking:
             if isinstance(pad_xy, int):
                 pad_xy = (pad_xy, pad_xy)
             if scandim == 'xy':
-                if edge_x != edge_y or edge_x[0] != edge_x[1] or edge_y[0] != edge_y[1]:
+                if edge_x != edge_y or edge_xy[0] != edge_xy[1]:
                     print("For scandim == 'xy', the edges should be symmetrical, edge_x should be the same as edge_y, and also the elements of each.")
                     sys.exit(0)
             if scandim == 'xy':
