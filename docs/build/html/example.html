@@ -47,13 +47,31 @@
             
   <section id="examples">
 <h1>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h1>
-<p><em>Say something here…</em></p>
+<p>Apart from the sample codes shown for the <a class="reference internal" href="getstart.html#tutorial"><span class="std std-ref">tutorial</span></a>, we also provide several
+examples in <strong>spexwavepy</strong> package to help users to learn how to do the data processing for
+different speckle-based techniques. All the examples shown here are extracted from our previous
+published research papers. We also shared the raw data for users of <strong>spexwavepy</strong> package.
+Please refer to <a class="reference internal" href="getstart.html#rawdata"><span class="std std-ref">Getting started page</span></a> for downloading these raw data.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>The shared raw data is only used for study. Please do not distribute the raw data.
+If you would like to use these raw data for publication and so on,
+please contact the authors of this package.</strong></p>
+</div>
 <section id="plane-mirror-measurement-with-reference-beam">
 <span id="expplane"></span><h2>Plane mirror measurement with reference beam<a class="headerlink" href="#plane-mirror-measurement-with-reference-beam" title="Permalink to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please find the example code from <em>/spexwavepy/examples/planemirror_2D.py</em></p>
+</div>
 <p>In this example, we would like to show that how to use the
 <a class="reference internal" href="principle.html#prinxssrefer"><span class="std std-ref">XSS technique with reference beam</span></a> to
-measure the plane mirror.</p>
+measure a plane mirror.</p>
 <p>This example basically extracts from <a class="reference internal" href="#huxssjsrpaper" id="id1"><span>[HuXSSJSRpaper]</span></a>.</p>
+<p>After detemining the data folder path and appropriate ROI for both sample and
+reference images, we define the <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack" title="spexwavepy.imstackfun.Imagestack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Imagestack</span></code></a>
+classes to contain the data.
+Then we define the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">imstack_sam</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">sam_folder</span><span class="p">,</span> <span class="n">ROI_sam</span><span class="p">)</span>
 <span class="n">imstack_ref</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">ref_folder</span><span class="p">,</span> <span class="n">ROI_ref</span><span class="p">)</span>
 <span class="n">imstack_ref</span><span class="o">.</span><span class="n">flip</span> <span class="o">=</span> <span class="s1">&#39;x&#39;</span>
@@ -78,12 +96,16 @@ reference image stack.</p>
 do is to align the speckle patterns from the two image stacks. It is
 particularly needed when the test optic is a mirror.
 We use <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.collimate" title="spexwavepy.trackfun.Tracking.collimate"><code class="xref py py-func docutils literal notranslate"><span class="pre">collimate()</span></code></a> function to do
-the alignment.</p>
+the alignment. Please refer to the
+<a class="reference internal" href="userguide.html#tracolli"><span class="std std-ref">User guide</span></a> for the detailed description of this function.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">track_XSS</span><span class="o">.</span><span class="n">collimate</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>After that, the speckle patterns from both image stacks are aligned and
-ready to be tracked.</p>
+ready to be tracked. We set the related parameters before we call the method
+used for speckle tracking.
+Please refer to the <a class="reference internal" href="userguide.html#traxss"><span class="std std-ref">User guide</span></a> for the detailed explanation of these
+parameters.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">edge_x</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">edge_y</span> <span class="o">=</span> <span class="mi">30</span>
 <span class="n">edge_z</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
@@ -91,7 +113,12 @@ ready to be tracked.</p>
 <span class="n">pad_xy</span> <span class="o">=</span> <span class="mi">30</span>
 </pre></div>
 </div>
-<p>After setting the initial parameters for the speckle patter tracking, we use either single-core version or multi-core version of the method used for the XSS technique with reference beam to obtain the speckle pattern shifts. Since the scan direction is along ‘x’, then <code class="docutils literal notranslate"><span class="pre">edge_x</span></code> is 0. Also, the <code class="docutils literal notranslate"><span class="pre">edge_z</span></code> is not symmetrical.</p>
+<p>After setting the initial parameters,
+we use either single-core version <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer" title="spexwavepy.trackfun.Tracking.XSS_withrefer"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XSS_withrefer()</span></code></a>
+or multi-core version <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer_multi" title="spexwavepy.trackfun.Tracking.XSS_withrefer_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XSS_withrefer_multi()</span></code></a>
+of the method to obtain the speckle pattern shifts.
+Since the scan direction is along ‘x’, then <code class="docutils literal notranslate"><span class="pre">edge_x</span></code> is 0.
+Also, the <code class="docutils literal notranslate"><span class="pre">edge_z</span></code> is not symmetrical.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">track_XSS</span><span class="o">.</span><span class="n">XSS_withrefer</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">edge_z</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">pad_xy</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -102,22 +129,30 @@ ready to be tracked.</p>
 <p>Note that we did <code class="docutils literal notranslate"><span class="pre">normalization</span></code> for the stiched images in this example.
 The shift in <em>‘x’</em> direction looks like</p>
 <a class="reference internal image-reference" href="_images/planeM_1.png"><img alt="_images/planeM_1.png" src="_images/planeM_1.png" style="width: 80%;" /></a>
-<p>Since we only scanned in the horizontal (x) direction, the <code class="docutils literal notranslate"><span class="pre">delayX</span></code> is only
+<p>Since we only scanned in the horizontal (x) direction, the <code class="docutils literal notranslate"><span class="pre">delayX</span></code> is
+the only “canonical” processed data
 stored in the <code class="docutils literal notranslate"><span class="pre">track_XSS</span></code> class. No <code class="docutils literal notranslate"><span class="pre">track_XSS.delayY</span></code> is available.
 However, we do store the tracked value in another direction in the
 <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class.
-In this example, the shift in <em>‘y’</em>  direction is stored in <code class="docutils literal notranslate"><span class="pre">track_XSS._delayY</span></code>.
-It looks like</p>
+In this example, the shift in <em>‘y’</em>  direction is stored in <code class="docutils literal notranslate"><span class="pre">track_XSS._delayY</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The underscored attribute such as <code class="docutils literal notranslate"><span class="pre">Tracking._delayX</span></code> or <code class="docutils literal notranslate"><span class="pre">Tracking._delayY</span></code> are not
+intended to be exposed to the user. However, in some cases, they do help the users with
+their data processing. Nonetheless, please keep in mind that the underscored data are not
+“canonical” basically.</p>
+</div>
+<p>It looks like</p>
 <a class="reference internal image-reference" href="_images/planeM_2.png"><img alt="_images/planeM_2.png" src="_images/planeM_2.png" style="width: 80%;" /></a>
 <p>Since the tested mirror is an ultra-smooth plane mirror, the speckle shift in y
 direction should be very small. If we extract a central horizontal line from the
 2D map of Y shift, we can see a tilted straight line</p>
 <a class="reference internal image-reference" href="_images/planeM_3.png"><img alt="_images/planeM_3.png" src="_images/planeM_3.png" style="width: 80%;" /></a>
 <p>This indicate that the mirror is not perfectly parallel with the reference incident beam.
-The raw images need to be rotated and carefully aligned. According to the paper,
+The raw images need to be rotated and carefully aligned. According to the paper <a class="reference internal" href="#huxssjsrpaper" id="id2"><span>[HuXSSJSRpaper]</span></a>,
 the rotation angle is calculated to be around -0.275 degrees.</p>
 <p>We can use <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack.rotate" title="spexwavepy.imstackfun.Imagestack.rotate"><code class="xref py py-func docutils literal notranslate"><span class="pre">rotate()</span></code></a> function
-to do the rotation.</p>
+to do the rotation. See the <a class="reference internal" href="userguide.html#userot"><span class="std std-ref">User guide</span></a> for its help information.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">rotateang</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.275</span>       <span class="c1"># [degree]</span>
 <span class="n">imstack_sam</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">rotateang</span><span class="p">)</span>
 </pre></div>
@@ -185,20 +220,24 @@ if we print out <code class="docutils literal notranslate"><span class="pre">ims
 </pre></div>
 </div>
 <p>After that, we redefine the <code class="docutils literal notranslate"><span class="pre">track_XSS</span></code> class and do the same operations
-as before, using either single-core version or multi-core version of
-the XSS tracking method, we have the following tracked shift in <em>`y`</em>
+as before, using either single-core version <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer" title="spexwavepy.trackfun.Tracking.XSS_withrefer"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XSS_withrefer()</span></code></a>
+or multi-core version <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer_multi" title="spexwavepy.trackfun.Tracking.XSS_withrefer_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XSS_withrefer_multi()</span></code></a>
+of the XSS tracking method, we have the following tracked shift in <em>y</em>
 direction.</p>
 <a class="reference internal image-reference" href="_images/PlaneM_5.png"><img alt="_images/PlaneM_5.png" src="_images/PlaneM_5.png" style="width: 80%;" /></a>
 <p>We can also extract the central line</p>
 <a class="reference internal image-reference" href="_images/PlaneM_6.png"><img alt="_images/PlaneM_6.png" src="_images/PlaneM_6.png" style="width: 80%;" /></a>
-<p>The tracked speckle pattern shift in ‘y’ direction has been properly corrected.
-We also have the tracked shift in ‘x’ direction.</p>
+<p>We can see the tracked speckle pattern shift in <em>y</em> direction has been properly corrected.
+We also have the tracked shift in <em>x</em> direction.</p>
 <a class="reference internal image-reference" href="_images/PlaneM_4.png"><img alt="_images/PlaneM_4.png" src="_images/PlaneM_4.png" style="width: 80%;" /></a>
-<p>Besides, the slope error in <em>‘x’</em> direction has been stored in the <code class="docutils literal notranslate"><span class="pre">slopeX</span></code> of
-<code class="docutils literal notranslate"><span class="pre">track_XSS</span></code> class.</p>
+<p>Besides, the slope error in <em>x</em> direction has also been calculated and stored
+in the <code class="docutils literal notranslate"><span class="pre">slopeX</span></code> of <code class="docutils literal notranslate"><span class="pre">track_XSS</span></code> class. Please refer to the
+<a class="reference internal" href="principle.html#prinxssrefer"><span class="std std-ref">principle of the XSS technique with reference beam</span></a> and the
+<a class="reference internal" href="userguide.html#slope"><span class="std std-ref">User guide</span></a> for reconstructing of the wavefront slope error.</p>
 <div role="list" class="citation-list">
 <div class="citation" id="huxssjsrpaper" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">HuXSSJSRpaper</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span>HuXSSJSRpaper<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id2">2</a>)</span>
 <p>Hu, L., Wang, H., Fox, O., &amp; Sawhney, K. (2022).
 Two-dimensional speckle technique for slope error measurements of
 weakly focusing reflective X-ray optics.
@@ -213,7 +252,7 @@ J. Synchrotron Rad. 29(6).
 the local curvature of the wavefront after a plane mirror. Then we will
 show that the fine structures appeared on the intensity image correspond
 to the lcoal curvature map.</p>
-<p>This example is extracted from <a class="reference internal" href="#hustripeoepaper" id="id2"><span>[HuStripeOEpaper]</span></a>.</p>
+<p>This example is extracted from <a class="reference internal" href="#hustripeoepaper" id="id3"><span>[HuStripeOEpaper]</span></a>.</p>
 <p>After the general settings of the image stack <code class="docutils literal notranslate"><span class="pre">imstack</span></code> and the
 Tracking class <code class="docutils literal notranslate"><span class="pre">track_XSS</span></code>,</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">ROI</span> <span class="o">=</span> <span class="p">[</span><span class="mi">180</span><span class="p">,</span> <span class="mi">1980</span><span class="p">,</span> <span class="mi">690</span><span class="p">,</span> <span class="mi">1270</span><span class="p">]</span>   <span class="c1"># [y_start, y_end, x_start, x_end]</span>
@@ -261,7 +300,7 @@ the intensity image can be related to the structures appeared
 in the local curvature 2D map.</p>
 <div role="list" class="citation-list">
 <div class="citation" id="hustripeoepaper" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">HuStripeOEpaper</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">HuStripeOEpaper</a><span class="fn-bracket">]</span></span>
 <p>Hu, L., Wang, H., Sutter, J., &amp; Sawhney, K. (2021).
 Investigation of the stripe patterns from X-ray reflection optics.
 Opt. Express 29, 4270-4286
@@ -316,7 +355,7 @@ measurement, we need to project the wavefront at the detector plane
 back to the mirror surface. To do that,
 we need the following iterative algorithm.</p>
 <p>The main idea of the following iterative algorithm is very similar
-to <a class="reference internal" href="#sebastiengrating" id="id3"><span>[SebastienGrating]</span></a>.</p>
+to <a class="reference internal" href="#sebastiengrating" id="id4"><span>[SebastienGrating]</span></a>.</p>
 <p>Two relations are used to devise the iterative algorithm.
 First, the slope of the mirror can be calculated as</p>
 <div class="math notranslate nohighlight">
@@ -431,7 +470,7 @@ to match the off-line NOM data.</p>
 </div>
 <div role="list" class="citation-list">
 <div class="citation" id="sebastiengrating" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">SebastienGrating</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">SebastienGrating</a><span class="fn-bracket">]</span></span>
 <p>S. Berujon, and E. Ziegler,
 Grating-based at-wavelength metrology of hard x-ray reflective optics
 Opt. Lett. 37, 4464-4466 (2012).
@@ -445,7 +484,7 @@ Opt. Lett. 37, 4464-4466 (2012).
 <a class="reference internal" href="principle.html#prinxssself"><span class="std std-ref">self-reference XSS technique</span></a>
 and the 1D <a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">self-reference XST technique</span></a> at first.
 The optic we used is a plane mirror. Similar results has been published
-from <a class="reference internal" href="#huxstoepaperfast" id="id4"><span>[HuXSTOEPaperFast]</span></a>.</p>
+from <a class="reference internal" href="#huxstoepaperfast" id="id5"><span>[HuXSTOEPaperFast]</span></a>.</p>
 <p>The plane mirror speckle data is the same as in
 <a class="reference internal" href="#expplane"><span class="std std-ref">Plane mirror measurement with reference beam</span></a>, and we only use the
 data with mirror in the beam.</p>
@@ -511,10 +550,10 @@ function to process the data.</p>
 <p>We plot the wavefront curvature obtained from the two technqiues together, note that the way
 to calculate the wavefront curvature from the two techniques are different, please refer to
 <a class="reference internal" href="userguide.html#curvature"><span class="std std-ref">Local curvature reconstruction</span></a>.</p>
-<figure class="align-default" id="id6">
+<figure class="align-default" id="id7">
 <a class="reference internal image-reference" href="_images/XSTvsXSS_2.png"><img alt="_images/XSTvsXSS_2.png" src="_images/XSTvsXSS_2.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Wavefront curvature obtained from XSS and XST techniques.</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Wavefront curvature obtained from XSS and XST techniques.</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>The results from the two techniques match with each other. Further, we can
@@ -578,7 +617,7 @@ we still have the following 2D wavefront map.</p>
 and accuracy compared to the self-reference XSS technique.</p>
 <div role="list" class="citation-list">
 <div class="citation" id="huxstoepaperfast" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">HuXSTOEPaperFast</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">HuXSTOEPaperFast</a><span class="fn-bracket">]</span></span>
 <p>Hu, L., Wang, H., Fox, O., &amp; Sawhney, K. (2022).
 Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique.
 Opt. Exp., 30(18), 33259-33273.
@@ -590,7 +629,7 @@ Opt. Exp., 30(18), 33259-33273.
 <span id="expkbalign"></span><h2>KB mirror alignment using self-reference XST technique<a class="headerlink" href="#kb-mirror-alignment-using-self-reference-xst-technique" title="Permalink to this heading"></a></h2>
 <p>In this example we will show how to align KB mirror’s pitch angle (<span class="math notranslate nohighlight">\(\theta\)</span>)
 using the <a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">self-reference XST technique</span></a>. This example is similar
-to Fig.5 in <a class="reference internal" href="#huxstoepaperfast2" id="id5"><span>[HuXSTOEPaperFast2]</span></a>.</p>
+to Fig.5 in <a class="reference internal" href="#huxstoepaperfast2" id="id6"><span>[HuXSTOEPaperFast2]</span></a>.</p>
 <p>The basic idea is also described in the above paper. At the nominal angle <span class="math notranslate nohighlight">\(\theta\)</span>,
 the local curvature is constant along the mirror length. However, if it deviates to the
 nominal value, the local curvature will change along the mirror length. The change of the
@@ -667,40 +706,40 @@ diffuser positions. The movement of the diffuser is 4 <span class="math notransl
 </pre></div>
 </div>
 <p>We can plot the obtained local curvature.</p>
-<figure class="align-default" id="id7">
+<figure class="align-default" id="id8">
 <a class="reference internal image-reference" href="_images/HKB_1.png"><img alt="_images/HKB_1.png" src="_images/HKB_1.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Local wavefront curvature of HKB mirror.</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Local wavefront curvature of HKB mirror.</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>We can find that the data cloase to one end is abnormal due to the visible
 stains observed on the mirror surface, we cut that part.</p>
-<figure class="align-default" id="id8">
+<figure class="align-default" id="id9">
 <a class="reference internal image-reference" href="_images/HKB_2.png"><img alt="_images/HKB_2.png" src="_images/HKB_2.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Local wavefront curvature of HKB mirror after cropping the abnormal data.</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Local wavefront curvature of HKB mirror after cropping the abnormal data.</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>We can also plot the wavefron local curvature changed by the VKB mirror.</p>
-<figure class="align-default" id="id9">
+<figure class="align-default" id="id10">
 <a class="reference internal image-reference" href="_images/VKB_1.png"><img alt="_images/VKB_1.png" src="_images/VKB_1.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Local wavefront curvature of VKB mirror.</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Local wavefront curvature of VKB mirror.</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>We do linear fitting for the measured local wavefront curvature data.
 From the following figure we can see clearly the linear relation
 predicted by the theory. The nominal angle <span class="math notranslate nohighlight">\(\theta\)</span> is at the
 position where the fitted slope is close to 0.</p>
-<figure class="align-default" id="id10">
+<figure class="align-default" id="id11">
 <a class="reference internal image-reference" href="_images/KBalign.png"><img alt="_images/KBalign.png" src="_images/KBalign.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">The fitted slope for the above measured curves.</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The fitted slope for the above measured curves.</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <div role="list" class="citation-list">
 <div class="citation" id="huxstoepaperfast2" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">HuXSTOEPaperFast2</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">HuXSTOEPaperFast2</a><span class="fn-bracket">]</span></span>
 <p>Hu, L., Wang, H., Fox, O., &amp; Sawhney, K. (2022).
 Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique.
 Opt. Exp., 30(18), 33259-33273.

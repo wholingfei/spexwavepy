@@ -1,17 +1,34 @@
 ========
 Examples
 ========
-*Say something here...*
+Apart from the sample codes shown for the :ref:`tutorial <tutorial>`, we also provide several 
+examples in **spexwavepy** package to help users to learn how to do the data processing for 
+different speckle-based techniques. All the examples shown here are extracted from our previous 
+published research papers. We also shared the raw data for users of **spexwavepy** package. 
+Please refer to :ref:`Getting started page <rawdata>` for downloading these raw data. 
+
+.. note::
+   **The shared raw data is only used for study. Please do not distribute the raw data.
+   If you would like to use these raw data for publication and so on, 
+   please contact the authors of this package.**
 
 .. _expplane:
 
 Plane mirror measurement with reference beam
 ============================================
+.. note::
+   Please find the example code from */spexwavepy/examples/planemirror_2D.py*
+
 In this example, we would like to show that how to use the 
 :ref:`XSS technique with reference beam <prinXSSRefer>` to 
-measure the plane mirror.
+measure a plane mirror.
 
 This example basically extracts from [HuXSSJSRpaper]_.
+
+After detemining the data folder path and appropriate ROI for both sample and 
+reference images, we define the :py:class:`~spexwavepy.imstackfun.Imagestack` 
+classes to contain the data.
+Then we define the :py:class:`~spexwavepy.trackfun.Tracking` class.
 
 .. code-block:: Python
 
@@ -40,14 +57,18 @@ Before we do the speckle pattern tracking, another thing we need to
 do is to align the speckle patterns from the two image stacks. It is
 particularly needed when the test optic is a mirror.
 We use :py:func:`~spexwavepy.trackfun.Tracking.collimate` function to do 
-the alignment.
+the alignment. Please refer to the 
+:ref:`User guide <tracolli>` for the detailed description of this function.
 
 .. code-block:: Python
 
    track_XSS.collimate(10, 200)
 
 After that, the speckle patterns from both image stacks are aligned and
-ready to be tracked.
+ready to be tracked. We set the related parameters before we call the method 
+used for speckle tracking.
+Please refer to the :ref:`User guide <traXSS>` for the detailed explanation of these 
+parameters.
 
 .. code-block:: Python
 
@@ -57,7 +78,12 @@ ready to be tracked.
    width = 100
    pad_xy = 30
 
-After setting the initial parameters for the speckle patter tracking, we use either single-core version or multi-core version of the method used for the XSS technique with reference beam to obtain the speckle pattern shifts. Since the scan direction is along 'x', then ``edge_x`` is 0. Also, the ``edge_z`` is not symmetrical. 
+After setting the initial parameters, 
+we use either single-core version :py:meth:`~spexwavepy.trackfun.Tracking.XSS_withrefer`
+or multi-core version :py:meth:`~spexwavepy.trackfun.Tracking.XSS_withrefer_multi`
+of the method to obtain the speckle pattern shifts. 
+Since the scan direction is along 'x', then ``edge_x`` is 0. 
+Also, the ``edge_z`` is not symmetrical. 
 
 .. code-block:: Python
 
@@ -75,11 +101,19 @@ The shift in *'x'* direction looks like
 .. image:: _static/planeM_1.png
    :width: 80%
 
-Since we only scanned in the horizontal (x) direction, the ``delayX`` is only 
+Since we only scanned in the horizontal (x) direction, the ``delayX`` is 
+the only "canonical" processed data
 stored in the ``track_XSS`` class. No ``track_XSS.delayY`` is available. 
 However, we do store the tracked value in another direction in the 
 :py:class:`~spexwavepy.trackfun.Tracking` class. 
 In this example, the shift in *'y'*  direction is stored in ``track_XSS._delayY``.
+
+.. note::
+   The underscored attribute such as ``Tracking._delayX`` or ``Tracking._delayY`` are not 
+   intended to be exposed to the user. However, in some cases, they do help the users with 
+   their data processing. Nonetheless, please keep in mind that the underscored data are not 
+   "canonical" basically.
+
 It looks like
 
 .. image:: _static/planeM_2.png
@@ -93,11 +127,11 @@ direction should be very small. If we extract a central horizontal line from the
    :width: 80%
 
 This indicate that the mirror is not perfectly parallel with the reference incident beam. 
-The raw images need to be rotated and carefully aligned. According to the paper,
+The raw images need to be rotated and carefully aligned. According to the paper [HuXSSJSRpaper]_,
 the rotation angle is calculated to be around -0.275 degrees.
 
 We can use :py:func:`~spexwavepy.imstackfun.Imagestack.rotate` function
-to do the rotation.
+to do the rotation. See the :ref:`User guide <userot>` for its help information.
 
 .. code-block:: Python
 
@@ -172,8 +206,9 @@ As a result, we need to cut the edge of the rotated images.
    imstack_ref.data = imstack_ref.data[:,cut:-cut, cut:-cut]
 
 After that, we redefine the ``track_XSS`` class and do the same operations
-as before, using either single-core version or multi-core version of 
-the XSS tracking method, we have the following tracked shift in *`y`* 
+as before, using either single-core version :py:meth:`~spexwavepy.trackfun.Tracking.XSS_withrefer`
+or multi-core version :py:meth:`~spexwavepy.trackfun.Tracking.XSS_withrefer_multi` 
+of the XSS tracking method, we have the following tracked shift in *y* 
 direction.
 
 .. image:: _static/PlaneM_5.png
@@ -184,14 +219,16 @@ We can also extract the central line
 .. image:: _static/PlaneM_6.png
    :width: 80%
 
-The tracked speckle pattern shift in 'y' direction has been properly corrected.
-We also have the tracked shift in 'x' direction.
+We can see the tracked speckle pattern shift in *y* direction has been properly corrected.
+We also have the tracked shift in *x* direction.
 
 .. image:: _static/PlaneM_4.png
    :width: 80%
 
-Besides, the slope error in *'x'* direction has been stored in the ``slopeX`` of 
-``track_XSS`` class.
+Besides, the slope error in *x* direction has also been calculated and stored 
+in the ``slopeX`` of ``track_XSS`` class. Please refer to the 
+:ref:`principle of the XSS technique with reference beam <prinXSSRefer>` and the 
+:ref:`User guide <slope>` for reconstructing of the wavefront slope error.
 
 .. [HuXSSJSRpaper] Hu, L., Wang, H., Fox, O., & Sawhney, K. (2022). 
               Two-dimensional speckle technique for slope error measurements of 

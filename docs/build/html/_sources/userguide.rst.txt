@@ -465,7 +465,7 @@ Another method is :py:meth:`~spexwavepy.imstackfun.Imagestack.rotate`.
 
 .. code-block:: Python
 
-   imstack.rot90deg(45)      # In [deg]
+   imstack.rotate(45)      # In [deg]
 
 .. figure:: _static/rotate45deg.png
    :width: 100%
