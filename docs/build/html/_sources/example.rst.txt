@@ -95,6 +95,9 @@ Or
 
    track_XSS.XSS_withrefer_multi(edge_x, edge_y, edge_z, width, pad_xy, cpu_no=16, normalize=True)
 
+.. warning::
+   Please check the available CPUs before calling :py:meth:`~spexwavepy.trackfun.Tracking.XSS_withrefer_multi` method. 
+
 Note that we did ``normalization`` for the stiched images in this example.
 The shift in *'x'* direction looks like
 
@@ -240,15 +243,18 @@ in the ``slopeX`` of ``track_XSS`` class. Please refer to the
 
 Measurement of the wavefront local curvature after a plane mirror
 =================================================================
+.. note::
+   Please find the example code from */spexwavepy/examples/plane_XSSself.py*
+
 In this example, we will use the :ref:`self-reference XSS technique <prinXSSSelf>` to measure 
-the local curvature of the wavefront after a plane mirror. Then we will 
-show that the fine structures appeared on the intensity image correspond 
-to the lcoal curvature map.
+the local curvature of the wavefront after a plane mirror. We will 
+show that **the fine structures appeared on the intensity image correspond 
+to the local curvature map**.
+This example is extracted from [HuStripeOEpaper]_ and [HuStripeOEpaper2]_.
+Please refer to the papers for the detailed physics of this example.
 
-This example is extracted from [HuStripeOEpaper]_.
-
-After the general settings of the image stack ``imstack`` and the 
-Tracking class ``track_XSS``, 
+First, let's set the parameters for the :py:class:`~spexwavepy.imstackfun.Imagestack` class 
+``imstack`` and the :py:class:`~spexwavepy.trackfun.Tracking` class ``track_XSS`` as usual,
 
 .. code-block:: Python
 
@@ -265,6 +271,8 @@ we call :py:func:`~spexwavepy.trackfun.Tracking.XSS_self` or
 :py:func:`~spexwavepy.trackfun.Tracking.XSS_self_multi` function 
 to process the data acquired using 
 :ref:`self-reference XSS technique <prinXSSSelf>`.
+Please also refer to the :ref:`User guide <traXSSself>` for the detailed 
+explanation of the related parameters.
 
 .. code-block:: Python
 
@@ -279,20 +287,29 @@ to process the data acquired using
    cpu_no = 16
    track_XSS.XSS_self_multi(edge_x, edge_y, edge_z, nstep, width, pad_xy, cpu_no, normalize)
 
+.. warning::
+   Please check the available CPUs before calling :py:meth:`~spexwavepy.trackfun.Tracking.XSS_self_multi` method. 
+
 For this technique, the wavefront local curvature is the quantity directly reconstructed. 
-We show the 2D map of it. The 2D map generated from the function 
+The 2D map generated from the :py:meth:`~spexwavepy.trackfun.Tracking.XSS_self` or 
+:py:meth:`~spexwavepy.trackfun.Tracking.XSS_self_multi` function 
 is the local curvature of the wavefront **on the detector plane**. 
+Since we san along the *x* direction, the 2D wavefront curvature is 
+stored in the ``curvX`` attribute of :py:class:`~spexwavepy.trackfun.Tracking` class. 
+Otherwise, the curvature in *y* direction is stroed in ``curvY``.
+The 2D figure of the wavefront local curvature in *x* direction is shown below.
 
 .. image:: _static/planeMXSSself.png
    :width: 80%
 
 The far-field intensity images are also acquired. We read them and do the average.
 The image stack data are stored in the ``data`` attribute of the 
-:py:class:`spexwavepy.imstackfun.Imagestack` class. We do the average on ``data``.
+:py:class:`~spexwavepy.imstackfun.Imagestack` class. We do the average on ``data``.
 Then we show the intensity image. 
 
 .. code-block:: Python
 
+   import numpy as np
    imstack2 = Imagestack(flatFolder, ROI)
    imstack2.read_data()
    ffimage = np.mean(imstack2.data, axis=0)
@@ -302,12 +319,19 @@ Then we show the intensity image.
 
 From the two images shown in the above, we can find that those structures in 
 the intensity image can be related to the structures appeared 
-in the local curvature 2D map.
+in the wavefront local curvature 2D map.
+The two papers [HuStripeOEpaper]_ and [HuStripeOEpaper2]_ give a detailed 
+physical explanation of this phenomenon.
 
 .. [HuStripeOEpaper] Hu, L., Wang, H., Sutter, J., & Sawhney, K. (2021).
                      Investigation of the stripe patterns from X-ray reflection optics.
-                     Opt. Express 29, 4270-4286  
+                     Opt. Express 29, 4270-4286.   
                      https://doi.org/10.1364/OE.417030
+
+.. [HuStripeOEpaper2] Hu, L, Wang, H, Sutter, J. &  Sawhney, K. (2023).
+                      Research on the beam structures observed from X-ray optics in the far field. 
+                      Opt Express 31(25):41000-41013. 
+                      https://doi.org/10.1364/OE.499685
 
 .. _iterative:
 

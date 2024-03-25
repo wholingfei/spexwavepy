@@ -827,7 +827,7 @@ Apart from the newly introduced ``nstep`` parameter, all the other
 parameters are the same as in the corresponding 
 :py:func:`~spexwavepy.trackfun.Tracking.XSS_withrefer` and 
 :py:func:`~spexwavepy.trackfun.Tracking.XSS_withrefer_multi` functions, 
-as already been described in the above. 
+as already been described in the :ref:`above <traXSS>`. 
 
 However, the physical quantities directly reconstructed 
 from this technique are dfferent from the

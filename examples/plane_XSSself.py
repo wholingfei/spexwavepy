@@ -14,7 +14,8 @@ from spexwavepy.trackfun import Tracking
 from spexwavepy.corefun import read_one, crop_one
 
 if __name__ == "__main__":
-    folderName = "/dls/science/groups/b16/SpeckleData/planemXSSself/Xscan/354343-pcoedge-files/"
+    #folderName = "/home/lingfei/spexwavepy/data/planemXSSself/Xscan/354343-pcoedge-files/"
+    folderName = "/YOUR/DATA/FOLDER/PATH/planemXSSself/Xscan/354343-pcoedge-files/"
     ROI = [180, 1980, 690, 1270]   # [y_start, y_end, x_start, x_end]
     imstack = Imagestack(folderName, ROI)
     track_XSS = Tracking(imstack)
@@ -35,7 +36,8 @@ if __name__ == "__main__":
     cpu_no = 16
     track_XSS.XSS_self_multi(edge_x, edge_y, edge_z, nstep, width, pad_xy, cpu_no, normalize)
 
-    flatFolder = "/dls/science/groups/b16/SpeckleData/planemXSSself/FlatField/354340-pcoedge-files/"
+    #flatFolder = "/home/lingfei/spexwavepy/data/planemXSSself/FlatField/354340-pcoedge-files/"
+    flatFolder = "/YOUR/DATA/FOLDER/PATH/planemXSSself/FlatField/354340-pcoedge-files/"
     imstack2 = Imagestack(flatFolder, ROI)
     imstack2.read_data()
     ffimage = np.mean(imstack2.data, axis=0)
