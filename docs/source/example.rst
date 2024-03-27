@@ -12,6 +12,11 @@ Please refer to :ref:`Getting started page <rawdata>` for downloading these raw 
    If you would like to use these raw data for publication and so on, 
    please contact the authors of this package.**
 
+.. note::
+   To be able to run all the provided examples with shared experiment data, 
+   please change the default data folder path to where your data is stored once you
+   download it.
+
 .. _expplane:
 
 Plane mirror measurement with reference beam
@@ -330,13 +335,16 @@ physical explanation of this phenomenon.
 
 .. [HuStripeOEpaper2] Hu, L, Wang, H, Sutter, J. &  Sawhney, K. (2023).
                       Research on the beam structures observed from X-ray optics in the far field. 
-                      Opt Express 31(25):41000-41013. 
+                      Opt. Express 31(25):41000-41013. 
                       https://doi.org/10.1364/OE.499685
 
 .. _iterative:
 
 Mirror slope error curve (1D) reconstructed from the dowmstream setup
 =====================================================================
+.. note::
+   Please find the example code from */spexwavepy/examples/curvm_XSSself.py*
+
 A curved mirror is measured in this example. The diffuser is placed 
 downstream of the mirror. 
 
@@ -346,18 +354,22 @@ downstream of the mirror.
 Because the curved mirror has no available reference beam, we use the 
 :ref:`self-reference XSS technique <prinXSSSelf>` for the measurement.
 It is easy to obtain the 1D curve of the wavefront curvature.
+This example is extracted from this paper [ZhouJSRpaper]_.
+For the detailed description of the physics and algorithm, please refer to 
+the paper.
 
 Let's check the raw data image first.
 
 .. code-block:: Python
 
+   from spexwavepy.corefun import read_one
    ShowImage = True
    im_sam = read_one(folderName + 'ipp_292770_1.TIF', ShowImage=ShowImage)
 
 .. image:: _static/curviter_1.png
    :width: 80%
 
-To obtain the 1D local wavefront curvature curve, 
+To obtain the 1D wavefront local curvature curve, 
 we choose a small stripe of around 150 pixels in width, 
 that is around 1mm wide.
 
@@ -380,22 +392,24 @@ that is around 1mm wide.
    edge_z = [5, 30] 
    nstep = 2
 
-   track_XSS.XSS_self(edge_x, edge_y, edge_z, nstep, display=True)
+   track_XSS.XSS_self(edge_x, edge_y, edge_z, nstep, display=False)
 
 After setting up the :py:class:`~spexwavepy.imstackfun.Imagestack` 
 class ``imstack`` and :py:class:`~spexwavepy.trackfun.Tracking` class
-``track_XSS`` and the related parameters, we have the wavefront 
-curvature curve at the detector plane ``track_XSS.curvY``.
+``track_XSS`` and the related parameters,
+we call :py:meth:`~spexwavepy.trackfun.Tracking.XSS_self` function to 
+calculate the wavefront local curvature **on the detector plane**.
+The obtained result is stored in ``track_XSS.curvY`` attribute.
 
 .. image:: _static/curvmiter_2.png
    :width: 80%
 
 In order to compare the at-wavelength measurement with the off-line NOM
-measurement, we need to project the wavefront at the detector plane 
-back to the mirror surface. To do that, 
+measurement, we need to **project the wavefront on the detector plane 
+back to the mirror surface**. To do that, 
 we need the following iterative algorithm.
-
-The main idea of the following iterative algorithm is very similar 
+This algorithm has been described in detail in this paper [ZhouJSRpaper]_.
+The main idea of the following iterative algorithm is also similar 
 to [SebastienGrating]_. 
 
 Two relations are used to devise the iterative algorithm.
@@ -416,11 +430,11 @@ height, which is also :math:`y` coordinate of the mirror.
 .. math::
    y = \int_{0}^{x}slo(x)dx
 
-Among the above equations, the mirror slope is measured quantity and 
+From the above equations, the mirror slope is the measured quantity and 
 is already known, the detector coordinate :math:`Y_{det}` is also 
 known, so is the distance :math:`d`. 
 
-We use the first equation to calculate mirror corrdinate :math:`x`,
+We use the first equation to calculate the mirror surface corrdinate :math:`x`,
 the second equation to calculate :math:`y`. We do it iteratively. 
 In the end, both :math:`x` and :math:`y` will converge.
 
@@ -507,6 +521,11 @@ together.
    plt.legend()
    ######### 
 
+.. note::
+   We use the `pandas <https://pandas.pydata.org/docs/index.html>`_ library to 
+   read the xlsx file. However, the pandas library is not mandatory for **spexwavepy**. 
+   You can run **spexwavepy** well without the supoort of padans.
+
 .. image:: _static/curviter_3.png
    :width: 80%
 
@@ -521,11 +540,13 @@ We can also check the fitted parameters of the elliptical mirror.
 
 The fitted p is 45.735 m, q is 0.37 m, :math:`\theta` 
 is 3.08 mrad. 
+The initial value ``theta``, ``D`` can be finely adjusted 
+to match the off-line NOM data. 
 
-.. note::
-   The initial value ``theta``, ``D`` can be fine adjusted 
-   to match the off-line NOM data. 
 
+.. [ZhouJSRpaper]     Zhou T., Hu L., Wang, H., Sutter, J. &  Sawhney, K. (2024).
+                      At-wavelength metrology of an X-ray mirror using a downstream wavefront modulator.
+                      J. Synchrotron Radiat. 31(3) (To be published)
 
 .. [SebastienGrating] S. Berujon, and E. Ziegler, 
                       Grating-based at-wavelength metrology of hard x-ray reflective optics

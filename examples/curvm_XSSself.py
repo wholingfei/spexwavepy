@@ -19,8 +19,8 @@ from spexwavepy.postfun import EllipseSlope
 
 if __name__ == "__main__":
     ShowImage = True
-    currentfolder = os.getcwd()
-    folderName = "/dls/science/groups/b16/SpeckleData/curvmirrorDown/"
+    #folderName = "/home/lingfei/spexwavepy/data/curvmirrorDown/"
+    folderName = "/YOUR/DATA/FOLDER/PATH/curvmirrorDown/"
     #im_sam = read_one(folderName + 'ipp_292770_1.TIF', ShowImage=ShowImage)
     ROI = [338, 643, 675, 825]          #[y_start, y_end, x_start, x_end]
     #crop_one(im_sam, ROI, ShowImage=ShowImage)
@@ -89,12 +89,15 @@ if __name__ == "__main__":
     popt, pcov = scipy.optimize.curve_fit(EllipseSlope, x, SloErr, bounds=([p-1, 0., theta-0.3e-3], [p+1, 1., theta+0.3e-3]))
     SloFit = EllipseSlope(x, popt[0], popt[1], popt[2])
     SloRes = SloErr - SloFit
+
+    #print(popt)
     #########
 
     ######### Exel data reading
     import pandas
 
-    exel_folder = currentfolder + "/NOM_data.xlsx"
+    #exel_folder = "/home/lingfei/spexwavepy/data/NOM_data.xlsx"
+    exel_folder = "/YOUR/DATA/FOLDER/PATH/NOM_data.xlsx"
     data_Fram = pandas.read_excel(exel_folder)
     data_array = np.array(data_Fram)
     x_lane1 = data_array[2:901, 1]

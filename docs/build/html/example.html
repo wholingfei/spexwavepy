@@ -58,6 +58,12 @@ Please refer to <a class="reference internal" href="getstart.html#rawdata"><span
 If you would like to use these raw data for publication and so on,
 please contact the authors of this package.</strong></p>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To be able to run all the provided examples with shared experiment data,
+please change the default data folder path to where your data is stored once you
+download it.</p>
+</div>
 <section id="plane-mirror-measurement-with-reference-beam">
 <span id="expplane"></span><h2>Plane mirror measurement with reference beam<a class="headerlink" href="#plane-mirror-measurement-with-reference-beam" title="Permalink to this heading"></a></h2>
 <div class="admonition note">
@@ -335,26 +341,34 @@ Opt. Express 29, 4270-4286.
 <span class="backrefs">(<a role="doc-backlink" href="#id4">1</a>,<a role="doc-backlink" href="#id6">2</a>)</span>
 <p>Hu, L, Wang, H, Sutter, J. &amp;  Sawhney, K. (2023).
 Research on the beam structures observed from X-ray optics in the far field.
-Opt Express 31(25):41000-41013.
+Opt. Express 31(25):41000-41013.
 <a class="reference external" href="https://doi.org/10.1364/OE.499685">https://doi.org/10.1364/OE.499685</a></p>
 </div>
 </div>
 </section>
 <section id="mirror-slope-error-curve-1d-reconstructed-from-the-dowmstream-setup">
 <span id="iterative"></span><h2>Mirror slope error curve (1D) reconstructed from the dowmstream setup<a class="headerlink" href="#mirror-slope-error-curve-1d-reconstructed-from-the-dowmstream-setup" title="Permalink to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please find the example code from <em>/spexwavepy/examples/curvm_XSSself.py</em></p>
+</div>
 <p>A curved mirror is measured in this example. The diffuser is placed
 downstream of the mirror.</p>
 <a class="reference internal image-reference" href="_images/curvMXSS_1.png"><img alt="_images/curvMXSS_1.png" src="_images/curvMXSS_1.png" style="width: 60%;" /></a>
 <p>Because the curved mirror has no available reference beam, we use the
 <a class="reference internal" href="principle.html#prinxssself"><span class="std std-ref">self-reference XSS technique</span></a> for the measurement.
-It is easy to obtain the 1D curve of the wavefront curvature.</p>
+It is easy to obtain the 1D curve of the wavefront curvature.
+This example is extracted from this paper <a class="reference internal" href="#zhoujsrpaper" id="id7"><span>[ZhouJSRpaper]</span></a>.
+For the detailed description of the physics and algorithm, please refer to
+the paper.</p>
 <p>Let’s check the raw data image first.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">ShowImage</span> <span class="o">=</span> <span class="kc">True</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">spexwavepy.corefun</span> <span class="kn">import</span> <span class="n">read_one</span>
+<span class="n">ShowImage</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="n">im_sam</span> <span class="o">=</span> <span class="n">read_one</span><span class="p">(</span><span class="n">folderName</span> <span class="o">+</span> <span class="s1">&#39;ipp_292770_1.TIF&#39;</span><span class="p">,</span> <span class="n">ShowImage</span><span class="o">=</span><span class="n">ShowImage</span><span class="p">)</span>
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/curviter_1.png"><img alt="_images/curviter_1.png" src="_images/curviter_1.png" style="width: 80%;" /></a>
-<p>To obtain the 1D local wavefront curvature curve,
+<p>To obtain the 1D wavefront local curvature curve,
 we choose a small stripe of around 150 pixels in width,
 that is around 1mm wide.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">ROI</span> <span class="o">=</span> <span class="p">[</span><span class="mi">338</span><span class="p">,</span> <span class="mi">643</span><span class="p">,</span> <span class="mi">675</span><span class="p">,</span> <span class="mi">825</span><span class="p">]</span>          <span class="c1">#[y_start, y_end, x_start, x_end]</span>
@@ -374,20 +388,23 @@ that is around 1mm wide.</p>
 <span class="n">edge_z</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
 <span class="n">nstep</span> <span class="o">=</span> <span class="mi">2</span>
 
-<span class="n">track_XSS</span><span class="o">.</span><span class="n">XSS_self</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">edge_z</span><span class="p">,</span> <span class="n">nstep</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">track_XSS</span><span class="o">.</span><span class="n">XSS_self</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">edge_z</span><span class="p">,</span> <span class="n">nstep</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>After setting up the <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack" title="spexwavepy.imstackfun.Imagestack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Imagestack</span></code></a>
 class <code class="docutils literal notranslate"><span class="pre">imstack</span></code> and <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class
-<code class="docutils literal notranslate"><span class="pre">track_XSS</span></code> and the related parameters, we have the wavefront
-curvature curve at the detector plane <code class="docutils literal notranslate"><span class="pre">track_XSS.curvY</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">track_XSS</span></code> and the related parameters,
+we call <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_self" title="spexwavepy.trackfun.Tracking.XSS_self"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XSS_self()</span></code></a> function to
+calculate the wavefront local curvature <strong>on the detector plane</strong>.
+The obtained result is stored in <code class="docutils literal notranslate"><span class="pre">track_XSS.curvY</span></code> attribute.</p>
 <a class="reference internal image-reference" href="_images/curvmiter_2.png"><img alt="_images/curvmiter_2.png" src="_images/curvmiter_2.png" style="width: 80%;" /></a>
 <p>In order to compare the at-wavelength measurement with the off-line NOM
-measurement, we need to project the wavefront at the detector plane
-back to the mirror surface. To do that,
-we need the following iterative algorithm.</p>
-<p>The main idea of the following iterative algorithm is very similar
-to <a class="reference internal" href="#sebastiengrating" id="id7"><span>[SebastienGrating]</span></a>.</p>
+measurement, we need to <strong>project the wavefront on the detector plane
+back to the mirror surface</strong>. To do that,
+we need the following iterative algorithm.
+This algorithm has been described in detail in this paper <a class="reference internal" href="#zhoujsrpaper" id="id8"><span>[ZhouJSRpaper]</span></a>.
+The main idea of the following iterative algorithm is also similar
+to <a class="reference internal" href="#sebastiengrating" id="id9"><span>[SebastienGrating]</span></a>.</p>
 <p>Two relations are used to devise the iterative algorithm.
 First, the slope of the mirror can be calculated as</p>
 <div class="math notranslate nohighlight">
@@ -401,10 +418,10 @@ curvature. If we integrate the mirror slope, we can have the mirror
 height, which is also <span class="math notranslate nohighlight">\(y\)</span> coordinate of the mirror.</p>
 <div class="math notranslate nohighlight">
 \[y = \int_{0}^{x}slo(x)dx\]</div>
-<p>Among the above equations, the mirror slope is measured quantity and
+<p>From the above equations, the mirror slope is the measured quantity and
 is already known, the detector coordinate <span class="math notranslate nohighlight">\(Y_{det}\)</span> is also
 known, so is the distance <span class="math notranslate nohighlight">\(d\)</span>.</p>
-<p>We use the first equation to calculate mirror corrdinate <span class="math notranslate nohighlight">\(x\)</span>,
+<p>We use the first equation to calculate the mirror surface corrdinate <span class="math notranslate nohighlight">\(x\)</span>,
 the second equation to calculate <span class="math notranslate nohighlight">\(y\)</span>. We do it iteratively.
 In the end, both <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> will converge.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1">######### Iterative algorithm for donwstream case</span>
@@ -485,6 +502,12 @@ together.</p>
 <span class="c1">#########</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We use the <a class="reference external" href="https://pandas.pydata.org/docs/index.html">pandas</a> library to
+read the xlsx file. However, the pandas library is not mandatory for <strong>spexwavepy</strong>.
+You can run <strong>spexwavepy</strong> well without the supoort of padans.</p>
+</div>
 <a class="reference internal image-reference" href="_images/curviter_3.png"><img alt="_images/curviter_3.png" src="_images/curviter_3.png" style="width: 80%;" /></a>
 <p>We can also check the fitted parameters of the elliptical mirror.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">popt</span><span class="p">)</span>
@@ -494,15 +517,19 @@ together.</p>
 </pre></div>
 </div>
 <p>The fitted p is 45.735 m, q is 0.37 m, <span class="math notranslate nohighlight">\(\theta\)</span>
-is 3.08 mrad.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The initial value <code class="docutils literal notranslate"><span class="pre">theta</span></code>, <code class="docutils literal notranslate"><span class="pre">D</span></code> can be fine adjusted
+is 3.08 mrad.
+The initial value <code class="docutils literal notranslate"><span class="pre">theta</span></code>, <code class="docutils literal notranslate"><span class="pre">D</span></code> can be finely adjusted
 to match the off-line NOM data.</p>
-</div>
 <div role="list" class="citation-list">
+<div class="citation" id="zhoujsrpaper" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>ZhouJSRpaper<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id7">1</a>,<a role="doc-backlink" href="#id8">2</a>)</span>
+<p>Zhou T., Hu L., Wang, H., Sutter, J. &amp;  Sawhney, K. (2024).
+At-wavelength metrology of an X-ray mirror using a downstream wavefront modulator.
+J. Synchrotron Radiat. 31(3) (To be published)</p>
+</div>
 <div class="citation" id="sebastiengrating" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">SebastienGrating</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">SebastienGrating</a><span class="fn-bracket">]</span></span>
 <p>S. Berujon, and E. Ziegler,
 Grating-based at-wavelength metrology of hard x-ray reflective optics
 Opt. Lett. 37, 4464-4466 (2012).
@@ -516,7 +543,7 @@ Opt. Lett. 37, 4464-4466 (2012).
 <a class="reference internal" href="principle.html#prinxssself"><span class="std std-ref">self-reference XSS technique</span></a>
 and the 1D <a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">self-reference XST technique</span></a> at first.
 The optic we used is a plane mirror. Similar results has been published
-from <a class="reference internal" href="#huxstoepaperfast" id="id8"><span>[HuXSTOEPaperFast]</span></a>.</p>
+from <a class="reference internal" href="#huxstoepaperfast" id="id10"><span>[HuXSTOEPaperFast]</span></a>.</p>
 <p>The plane mirror speckle data is the same as in
 <a class="reference internal" href="#expplane"><span class="std std-ref">Plane mirror measurement with reference beam</span></a>, and we only use the
 data with mirror in the beam.</p>
@@ -582,10 +609,10 @@ function to process the data.</p>
 <p>We plot the wavefront curvature obtained from the two technqiues together, note that the way
 to calculate the wavefront curvature from the two techniques are different, please refer to
 <a class="reference internal" href="userguide.html#curvature"><span class="std std-ref">Local curvature reconstruction</span></a>.</p>
-<figure class="align-default" id="id10">
+<figure class="align-default" id="id12">
 <a class="reference internal image-reference" href="_images/XSTvsXSS_2.png"><img alt="_images/XSTvsXSS_2.png" src="_images/XSTvsXSS_2.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Wavefront curvature obtained from XSS and XST techniques.</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Wavefront curvature obtained from XSS and XST techniques.</span><a class="headerlink" href="#id12" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>The results from the two techniques match with each other. Further, we can
@@ -649,7 +676,7 @@ we still have the following 2D wavefront map.</p>
 and accuracy compared to the self-reference XSS technique.</p>
 <div role="list" class="citation-list">
 <div class="citation" id="huxstoepaperfast" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">HuXSTOEPaperFast</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">HuXSTOEPaperFast</a><span class="fn-bracket">]</span></span>
 <p>Hu, L., Wang, H., Fox, O., &amp; Sawhney, K. (2022).
 Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique.
 Opt. Exp., 30(18), 33259-33273.
@@ -661,7 +688,7 @@ Opt. Exp., 30(18), 33259-33273.
 <span id="expkbalign"></span><h2>KB mirror alignment using self-reference XST technique<a class="headerlink" href="#kb-mirror-alignment-using-self-reference-xst-technique" title="Permalink to this heading"></a></h2>
 <p>In this example we will show how to align KB mirror’s pitch angle (<span class="math notranslate nohighlight">\(\theta\)</span>)
 using the <a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">self-reference XST technique</span></a>. This example is similar
-to Fig.5 in <a class="reference internal" href="#huxstoepaperfast2" id="id9"><span>[HuXSTOEPaperFast2]</span></a>.</p>
+to Fig.5 in <a class="reference internal" href="#huxstoepaperfast2" id="id11"><span>[HuXSTOEPaperFast2]</span></a>.</p>
 <p>The basic idea is also described in the above paper. At the nominal angle <span class="math notranslate nohighlight">\(\theta\)</span>,
 the local curvature is constant along the mirror length. However, if it deviates to the
 nominal value, the local curvature will change along the mirror length. The change of the
@@ -738,40 +765,40 @@ diffuser positions. The movement of the diffuser is 4 <span class="math notransl
 </pre></div>
 </div>
 <p>We can plot the obtained local curvature.</p>
-<figure class="align-default" id="id11">
+<figure class="align-default" id="id13">
 <a class="reference internal image-reference" href="_images/HKB_1.png"><img alt="_images/HKB_1.png" src="_images/HKB_1.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Local wavefront curvature of HKB mirror.</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Local wavefront curvature of HKB mirror.</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>We can find that the data cloase to one end is abnormal due to the visible
 stains observed on the mirror surface, we cut that part.</p>
-<figure class="align-default" id="id12">
+<figure class="align-default" id="id14">
 <a class="reference internal image-reference" href="_images/HKB_2.png"><img alt="_images/HKB_2.png" src="_images/HKB_2.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Local wavefront curvature of HKB mirror after cropping the abnormal data.</span><a class="headerlink" href="#id12" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Local wavefront curvature of HKB mirror after cropping the abnormal data.</span><a class="headerlink" href="#id14" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>We can also plot the wavefron local curvature changed by the VKB mirror.</p>
-<figure class="align-default" id="id13">
+<figure class="align-default" id="id15">
 <a class="reference internal image-reference" href="_images/VKB_1.png"><img alt="_images/VKB_1.png" src="_images/VKB_1.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Local wavefront curvature of VKB mirror.</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Local wavefront curvature of VKB mirror.</span><a class="headerlink" href="#id15" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>We do linear fitting for the measured local wavefront curvature data.
 From the following figure we can see clearly the linear relation
 predicted by the theory. The nominal angle <span class="math notranslate nohighlight">\(\theta\)</span> is at the
 position where the fitted slope is close to 0.</p>
-<figure class="align-default" id="id14">
+<figure class="align-default" id="id16">
 <a class="reference internal image-reference" href="_images/KBalign.png"><img alt="_images/KBalign.png" src="_images/KBalign.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">The fitted slope for the above measured curves.</span><a class="headerlink" href="#id14" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The fitted slope for the above measured curves.</span><a class="headerlink" href="#id16" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <div role="list" class="citation-list">
 <div class="citation" id="huxstoepaperfast2" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">HuXSTOEPaperFast2</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">HuXSTOEPaperFast2</a><span class="fn-bracket">]</span></span>
 <p>Hu, L., Wang, H., Fox, O., &amp; Sawhney, K. (2022).
 Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique.
 Opt. Exp., 30(18), 33259-33273.
