@@ -557,26 +557,36 @@ to match the off-line NOM data.
 
 Comparison between self-reference XSS technique and self-reference XST technique
 ================================================================================
-In this example, we will compare the 1D 
-:ref:`self-reference XSS technique <prinXSSSelf>` 
-and the 1D :ref:`self-reference XST technique <prinXSTSelf>` at first. 
-The optic we used is a plane mirror. Similar results has been published 
-from [HuXSTOEPaperFast]_.
+.. note::
+   Please find the example code from */spexwavepy/examples/XSTselfvsXSSself.py*
 
-The plane mirror speckle data is the same as in 
-:ref:`Plane mirror measurement with reference beam <expplane>`, and we only use the 
+In this example, we will compare the **1D** 
+:ref:`self-reference XSS technique <prinXSSSelf>` 
+and the **1D** :ref:`self-reference XST technique <prinXSTSelf>` at first. 
+The optic we used is a plane mirror. Similar results has been published 
+in [HuXSTOEPaperFast]_.
+
+The plane mirror speckle data is the same as in the example of 
+:ref:`plane mirror measurement with reference beam <expplane>`, and we only use the 
 data with mirror in the beam. 
 
 .. code-block:: Python
 
    ROI = [600, 1600, 740, 2040]
    
-A width of around 1mm is chosen for the 1D data analysis. 
+A width of around 1mm is chosen for the 1D data analysis, 
+shown as a red rectangular box in the following figure.
+The mirror length is along the horizontal direction, 
+the width is along the vertical direction.
 
 .. figure:: _static/XSTvsXSS_1.png
    :width: 60%
 
-Next let's use the self-reference XSS technique at first.
+Next let's use the self-reference XSS technique.
+Similar to the above examples, we define the :py:class:`~spexwavepy.imstackfun.Imagestack` 
+class ``imstack``, the :py:class:`~spexwavepy.trackfun.Tracking` class ``track_XSS``
+and their related parameters in order. 
+Then we call the :py:meth:`~spexwavepy.trackfun.Tracking.XSS_self` function.
 
 .. code-block:: Python
 
@@ -596,9 +606,19 @@ Next let's use the self-reference XSS technique at first.
 
    track_XSS.XSS_self(edge_x, edge_y, edge_z, nstep, display=False, normalize=True)
  
-After that, the ``track_XSS`` will return the wavefront local curvature in ``curv_X``.
+Unlike the example of :ref:`plane mirror measurement with reference beam <expplane>`,
+in which the :ref:`XSS technique with reference beam <prinXSSRefer>` is used,
+we use the :ref:`self-reference XSS technique <prinXSSself>` in this example. 
+Thus, the local wavefront curvature other than local wavefront slope is obtained directly 
+from the data processing procedure.
+Since the speckle generator was scanned in the horizontal direction, 
+the obtained wavefront local curvature is stored in the ``curv_X`` attribute of 
+``track_XSS`` class.
+
 We know that the wavefront local curvatur can also be obrained using the 
 :ref:`self-reference XST technique <prinXSTSelf>`. 
+Doing the same as in the above, we create a new 
+:py:class:`~spexwavepy.trackfun.Tracking` class ``track_XST``.
 
 .. code-block:: Python
 
@@ -633,8 +653,11 @@ Thus, the ``scanstep`` is 5 :math:`\mu m`.
 
    track_XST.XST_self(edge_x, edge_y, pad_x, pad_y, hw_xy, display=False, normalize=True)
 
-After setting proper parameters, we can call :py:func:`~spexwavepy.trackfun.Tracking.XST_self`
-function to process the data.
+To use the :py:func:`~spexwavepy.trackfun.Tracking.XST_self` function to process the data,
+we need to set some additional parameters properly. 
+Please refer to the :ref:`user guide <traXSTself>` for the meaning of these parameters. 
+The obtained wavefront local curvature is also stored in the ``curvX`` or ``curvY`` attribute.
+In this case, it is in ``curvX``.
 
 We plot the wavefront curvature obtained from the two technqiues together, note that the way 
 to calculate the wavefront curvature from the two techniques are different, please refer to
@@ -645,9 +668,9 @@ to calculate the wavefront curvature from the two techniques are different, plea
 
    Wavefront curvature obtained from XSS and XST techniques.
 
-The results from the two techniques match with each other. Further, we can 
-plot the tracking coefficient also. The tracking coefficient is stored in 
-``resX`` and/or ``resY`` parameters of :py:class:`~spexwavepy.trackfun.Tracking`
+The results from the two techniques match with each other. Further, we can also 
+plot the tracking coefficient. The tracking coefficient is stored in 
+``resX`` and/or ``resY`` attribute of :py:class:`~spexwavepy.trackfun.Tracking`
 class.
 
 .. figure:: _static/XSTvsXSS_3.png
@@ -656,10 +679,10 @@ class.
 .. figure:: _static/XSTvsXSS_4.png
    :width: 80%
 
-From the tracking coefficients we can find that the XSS technique in general have
-higher tracking coefficient than the conventional XST technique.
+From the tracking coefficients we can find that **the XSS technique in general have
+higher tracking coefficient than the conventional XST technique**.
 
-We can also compare 2D data prcossing of these two techniques.
+We can also compare the **2D** data prcossing method of these two techniques.
 
 .. code-block:: Python
 
@@ -675,15 +698,23 @@ We can also compare 2D data prcossing of these two techniques.
    #track_XSS.XSS_self(edge_x, edge_y, edge_z, nstep, hw_xy, pad_xy, display=True, normalize=True)
    track_XSS.XSS_self_multi(edge_x, edge_y, edge_z, nstep, hw_xy, pad_xy, cpu_no, normalize=True)
 
-For 2D case of self-reference XSS technique, the old parameters remain the same, added the 
-new parameters that are specific for the 2D data processing case, we can have the following 
-2D local wavefront curvature map.
+.. warning::
+   Please check the available CPUs before calling 
+   :py:meth:`~spexwavepy.trackfun.Tracking.XSS_self_multi` method. 
+
+For 2D case of :ref:`self-reference XSS technique <prinXSSself>`,
+the original parameters for 1D technique remain the same. 
+Several new parameters need to be added for the 
+:py:meth:`~spexwavepy.trackfun.Tracking.XSS_self` or 
+:py:meth:`~spexwavepy.trackfun.Tracking.XSS_self_multi` function.
+Please refer to the :ref:`user guide <traXSS>` for the setting of these parameters.
+We have the following result of 2D local wavefront curvature map.
 
 .. figure:: _static/XSSvsXST2D_1.png
    :width: 80%
 
-Likewise, we can do the 2D data processing for self-reference XST technique. Unlike the XSS case, 
-the parameters for 2D processing should be changed in order to have successful tracking result.
+Likewise, we can do the 2D data processing for :ref:`self-reference XST technique <prinXSTself>`. 
+Also, the parameters for 2D processing should be changed in order to have successful tracking result.
 
 .. code-block:: Python
 
@@ -700,7 +731,11 @@ the parameters for 2D processing should be changed in order to have successful t
    #track_XST.XST_self(edge_x, edge_y, pad_x, pad_y, hw_xy, window, display=True, normalize=True)
    track_XST.XST_self_multi(edge_x, edge_y, pad_x, pad_y, hw_xy, window, cpu_no, normalize=True)
 
-Note that sometimes the following warning information will occur,
+.. warning::
+   Please check the available CPUs before calling 
+   :py:meth:`~spexwavepy.trackfun.Tracking.XST_self_multi` method. 
+
+Note that sometimes the following warning information will pop out,
 
 .. parsed-literal::
 
@@ -712,8 +747,9 @@ we still have the following 2D wavefront map.
 .. figure:: _static/XSSvsXST2D_2.png
    :width: 80%
 
-The wavefront curvature map from the self-reference XST technique has lower spatial resolution 
-and accuracy compared to the self-reference XSS technique. 
+The wavefront curvature map from the :ref:`self-reference XST technique <prinXSTself>` 
+has lower spatial resolution 
+and accuracy compared to the :ref:`self-reference XSS technique <prinXSSself>`. 
 
 .. [HuXSTOEPaperFast] Hu, L., Wang, H., Fox, O., & Sawhney, K. (2022). 
                Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique. 

@@ -539,22 +539,33 @@ Opt. Lett. 37, 4464-4466 (2012).
 </section>
 <section id="comparison-between-self-reference-xss-technique-and-self-reference-xst-technique">
 <span id="expxssvsxst"></span><h2>Comparison between self-reference XSS technique and self-reference XST technique<a class="headerlink" href="#comparison-between-self-reference-xss-technique-and-self-reference-xst-technique" title="Permalink to this heading"></a></h2>
-<p>In this example, we will compare the 1D
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please find the example code from <em>/spexwavepy/examples/XSTselfvsXSSself.py</em></p>
+</div>
+<p>In this example, we will compare the <strong>1D</strong>
 <a class="reference internal" href="principle.html#prinxssself"><span class="std std-ref">self-reference XSS technique</span></a>
-and the 1D <a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">self-reference XST technique</span></a> at first.
+and the <strong>1D</strong> <a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">self-reference XST technique</span></a> at first.
 The optic we used is a plane mirror. Similar results has been published
-from <a class="reference internal" href="#huxstoepaperfast" id="id10"><span>[HuXSTOEPaperFast]</span></a>.</p>
-<p>The plane mirror speckle data is the same as in
-<a class="reference internal" href="#expplane"><span class="std std-ref">Plane mirror measurement with reference beam</span></a>, and we only use the
+in <a class="reference internal" href="#huxstoepaperfast" id="id10"><span>[HuXSTOEPaperFast]</span></a>.</p>
+<p>The plane mirror speckle data is the same as in the example of
+<a class="reference internal" href="#expplane"><span class="std std-ref">plane mirror measurement with reference beam</span></a>, and we only use the
 data with mirror in the beam.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">ROI</span> <span class="o">=</span> <span class="p">[</span><span class="mi">600</span><span class="p">,</span> <span class="mi">1600</span><span class="p">,</span> <span class="mi">740</span><span class="p">,</span> <span class="mi">2040</span><span class="p">]</span>
 </pre></div>
 </div>
-<p>A width of around 1mm is chosen for the 1D data analysis.</p>
+<p>A width of around 1mm is chosen for the 1D data analysis,
+shown as a red rectangular box in the following figure.
+The mirror length is along the horizontal direction,
+the width is along the vertical direction.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="_images/XSTvsXSS_1.png"><img alt="_images/XSTvsXSS_1.png" src="_images/XSTvsXSS_1.png" style="width: 60%;" /></a>
 </figure>
-<p>Next let’s use the self-reference XSS technique at first.</p>
+<p>Next let’s use the self-reference XSS technique.
+Similar to the above examples, we define the <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack" title="spexwavepy.imstackfun.Imagestack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Imagestack</span></code></a>
+class <code class="docutils literal notranslate"><span class="pre">imstack</span></code>, the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class <code class="docutils literal notranslate"><span class="pre">track_XSS</span></code>
+and their related parameters in order.
+Then we call the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_self" title="spexwavepy.trackfun.Tracking.XSS_self"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XSS_self()</span></code></a> function.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">imstack</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">sam_folderX</span><span class="p">,</span> <span class="n">ROI</span><span class="p">)</span>
 
 <span class="n">track_XSS</span> <span class="o">=</span> <span class="n">Tracking</span><span class="p">(</span><span class="n">imstack</span><span class="p">)</span>
@@ -572,9 +583,18 @@ data with mirror in the beam.</p>
 <span class="n">track_XSS</span><span class="o">.</span><span class="n">XSS_self</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">edge_z</span><span class="p">,</span> <span class="n">nstep</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>After that, the <code class="docutils literal notranslate"><span class="pre">track_XSS</span></code> will return the wavefront local curvature in <code class="docutils literal notranslate"><span class="pre">curv_X</span></code>.
-We know that the wavefront local curvatur can also be obrained using the
-<a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">self-reference XST technique</span></a>.</p>
+<p>Unlike the example of <a class="reference internal" href="#expplane"><span class="std std-ref">plane mirror measurement with reference beam</span></a>,
+in which the <a class="reference internal" href="principle.html#prinxssrefer"><span class="std std-ref">XSS technique with reference beam</span></a> is used,
+we use the <a class="reference internal" href="principle.html#prinxssself"><span class="std std-ref">self-reference XSS technique</span></a> in this example.
+Thus, the local wavefront curvature other than local wavefront slope is obtained directly
+from the data processing procedure.
+Since the speckle generator was scanned in the horizontal direction,
+the obtained wavefront local curvature is stored in the <code class="docutils literal notranslate"><span class="pre">curv_X</span></code> attribute of
+<code class="docutils literal notranslate"><span class="pre">track_XSS</span></code> class.</p>
+<p>We know that the wavefront local curvatur can also be obrained using the
+<a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">self-reference XST technique</span></a>.
+Doing the same as in the above, we create a new
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class <code class="docutils literal notranslate"><span class="pre">track_XST</span></code>.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">imstack_1</span> <span class="o">=</span> <span class="n">Imagestack</span><span class="p">(</span><span class="n">data_folder</span><span class="p">,</span> <span class="n">ROI</span><span class="p">)</span>
 <span class="n">imstack_1</span><span class="o">.</span><span class="n">fnum</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">imstack_1</span><span class="o">.</span><span class="n">fstart</span> <span class="o">=</span> <span class="mi">0</span>
@@ -604,8 +624,11 @@ Thus, the <code class="docutils literal notranslate"><span class="pre">scanstep<
 <span class="n">track_XST</span><span class="o">.</span><span class="n">XST_self</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">pad_x</span><span class="p">,</span> <span class="n">pad_y</span><span class="p">,</span> <span class="n">hw_xy</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>After setting proper parameters, we can call <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_self" title="spexwavepy.trackfun.Tracking.XST_self"><code class="xref py py-func docutils literal notranslate"><span class="pre">XST_self()</span></code></a>
-function to process the data.</p>
+<p>To use the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_self" title="spexwavepy.trackfun.Tracking.XST_self"><code class="xref py py-func docutils literal notranslate"><span class="pre">XST_self()</span></code></a> function to process the data,
+we need to set some additional parameters properly.
+Please refer to the <a class="reference internal" href="userguide.html#traxstself"><span class="std std-ref">user guide</span></a> for the meaning of these parameters.
+The obtained wavefront local curvature is also stored in the <code class="docutils literal notranslate"><span class="pre">curvX</span></code> or <code class="docutils literal notranslate"><span class="pre">curvY</span></code> attribute.
+In this case, it is in <code class="docutils literal notranslate"><span class="pre">curvX</span></code>.</p>
 <p>We plot the wavefront curvature obtained from the two technqiues together, note that the way
 to calculate the wavefront curvature from the two techniques are different, please refer to
 <a class="reference internal" href="userguide.html#curvature"><span class="std std-ref">Local curvature reconstruction</span></a>.</p>
@@ -615,9 +638,9 @@ to calculate the wavefront curvature from the two techniques are different, plea
 <p><span class="caption-text">Wavefront curvature obtained from XSS and XST techniques.</span><a class="headerlink" href="#id12" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<p>The results from the two techniques match with each other. Further, we can
-plot the tracking coefficient also. The tracking coefficient is stored in
-<code class="docutils literal notranslate"><span class="pre">resX</span></code> and/or <code class="docutils literal notranslate"><span class="pre">resY</span></code> parameters of <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a>
+<p>The results from the two techniques match with each other. Further, we can also
+plot the tracking coefficient. The tracking coefficient is stored in
+<code class="docutils literal notranslate"><span class="pre">resX</span></code> and/or <code class="docutils literal notranslate"><span class="pre">resY</span></code> attribute of <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a>
 class.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="_images/XSTvsXSS_3.png"><img alt="_images/XSTvsXSS_3.png" src="_images/XSTvsXSS_3.png" style="width: 80%;" /></a>
@@ -625,9 +648,9 @@ class.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="_images/XSTvsXSS_4.png"><img alt="_images/XSTvsXSS_4.png" src="_images/XSTvsXSS_4.png" style="width: 80%;" /></a>
 </figure>
-<p>From the tracking coefficients we can find that the XSS technique in general have
-higher tracking coefficient than the conventional XST technique.</p>
-<p>We can also compare 2D data prcossing of these two techniques.</p>
+<p>From the tracking coefficients we can find that <strong>the XSS technique in general have
+higher tracking coefficient than the conventional XST technique</strong>.</p>
+<p>We can also compare the <strong>2D</strong> data prcossing method of these two techniques.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">track_XSS</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="s1">&#39;2D&#39;</span> <span class="c1">#&#39;1D&#39;</span>
 
 <span class="n">edge_x</span> <span class="o">=</span> <span class="mi">10</span>
@@ -641,14 +664,23 @@ higher tracking coefficient than the conventional XST technique.</p>
 <span class="n">track_XSS</span><span class="o">.</span><span class="n">XSS_self_multi</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">edge_z</span><span class="p">,</span> <span class="n">nstep</span><span class="p">,</span> <span class="n">hw_xy</span><span class="p">,</span> <span class="n">pad_xy</span><span class="p">,</span> <span class="n">cpu_no</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>For 2D case of self-reference XSS technique, the old parameters remain the same, added the
-new parameters that are specific for the 2D data processing case, we can have the following
-2D local wavefront curvature map.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Please check the available CPUs before calling
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_self_multi" title="spexwavepy.trackfun.Tracking.XSS_self_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XSS_self_multi()</span></code></a> method.</p>
+</div>
+<p>For 2D case of <a class="reference internal" href="principle.html#prinxssself"><span class="std std-ref">self-reference XSS technique</span></a>,
+the original parameters for 1D technique remain the same.
+Several new parameters need to be added for the
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_self" title="spexwavepy.trackfun.Tracking.XSS_self"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XSS_self()</span></code></a> or
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_self_multi" title="spexwavepy.trackfun.Tracking.XSS_self_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XSS_self_multi()</span></code></a> function.
+Please refer to the <a class="reference internal" href="userguide.html#traxss"><span class="std std-ref">user guide</span></a> for the setting of these parameters.
+We have the following result of 2D local wavefront curvature map.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="_images/XSSvsXST2D_1.png"><img alt="_images/XSSvsXST2D_1.png" src="_images/XSSvsXST2D_1.png" style="width: 80%;" /></a>
 </figure>
-<p>Likewise, we can do the 2D data processing for self-reference XST technique. Unlike the XSS case,
-the parameters for 2D processing should be changed in order to have successful tracking result.</p>
+<p>Likewise, we can do the 2D data processing for <a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">self-reference XST technique</span></a>.
+Also, the parameters for 2D processing should be changed in order to have successful tracking result.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">track_XST</span><span class="o">.</span><span class="n">dimension</span> <span class="o">=</span> <span class="s1">&#39;2D&#39;</span> <span class="c1">#&#39;1D&#39;</span>
 
 <span class="n">edge_x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
@@ -663,7 +695,12 @@ the parameters for 2D processing should be changed in order to have successful t
 <span class="n">track_XST</span><span class="o">.</span><span class="n">XST_self_multi</span><span class="p">(</span><span class="n">edge_x</span><span class="p">,</span> <span class="n">edge_y</span><span class="p">,</span> <span class="n">pad_x</span><span class="p">,</span> <span class="n">pad_y</span><span class="p">,</span> <span class="n">hw_xy</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">cpu_no</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Note that sometimes the following warning information will occur,</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Please check the available CPUs before calling
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_self_multi" title="spexwavepy.trackfun.Tracking.XST_self_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XST_self_multi()</span></code></a> method.</p>
+</div>
+<p>Note that sometimes the following warning information will pop out,</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Potential</span> <span class="n">tracking</span> <span class="n">failure</span><span class="p">,</span> <span class="n">no</span> <span class="n">subpixel</span> <span class="n">registration</span><span class="p">:</span>
 </pre></div>
 </div>
@@ -672,8 +709,9 @@ we still have the following 2D wavefront map.</p>
 <figure class="align-default">
 <a class="reference internal image-reference" href="_images/XSSvsXST2D_2.png"><img alt="_images/XSSvsXST2D_2.png" src="_images/XSSvsXST2D_2.png" style="width: 80%;" /></a>
 </figure>
-<p>The wavefront curvature map from the self-reference XST technique has lower spatial resolution
-and accuracy compared to the self-reference XSS technique.</p>
+<p>The wavefront curvature map from the <a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">self-reference XST technique</span></a>
+has lower spatial resolution
+and accuracy compared to the <a class="reference internal" href="principle.html#prinxssself"><span class="std std-ref">self-reference XSS technique</span></a>.</p>
 <div role="list" class="citation-list">
 <div class="citation" id="huxstoepaperfast" role="doc-biblioentry">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">HuXSTOEPaperFast</a><span class="fn-bracket">]</span></span>

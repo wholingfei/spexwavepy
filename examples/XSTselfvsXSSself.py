@@ -12,18 +12,17 @@ sys.path.append(os.path.join('../../..'))
 from spexwavepy.imstackfun import Imagestack
 from spexwavepy.trackfun import Tracking 
 from spexwavepy.corefun import read_one, crop_one
-from spexwavepy.postfun import curv_scan_XST 
 
-_PLOT = False#True
+_PLOT = True
 if __name__ == "__main__":
-    #data_folder = "/dls/science/groups/b16/SpeckleData/example_2/"
-    data_folder = "/home/lingfei/spexwavepy/tmp/example_2/"
+    #data_folder = "/home/lingfei/spexwavepy/data/planeM2D/mirror/"
+    data_folder = "/YOU/DATA/FOLDER/PATH/planeM2D/mirror/"
     ROI = [600, 1600, 740, 2040]
 
     imstack = Imagestack(data_folder, ROI) 
 
     track_XSS = Tracking(imstack)
-    track_XSS.dimension = '2D' #'1D'
+    track_XSS.dimension = '1D' #'2D' #'1D'
     track_XSS.scandim = 'x'
     track_XSS.dist = 833.   # [mm] 
     track_XSS.scanstep = 1.0  # [um]
@@ -39,9 +38,9 @@ if __name__ == "__main__":
     if track_XSS.dimension == '2D':
         pad_xy = 10
         hw_xy = 20
-        cpu_no = 30#16
+        cpu_no = 16
         #track_XSS.XSS_self(edge_x, edge_y, edge_z, nstep, hw_xy, pad_xy, display=True, normalize=True)
-        #track_XSS.XSS_self_multi(edge_x, edge_y, edge_z, nstep, hw_xy, pad_xy, cpu_no, normalize=True)
+        track_XSS.XSS_self_multi(edge_x, edge_y, edge_z, nstep, hw_xy, pad_xy, cpu_no, normalize=True)
 
     imstack_1 = Imagestack(data_folder, ROI) 
     imstack_1.fnum = 1
@@ -52,7 +51,7 @@ if __name__ == "__main__":
     imstack_2.fstart = 5 
 
     track_XST = Tracking(imstack_1, imstack_2)
-    track_XST.dimension = '2D' #'1D'
+    track_XST.dimension = '1D' #'2D' #'1D'
     track_XST.scandim = 'x'
     track_XST.dist = 833.   # [mm] 
     track_XST.scanstep = 5.0  # [um]
@@ -71,7 +70,7 @@ if __name__ == "__main__":
         hw_xy = 15
         pad_y = 10
 
-        #track_XST.XST_self(edge_x, edge_y, pad_x, pad_y, hw_xy, display=False, normalize=True)
+        track_XST.XST_self(edge_x, edge_y, pad_x, pad_y, hw_xy, display=False, normalize=True)
 
     if track_XST.dimension == '2D':
         edge_x = [20, 20]
@@ -80,10 +79,10 @@ if __name__ == "__main__":
         hw_xy = 30
         pad_y = [20, 25]
         window = 60
-        cpu_no = 30 #16
+        cpu_no = 16
 
         #track_XST.XST_self(edge_x, edge_y, pad_x, pad_y, hw_xy, window, display=True, normalize=True)
-        #track_XST.XST_self_multi(edge_x, edge_y, pad_x, pad_y, hw_xy, window, cpu_no, normalize=True)
+        track_XST.XST_self_multi(edge_x, edge_y, pad_x, pad_y, hw_xy, window, cpu_no, normalize=True)
 
 
     if _PLOT:
