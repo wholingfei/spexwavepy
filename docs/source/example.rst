@@ -760,19 +760,25 @@ and accuracy compared to the :ref:`self-reference XSS technique <prinXSSself>`.
 
 KB mirror alignment using self-reference XST technique
 ======================================================
+.. note::
+   Please find the example code from */spexwavepy/examples/KBalignment.py*
+
 In this example we will show how to align KB mirror's pitch angle (:math:`\theta`) 
 using the :ref:`self-reference XST technique <prinXSTSelf>`. This example is similar 
-to Fig.5 in [HuXSTOEPaperFast2]_.
+to Fig.5 in [HuXSTOEPaperFast]_.
 
 The basic idea is also described in the above paper. At the nominal angle :math:`\theta`, 
 the local curvature is constant along the mirror length. However, if it deviates to the 
 nominal value, the local curvature will change along the mirror length. The change of the 
 local curvature can be assumed linealy to the mirror length coordinate. 
 
-Let's first obtain the wavefront curvature for both HKB and VKB using the self-reference 
-XST technique. Note that for this technique, only one image is needed for each image stack,
+We first obtain the wavefront curvature for both HKB and VKB using the 
+:ref:`self-reference XST technique <prinXSTSelf>`.
+Note that for this technique, only one image is needed for each image stack,
 thus, the parameter ``fnum`` is 1. In each folder, the two images are at two different 
-diffuser positions. The movement of the diffuser is 4 :math:`\mu m`.
+diffuser positions. The movement of the diffuser is 4 :math:`\mu m`. 
+The codes in this example for calling the :py:meth:`~spexwavepy.trackfun.Tracking.XST_self`
+function is similar to the above example.
 
 .. code-block:: Python
 
@@ -842,14 +848,15 @@ diffuser positions. The movement of the diffuser is 4 :math:`\mu m`.
        delayVKB_stack[jc-1] = track_tmp.delayX
        curvYVKB_stack[jc-1] = track_tmp.curvX
 
-We can plot the obtained local curvature.  
+We then plot the obtained local curvature, which is stored in the ``curvX`` and ``curvY`` in the 
+:py:class:`~spexwavepy.trackfun.Tracking` class, for both HKB and VKB.  
 
 .. figure:: _static/HKB_1.png
    :width: 80%
 
    Local wavefront curvature of HKB mirror.
 
-We can find that the data cloase to one end is abnormal due to the visible 
+We can find that the data close to one end is abnormal due to the visible 
 stains observed on the mirror surface, we cut that part.
 
 .. figure:: _static/HKB_2.png
@@ -857,16 +864,16 @@ stains observed on the mirror surface, we cut that part.
 
    Local wavefront curvature of HKB mirror after cropping the abnormal data.
 
-We can also plot the wavefron local curvature changed by the VKB mirror.
+We do the same for the VKB mirror.
 
 .. figure:: _static/VKB_1.png
    :width: 80%
 
    Local wavefront curvature of VKB mirror.
 
-We do linear fitting for the measured local wavefront curvature data.
-From the following figure we can see clearly the linear relation 
-predicted by the theory. The nominal angle :math:`\theta` is at the 
+We then do the linear fitting for the measured local wavefront curvature data.
+From the following figure we can see the linear relation 
+predicted by the theory clearly. The nominal angle :math:`\theta` is at the 
 position where the fitted slope is close to 0.
 
 .. figure:: _static/KBalign.png
@@ -874,17 +881,15 @@ position where the fitted slope is close to 0.
 
    The fitted slope for the above measured curves.
 
-
-.. [HuXSTOEPaperFast2] Hu, L., Wang, H., Fox, O., & Sawhney, K. (2022). 
-               Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique. 
-               Opt. Exp., 30(18), 33259-33273.
-               https://doi.org/10.1364/OE.460163
-
+Please refer to the paper [HuXSTOEPaperFast]_ for more details.
 
 .. _exphart:
 
 Hartmann-like data processing scheme 
 ====================================
+.. note::
+   Please find the example code from */spexwavepy/examples/Hartmann.py*
+
 We have also implemented a speckle-based data processing methods that 
 resemble the conventional Hartmann-like data processing method. 
 We will demonstrate it in this example.

@@ -632,10 +632,10 @@ In this case, it is in <code class="docutils literal notranslate"><span class="p
 <p>We plot the wavefront curvature obtained from the two technqiues together, note that the way
 to calculate the wavefront curvature from the two techniques are different, please refer to
 <a class="reference internal" href="userguide.html#curvature"><span class="std std-ref">Local curvature reconstruction</span></a>.</p>
-<figure class="align-default" id="id12">
+<figure class="align-default" id="id13">
 <a class="reference internal image-reference" href="_images/XSTvsXSS_2.png"><img alt="_images/XSTvsXSS_2.png" src="_images/XSTvsXSS_2.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Wavefront curvature obtained from XSS and XST techniques.</span><a class="headerlink" href="#id12" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Wavefront curvature obtained from XSS and XST techniques.</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>The results from the two techniques match with each other. Further, we can also
@@ -714,7 +714,8 @@ has lower spatial resolution
 and accuracy compared to the <a class="reference internal" href="principle.html#prinxssself"><span class="std std-ref">self-reference XSS technique</span></a>.</p>
 <div role="list" class="citation-list">
 <div class="citation" id="huxstoepaperfast" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">HuXSTOEPaperFast</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span>HuXSTOEPaperFast<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id10">1</a>,<a role="doc-backlink" href="#id11">2</a>,<a role="doc-backlink" href="#id12">3</a>)</span>
 <p>Hu, L., Wang, H., Fox, O., &amp; Sawhney, K. (2022).
 Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique.
 Opt. Exp., 30(18), 33259-33273.
@@ -724,17 +725,24 @@ Opt. Exp., 30(18), 33259-33273.
 </section>
 <section id="kb-mirror-alignment-using-self-reference-xst-technique">
 <span id="expkbalign"></span><h2>KB mirror alignment using self-reference XST technique<a class="headerlink" href="#kb-mirror-alignment-using-self-reference-xst-technique" title="Permalink to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please find the example code from <em>/spexwavepy/examples/KBalignment.py</em></p>
+</div>
 <p>In this example we will show how to align KB mirror’s pitch angle (<span class="math notranslate nohighlight">\(\theta\)</span>)
 using the <a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">self-reference XST technique</span></a>. This example is similar
-to Fig.5 in <a class="reference internal" href="#huxstoepaperfast2" id="id11"><span>[HuXSTOEPaperFast2]</span></a>.</p>
+to Fig.5 in <a class="reference internal" href="#huxstoepaperfast" id="id11"><span>[HuXSTOEPaperFast]</span></a>.</p>
 <p>The basic idea is also described in the above paper. At the nominal angle <span class="math notranslate nohighlight">\(\theta\)</span>,
 the local curvature is constant along the mirror length. However, if it deviates to the
 nominal value, the local curvature will change along the mirror length. The change of the
 local curvature can be assumed linealy to the mirror length coordinate.</p>
-<p>Let’s first obtain the wavefront curvature for both HKB and VKB using the self-reference
-XST technique. Note that for this technique, only one image is needed for each image stack,
+<p>We first obtain the wavefront curvature for both HKB and VKB using the
+<a class="reference internal" href="principle.html#prinxstself"><span class="std std-ref">self-reference XST technique</span></a>.
+Note that for this technique, only one image is needed for each image stack,
 thus, the parameter <code class="docutils literal notranslate"><span class="pre">fnum</span></code> is 1. In each folder, the two images are at two different
-diffuser positions. The movement of the diffuser is 4 <span class="math notranslate nohighlight">\(\mu m\)</span>.</p>
+diffuser positions. The movement of the diffuser is 4 <span class="math notranslate nohighlight">\(\mu m\)</span>.
+The codes in this example for calling the <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XST_self" title="spexwavepy.trackfun.Tracking.XST_self"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XST_self()</span></code></a>
+function is similar to the above example.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1">###### HKB self-reference XST</span>
 <span class="n">ROI_HKB</span> <span class="o">=</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">545</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">330</span><span class="p">]</span>
 
@@ -802,50 +810,47 @@ diffuser positions. The movement of the diffuser is 4 <span class="math notransl
     <span class="n">curvYVKB_stack</span><span class="p">[</span><span class="n">jc</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">track_tmp</span><span class="o">.</span><span class="n">curvX</span>
 </pre></div>
 </div>
-<p>We can plot the obtained local curvature.</p>
-<figure class="align-default" id="id13">
+<p>We then plot the obtained local curvature, which is stored in the <code class="docutils literal notranslate"><span class="pre">curvX</span></code> and <code class="docutils literal notranslate"><span class="pre">curvY</span></code> in the
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking" title="spexwavepy.trackfun.Tracking"><code class="xref py py-class docutils literal notranslate"><span class="pre">Tracking</span></code></a> class, for both HKB and VKB.</p>
+<figure class="align-default" id="id14">
 <a class="reference internal image-reference" href="_images/HKB_1.png"><img alt="_images/HKB_1.png" src="_images/HKB_1.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Local wavefront curvature of HKB mirror.</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Local wavefront curvature of HKB mirror.</span><a class="headerlink" href="#id14" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<p>We can find that the data cloase to one end is abnormal due to the visible
+<p>We can find that the data close to one end is abnormal due to the visible
 stains observed on the mirror surface, we cut that part.</p>
-<figure class="align-default" id="id14">
+<figure class="align-default" id="id15">
 <a class="reference internal image-reference" href="_images/HKB_2.png"><img alt="_images/HKB_2.png" src="_images/HKB_2.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Local wavefront curvature of HKB mirror after cropping the abnormal data.</span><a class="headerlink" href="#id14" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Local wavefront curvature of HKB mirror after cropping the abnormal data.</span><a class="headerlink" href="#id15" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<p>We can also plot the wavefron local curvature changed by the VKB mirror.</p>
-<figure class="align-default" id="id15">
+<p>We do the same for the VKB mirror.</p>
+<figure class="align-default" id="id16">
 <a class="reference internal image-reference" href="_images/VKB_1.png"><img alt="_images/VKB_1.png" src="_images/VKB_1.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">Local wavefront curvature of VKB mirror.</span><a class="headerlink" href="#id15" title="Permalink to this image"></a></p>
+<p><span class="caption-text">Local wavefront curvature of VKB mirror.</span><a class="headerlink" href="#id16" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<p>We do linear fitting for the measured local wavefront curvature data.
-From the following figure we can see clearly the linear relation
-predicted by the theory. The nominal angle <span class="math notranslate nohighlight">\(\theta\)</span> is at the
+<p>We then do the linear fitting for the measured local wavefront curvature data.
+From the following figure we can see the linear relation
+predicted by the theory clearly. The nominal angle <span class="math notranslate nohighlight">\(\theta\)</span> is at the
 position where the fitted slope is close to 0.</p>
-<figure class="align-default" id="id16">
+<figure class="align-default" id="id17">
 <a class="reference internal image-reference" href="_images/KBalign.png"><img alt="_images/KBalign.png" src="_images/KBalign.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">The fitted slope for the above measured curves.</span><a class="headerlink" href="#id16" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The fitted slope for the above measured curves.</span><a class="headerlink" href="#id17" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<div role="list" class="citation-list">
-<div class="citation" id="huxstoepaperfast2" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">HuXSTOEPaperFast2</a><span class="fn-bracket">]</span></span>
-<p>Hu, L., Wang, H., Fox, O., &amp; Sawhney, K. (2022).
-Fast wavefront sensing for X-ray optics with an alternating speckle tracking technique.
-Opt. Exp., 30(18), 33259-33273.
-<a class="reference external" href="https://doi.org/10.1364/OE.460163">https://doi.org/10.1364/OE.460163</a></p>
-</div>
-</div>
+<p>Please refer to the paper <a class="reference internal" href="#huxstoepaperfast" id="id12"><span>[HuXSTOEPaperFast]</span></a> for more details.</p>
 </section>
 <section id="hartmann-like-data-processing-scheme">
 <span id="exphart"></span><h2>Hartmann-like data processing scheme<a class="headerlink" href="#hartmann-like-data-processing-scheme" title="Permalink to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please find the example code from <em>/spexwavepy/examples/Hartmann.py</em></p>
+</div>
 <p>We have also implemented a speckle-based data processing methods that
 resemble the conventional Hartmann-like data processing method.
 We will demonstrate it in this example.</p>

@@ -14,10 +14,10 @@ from spexwavepy.trackfun import Tracking
 from spexwavepy.corefun import read_one, crop_one
 
 if __name__ == "__main__":
-    sam_folder = "/YOUR/DATA/FOLDER/PATH/planeM2D/mirror/"  # The sample folder path
-    ref_folder = "/YOUR/DATA/FOLDER/PATH/planeM2D/reference/"  # The reference folder path
     #sam_folder = "/home/lingfei/spexwavepy/data/planeM2D/mirror/"  # The sample folder path
     #ref_folder = "/home/lingfei/spexwavepy/data/planeM2D/reference/"  # The reference folder path
+    sam_folder = "/YOUR/DATA/FOLDER/PATH/planeM2D/mirror/"  # The sample folder path
+    ref_folder = "/YOUR/DATA/FOLDER/PATH/planeM2D/reference/"  # The reference folder path
     
     #sam_im = read_one(sam_folder + '00001.tif', ShowImage=True)
     #ref_im = read_one(ref_folder + '00001.tif', ShowImage=True)

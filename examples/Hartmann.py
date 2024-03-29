@@ -14,8 +14,10 @@ from spexwavepy.trackfun import Tracking
 from spexwavepy.corefun import Hartmann_mesh_show
 
 if __name__ == "__main__":
-    ref_folder = "../tmp/CRLRefer/"
-    sam_folder = "../tmp/CRLSample/"
+    #ref_folder = "/home/lingfei/spexwavepy/data/Hartmann/CRLRefer/"
+    #sam_folder = "/home/lingfei/spexwavepy/data/Hartmann/CRLSample/"
+    ref_folder = "/YOUR/DATA/FOLDER/PATH/Hartmann/CRLRefer/"
+    sam_folder = "/YOUR/DATA/FOLDER/PATH/Hartmann/CRLSample/"
 
     ROI_sam = [540, 1570, 750, 1800]
     ROI_ref = ROI_sam
@@ -39,9 +41,9 @@ if __name__ == "__main__":
     pad = 20
     Track_Hartmann.Hartmann_XST(X_cens, Y_cens, pad, size)
 
-    #plt.figure()
-    #plt.imshow(Track_Hartmann.delayX, cmap='jet')
-    #plt.figure()
-    #plt.imshow(Track_Hartmann.delayY, cmap='jet')
+    plt.figure()
+    plt.imshow(Track_Hartmann.delayX, cmap='jet')
+    plt.figure()
+    plt.imshow(Track_Hartmann.delayY, cmap='jet')
 
-    #plt.show()
+    plt.show()

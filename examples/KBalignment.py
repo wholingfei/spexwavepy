@@ -15,10 +15,10 @@ from spexwavepy.corefun import read_one, crop_one
 
 _PLOT = True #False 
 if __name__ == "__main__":
-    #folder_prefix_HKB = "/dls/science/groups/b16/SpeckleData/KBPitch/HKB/"
-    #folder_prefix_VKB = "/dls/science/groups/b16/SpeckleData/KBPitch/HKB/"
-    folder_prefix_HKB = "/home/lingfei/spexwavepy/tmp/HKB/"
-    folder_prefix_VKB = "/home/lingfei/spexwavepy/tmp/VKB/"
+    #folder_prefix_HKB = "/home/lingfei/spexwavepy/data/KBPithch/HKB/"
+    #folder_prefix_VKB = "/home/lingfei/spexwavepy/data/KBPithch/VKB/"
+    folder_prefix_HKB = "/YOUR/DATA/FOLDER/PATH/KBPithch/HKB/"
+    folder_prefix_VKB = "/YOUR/DATA/FOLDER/PATH/KBPithch/VKB/"
     
     ###### HKB self-reference XST
     ROI_HKB = [45, 545, 60, 330]
