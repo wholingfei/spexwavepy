@@ -36,6 +36,8 @@ def _indicator(num, length, comments=None):
 def read_one(filename, ShowImage=False):
     """
     Read one image
+    At the moment, only .png and .tiff files 
+    are considered.
 
     Parameters
     ----------
@@ -49,7 +51,8 @@ def read_one(filename, ShowImage=False):
     numpy.ndarray
         One image data
     """
-    data_tmp = cv2.imread(filename, cv2.IMREAD_ANYCOLOR | cv2.IMREAD_ANYDEPTH) 
+    if filename.lower().endswith('.png'): data_tmp = cv2.imread(filename, cv2.IMREAD_GRAYSCALE) 
+    else: data_tmp = cv2.imread(filename, cv2.IMREAD_ANYCOLOR | cv2.IMREAD_ANYDEPTH) 
     if ShowImage:
         plt.figure()
         plt.imshow(data_tmp, cmap='jet')

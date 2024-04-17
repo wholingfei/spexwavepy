@@ -1,50 +1,87 @@
-
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>The speckle-based wavefront sensing techniques &#8212; spexwavepy 1.0.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The speckle-based wavefront sensing techniques &mdash; spexwavepy 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Getting started" href="getstart.html" />
     <link rel="prev" title="spexwavepy" href="index.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="getstart.html" title="Getting started"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="spexwavepy"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">spexwavepy 1.0.0 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">The speckle-based wavefront sensing techniques</a></li> 
-      </ul>
-    </div>  
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            spexwavepy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The speckle-based wavefront sensing techniques</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#conventional-x-ray-speckle-tracking-xst-technique-with-reference-beam">Conventional X-ray Speckle Tracking (XST) technique with reference beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#self-reference-x-ray-speckle-tracking-xst-technique">Self-reference X-ray Speckle Tracking (XST) technique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#x-ray-speckle-scanning-xss-technique-with-reference-beam">X-ray Speckle Scanning (XSS) technique with reference beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#self-reference-x-ray-speckle-scanning-xss-technique">Self-reference X-ray Speckle Scanning (XSS) technique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#x-ray-speckle-vector-tracking-xsvt-technique">X-ray Speckle Vector Tracking (XSVT) technique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#other-x-ray-speckle-based-techniques">Other X-ray speckle-based techniques</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getstart.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userguide.html">User guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">spexwavepy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The speckle-based wavefront sensing techniques</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="the-speckle-based-wavefront-sensing-techniques">
 <h1>The speckle-based wavefront sensing techniques<a class="headerlink" href="#the-speckle-based-wavefront-sensing-techniques" title="Permalink to this heading"></a></h1>
 <p>When shining a laser through a diffuser,
@@ -56,12 +93,11 @@ a decade ago by early researchers <a class="reference internal" href="#berujonpr
 Since then, the X-ray speckle-based techniques was burgeoning over time.
 These techniques stand out due to their relatively simple
 experimental requirements and ease of use.</p>
-<p>A typical experimental setup for hard X-ray is shown in the
+<p>A typical experimental setup for a hard X-ray is shown in the
 following picture. The diffuser used is a sandpaper.
-It is mounted on a 2D scannable high precision stage.
+It is mounted on a 2D scannable high-precision stage.
 The detector used a scintillator to convert the incident
-X-ray to the visible light and coupled with a microscopy
-imaging system.</p>
+X-ray to visible light and coupled with a visible-light microscope.</p>
 <figure class="align-default" id="id22">
 <a class="reference internal image-reference" href="_images/ExpsetupB16.png"><img alt="_images/ExpsetupB16.png" src="_images/ExpsetupB16.png" style="width: 100%;" /></a>
 <figcaption>
@@ -111,24 +147,29 @@ The speckle patterns to be compared come from the same data set
 in which the tested optics are always in the beam.
 Here, in this documentation, we call this mode with the prefix
 <strong>‘self-reference’</strong>.</p>
-<p>Regardless of the characterization modes, the various techniques
+<p>Regardless of the data processing modes, they
 all trace the shift of the speckle pattern.
-However, these shifts are caused by different physcial process.
-In other words, different modes represent different
-physcial quantities directly characterized.</p>
+However, the shift can represent different physical
+quantities for different experiment methods.</p>
 <p>In brief, when the reference beam is available,
 the speckle pattern shift is caused by the
 first derivative, i.e., the slope of the measured wavefront.
 Otherwise, when in self-reference mode,
 the speckle pattern shift is caused by the
 second derivative, i.e., the curvature of the measured wavefront.</p>
-<p>Another variation for the data acquisation is the position of
-diffuser. It can be placed in the upstream or downstream
-of the tested optic, depending on the type of it.
-In general, the diffuser can be placed in either the upstream or
-the downstream of the tested optic if it is a weakly focusing optic.
-Otherwise, the diffuser is usually placed in the downstream of the
-optic.</p>
+<p>Another variation of the experiment method is the position of the diffuser.
+It can be placed in the upstream or downstream of the tested optic,
+depending on the type of the optic. In general, if there is a reference beam,
+i.e., in the case of a weakly-focusing optic,
+the shift of the speckle pattern from the reference image to the compared
+image is due to the local wavefront slope change at the plane
+in the diffusor’s position for the downstream case and in the optical
+central position for the upstream case. On the other hand, in the self-reference mode,
+the shift of the speckle pattern is due to the local wavefront curvature change.
+Similarly, the change happens in the diffusor’s position for the downstream case while
+in the optical central position for the upstream case. Apart from that,
+the algorithms used to reconstruct the local wavefront curvature
+for the two cases are also different.</p>
 <p>The following table gives a summary of the speckle-based techniques
 included in this package. For the detailed description of the principle
 of each technique, please see the following sections.</p>
@@ -146,7 +187,7 @@ sample dataset.</p></td>
 <td><p>Wavefront slope</p></td>
 </tr>
 <tr class="row-odd"><td><p>Self-reference XST</p></td>
-<td><p>2 images for reference dataset.</p></td>
+<td><p>2 images for sample dataset.</p></td>
 <td><p>Wavefront curvature</p></td>
 </tr>
 <tr class="row-even"><td><p>XSS with reference
@@ -491,8 +532,8 @@ detector plane. <span class="math notranslate nohighlight">\(W\)</span> represen
 <span id="prinother"></span><h2>Other X-ray speckle-based techniques<a class="headerlink" href="#other-x-ray-speckle-based-techniques" title="Permalink to this heading"></a></h2>
 <p>Due to special experimental considerations, all the techniques described in the above keep
 the detector fixed. As a result,
-all the so called “absolute mode” sepckle-based techniques (see <a class="reference internal" href="#jsrtheory" id="id20"><span>[JSRTheory]</span></a> and <a class="reference internal" href="#jsrexperiment" id="id21"><span>[JSRExperiment]</span></a>)
-are not inculded in this python package ostensibly.
+all the so called “absolute mode” speckle-based techniques (see <a class="reference internal" href="#jsrtheory" id="id20"><span>[JSRTheory]</span></a> and <a class="reference internal" href="#jsrexperiment" id="id21"><span>[JSRExperiment]</span></a>)
+are not included in this python package ostensibly.
 However, the data processing procedure for these “absolute mode” techniques
 is the same as their corresponding techniques in the above.</p>
 <p>For instance, the “absolute mode” XST technique is equivalent to the
@@ -513,73 +554,34 @@ implemention in the code.</strong></p>
 </section>
 
 
-            <div class="clearer"></div>
+           </div>
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <div>
-    <h3><a href="index.html">Table of Contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">The speckle-based wavefront sensing techniques</a><ul>
-<li><a class="reference internal" href="#conventional-x-ray-speckle-tracking-xst-technique-with-reference-beam">Conventional X-ray Speckle Tracking (XST) technique with reference beam</a></li>
-<li><a class="reference internal" href="#self-reference-x-ray-speckle-tracking-xst-technique">Self-reference X-ray Speckle Tracking (XST) technique</a></li>
-<li><a class="reference internal" href="#x-ray-speckle-scanning-xss-technique-with-reference-beam">X-ray Speckle Scanning (XSS) technique with reference beam</a></li>
-<li><a class="reference internal" href="#self-reference-x-ray-speckle-scanning-xss-technique">Self-reference X-ray Speckle Scanning (XSS) technique</a></li>
-<li><a class="reference internal" href="#x-ray-speckle-vector-tracking-xsvt-technique">X-ray Speckle Vector Tracking (XSVT) technique</a></li>
-<li><a class="reference internal" href="#other-x-ray-speckle-based-techniques">Other X-ray speckle-based techniques</a></li>
-</ul>
-</li>
-</ul>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="spexwavepy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="getstart.html" class="btn btn-neutral float-right" title="Getting started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Lingfei Hu, Hongchang Wang.</p>
   </div>
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="index.html"
-                          title="previous chapter">spexwavepy</a></p>
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="getstart.html"
-                          title="next chapter">Getting started</a></p>
-  </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="getstart.html" title="Getting started"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="spexwavepy"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">spexwavepy 1.0.0 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">The speckle-based wavefront sensing techniques</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2024, Lingfei Hu, Hongchang Wang.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
-    </div>
-  </body>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

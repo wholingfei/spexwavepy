@@ -10,7 +10,7 @@ spexwavepy
 :Authors: Lingfei Hu (USTC), Hongchang Wang (DLS)
 :Dependencies: * **Numpy**
                * **Scipy**
-               * **cv2**: This is OpenCV support for python.
+               * **cv2(opencv-python)**: This is OpenCV support for python.
                * **natsort**: This package is used for natural sorting.
 :E-mail: hulf88@ustc.edu.cn, hongchang.wang@diamond.ac.uk
 
@@ -19,13 +19,13 @@ What is spexwavepy
 ==================
 **Spexwavepy** is an open-source Python package dedicated to the speckle-based wavefront sensing 
 techniques for X-ray optics. 
-Its name is the abbreviation of **Spe**\ ckle-based **x**-ray **wave**\ front sensing 
-**py**\ thon package.
-It covers a variety of X-ray speckle-based techniques, provides examples with real experiment data.
+Its name is the abbreviation of the **Spe**\ ckle-based **x**-ray **wave**\ front sensing 
+**Py**\ thon package.
+It covers a variety of X-ray speckle-based techniques and provides examples with real experiment data.
 This documentation will show users how to get the spexwavepy package, 
 where to download the shared experiment data, how to run the examples, 
-how to build your own python code using this package, etc.
-We hope this python package can help users to get familiar with the data processing for X-ray 
+how to build your own Python code using this package, etc.
+We hope this Python package can help users get familiar with the data processing for X-ray 
 wavefront sensing using speckle-based techniques.
 
 .. image:: _static/banner.jpg

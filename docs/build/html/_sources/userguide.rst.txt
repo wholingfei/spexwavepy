@@ -223,6 +223,10 @@ the start and the end position of x coordinate. The start and the end coordinate
 .. image:: _static/readone.png
    :width: 80%
 
+.. note::
+   Only .tiff and .png files are considered at present. If it is possible, it is  
+   preferred to convert your images in the data set to **.tiff** files.
+
 The :py:func:`~spexwavepy.corefun.Hartmann_mesh_show` function 
 is used to show the boxes chosen for the Hartmann-like data processing method.
 

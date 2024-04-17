@@ -11,12 +11,11 @@ Since then, the X-ray speckle-based techniques was burgeoning over time.
 These techniques stand out due to their relatively simple 
 experimental requirements and ease of use. 
 
-A typical experimental setup for hard X-ray is shown in the 
+A typical experimental setup for a hard X-ray is shown in the 
 following picture. The diffuser used is a sandpaper. 
-It is mounted on a 2D scannable high precision stage. 
+It is mounted on a 2D scannable high-precision stage. 
 The detector used a scintillator to convert the incident 
-X-ray to the visible light and coupled with a microscopy
-imaging system.
+X-ray to visible light and coupled with a visible-light microscope.
 
 .. figure:: _static/ExpsetupB16.png
    :width: 100%
@@ -70,11 +69,10 @@ in which the tested optics are always in the beam.
 Here, in this documentation, we call this mode with the prefix 
 **'self-reference'**.
 
-Regardless of the characterization modes, the various techniques 
+Regardless of the data processing modes, they 
 all trace the shift of the speckle pattern. 
-However, these shifts are caused by different physcial process. 
-In other words, different modes represent different 
-physcial quantities directly characterized.
+However, the shift can represent different physical 
+quantities for different experiment methods.
 
 In brief, when the reference beam is available, 
 the speckle pattern shift is caused by the 
@@ -83,13 +81,19 @@ Otherwise, when in self-reference mode,
 the speckle pattern shift is caused by the 
 second derivative, i.e., the curvature of the measured wavefront. 
 
-Another variation for the data acquisation is the position of 
-diffuser. It can be placed in the upstream or downstream 
-of the tested optic, depending on the type of it.
-In general, the diffuser can be placed in either the upstream or 
-the downstream of the tested optic if it is a weakly focusing optic.
-Otherwise, the diffuser is usually placed in the downstream of the 
-optic.
+Another variation of the experiment method is the position of the diffuser. 
+It can be placed in the upstream or downstream of the tested optic, 
+depending on the type of the optic. In general, if there is a reference beam, 
+i.e., in the case of a weakly-focusing optic, 
+the shift of the speckle pattern from the reference image to the compared 
+image is due to the local wavefront slope change at the plane 
+in the diffusor’s position for the downstream case and in the optical 
+central position for the upstream case. On the other hand, in the self-reference mode, 
+the shift of the speckle pattern is due to the local wavefront curvature change. 
+Similarly, the change happens in the diffusor’s position for the downstream case while 
+in the optical central position for the upstream case. Apart from that, 
+the algorithms used to reconstruct the local wavefront curvature 
+for the two cases are also different.
 
 The following table gives a summary of the speckle-based techniques 
 included in this package. For the detailed description of the principle
@@ -101,7 +105,7 @@ of each technique, please see the following sections.
 | Conventional XST [1]_    | 1 image for both reference and                | Wavefront slope                     |
 |                          | sample dataset.                               |                                     |
 +--------------------------+-----------------------------------------------+-------------------------------------+
-| Self-reference XST       | 2 images for reference dataset.               | Wavefront curvature                 |
+| Self-reference XST       | 2 images for sample dataset.                  | Wavefront curvature                 |
 +--------------------------+-----------------------------------------------+-------------------------------------+
 | XSS with reference       | 2 datasets, for reference and sample each.    |                                     |
 | beam                     | The number of images in one dataset equals to | Wavefront slope                     |
@@ -461,8 +465,8 @@ Other X-ray speckle-based techniques
 ====================================
 Due to special experimental considerations, all the techniques described in the above keep 
 the detector fixed. As a result, 
-all the so called "absolute mode" sepckle-based techniques (see [JSRTheory]_ and [JSRExperiment]_)
-are not inculded in this python package ostensibly. 
+all the so called "absolute mode" speckle-based techniques (see [JSRTheory]_ and [JSRExperiment]_)
+are not included in this python package ostensibly. 
 However, the data processing procedure for these "absolute mode" techniques 
 is the same as their corresponding techniques in the above. 
 

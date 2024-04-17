@@ -23,7 +23,8 @@ Getting raw data
 ================
 We provide several :doc:`examples <example>` to help users to learn how to use this python package.
 Every example shown in this documentation can be reproduced using our shared experiment data.
-**To download the shared data, please visit ...**
+**To download the shared data, please visit** 
+`https://doi.org/10.5281/zenodo.10892838 <https://doi.org/10.5281/zenodo.10892838>`_.
 
 .. _citation:
 
@@ -32,6 +33,10 @@ Citing spexwavepy
 
 Citing shared data
 ------------------
+If the shared dataset helped your research, please kindly cite the dataset as:
+
+Hu, L. (2024). Dataset for spexwavepy examples [Data set]. Zenodo. 
+`https://doi.org/10.5281/zenodo.10892838 <https://doi.org/10.5281/zenodo.10892838>`_.
 
 .. _comput:
 
@@ -294,10 +299,10 @@ First, let us load and see the raw images.
    from spexwavepy.trackfun import Tracking 
    from spexwavepy.corefun import read_one, crop_one
 
-   ref_folder_x = "/YOUR/DATA/FOLDER/PATH/CRLXSS/ReferX1D/402923-pcoedge-files/"
-   sam_folder_x = "/YOUR/DATA/FOLDER/PATH/CRLXSS/SampleX1D/402924-pcoedge-files/"
-   ref_folder_y = "/YOUR/DATA/FOLDER/PATH/CRLXSS/ReferY1D/402925-pcoedge-files/"
-   sam_folder_y = "/YOUR/DATA/FOLDER/PATH/CRLXSS/SampleY1D/402926-pcoedge-files/"
+   ref_folder_x = "/YOUR/DATA/FOLDER/PATH/CRLReferX1D/402923-pcoedge-files/"
+   sam_folder_x = "/YOUR/DATA/FOLDER/PATH/CRLSampleX1D/402924-pcoedge-files/"
+   ref_folder_y = "/YOUR/DATA/FOLDER/PATH/CRLReferY1D/402925-pcoedge-files/"
+   sam_folder_y = "/YOUR/DATA/FOLDER/PATH/CRLSampleY1D/402926-pcoedge-files/"
 
    im_sam_tmp = read_one(sam_folder_y+'00005.tif', ShowImage=True)
 

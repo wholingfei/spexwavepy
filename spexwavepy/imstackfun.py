@@ -117,6 +117,7 @@ class Imagestack:
     def read_data(self):
         """
         Read the raw image data. 
+        At the moment, only .png and .tiff files are considered.
         """
         cwd = os.getcwd()
         if self.rawdata is None:

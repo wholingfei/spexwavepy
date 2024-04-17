@@ -52,11 +52,11 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-#html_theme = 'sphinx_rtd_theme'
-html_theme = 'nature'
+html_theme = 'sphinx_rtd_theme'
+#html_theme = 'nature'
 html_show_sourcelink = False#True
 html_theme_options = {
-        'body_max_width':'50%'
+        'body_max_width':'90%'
         }
 
 # Add any paths that contain custom static files (such as style sheets) here,

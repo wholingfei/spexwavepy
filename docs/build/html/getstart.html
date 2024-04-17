@@ -1,50 +1,99 @@
-
 <!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-
-    <title>Getting started &#8212; spexwavepy 1.0.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting started &mdash; spexwavepy 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Examples" href="example.html" />
     <link rel="prev" title="The speckle-based wavefront sensing techniques" href="principle.html" /> 
-  </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="example.html" title="Examples"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="principle.html" title="The speckle-based wavefront sensing techniques"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">spexwavepy 1.0.0 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Getting started</a></li> 
-      </ul>
-    </div>  
+</head>
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            spexwavepy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="principle.html">The speckle-based wavefront sensing techniques</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-pip">Using pip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#from-source-code">From source code</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-raw-data">Getting raw data</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#citing-spexwavepy">Citing spexwavepy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#citing-shared-data">Citing shared data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#computational-consumption">Computational consumption</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial">Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#read-the-image-stack">1. Read the image stack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#determine-the-detector-pixel-size">2. Determine the detector pixel size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stability-check">3. Stability check</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#single-crl-measurement">4. Single CRL measurement</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="example.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="userguide.html">User guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">spexwavepy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Getting started</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
   <section id="getting-started">
 <h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h1>
 <section id="installation">
@@ -61,12 +110,16 @@
 <span id="rawdata"></span><h2>Getting raw data<a class="headerlink" href="#getting-raw-data" title="Permalink to this heading"></a></h2>
 <p>We provide several <a class="reference internal" href="example.html"><span class="doc">examples</span></a> to help users to learn how to use this python package.
 Every example shown in this documentation can be reproduced using our shared experiment data.
-<strong>To download the shared data, please visit …</strong></p>
+<strong>To download the shared data, please visit</strong>
+<a class="reference external" href="https://doi.org/10.5281/zenodo.10892838">https://doi.org/10.5281/zenodo.10892838</a>.</p>
 <section id="citing-spexwavepy">
 <span id="citation"></span><h3>Citing spexwavepy<a class="headerlink" href="#citing-spexwavepy" title="Permalink to this heading"></a></h3>
 </section>
 <section id="citing-shared-data">
 <h3>Citing shared data<a class="headerlink" href="#citing-shared-data" title="Permalink to this heading"></a></h3>
+<p>If the shared dataset helped your research, please kindly cite the dataset as:</p>
+<p>Hu, L. (2024). Dataset for spexwavepy examples [Data set]. Zenodo.
+<a class="reference external" href="https://doi.org/10.5281/zenodo.10892838">https://doi.org/10.5281/zenodo.10892838</a>.</p>
 </section>
 </section>
 <section id="computational-consumption">
@@ -74,7 +127,7 @@ Every example shown in this documentation can be reproduced using our shared exp
 <p><em>Say something…</em></p>
 </section>
 <section id="tutorial">
-<span id="id1"></span><h2>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this heading"></a></h2>
+<span id="id2"></span><h2>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this heading"></a></h2>
 <p>The <strong>spexwavepy</strong> is a data processing package for speckle-based X-ray wavefront sensing techniques.
 In this tutorial, we try to help new users to get familiar with the basic concept and the usage of this package.
 Let’s do it step by step.</p>
@@ -181,10 +234,10 @@ Thus, <code class="docutils literal notranslate"><span class="pre">subROI</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">display</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, we show the fitting line and the fitting residual error.</p>
-<figure class="align-center" id="id2">
+<figure class="align-center" id="id3">
 <a class="reference internal image-reference" href="_images/pixdet2.jpg"><img alt="_images/pixdet2.jpg" src="_images/pixdet2.jpg" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-text">The fitting results and the residuals.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The fitting results and the residuals.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>Also, the calculated pixel size has been printed out.</p>
@@ -278,10 +331,10 @@ As to the detailed description of the implementation of this technique, please g
 <span class="kn">from</span> <span class="nn">spexwavepy.trackfun</span> <span class="kn">import</span> <span class="n">Tracking</span>
 <span class="kn">from</span> <span class="nn">spexwavepy.corefun</span> <span class="kn">import</span> <span class="n">read_one</span><span class="p">,</span> <span class="n">crop_one</span>
 
-<span class="n">ref_folder_x</span> <span class="o">=</span> <span class="s2">&quot;/YOUR/DATA/FOLDER/PATH/CRLXSS/ReferX1D/402923-pcoedge-files/&quot;</span>
-<span class="n">sam_folder_x</span> <span class="o">=</span> <span class="s2">&quot;/YOUR/DATA/FOLDER/PATH/CRLXSS/SampleX1D/402924-pcoedge-files/&quot;</span>
-<span class="n">ref_folder_y</span> <span class="o">=</span> <span class="s2">&quot;/YOUR/DATA/FOLDER/PATH/CRLXSS/ReferY1D/402925-pcoedge-files/&quot;</span>
-<span class="n">sam_folder_y</span> <span class="o">=</span> <span class="s2">&quot;/YOUR/DATA/FOLDER/PATH/CRLXSS/SampleY1D/402926-pcoedge-files/&quot;</span>
+<span class="n">ref_folder_x</span> <span class="o">=</span> <span class="s2">&quot;/YOUR/DATA/FOLDER/PATH/CRLReferX1D/402923-pcoedge-files/&quot;</span>
+<span class="n">sam_folder_x</span> <span class="o">=</span> <span class="s2">&quot;/YOUR/DATA/FOLDER/PATH/CRLSampleX1D/402924-pcoedge-files/&quot;</span>
+<span class="n">ref_folder_y</span> <span class="o">=</span> <span class="s2">&quot;/YOUR/DATA/FOLDER/PATH/CRLReferY1D/402925-pcoedge-files/&quot;</span>
+<span class="n">sam_folder_y</span> <span class="o">=</span> <span class="s2">&quot;/YOUR/DATA/FOLDER/PATH/CRLSampleY1D/402926-pcoedge-files/&quot;</span>
 
 <span class="n">im_sam_tmp</span> <span class="o">=</span> <span class="n">read_one</span><span class="p">(</span><span class="n">sam_folder_y</span><span class="o">+</span><span class="s1">&#39;00005.tif&#39;</span><span class="p">,</span> <span class="n">ShowImage</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -635,85 +688,34 @@ surface to the CRL thinckness distribution.</p>
 </section>
 
 
-            <div class="clearer"></div>
+           </div>
           </div>
-        </div>
-      </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <div>
-    <h3><a href="index.html">Table of Contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Getting started</a><ul>
-<li><a class="reference internal" href="#installation">Installation</a><ul>
-<li><a class="reference internal" href="#using-pip">Using pip</a></li>
-<li><a class="reference internal" href="#from-source-code">From source code</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#getting-raw-data">Getting raw data</a><ul>
-<li><a class="reference internal" href="#citing-spexwavepy">Citing spexwavepy</a></li>
-<li><a class="reference internal" href="#citing-shared-data">Citing shared data</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#computational-consumption">Computational consumption</a></li>
-<li><a class="reference internal" href="#tutorial">Tutorial</a><ul>
-<li><a class="reference internal" href="#read-the-image-stack">1. Read the image stack</a></li>
-<li><a class="reference internal" href="#determine-the-detector-pixel-size">2. Determine the detector pixel size</a></li>
-<li><a class="reference internal" href="#stability-check">3. Stability check</a></li>
-<li><a class="reference internal" href="#single-crl-measurement">4. Single CRL measurement</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="principle.html" class="btn btn-neutral float-left" title="The speckle-based wavefront sensing techniques" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="example.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Lingfei Hu, Hongchang Wang.</p>
   </div>
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="principle.html"
-                          title="previous chapter">The speckle-based wavefront sensing techniques</a></p>
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="example.html"
-                          title="next chapter">Examples</a></p>
-  </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
         </div>
       </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li class="right" >
-          <a href="example.html" title="Examples"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="principle.html" title="The speckle-based wavefront sensing techniques"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">spexwavepy 1.0.0 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Getting started</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2024, Lingfei Hu, Hongchang Wang.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.0.2.
-    </div>
-  </body>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
 </html>

@@ -1,0 +1,36 @@
+# pyproject.toml
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "spexwavepy"
+version = "1.0.0"
+authors = [
+    {name = "Lingfei Hu", email="hulf88@ustc.edu.cn"},
+    {name = "Hongchang Wang", email="hongchang.wang@diamond.ac.uk"},
+]
+description = "Spexwavepy is an open-source Python package dedicated to the speckle-based wavefront sensing techniques for X-ray optics." 
+readme = "README.md"
+license = {file = "LICENSE"}
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+keywords = ["Synchrotron Radiation", "Free Electron Laser", "X-ray", "Wavefront Sensing", "Speckle"]
+dependencies = [
+    "numpy",
+    "scipy",
+    "opencv-python >= 4.4",
+    "natsort >= 8.1.0",
+]
+
+[tool.setuptools]
+include-package-data = False 
+
+[project.urls]
+# Homepage = "GitHub..."
+# Documentation = "Readthedocs..."
+# "Data Repository" = "Zenodo..."

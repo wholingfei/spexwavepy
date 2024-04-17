@@ -13,14 +13,14 @@ from spexwavepy.corefun import read_one, crop_one
 from spexwavepy.postfun import Integration2D_SCS
 
 if __name__ == "__main__":
-    ref_folder_x = "/YOUR/DATA/FOLDER/PATH/CRLXSS/ReferX1D/402923-pcoedge-files/"
-    sam_folder_x = "/YOUR/DATA/FOLDER/PATH/CRLXSS/SampleX1D/402924-pcoedge-files/"
-    ref_folder_y = "/YOUR/DATA/FOLDER/PATH/CRLXSS/ReferY1D/402925-pcoedge-files/"
-    sam_folder_y = "/YOUR/DATA/FOLDER/PATH/CRLXSS/SampleY1D/402926-pcoedge-files/"
-    #ref_folder_x = "/home/lingfei/spexwavepy/data/CRLXSS/ReferX1D/402923-pcoedge-files/"
-    #sam_folder_x = "/home/lingfei/spexwavepy/data/CRLXSS/SampleX1D/402924-pcoedge-files/"
-    #ref_folder_y = "/home/lingfei/spexwavepy/data/CRLXSS/ReferY1D/402925-pcoedge-files/"
-    #sam_folder_y = "/home/lingfei/spexwavepy/data/CRLXSS/SampleY1D/402926-pcoedge-files/"
+    #ref_folder_x = "/home/lingfei/spexwavepy/data/CRLReferX1D/402923-pcoedge-files/"
+    #sam_folder_x = "/home/lingfei/spexwavepy/data/CRLSampleX1D/402924-pcoedge-files/"
+    #ref_folder_y = "/home/lingfei/spexwavepy/data/CRLReferY1D/402925-pcoedge-files/"
+    #sam_folder_y = "/home/lingfei/spexwavepy/data/CRLSampleY1D/402926-pcoedge-files/"
+    ref_folder_x = "/YOUR/DATA/FOLDER/PATH/CRLReferX1D/402923-pcoedge-files/"
+    sam_folder_x = "/YOUR/DATA/FOLDER/PATH/CRLSampleX1D/402924-pcoedge-files/"
+    ref_folder_y = "/YOUR/DATA/FOLDER/PATH/CRLReferY1D/402925-pcoedge-files/"
+    sam_folder_y = "/YOUR/DATA/FOLDER/PATH/CRLSampleY1D/402926-pcoedge-files/"
 
     #im_sam_tmp = read_one(sam_folder_y+'00005.tif', ShowImage=True)
     #sys.exit(0)
