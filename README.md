@@ -35,6 +35,10 @@ available, you can use this package without installation as well.
 
 ### 2. From PyPI
 
+`pip install spexwavepy`
+
+This can install the package without the provided examples. 
+
 ## Documentation
 
 ## Data availability
