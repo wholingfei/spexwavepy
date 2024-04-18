@@ -1,0 +1,4 @@
+numpy
+scipy
+opencv-python>=4.4
+natsort>=8.1.0
