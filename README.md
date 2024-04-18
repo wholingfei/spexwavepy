@@ -19,6 +19,12 @@ Its name is the abbreviation of the **spe**ckle-based **X**-ray **wave**front se
 
 Git clone from this repository.
 
+`git clone https://github.com/wholingfei/spexwavepy.git`
+
+`cd spexwavepy`
+
+`pip install -e .`
+
 ### 2. From PyPI
 
 ## Documentation
