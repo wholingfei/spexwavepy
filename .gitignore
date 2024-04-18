@@ -20,7 +20,7 @@ tmp/
 data/
 
 #egg file
-spexwavepy.egg-info/
+#spexwavepy.egg-info/
 
 #Documentation
 #docs/build/
