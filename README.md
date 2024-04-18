@@ -17,7 +17,11 @@ Its name is the abbreviation of the **spe**ckle-based **X**-ray **wave**front se
 
 ### 1. From GitHub
 
-Git clone from this repository.
+This is the **recommended** way of getting this package.
+Since in this way, the users will have the example code and 
+also the compiled documentation in the form of html files.
+
+Git clone from the GitHub repository.
 
 `git clone https://github.com/wholingfei/spexwavepy.git`
 
