@@ -1,5 +1,5 @@
 # MANIFEST.in
 
-include examples/*
-include docs/build/*
-include examples/*
+include examples/* 
+
+include docs/build/html/*
