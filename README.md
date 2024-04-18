@@ -13,7 +13,7 @@ Its name is the abbreviation of the **spe**ckle-based **X**-ray **wave**front se
 * It has a complete [Documentation](#documentation) for the package.
 * It shares the expriment data used for the examples.
 
-## Get ***spexwavepy***
+## Getting ***spexwavepy***
 
 ### 1. From GitHub
 
@@ -38,5 +38,3 @@ available, you can use this package without installation as well.
 All the data used in ***spexwavepy*** is shared on [Zenodo, https://zenodo.org/records/10892838](https://zenodo.org/records/10892838).
 Users can download the data and reproduce all the results from the 
 example code by themselves.
-
-## License
