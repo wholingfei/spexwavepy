@@ -19,7 +19,7 @@ What is spexwavepy
 ==================
 **Spexwavepy** is an open-source Python package dedicated to the speckle-based wavefront sensing 
 techniques for X-ray optics. 
-Its name is the abbreviation of the **Spe**\ ckle-based **x**-ray **wave**\ front sensing 
+Its name is the abbreviation of the **spe**\ ckle-based **x**-ray **wave**\ front sensing 
 **Py**\ thon package.
 It covers a variety of X-ray speckle-based techniques and provides examples with real experiment data.
 This documentation will show users how to get the spexwavepy package, 
@@ -36,7 +36,7 @@ The principle of speckle-based wavefront sensing techniques
 
   - :ref:`Conventional X-ray Speckle Tracking (XST) technique with reference beam <prinXSTRefer>`
 
-  - :ref:`Self-reference conventional X-ray Speckle Tracking (XST) technique <prinXSTSelf>`
+  - :ref:`Self-reference X-ray Speckle Tracking (XST) technique <prinXSTSelf>`
 
   - :ref:`X-ray Speckle Scanning (XSS) technique with reference beam <prinXSSRefer>`
 
@@ -53,9 +53,9 @@ Getting started
 
   - :ref:`Installation <install>`
 
-  - :ref:`Computational consumption <comput>`
-
   - :ref:`Getting raw data <rawdata>`
+
+  - :ref:`Computational consumption <comput>`
 
   - :ref:`Tutorial <tutorial>`
 
@@ -95,9 +95,9 @@ User guide
 
       - :ref:`Default method <subdefault>`
 
-      - :ref:`Gaussian peak fitting method <subgauss>`
+      - :ref:`Gaussian peak finding method <subgauss>`
 
-      - :ref:`Parabola peak fitting method <subpara>`
+      - :ref:`Parabola peak finding method <subpara>`
         
     - :ref:`Image match <useimmatch>`
 

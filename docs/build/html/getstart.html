@@ -111,7 +111,7 @@
 <p>We provide several <a class="reference internal" href="example.html"><span class="doc">examples</span></a> to help users to learn how to use this python package.
 Every example shown in this documentation can be reproduced using our shared experiment data.
 <strong>To download the shared data, please visit</strong>
-<a class="reference external" href="https://doi.org/10.5281/zenodo.10892838">https://doi.org/10.5281/zenodo.10892838</a>.</p>
+<a class="reference external" href="https://zenodo.org/records/10892838">https://zenodo.org/records/10892838</a>.</p>
 <section id="citing-spexwavepy">
 <span id="citation"></span><h3>Citing spexwavepy<a class="headerlink" href="#citing-spexwavepy" title="Permalink to this heading"></a></h3>
 </section>
@@ -119,12 +119,45 @@ Every example shown in this documentation can be reproduced using our shared exp
 <h3>Citing shared data<a class="headerlink" href="#citing-shared-data" title="Permalink to this heading"></a></h3>
 <p>If the shared dataset helped your research, please kindly cite the dataset as:</p>
 <p>Hu, L. (2024). Dataset for spexwavepy examples [Data set]. Zenodo.
-<a class="reference external" href="https://doi.org/10.5281/zenodo.10892838">https://doi.org/10.5281/zenodo.10892838</a>.</p>
+<a class="reference external" href="https://zenodo.org/records/10892838">https://zenodo.org/records/10892838</a>.</p>
 </section>
 </section>
 <section id="computational-consumption">
 <span id="comput"></span><h2>Computational consumption<a class="headerlink" href="#computational-consumption" title="Permalink to this heading"></a></h2>
-<p><em>Say something…</em></p>
+<p>The two-dimensional (2D) speckle tracking can be time-consuming sometimes. We used the built-in
+<a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html">multiprocessing</a> module of Python to
+parallelise the code to speed up the data processing procedure.</p>
+<p>We compared the running time of the single-core version and the multiprocessing version of
+the <a class="reference internal" href="principle.html#prinxssrefer"><span class="std std-ref">XSS technique with reference beam</span></a>. The two functions are
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer" title="spexwavepy.trackfun.Tracking.XSS_withrefer"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XSS_withrefer()</span></code></a> and
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer_multi" title="spexwavepy.trackfun.Tracking.XSS_withrefer_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XSS_withrefer_multi()</span></code></a>, repectively.</p>
+<p>The following table summerises the basic information of the computer used for this comparison.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Workstation</p></th>
+<th class="head"><p>Operating system</p></th>
+<th class="head"><p>Memory</p></th>
+<th class="head"><p>Number of CPUs</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Intel(R) Xeon(R) CPU
+E5-2670 v3 &#64; 2.30GHz</p></td>
+<td><p>Rocky Linux 8.7</p></td>
+<td><p>125 G</p></td>
+<td><p>48</p></td>
+</tr>
+</tbody>
+</table>
+<p>The comparison was extracted from the example code of
+<a class="reference internal" href="example.html#expplane"><span class="std std-ref">plane mirror measurement with reference beam</span></a>.
+Four <a class="reference internal" href="spexwavepy.html#spexwavepy.imstackfun.Imagestack" title="spexwavepy.imstackfun.Imagestack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Imagestack</span></code></a> were loaded into the memory.
+Each image stack consists of 101 images, each image in the stack is 1380 pixels
+in width, 2140 pixels in height.</p>
+<p>The single-core function <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer" title="spexwavepy.trackfun.Tracking.XSS_withrefer"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XSS_withrefer()</span></code></a> runned
+for <strong>2366 s</strong>, whereas the multi-core function
+<a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer_multi" title="spexwavepy.trackfun.Tracking.XSS_withrefer_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XSS_withrefer_multi()</span></code></a> runned for <strong>116 s</strong> using
+<strong>32</strong> cores out of total 48 CPUs.</p>
 </section>
 <section id="tutorial">
 <span id="id2"></span><h2>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this heading"></a></h2>
@@ -234,10 +267,10 @@ Thus, <code class="docutils literal notranslate"><span class="pre">subROI</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">display</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, we show the fitting line and the fitting residual error.</p>
-<figure class="align-center" id="id3">
+<figure class="align-center" id="id4">
 <a class="reference internal image-reference" href="_images/pixdet2.jpg"><img alt="_images/pixdet2.jpg" src="_images/pixdet2.jpg" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-text">The fitting results and the residuals.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The fitting results and the residuals.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>Also, the calculated pixel size has been printed out.</p>

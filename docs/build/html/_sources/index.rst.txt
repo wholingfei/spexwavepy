@@ -36,7 +36,7 @@ The principle of speckle-based wavefront sensing techniques
 
   - :ref:`Conventional X-ray Speckle Tracking (XST) technique with reference beam <prinXSTRefer>`
 
-  - :ref:`Self-reference conventional X-ray Speckle Tracking (XST) technique <prinXSTSelf>`
+  - :ref:`Self-reference X-ray Speckle Tracking (XST) technique <prinXSTSelf>`
 
   - :ref:`X-ray Speckle Scanning (XSS) technique with reference beam <prinXSSRefer>`
 
@@ -53,9 +53,9 @@ Getting started
 
   - :ref:`Installation <install>`
 
-  - :ref:`Computational consumption <comput>`
-
   - :ref:`Getting raw data <rawdata>`
+
+  - :ref:`Computational consumption <comput>`
 
   - :ref:`Tutorial <tutorial>`
 
@@ -95,9 +95,9 @@ User guide
 
       - :ref:`Default method <subdefault>`
 
-      - :ref:`Gaussian peak fitting method <subgauss>`
+      - :ref:`Gaussian peak finding method <subgauss>`
 
-      - :ref:`Parabola peak fitting method <subpara>`
+      - :ref:`Parabola peak finding method <subpara>`
         
     - :ref:`Image match <useimmatch>`
 

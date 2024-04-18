@@ -24,7 +24,7 @@ Getting raw data
 We provide several :doc:`examples <example>` to help users to learn how to use this python package.
 Every example shown in this documentation can be reproduced using our shared experiment data.
 **To download the shared data, please visit** 
-`https://doi.org/10.5281/zenodo.10892838 <https://doi.org/10.5281/zenodo.10892838>`_.
+`https://zenodo.org/records/10892838 <https://zenodo.org/records/10892838>`_.
 
 .. _citation:
 
@@ -36,13 +36,40 @@ Citing shared data
 If the shared dataset helped your research, please kindly cite the dataset as:
 
 Hu, L. (2024). Dataset for spexwavepy examples [Data set]. Zenodo. 
-`https://doi.org/10.5281/zenodo.10892838 <https://doi.org/10.5281/zenodo.10892838>`_.
+`https://zenodo.org/records/10892838 <https://zenodo.org/records/10892838>`_.
 
 .. _comput:
 
 Computational consumption
 =========================
-*Say something...*
+The two-dimensional (2D) speckle tracking can be time-consuming sometimes. We used the built-in 
+`multiprocessing <https://docs.python.org/3/library/multiprocessing.html>`_ module of Python to 
+parallelise the code to speed up the data processing procedure.
+
+We compared the running time of the single-core version and the multiprocessing version of 
+the :ref:`XSS technique with reference beam <prinXSSRefer>`. The two functions are 
+:py:meth:`~spexwavepy.trackfun.Tracking.XSS_withrefer` and 
+:py:meth:`~spexwavepy.trackfun.Tracking.XSS_withrefer_multi`, repectively.
+
+The following table summerises the basic information of the computer used for this comparison.
+
++------------------------+--------------------+---------------+------------------+
+| Workstation            | Operating system   | Memory        | Number of CPUs   |
++========================+====================+===============+==================+
+| Intel(R) Xeon(R) CPU   | Rocky Linux 8.7    | 125 G         | 48               |
+| E5-2670 v3 @ 2.30GHz   |                    |               |                  |
++------------------------+--------------------+---------------+------------------+
+
+The comparison was extracted from the example code of 
+:ref:`plane mirror measurement with reference beam <expplane>`. 
+Four :py:class:`~spexwavepy.imstackfun.Imagestack` were loaded into the memory. 
+Each image stack consists of 101 images, each image in the stack is 1380 pixels 
+in width, 2140 pixels in height.
+
+The single-core function :py:meth:`~spexwavepy.trackfun.Tracking.XSS_withrefer` runned 
+for **2366 s**, whereas the multi-core function 
+:py:meth:`~spexwavepy.trackfun.Tracking.XSS_withrefer_multi` runned for **116 s** using 
+**32** out of total 48 CPUs.
 
 .. _tutorial:
 
