@@ -11,7 +11,7 @@ Its name is the abbreviation of the **spe**ckle-based **X**-ray **wave**front se
 * It is written in Python and open-source.
 * It uses the built-in multiprocessing module to parallelise the code.
 * It has a complete [Documentation](#documentation) for the package.
-* It shares the expriment [Data](#data availability) used for the examples.
+* It shares the expriment [Data](#data%20availability) used for the examples.
 
 ## Get ***spexwavepy***
 
