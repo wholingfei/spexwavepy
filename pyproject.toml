@@ -27,10 +27,3 @@ dependencies = [
     "natsort >= 8.1.0",
 ]
 
-[tool.setuptools]
-include-package-data = False 
-
-[project.urls]
-# Homepage = "GitHub..."
-# Documentation = "Readthedocs..."
-# "Data Repository" = "Zenodo..."
