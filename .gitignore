@@ -19,6 +19,9 @@ tmp/
 #data file
 data/
 
+#egg file
+spexwavepy.egg-info/
+
 #Documentation
 #docs/build/
 
