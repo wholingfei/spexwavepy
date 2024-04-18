@@ -25,6 +25,10 @@ Git clone from this repository.
 
 `pip install -e .`
 
+Or, if you have difficulties in using `pip install` due to various reasons, 
+make sure you have **Numpy**, **Scipy**, **cv2(opencv-python)** and **natsort** 
+available, you can use this package without installation as well.
+
 ### 2. From PyPI
 
 ## Documentation
