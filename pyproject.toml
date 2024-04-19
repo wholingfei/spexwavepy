@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "spexwavepy"
-version = "1.0.0"
+version = "1.0.1"
 authors = [
     {name = "Lingfei Hu", email="hulf88@ustc.edu.cn"},
     {name = "Hongchang Wang", email="hongchang.wang@diamond.ac.uk"},
