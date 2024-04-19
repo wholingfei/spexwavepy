@@ -16,11 +16,6 @@ build:
   jobs:
     post_create_environment:
       - python -m pip install sphinx_rtd_theme
-      - python -m pip install numpy
-      - python -m pip install matplotlib
-      - python -m pip install scipy
-      - python -m pip install natsource
-      - python -m pip install opencv-python 
 
 # Build documentation in the "docs/" directory with Sphinx
 sphinx:
