@@ -20,10 +20,10 @@ tmp/
 data/
 
 #egg file
-spexwavepy.egg-info/
+spexwavepy.egg-info/*
 
 #dist
-dist/
+dist/*
 
 #Documentation
 #docs/build/
