@@ -69,7 +69,7 @@ in width, 2140 pixels in height.
 The single-core function :py:meth:`~spexwavepy.trackfun.Tracking.XSS_withrefer` runned 
 for **2366 s**, whereas the multi-core function 
 :py:meth:`~spexwavepy.trackfun.Tracking.XSS_withrefer_multi` runned for **116 s** using 
-**32** cores out of total 48 CPUs.
+**32** out of total 48 CPUs.
 
 .. _tutorial:
 
