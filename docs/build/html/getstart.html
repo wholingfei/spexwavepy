@@ -47,8 +47,8 @@
 <li class="toctree-l1"><a class="reference internal" href="principle.html">The speckle-based wavefront sensing techniques</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#using-pip">Using pip</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#from-source-code">From source code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#from-github">1. From GitHub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#from-pypi">2. From PyPI</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#getting-raw-data">Getting raw data</a><ul>
@@ -98,12 +98,31 @@
 <h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h1>
 <section id="installation">
 <span id="install"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
-<p><em>Say something…</em></p>
-<section id="using-pip">
-<span id="pip"></span><h3>Using pip<a class="headerlink" href="#using-pip" title="Permalink to this heading"></a></h3>
+<section id="from-github">
+<h3>1. From GitHub<a class="headerlink" href="#from-github" title="Permalink to this heading"></a></h3>
+<p>This is the <strong>recommended</strong> way of getting this package.
+Since in this way, the users will have the example code and
+also the compiled documentation in the form of html files.</p>
+<p>Git clone from the <a class="reference external" href="https://github.com/wholingfei/spexwavepy/">GitHub repository</a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">wholingfei</span><span class="o">/</span><span class="n">spexwavepy</span><span class="o">.</span><span class="n">git</span>
+
+<span class="n">cd</span> <span class="n">spexwavepy</span>
+
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">e</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>Or, if you have difficulties in using <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> due to various reasons,
+make sure you have <strong>Numpy</strong>, <strong>Scipy</strong>, <strong>cv2(opencv-python)</strong> and <strong>natsort</strong>
+available, you can use this package without installation as well.</p>
 </section>
-<section id="from-source-code">
-<span id="source"></span><h3>From source code<a class="headerlink" href="#from-source-code" title="Permalink to this heading"></a></h3>
+<section id="from-pypi">
+<span id="pip"></span><h3>2. From PyPI<a class="headerlink" href="#from-pypi" title="Permalink to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">spexwavepy</span>
+</pre></div>
+</div>
+<p>This can install the package without the provided examples.
+The main page of this package at PyPI is
+<a class="reference external" href="https://pypi.org/project/spexwavepy/">https://pypi.org/project/spexwavepy/</a>.</p>
 </section>
 </section>
 <section id="getting-raw-data">

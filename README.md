@@ -41,6 +41,26 @@ This can install the package without the provided examples.
 
 ## Documentation
 
+There are two ways of reading the documentation of this package.
+
+If you download the source code of this package from GitHub, you can find the 
+local documentation in docs/build/html/ folder. Read them using your web browser.
+Further, you can make the html pages from make file.
+
+`make clean`
+
+and 
+
+`make html`
+
+will generate the documentation in html files.
+
+The documentation can also be found online.
+
+The main page of the documention is host at 
+[readthedocs.org](https://spexwavepy.readthedocs.io/en/latest/).
+
+
 ## Data availability
 
 All the data used in ***spexwavepy*** is shared on [Zenodo, https://zenodo.org/records/10892838](https://zenodo.org/records/10892838).
