@@ -5,17 +5,39 @@ Getting started
 
 Installation
 =====================
-*Say something...*
+
+1. From GitHub
+--------------
+This is the **recommended** way of getting this package.
+Since in this way, the users will have the example code and 
+also the compiled documentation in the form of html files.
+
+Git clone from the `GitHub repository <https://github.com/wholingfei/spexwavepy/>`_.
+
+.. code-block::
+
+   git clone https://github.com/wholingfei/spexwavepy.git
+
+   cd spexwavepy
+
+   pip install -e .
+
+Or, if you have difficulties in using ``pip install`` due to various reasons, 
+make sure you have **Numpy**, **Scipy**, **cv2(opencv-python)** and **natsort** 
+available, you can use this package without installation as well.
 
 .. _pip:
 
-Using pip
----------
+2. From PyPI
+------------
 
-.. _source:
+.. code-block::
 
-From source code
-----------------
+   pip install spexwavepy
+
+This can install the package without the provided examples. 
+The main page of this package at PyPI is 
+`https://pypi.org/project/spexwavepy/ <https://pypi.org/project/spexwavepy/>`_.
 
 .. _rawdata:
 
