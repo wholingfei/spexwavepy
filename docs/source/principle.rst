@@ -273,11 +273,11 @@ detector plane. :math:`W` represents the equiphase surface.
 We have the following equations:
 
 .. math::
-   \frac{1}{R_x} \approx \frac{\partial^{2}W}{\partial x^2} = \frac{1}{D} - \frac{s_x}{i_x \times p \times D}
+   \frac{1}{R_x} \approx \frac{\partial^{2}W}{\partial x^2} = \frac{1}{D} - \frac{s_x}{ix \times p \times D}
    
-   \frac{1}{R_y} \approx \frac{\partial^{2}W}{\partial y^2} = \frac{1}{D} - \frac{s_y}{i_y \times p \times D}
+   \frac{1}{R_y} \approx \frac{\partial^{2}W}{\partial y^2} = \frac{1}{D} - \frac{s_y}{iy \times p \times D}
 
-Note in the above equations, :math:`R_x` and :math:`R_y` are the curvatures, i.e., 
+Note in the above equations, :math:`R_x` and :math:`R_y` are the radii of curvature, i.e., 
 the second derivative of the wavefront.
 
 See the examples for the applications of the :ref:`1D <expKBalign>` and :ref:`2D <expxssvsxst>` self-reference 
@@ -374,25 +374,28 @@ the self-reference XSS technique.
    The experiment layout for the self-reference 
    X-ray speckle scanning technique. 
 
-Like the self-reference conventional XST method, 
+Like the :ref:`self-reference conventional XST <prinXSTSelf>` method, 
 the physical quantity directly derived from the tracked 
 speckle pattern shift for this technique 
-is the wavefront slope, i.e., the second derivative 
+is the wavefront curvature, i.e., the second derivative 
 of the wavefront.
 
 We have the following equations:
 
 .. math::
-   \frac{1}{R_x} \approx \frac{\partial^{2}W}{\partial x^2} = \frac{1}{D} - \frac{i_x \times s_x}{(j-i) \times p \times D}
+   \frac{1}{R_x} \approx \frac{\partial^{2}W}{\partial x^2} = \frac{1}{D} - \frac{ix \times s_x}{(j-i) \times p \times D}
    
-   \frac{1}{R_y} \approx \frac{\partial^{2}W}{\partial y^2} = \frac{1}{D} - \frac{i_y \times s_y}{(j-i) \times p \times D}
+   \frac{1}{R_y} \approx \frac{\partial^{2}W}{\partial y^2} = \frac{1}{D} - \frac{iy \times s_y}{(j-i) \times p \times D}
 
-where :math:`R_x` and :math:`R_y` are the curvatures of the wavefront. 
+where :math:`R_x` and :math:`R_y` are the radii of curvature of the wavefront. 
 They are the second derivatives of the wavefront in the 
 horizontal and vertical directions.
 :math:`ix` and :math:`iy` are the tracked shifts of the speckle pattern, 
 :math:`s_x` and :math:`s_y` are the scan steps,
 :math:`p` is the pixel size of the detector,
+:math:`i` and :math:`j` are the column (row) number of the image when the 
+tested mirror is placed vertically (horizontally),
+:math:`j-i` is usually a fixed number of 2 or 3.
 :math:`D` represents the distance between the diffuser and the detector plane 
 if the diffuser is placed in the downstream of the tested optic.
 Otherwise, it is the distance between the centre of the tested optic and the 
@@ -430,7 +433,7 @@ data acquisition.
    
    The experiment layout for the X-ray speckle vector tracking technique. 
 
-Like the XSS technique with reference beam, two datasets will be obtained 
+Like the :ref:`XSS technique with reference beam <prinXSSRefer>`, two datasets will be obtained 
 in the end. The data processing procedure for XSVT also resembles the XSS
 technique. A new image will be formed by extracting the data row(column) by 
 row(column) and stiched together along the "random scan direction".

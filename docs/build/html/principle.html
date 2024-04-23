@@ -365,8 +365,8 @@ Otherwise, it is the distance between the centre of the tested optic and the
 detector plane. <span class="math notranslate nohighlight">\(W\)</span> represents the equiphase surface.</p>
 <p>We have the following equations:</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}\frac{1}{R_x} \approx \frac{\partial^{2}W}{\partial x^2} = \frac{1}{D} - \frac{s_x}{i_x \times p \times D}\\\frac{1}{R_y} \approx \frac{\partial^{2}W}{\partial y^2} = \frac{1}{D} - \frac{s_y}{i_y \times p \times D}\end{aligned}\end{align} \]</div>
-<p>Note in the above equations, <span class="math notranslate nohighlight">\(R_x\)</span> and <span class="math notranslate nohighlight">\(R_y\)</span> are the curvatures, i.e.,
+\[ \begin{align}\begin{aligned}\frac{1}{R_x} \approx \frac{\partial^{2}W}{\partial x^2} = \frac{1}{D} - \frac{s_x}{ix \times p \times D}\\\frac{1}{R_y} \approx \frac{\partial^{2}W}{\partial y^2} = \frac{1}{D} - \frac{s_y}{iy \times p \times D}\end{aligned}\end{align} \]</div>
+<p>Note in the above equations, <span class="math notranslate nohighlight">\(R_x\)</span> and <span class="math notranslate nohighlight">\(R_y\)</span> are the radii of curvature, i.e.,
 the second derivative of the wavefront.</p>
 <p>See the examples for the applications of the <a class="reference internal" href="example.html#expkbalign"><span class="std std-ref">1D</span></a> and <a class="reference internal" href="example.html#expxssvsxst"><span class="std std-ref">2D</span></a> self-reference
 XST technique.</p>
@@ -455,20 +455,23 @@ the self-reference XSS technique.</p>
 X-ray speckle scanning technique.</span><a class="headerlink" href="#id26" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<p>Like the self-reference conventional XST method,
+<p>Like the <a class="reference internal" href="#prinxstself"><span class="std std-ref">self-reference conventional XST</span></a> method,
 the physical quantity directly derived from the tracked
 speckle pattern shift for this technique
-is the wavefront slope, i.e., the second derivative
+is the wavefront curvature, i.e., the second derivative
 of the wavefront.</p>
 <p>We have the following equations:</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}\frac{1}{R_x} \approx \frac{\partial^{2}W}{\partial x^2} = \frac{1}{D} - \frac{i_x \times s_x}{(j-i) \times p \times D}\\\frac{1}{R_y} \approx \frac{\partial^{2}W}{\partial y^2} = \frac{1}{D} - \frac{i_y \times s_y}{(j-i) \times p \times D}\end{aligned}\end{align} \]</div>
-<p>where <span class="math notranslate nohighlight">\(R_x\)</span> and <span class="math notranslate nohighlight">\(R_y\)</span> are the curvatures of the wavefront.
+\[ \begin{align}\begin{aligned}\frac{1}{R_x} \approx \frac{\partial^{2}W}{\partial x^2} = \frac{1}{D} - \frac{ix \times s_x}{(j-i) \times p \times D}\\\frac{1}{R_y} \approx \frac{\partial^{2}W}{\partial y^2} = \frac{1}{D} - \frac{iy \times s_y}{(j-i) \times p \times D}\end{aligned}\end{align} \]</div>
+<p>where <span class="math notranslate nohighlight">\(R_x\)</span> and <span class="math notranslate nohighlight">\(R_y\)</span> are the radii of curvature of the wavefront.
 They are the second derivatives of the wavefront in the
 horizontal and vertical directions.
 <span class="math notranslate nohighlight">\(ix\)</span> and <span class="math notranslate nohighlight">\(iy\)</span> are the tracked shifts of the speckle pattern,
 <span class="math notranslate nohighlight">\(s_x\)</span> and <span class="math notranslate nohighlight">\(s_y\)</span> are the scan steps,
 <span class="math notranslate nohighlight">\(p\)</span> is the pixel size of the detector,
+<span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span> are the column (row) number of the image when the
+tested mirror is placed vertically (horizontally),
+<span class="math notranslate nohighlight">\(j-i\)</span> is usually a fixed number of 2 or 3.
 <span class="math notranslate nohighlight">\(D\)</span> represents the distance between the diffuser and the detector plane
 if the diffuser is placed in the downstream of the tested optic.
 Otherwise, it is the distance between the centre of the tested optic and the
@@ -505,7 +508,7 @@ data acquisition.</p>
 <p><span class="caption-text">The experiment layout for the X-ray speckle vector tracking technique.</span><a class="headerlink" href="#id27" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<p>Like the XSS technique with reference beam, two datasets will be obtained
+<p>Like the <a class="reference internal" href="#prinxssrefer"><span class="std std-ref">XSS technique with reference beam</span></a>, two datasets will be obtained
 in the end. The data processing procedure for XSVT also resembles the XSS
 technique. A new image will be formed by extracting the data row(column) by
 row(column) and stiched together along the “random scan direction”.
