@@ -1,6 +1,12 @@
 ========
 Examples
 ========
+.. warning::
+   Due to the different behaviours of the Python built-in **multiprocessing** module on 
+   Linux and Windows operating systems, the current version of **spexwavepy** can only 
+   run on Linux machine for the multiprocessing version of each technique. Future work 
+   will extend this package to run on multicores for the Windows system.
+
 Apart from the sample codes shown for the :ref:`tutorial <tutorial>`, we also provide several 
 examples in **spexwavepy** package to help users to learn how to do the data processing for 
 different speckle-based techniques. All the examples shown here are extracted from our previous 

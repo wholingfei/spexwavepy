@@ -4,7 +4,7 @@ Getting started
 .. _install:
 
 Installation
-=====================
+============
 
 1. From GitHub
 --------------
@@ -51,10 +51,10 @@ Every example shown in this documentation can be reproduced using our shared exp
 .. _citation:
 
 Citing spexwavepy
------------------
+=================
 
 Citing shared data
-------------------
+==================
 If the shared dataset helped your research, please kindly cite the dataset as:
 
 Hu, L. (2024). Dataset for spexwavepy examples [Data set]. Zenodo. 
@@ -92,6 +92,12 @@ The single-core function :py:meth:`~spexwavepy.trackfun.Tracking.XSS_withrefer` 
 for **2366 s**, whereas the multi-core function 
 :py:meth:`~spexwavepy.trackfun.Tracking.XSS_withrefer_multi` runned for **116 s** using 
 **32** out of total 48 CPUs.
+
+.. warning::
+   Due to the different behaviours of the Python built-in **multiprocessing** module on 
+   Linux and Windows operating systems, the current version of **spexwavepy** can only 
+   run on Linux machine for the multiprocessing version of each technique. Future work 
+   will extend this package to run on multicores for the Windows system.
 
 .. _tutorial:
 

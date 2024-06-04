@@ -51,11 +51,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#from-pypi">2. From PyPI</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#getting-raw-data">Getting raw data</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#citing-spexwavepy">Citing spexwavepy</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#citing-shared-data">Citing shared data</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-raw-data">Getting raw data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#citing-spexwavepy">Citing spexwavepy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#citing-shared-data">Citing shared data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#computational-consumption">Computational consumption</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#tutorial">Tutorial</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#read-the-image-stack">1. Read the image stack</a></li>
@@ -131,15 +129,15 @@ The main page of this package at PyPI is
 Every example shown in this documentation can be reproduced using our shared experiment data.
 <strong>To download the shared data, please visit</strong>
 <a class="reference external" href="https://zenodo.org/records/10892838">https://zenodo.org/records/10892838</a>.</p>
+</section>
 <section id="citing-spexwavepy">
-<span id="citation"></span><h3>Citing spexwavepy<a class="headerlink" href="#citing-spexwavepy" title="Permalink to this heading"></a></h3>
+<span id="citation"></span><h2>Citing spexwavepy<a class="headerlink" href="#citing-spexwavepy" title="Permalink to this heading"></a></h2>
 </section>
 <section id="citing-shared-data">
-<h3>Citing shared data<a class="headerlink" href="#citing-shared-data" title="Permalink to this heading"></a></h3>
+<h2>Citing shared data<a class="headerlink" href="#citing-shared-data" title="Permalink to this heading"></a></h2>
 <p>If the shared dataset helped your research, please kindly cite the dataset as:</p>
 <p>Hu, L. (2024). Dataset for spexwavepy examples [Data set]. Zenodo.
 <a class="reference external" href="https://zenodo.org/records/10892838">https://zenodo.org/records/10892838</a>.</p>
-</section>
 </section>
 <section id="computational-consumption">
 <span id="comput"></span><h2>Computational consumption<a class="headerlink" href="#computational-consumption" title="Permalink to this heading"></a></h2>
@@ -177,6 +175,13 @@ in width, 2140 pixels in height.</p>
 for <strong>2366 s</strong>, whereas the multi-core function
 <a class="reference internal" href="spexwavepy.html#spexwavepy.trackfun.Tracking.XSS_withrefer_multi" title="spexwavepy.trackfun.Tracking.XSS_withrefer_multi"><code class="xref py py-meth docutils literal notranslate"><span class="pre">XSS_withrefer_multi()</span></code></a> runned for <strong>116 s</strong> using
 <strong>32</strong> out of total 48 CPUs.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Due to the different behaviours of the Python built-in <strong>multiprocessing</strong> module on
+Linux and Windows operating systems, the current version of <strong>spexwavepy</strong> can only
+run on Linux machine for the multiprocessing version of each technique. Future work
+will extend this package to run on multicores for the Windows system.</p>
+</div>
 </section>
 <section id="tutorial">
 <span id="id2"></span><h2>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this heading"></a></h2>
