@@ -1010,27 +1010,14 @@ Like the XSS-type techniques, the raw image stack is a 3D data set.
 Unlike the XSS-type techniques, the scan step in this technique has 
 no clear physical meaning. Also, 
 the '1D' mode is **NOT** supported in this technique. The data processing 
-mode in this technique is assumed to be two-dimentional. 
+mode in this technique is assumed to be two-dimensional. 
 
-The important parameters of these two functions are ``edge_xy``, ``edge_z``, 
-``hw_xy``, ``pad_xy``.
-
-``hw_xy`` defines the window size of the subregion to be processed 
-on the raw image. As shown in the picture below. Note the selected area 
-is a square. 
-
-.. figure:: _static/XSVT_refer1.png
-   :width: 80%
-
-   Subregions choosed from the image stack in one loop of the 
-   whole data processing procedure. 
-
-Like the XSS-type techniques, the :ref:`XSVT technique <prinXSVTRefer>`
-will process the data 
+Similar to the XSS-type techniques, the 
+:ref:`XSVT technique <prinXSVTRefer>` will process the data 
 row by row and column by column to obtain the displacements in two 
-dimensions. Unlike the XSS-type techniques, since there is no clear 
+dimensions. Since there is no clear 
 physcial meaning in the scan direction, we obtain the speckle pattern 
-shifts in x direction from the row-by-row data processing and y direction 
+shifts in **x** direction from the row-by-row data processing and in **y** direction 
 from the column-by-column data processing. As a result, the obtained 
 shifts are in the unit of the pixels size rather than the scan step 
 as in the XSS-type techniques. 
@@ -1039,7 +1026,7 @@ Due to the above reasons, for the practical implementation of the
 XSVT technique, we do the speckle tracking data processing two times
 to obtain the shifts in x and y direction, respectively. The data 
 processing procedure resembles the 
-:ref:`2D case XSS technique with reference beam <traXSS>`. 
+2D case :ref:`XSS technique with reference beam <traXSS>`. 
 
 To obtain the speckle pattern shift in the x direction, the outmost 
 loop is along the same direction. 
@@ -1061,6 +1048,38 @@ Although the implementation of the codes are
 almost the same as the :ref:`XSS technique with reference beam <traXSS>`, 
 the shifts obtained from XSVT technique are in the unit of pixel size rather than 
 the scan step as from the XSS-type techniques.
+
+The important parameters of these two functions are ``edge_xy``, ``edge_z``, 
+``hw_xy``, ``pad_xy``.
+
+.. figure:: _static/XSVT_loopx.png
+   :width: 80%
+
+   2D image processing to obtain shifts in x direction. The chosen strip 
+   belongs to the 1D processing procedure within each loop.
+
+.. figure:: _static/XSVT_loopy.png
+   :width: 80%
+
+   2D image processing to obtain shifts in y direction. The chosen strip 
+   belongs to the 1D processing procedure within each loop.
+
+``hw_xy`` defines the window size of the subregion to be processed 
+on the raw image. For XSVT technique, we will do the speckle tracking 
+in both **x** and **y** direction, thus, ``hw_xy`` is the same for these 
+two cases. ``edge_xy`` defines the edge to be cut on the template images, 
+they are the same for both **x** and **y** directions.
+
+.. figure:: _static/XSVT_stiched.png
+   :width: 80%
+
+   Stiched images for speckle tracking.
+
+Within every loop, the strip data in one image stack will be stiched 
+together to obtain the image for speckle tracking. ``edge_z`` defines 
+the edge to be cut on the stiched template image in the scan direction, 
+as shown in the above. The remaining procedure is the same as in the 
+:ref:`XSS technique with reference beam <traXSS>`
 
 Refer to the principle of the :ref:`XSVT technique <prinXSVTRefer>`, 
 the physical quantities directly reconstructed from this technique are 

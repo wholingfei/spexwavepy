@@ -1021,25 +1021,13 @@ is set to be ‘random’, the <code class="docutils literal notranslate"><span 
 Unlike the XSS-type techniques, the scan step in this technique has
 no clear physical meaning. Also,
 the ‘1D’ mode is <strong>NOT</strong> supported in this technique. The data processing
-mode in this technique is assumed to be two-dimentional.</p>
-<p>The important parameters of these two functions are <code class="docutils literal notranslate"><span class="pre">edge_xy</span></code>, <code class="docutils literal notranslate"><span class="pre">edge_z</span></code>,
-<code class="docutils literal notranslate"><span class="pre">hw_xy</span></code>, <code class="docutils literal notranslate"><span class="pre">pad_xy</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">hw_xy</span></code> defines the window size of the subregion to be processed
-on the raw image. As shown in the picture below. Note the selected area
-is a square.</p>
-<figure class="align-default" id="id36">
-<a class="reference internal image-reference" href="_images/XSVT_refer1.png"><img alt="_images/XSVT_refer1.png" src="_images/XSVT_refer1.png" style="width: 80%;" /></a>
-<figcaption>
-<p><span class="caption-text">Subregions choosed from the image stack in one loop of the
-whole data processing procedure.</span><a class="headerlink" href="#id36" title="Permalink to this image"></a></p>
-</figcaption>
-</figure>
-<p>Like the XSS-type techniques, the <a class="reference internal" href="principle.html#prinxsvtrefer"><span class="std std-ref">XSVT technique</span></a>
-will process the data
+mode in this technique is assumed to be two-dimensional.</p>
+<p>Similar to the XSS-type techniques, the
+<a class="reference internal" href="principle.html#prinxsvtrefer"><span class="std std-ref">XSVT technique</span></a> will process the data
 row by row and column by column to obtain the displacements in two
-dimensions. Unlike the XSS-type techniques, since there is no clear
+dimensions. Since there is no clear
 physcial meaning in the scan direction, we obtain the speckle pattern
-shifts in x direction from the row-by-row data processing and y direction
+shifts in <strong>x</strong> direction from the row-by-row data processing and in <strong>y</strong> direction
 from the column-by-column data processing. As a result, the obtained
 shifts are in the unit of the pixels size rather than the scan step
 as in the XSS-type techniques.</p>
@@ -1047,27 +1035,59 @@ as in the XSS-type techniques.</p>
 XSVT technique, we do the speckle tracking data processing two times
 to obtain the shifts in x and y direction, respectively. The data
 processing procedure resembles the
-<a class="reference internal" href="#traxss"><span class="std std-ref">2D case XSS technique with reference beam</span></a>.</p>
+2D case <a class="reference internal" href="#traxss"><span class="std std-ref">XSS technique with reference beam</span></a>.</p>
 <p>To obtain the speckle pattern shift in the x direction, the outmost
 loop is along the same direction.</p>
-<figure class="align-default" id="id37">
+<figure class="align-default" id="id36">
 <a class="reference internal image-reference" href="_images/XSVT_refer2.png"><img alt="_images/XSVT_refer2.png" src="_images/XSVT_refer2.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">The loop is over x direction to obtain the speckle pattern shift in this direction.</span><a class="headerlink" href="#id37" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The loop is over x direction to obtain the speckle pattern shift in this direction.</span><a class="headerlink" href="#id36" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>Likewise, the outmost loop is along y direction if the speckle pattern
 shift in y direction is to be tracked.</p>
-<figure class="align-default" id="id38">
+<figure class="align-default" id="id37">
 <a class="reference internal image-reference" href="_images/XSVT_refer3.png"><img alt="_images/XSVT_refer3.png" src="_images/XSVT_refer3.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">The loop is over y direction to obtain the speckle pattern shift in this direction.</span><a class="headerlink" href="#id38" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The loop is over y direction to obtain the speckle pattern shift in this direction.</span><a class="headerlink" href="#id37" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>Although the implementation of the codes are
 almost the same as the <a class="reference internal" href="#traxss"><span class="std std-ref">XSS technique with reference beam</span></a>,
 the shifts obtained from XSVT technique are in the unit of pixel size rather than
 the scan step as from the XSS-type techniques.</p>
+<p>The important parameters of these two functions are <code class="docutils literal notranslate"><span class="pre">edge_xy</span></code>, <code class="docutils literal notranslate"><span class="pre">edge_z</span></code>,
+<code class="docutils literal notranslate"><span class="pre">hw_xy</span></code>, <code class="docutils literal notranslate"><span class="pre">pad_xy</span></code>.</p>
+<figure class="align-default" id="id38">
+<a class="reference internal image-reference" href="_images/XSVT_loopx.png"><img alt="_images/XSVT_loopx.png" src="_images/XSVT_loopx.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">2D image processing to obtain shifts in x direction. The chosen strip
+belongs to the 1D processing procedure within each loop.</span><a class="headerlink" href="#id38" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id39">
+<a class="reference internal image-reference" href="_images/XSVT_loopy.png"><img alt="_images/XSVT_loopy.png" src="_images/XSVT_loopy.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">2D image processing to obtain shifts in y direction. The chosen strip
+belongs to the 1D processing procedure within each loop.</span><a class="headerlink" href="#id39" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p><code class="docutils literal notranslate"><span class="pre">hw_xy</span></code> defines the window size of the subregion to be processed
+on the raw image. For XSVT technique, we will do the speckle tracking
+in both <strong>x</strong> and <strong>y</strong> direction, thus, <code class="docutils literal notranslate"><span class="pre">hw_xy</span></code> is the same for these
+two cases. <code class="docutils literal notranslate"><span class="pre">edge_xy</span></code> defines the edge to be cut on the template images,
+they are the same for both <strong>x</strong> and <strong>y</strong> directions.</p>
+<figure class="align-default" id="id40">
+<a class="reference internal image-reference" href="_images/XSVT_stiched.png"><img alt="_images/XSVT_stiched.png" src="_images/XSVT_stiched.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Stiched images for speckle tracking.</span><a class="headerlink" href="#id40" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Within every loop, the strip data in one image stack will be stiched
+together to obtain the image for speckle tracking. <code class="docutils literal notranslate"><span class="pre">edge_z</span></code> defines
+the edge to be cut on the stiched template image in the scan direction,
+as shown in the above. The remaining procedure is the same as in the
+<a class="reference internal" href="#traxss"><span class="std std-ref">XSS technique with reference beam</span></a></p>
 <p>Refer to the principle of the <a class="reference internal" href="principle.html#prinxsvtrefer"><span class="std std-ref">XSVT technique</span></a>,
 the physical quantities directly reconstructed from this technique are
 the wavefront slopes in x and y directions.
@@ -1197,10 +1217,10 @@ Otherwise, if the diffuser is placed in the <strong>upstream</strong>,
 <span class="math notranslate nohighlight">\(d\)</span> is usually set to be the distance between the
 centre of the optic and the detector.</p>
 <p>We show the <strong>downstream</strong> case at first.</p>
-<figure class="align-default" id="id39">
+<figure class="align-default" id="id41">
 <a class="reference internal image-reference" href="_images/downstream.jpg"><img alt="_images/downstream.jpg" src="_images/downstream.jpg" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-text">The downstream case.</span><a class="headerlink" href="#id39" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The downstream case.</span><a class="headerlink" href="#id41" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>If we use <span class="math notranslate nohighlight">\(p\)</span> to represent the detector pixel
@@ -1221,10 +1241,10 @@ have:</p>
 <div class="math notranslate nohighlight">
 \[\frac{1}{R} = \frac{1-m}{d}\]</div>
 <p>Now let’s look at the <strong>upstream</strong> case.</p>
-<figure class="align-default" id="id40">
+<figure class="align-default" id="id42">
 <a class="reference internal image-reference" href="_images/upstream.jpg"><img alt="_images/upstream.jpg" src="_images/upstream.jpg" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-text">The upstream case.</span><a class="headerlink" href="#id40" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The upstream case.</span><a class="headerlink" href="#id42" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>We use the same symbols to represent the related physical quantity. For the upstream case,
