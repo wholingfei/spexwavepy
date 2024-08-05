@@ -52,12 +52,18 @@ Every example shown in this documentation can be reproduced using our shared exp
 
 Citing spexwavepy
 =================
+If this package has helped your project, we would like you to cite it as:
+
+**Hu L, Wang H, Sawhney K. Spexwavepy: an open-source Python package for X-ray wavefront sensing 
+using speckle-based techniques.** 
+**J Synchrotron Radiat. 2024 Sep 1.**
+**doi: 10.1107/S1600577524005861.** 
 
 Citing shared data
 ==================
 If the shared dataset helped your research, please kindly cite the dataset as:
 
-Hu, L. (2024). Dataset for spexwavepy examples [Data set]. Zenodo. 
+**Hu, L. (2024). Dataset for spexwavepy examples [Data set]. Zenodo.** 
 `https://zenodo.org/records/10892838 <https://zenodo.org/records/10892838>`_.
 
 .. _comput:
